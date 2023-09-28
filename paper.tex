@@ -66,7 +66,65 @@ statement of our results
 
 \section{Representability}
 
+\begin{definition}
+    Given a not necessarily finite set $\Omega$ of simple graphs, we define the endofunctor $F_\Omega$ on $\G$ as follows: For any graph $G = (V, E)$, $F_\Omega(G)$ is a graph on the same vertex set, and there is an edge between $u$ and $v$ in $F_\Omega(G)$ whenever there exists some subgraph of $G$ containing both $u$ and $v$ which is isomorphic to some $\omega \in \Omega$.
 
+    Equivalently, there is an edge $uv$ in $F_\Omega(G)$ whenever there exists an $\omega \in \Omega$ and a morphism $f: \omega \to G$ such that $f(\omega) \ni u, v$.
+
+    On morphisms, $F_\Omega$ is always just the identity.
+\end{definition}
+
+\begin{lemma}\label{lemma_representable_endofunctor_is_functor}
+    For any representing set $\Omega$ of simple graphs, $F_\Omega$ is indeed an endofunctor on $\G$.
+
+    \begin{proof}
+        That it always gives a simple graph and that it respects identity morphisms and composition of morphisms is easy to see. The only thing we actually need to check is that if $f: H \to G$ is a morphism, then $F_\Omega(f) = f: F_\Omega(H) \to F_\Omega(G)$ is also a morphism.
+
+        Unwrapping this statement, what we need is that, for any morphism $f: H \to G$, whenever $uv$ is an edge in $F_\Omega(H)$, $f(u)f(v)$ is an edge in $F_\Omega(G)$. Now, that $uv$ is an edge in $F_\Omega(H)$ means that there is an $\omega \in \Omega$ and $f_\omega: \omega \to H$ such that $f(\omega) \ni u, v$.
+
+        But consider what happens if we just compose $f_\omega$ and $f$ -- this will be a morphism from $\omega$ into $G$, and trivially we must have that $f(f_\omega(\omega)) \ni f(u), f(v)$, and so there must be an edge $f(u)f(v)$ in $F_\Omega(G)$, by definition of $F_\Omega$.
+    \end{proof}
+\end{lemma}
+
+What is going on in the proof of Lemma \ref{lemma_representable_endofunctor_is_functor} is much clearer if we just think about it in terms of things being subgraphs of each other, forgetting the data of \emph{how} exactly they are subgraphs. Then the statement that $F_\Omega$ is a functor boils down to the statement that if $\omega$ is a subgraph of $H$ and $H$ is a subgraph of $G$, then certainly $\omega$ is a subgraph of $G$, and so $F_\Omega(G)$ must have all the edges $F_\Omega(H)$ has, since edges in $F_\Omega(G)$ represent the presence of a certain subgraph in $G$.
+
+\begin{definition}
+    The functor $\Pi: \G \to \Pset$ which sends a graph to its partition into connected components is called the connected components functor. Equivalently, we can think of it as taking the equivalence relation hull of the binary relation $E$ defining the edges.
+\end{definition}
+
+\begin{definition}
+    A clustering scheme $\Clust$ is \emph{representable} if we can write it as $F_\Omega \circ \Pi$ for some representable endofunctor $F_\Omega$. Notice that this means that all representable clustering schemes are trivially functorial.
+\end{definition}
+
+One somewhat surprising fact is that there are actually representable clustering schemes that are not finitely representable.
+
+\begin{theorem}
+    There exists a representable endofunctor $F_\Omega$ which is not \emph{finitely} representable, that is, it is not equal to $F_\Gamma$ for any finite set of simple graphs $\Gamma$.
+\end{theorem}
+
+In order to give a proof of this, we first need a structural result about how these endofunctors behave.
+
+\begin{remark}\label{remark_omegas_sent_to_cliques}
+    For any $\omega \in \Omega$, it is trivial to see that $F_\Omega(\omega)$ must be a clique, since we can just take the identity morphism on $\omega$ to show that all edges must exist.
+\end{remark}
+
+In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines what it does as a functor. We will see this even more precisely in the next section, but for now this lemma will suffice for our needs:
+
+\begin{lemma}
+    For any set $\Omega$ of simple graphs and any simple graph $G = (V, E)$, it holds that $F_{\Omega \cup \{G\}} = F_\Omega$ if and only if $F_\Omega(G) = (V, V^2)$, that is, if $G$ is sent to a clique on its vertices by $F_\Omega$.
+
+    \begin{proof}
+        Suppose $F_{\Omega \cup \{G\}} = F_\Omega$. That $F_{\Omega \cup \{G\}}(G) = (V, V^2)$ is immediate by Remark \ref{remark_omegas_sent_to_cliques}, and so since $F_{\Omega \cup \{G\}} = F_\Omega$, we also have $F_\Omega(G) = (V, V^2)$, as desired.
+
+        Now suppose $F_\Omega(G) = (V, V^2)$, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Omega \cup \{G\}}(H) = F_\Omega(H)$. 
+        
+        Let us begin by showing that edges of $F_{\Omega \cup \{G\}}(H)$ are also edges of $F_\Omega(H)$. So suppose $uv$ is an edge of $F_{\Omega \cup \{G\}}(H)$ -- that this is so must be because there is some $\omega \in \Omega \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
+
+        If this $\omega$ is not $G$, then we are done. If it is $G$, we recall that since $F_\Omega(G)$ is a clique, there must be an edge $f^{-1}(u)f^{-1}(v)$ in it. Therefore there must exist some $\omega \in \Omega$ and some $g: \omega \to G$ such that $f(\omega) \ni f^{-1}(u), f^{-1}(v)$. But then the composition $g \circ f: \omega \to H$ will be a morphism from an $\omega \in \Omega$ into $H$ whose image contains $u$ and $v$, proving that $uv$ is an edge of $F_\Omega(H)$.
+
+        Now, let us show that an edge of $F_\Omega(H)$ will also be an edge of $F_{\Omega \cup \{G\}}(H)$.
+    \end{proof}
+\end{lemma}
 
 \section{Proof of equivalence of representability and excisiveness}
 
