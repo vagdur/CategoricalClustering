@@ -82,6 +82,7 @@
 \newcommand{\calH}{\mathcal{H}}
 \newcommand{\Lgr}{\mathcal{L}} % Lagrangian
 \newcommand{\Clust}{\mathfrak{C}}
+\newcommand{\Pset}{\mathcal{P}}
 
 %Fouriertransform:
 \newcommand{\Fou}{\mathscr{F}}

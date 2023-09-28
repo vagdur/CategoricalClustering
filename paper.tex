@@ -48,6 +48,18 @@ statement of our results
 
 \section{Definitions of our terms}
 
+\begin{definition}
+    The category of simple graphs $\G$ has as its objects simple graphs, which we consider to be a finite set $V$ equipped with a reflexive and symmetric binary relation $E$ -- that is, our simple graphs are finite, have no double edges, and have loops at every vertex\footnote{The final property here may seem a bit unusual, but it simplifies our proofs in some places, without really affecting much. }. A morphism from $H = (V, E)$ to $G = (V', E')$ is an injective set function $f: V \to V'$ such that whenever $uEv$, we also have $f(u)E'f(v)$. That is, a morphism from $H$ to $G$ is a way of realizing $H$ as a subgraph of $G$.
+\end{definition}
+
+\begin{definition}
+    The category of partitioned sets $\Pset$ has as its objects sets $V$ with an equivalence relation $\sim$. A morphism in $\Pset$ from $(V, \sim)$ to $(W, \approx)$ is a set function $f: V \to W$ such that whenever $v\sim w$, $f(v) \approx f(w)$. So in the case where $V = W$, $f = \Id$ is a morphism if $\approx$ is a coarsening of $\sim$.
+\end{definition}
+
+\begin{definition}
+    A clustering scheme is a function\footnote{Technically, of course, neither $\G$ nor $\Pset$ are small categories, so the word ``function'' should be read as ``class function'' here, not in the usual sense of the word. We sweep this issue under the rug here, because it will never affect anything.} $\Clust$ that sends simple graphs to partitioned sets, with the same underlying set. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$.
+\end{definition}
+
 \section{Representability}
 
 \section{Proof of equivalence of representability and excisiveness}
