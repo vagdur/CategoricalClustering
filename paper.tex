@@ -60,7 +60,13 @@ statement of our results
     A clustering scheme is a function\footnote{Technically, of course, neither $\G$ nor $\Pset$ are small categories, so the word ``function'' should be read as ``class function'' here, not in the usual sense of the word. We sweep this issue under the rug here, because it will never affect anything.} $\Clust$ that sends simple graphs to partitioned sets, with the same underlying set. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$.
 \end{definition}
 
+\begin{definition}
+    A clustering scheme $\Clust$ is \emph{excisive} if, for all graphs $G = (V, E)$, it holds for every equivalence class $A$ of $\Clust(G)$ that $\Clust(G|_A) = (A, A^2)$. That is, if we take a graph, cluster it, pick out one of the parts, and cluster that part alone, that part will be clustered into a single part.
+\end{definition}
+
 \section{Representability}
+
+
 
 \section{Proof of equivalence of representability and excisiveness}
 
