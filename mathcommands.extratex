@@ -1,86 +1,126 @@
-
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \microtypecontext{spacing=nonfrench}
 \usepackage{amsmath}%
 \usepackage{amsfonts}%
 \usepackage{amssymb}%
 \usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{url}
+\usepackage{color}
+\usepackage{varioref}
+\usepackage{tcolorbox}
 
-\usepackage{dsfont}
-
-\usepackage[swedish]{babel}
-
-\usepackage{tabularx}
+\usepackage{multirow}
 
 \usepackage{tikz}
-\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+\usepackage{tikz-cd}
+\tikzset{commutative diagrams/.cd}
 
-\usepackage{algorithm}
-\usepackage{algpseudocode}
+\usepackage[natbib, backend=biber, style=alphabetic, backref=true]{biblatex}
+\bibliography{references}
 
-\makeatletter
-\newcommand{\ostar}{\mathbin{\mathpalette\make@circled\star}}
-\newcommand{\make@circled}[2]{%
-  \ooalign{$\m@th#1\smallbigcirc{#1}$\cr\hidewidth$\m@th#1#2$\hidewidth\cr}%
-}
-\newcommand{\smallbigcirc}[1]{%
-  \vcenter{\hbox{\scalebox{0.77778}{$\m@th#1\bigcirc$}}}%
-}
-\makeatother
+\usepackage{pgf,tikz}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
 
-\newtheorem{theorem}{Teorem}%[subsection]
+\usepackage{epigraph}
+\usepackage{listings}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+
+\usepackage{enumitem}
+
+\usepackage{float}
+
+\usepackage{verbatim}
+
+\usepackage{color,soul}
+
+\usepackage[a4paper, total={5.5in, 8in}]{geometry}
+
+\newtheorem{theorem}{Theorem}%[subsection]
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{cor}[theorem]{Korollarium}
-\newtheorem{conjecture}[theorem]{Hypotes}
-\newtheorem{claim}[theorem]{Påstående}
-\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Exempel}
-\newtheorem{xca}{Övning}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Övning}
 
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Kommentar}
+\newtheorem{remark}[theorem]{Remark}
+
+%\numberwithin{equation}{section}
+%\renewcommand{\theequation}{\arabic{subsection}--\arabic{equation}}
+
+\usepackage[toc,page]{appendix}
 
 % Absolutbelopp
-\newcommand{\abs}[1]{{\left\lvert#1\right\rvert}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
 
 % Avrunda uppåt och nedåt
 \newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
 \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
 
 % Nyttiga mängder:
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-%\newcommand{\C}{\mathbb{C}}
-\newcommand{\D}{\mathcal{D}}
-\newcommand{\F}{\mathcal{F}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\Q}{{\mathbb{Q}}}
+\newcommand{\N}{{\mathbb{N}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\C}{{\mathbb{C}}}
+\newcommand{\D}{{\mathcal{D}}}
+\newcommand{\M}{{\mathfrak{M}}}
+\newcommand{\G}{{\mathcal{G}}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\Lgr}{\mathcal{L}} % Lagrangian
+\newcommand{\Clust}{\mathfrak{C}}
 
 %Fouriertransform:
 \newcommand{\Fou}{\mathscr{F}}
-\newcommand{\Hatf}{\mathscr{H}}
 
 % Punkt som placeholder i funktioner:
 \newcommand{\vardot}{\ \cdot\ }
 
 % Väntevärde, varians, sannolikhet, kovarians, indikatorfunktion
 \newcommand{\E}[1]{\mathbb{E}\left[ #1 \right]}
-\newcommand{\Var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\Eover}[2]{\mathbb{E}_{#1}\left[#2\right]}
+\newcommand{\bracketE}[1]{\left\langle#1\right\rangle}
+\newcommand{\bracketEover}[2]{\left\langle#2\right\rangle_{{#1}}}
+
+\newcommand{\sigmahat}{{\hat{\sigma}}}
+
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+
 \newcommand{\Prob}[1]{\mathbb{P}\left( #1 \right)}
 \newcommand{\ProbP}{\mathbb{P}}
+\newcommand{\ProbOver}[2]{\mathbb{P}_{#1}\left[#2\right]}
+
+\newcommand{\BmannProb}[1]{\mathscr{B}\left(#1\right)}
+\newcommand{\BmannProbP}{\mathscr{B}}
+\newcommand{\BmannProbOver}[2]{\mathscr{B}_{#1}\left(#2\right)}
+
 \newcommand{\Cov}[2]{\operatorname{Cov}\left(#1,#2\right)}
-\newcommand{\ind}[1]{\mathds{1}_{\left\{#1\right\}}}
-\newcommand{\indSet}[1]{\mathds{1}_{#1}}
+\newcommand{\Var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\Ei}[1]{\operatorname{Ei}\left(#1\right)}
+\newcommand{\Dist}{\mathcal{D}'}
+\newcommand{\Testf}{\mathcal{D}}
+
+\usepackage{dsfont}
+\newcommand{\ind}[1]{\mathds{1}_{#1}}
 \newcommand{\given}{\ \middle|\ }
 
-\newcommand{\e}{\mathfrak{e}}
-\newcommand{\Pset}{\mathcal{P}}
+\newcommand{\argmax}{\operatorname{argmax}}
 
-\DeclareMathOperator{\Piv}{Piv}
+\newcommand{\pivset}{\mathscr{P}}
+\newcommand{\specsamp}{\mathscr{S}}
 
 %% Följande kod gör att \Re och \Im inte skrivs med gotiska kapitaler:
 
@@ -94,17 +134,19 @@
 
 %% Skapar ett kommando \grad för graden av ett polynom
 
-\newcommand{\grad}[1]{\operatorname{grad}#1}
+\newcommand{\grad}[1]{\nabla#1}
 
 %% Massor av olika differentialer
 \newcommand{\df}{\mathrm{d}f}
 \newcommand{\dx}{\mathrm{d}x}
 \newcommand{\dy}{\mathrm{d}y}
+\newcommand{\dz}{\mathrm{d}z}
 \newcommand{\dt}{\mathrm{d}t}
 \newcommand{\du}{\mathrm{d}u}
 \newcommand{\ds}{\mathrm{d}s}
 \newcommand{\dmu}{\mathrm{d}\mu} 
 \newcommand{\dnu}{\mathrm{d}\nu}
+\newcommand{\dxi}{\mathrm{d}\xi}
 
 % Samt för när man vill integrera dgamma eller något
 \newcommand{\intd}{\mathrm{d}}
@@ -114,7 +156,7 @@
 \newcommand{\vaguely}{\xrightarrow[]{\text{v.}}}
 
 %Inre produkt och norm
-\newcommand{\inpr}[2]{\langle#1,#2\rangle}
+\newcommand{\inpr}[2]{\left\langle#1,\,#2\right\rangle}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 % Automorfigrupp, identitet, spår av en matris, signum, bild, och spann
@@ -124,15 +166,40 @@
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\lspan}{span}
-\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\princval}{v.p.}
+\DeclareMathOperator{\finpart}{p.f.}
+\DeclareMathOperator{\compsupp}{\mathcal{E}}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+
+
+\newcommand{\blank}{\,\cdot\,}
 
 % Mängddifferens
-\newcommand{\symdiff}{\mathbin{\triangle}}
+\newcommand{\setdiff}{\mathbin{\triangle}}
 
-% Stirlingtal
-\DeclareRobustCommand{\stirlingPart}{\genfrac\{\}{0pt}{}}
-\DeclareRobustCommand{\stirlingCycle}{\genfrac{[}{]}{0pt}{}}
+%Logik
+\newcommand{\syntequiv}{\equiv}
+\newcommand{\semequiv}{\approx}
 
-% Specialcell i tabell:
-\newcommand{\specialcell}[2][c]{%
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\newcommand{\proves}{\mathbin{\vdash}}
+\newcommand{\entails}{\mathbin{\vDash}}
+\newcommand{\intentails}{\mathbin{\Vdash}}
+
+\newcommand{\orl}{\vee}
+\newcommand{\andl}{\wedge}
+\renewcommand{\implies}{\rightarrow}
+\newcommand{\notl}{\neg}
+\newcommand{\falsity}{\bot}
+
+\DeclareMathOperator{\Th}{Th}
+\DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\defin}{def}
+
+\newcommand{\usedrule}[1]{\RightLabel{\scriptsize(#1)}}
+\usepackage{bussproofs}
+
+\newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 
+    \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
