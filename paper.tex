@@ -98,7 +98,7 @@ What is going on in the proof of Lemma \ref{lemma_representable_endofunctor_is_f
 
 One somewhat surprising fact is that there are actually representable clustering schemes that are not finitely representable.
 
-\begin{theorem}
+\begin{theorem} \label{theorem_exists_not_finitely_representable}
     There exists a representable endofunctor $F_\Omega$ which is not \emph{finitely} representable, that is, it is not equal to $F_\Gamma$ for any finite set of simple graphs $\Gamma$.
 \end{theorem}
 
@@ -110,7 +110,7 @@ In order to give a proof of this, we first need a structural result about how th
 
 In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines what it does as a functor. We will see this even more precisely in the next section, but for now this lemma will suffice for our needs:
 
-\begin{lemma}
+\begin{lemma} \label{lemma_representation_hull}
     For any set $\Omega$ of simple graphs and any simple graph $G = (V, E)$, it holds that $F_{\Omega \cup \{G\}} = F_\Omega$ if and only if $F_\Omega(G) = (V, V^2)$, that is, if $G$ is sent to a clique on its vertices by $F_\Omega$.
 
     \begin{proof}
@@ -118,13 +118,44 @@ In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines w
 
         Now suppose $F_\Omega(G) = (V, V^2)$, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Omega \cup \{G\}}(H) = F_\Omega(H)$. 
         
-        Let us begin by showing that edges of $F_{\Omega \cup \{G\}}(H)$ are also edges of $F_\Omega(H)$. So suppose $uv$ is an edge of $F_{\Omega \cup \{G\}}(H)$ -- that this is so must be because there is some $\omega \in \Omega \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
+        That edges of $F_\Omega(H)$ must also be edges of $F_{\Omega \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Omega \cup \{G\}}(H)$ are also edges of $F_\Omega(H)$. So suppose $uv$ is an edge of $F_{\Omega \cup \{G\}}(H)$ -- that this is so must be because there is some $\omega \in \Omega \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
 
         If this $\omega$ is not $G$, then we are done. If it is $G$, we recall that since $F_\Omega(G)$ is a clique, there must be an edge $f^{-1}(u)f^{-1}(v)$ in it. Therefore there must exist some $\omega \in \Omega$ and some $g: \omega \to G$ such that $f(\omega) \ni f^{-1}(u), f^{-1}(v)$. But then the composition $g \circ f: \omega \to H$ will be a morphism from an $\omega \in \Omega$ into $H$ whose image contains $u$ and $v$, proving that $uv$ is an edge of $F_\Omega(H)$.
-
-        Now, let us show that an edge of $F_\Omega(H)$ will also be an edge of $F_{\Omega \cup \{G\}}(H)$.
     \end{proof}
 \end{lemma}
+
+With this result in hand, we can now give a proof of the existence of a representable but not finitely representable endofunctor.
+
+\begin{proof}[Proof of Theorem \ref{theorem_exists_not_finitely_representable}]
+    Let, for each $i$, $\omega_i$ consist of a triangle with a tail of $i$ vertices, as shown in Figure \ref{figure_triangles_w_tails}, and let $\Omega = \left\{\omega_i \given i \in \N\right\}$. We claim that $F_\Omega$ is not equal to $F_\Gamma$ for any finite set of simple graphs $\Gamma$.
+
+    \begin{figure}
+        \centering
+        \label{figure_triangles_w_tails}
+        \includegraphics[width=0.6\textwidth]{graphics/triangles_w_tails.png}
+        \caption{The family of graphs $\{\omega_i\}_{i=0}^3$.}
+    \end{figure}
+
+    To prove this, let us first define
+    $$\bar{\Omega} = \left\{G \in \G \given F_\Omega(G) = (V_G, V_G^2)\right\}$$
+    as the set of all things which $F_\Omega$ sends to cliques. By Lemma \ref{lemma_representation_hull}, $F_\Omega = F_{\bar{\Omega}}$, and $\bar{\Omega}$ is the greatest set with this property.
+
+    A little bit of reflection will make it clear that $\bar{\Omega}$ is precisely the set of connected graphs which contain a triangle. Particularly, for any edge in such a graph, we can map the tail end of some $\omega_i$ onto that edge, the rest of the tail onto a path to the triangle in the graph, and the triangle of the $\omega_i$ onto the triangle of the graph. That $F_\Omega$ will send any triangle-free graph to a graph with no edges is clear, since there is no morphism from any triangle-containing graph such as $\omega_i$ into a triangle-free graph. Likewise, that it cannot send a disconnected graph to a clique is obvious.
+
+    Now suppose for contradiction that $\Gamma$ is a finite set of graphs such that $F_\Gamma = F_{\bar{\Omega}}$. Lemma \ref{lemma_representation_hull} implies that we must have $\Gamma \subset \bar{\Omega}$, since if there were a $\gamma \in \Gamma \setminus \bar{\Omega}$ it'd be sent to a clique by $F_\Gamma$, and thus also by $F_{\bar{\Omega}}$, since we've assumed they are equal -- but we chose $\bar{\Omega}$ so that it already contains everything sent to a clique by $F_{\bar{\Omega}}$.
+
+    So, let
+    $$\delta = \max_{\gamma \in \Gamma} \max \left\{ d(u, v) \given u, v \in V_\gamma, v\text{ is in a triangle} \right\}.$$
+    That is, $\delta$ is the furthest any vertex in any graph in $\Gamma$ is from a triangle. We claim that $F_\Gamma$ will not send $\omega_{\delta + 1}$ to a clique, proving it is not equal to $F_{\bar{\Omega}}$, giving our contradiction.
+
+    That this is so is actually easy to see -- if $\omega_{\delta + 1}$ were sent to a clique, that must in particular mean there is an edge in $F_\Gamma(\omega_{\delta + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $\gamma \in \Gamma$ that hits both vertices. However, such a morphism must also map the triangle in $\gamma$ onto the triangle in $\omega_{\delta + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $\gamma$ is from the triangle. So no such morphism can exist, and we are done.
+\end{proof}
+
+\begin{remark}
+    The construction in our proof of course works equally as well replacing the triangle by any connected graph that is not a line. So we have found a whole lot of examples of classes of graphs that give representable but not finitely representable endofunctors.
+
+    The question of which natural classes of graphs are representable or finitely representable may be interesting. The connected graphs, for example, are of course represented by just a $K_2$. %Meanwhile, a not-too-difficult argument shows that the graphs of girth at least $k$ are representable but not finitely representable for any $k$. % <- I think this last bit is not actually true?
+\end{remark}
 
 \section{Proof of equivalence of representability and excisiveness}
 
