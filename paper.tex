@@ -92,8 +92,8 @@ What is going on in the proof of Lemma \ref{lemma_representable_endofunctor_is_f
     The functor $\Pi: \G \to \Pset$ which sends a graph to its partition into connected components is called the connected components functor. Equivalently, we can think of it as taking the equivalence relation hull of the binary relation $E$ defining the edges.
 \end{definition}
 
-\begin{definition}
-    A clustering scheme $\Clust$ is \emph{representable} if we can write it as $F_\Omega \circ \Pi$ for some representable endofunctor $F_\Omega$. Notice that this means that all representable clustering schemes are trivially functorial.
+\begin{definition}\label{definition_representable_clustscheme}
+    A clustering scheme $\Clust$ is \emph{representable} if we can write it as $F_\Omega \circ \Pi$ for some representable endofunctor $F_\Omega$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
 \end{definition}
 
 One somewhat surprising fact is that there are actually representable clustering schemes that are not finitely representable.
@@ -158,6 +158,76 @@ With this result in hand, we can now give a proof of the existence of a represen
 \end{remark}
 
 \section{Proof of equivalence of representability and excisiveness}
+
+We are able to exactly characterize the relationship between the three concepts of functoriality, representability, and excisiveness for clustering schemes.
+
+\begin{theorem} \label{main_theorem}
+    A representable clustering scheme is excisive. An excisive and functorial clustering scheme is representable. No other implications hold between these concepts.
+\end{theorem}
+
+We divide the proof of Theorem \ref{main_theorem} into two lemmas and a collection of examples.
+
+\begin{lemma} \label{lemma_repr_implies_excisive}
+    A representable clustering scheme is excisive.
+
+    \begin{proof}
+        Let $\Omega$ be some set of simple graphs, and $G$ be some simple graph. Assume the equivalence classes of $(F_\Omega \circ \Pi)(G)$ are $\{A_1, A_2, \ldots A_k\}$, and let $H = G|_{A_1}$ be the induced subgraph of $G$ on $A_1$. What we need to show is that $(F_\Omega \circ \Pi)(H) = (A_1, A_1^2)$, that is, that every vertex is equivalent in the clustering of $H$.
+        
+        It is obvious that this is equivalent to showing that $F_\Omega(H)$ is a connected graph. We will in fact show something stronger -- that $F_\Omega(H) = F_\Omega(G_{A_1}) = (F_\Omega(G))|_{A_1}$. Since $A_1$ is by assumption a connected component of $F_\Omega(G)$, this will show what we want.
+
+        First, let $f: H \hookrightarrow G$ be the subgraph inclusion morphism of $H$ into $G$. By functoriality of $F_\Omega$, $f$ is also a morphism from $F_\Omega(H)$ into $F_\Omega(G)$, showing that $F_\Omega(H)$ is a subgraph of $F_\Omega(G)$, so every edge of $F_\Omega(H)$ is an edge of $F_\Omega(G)$
+
+        Now, let $uv$ be an arbitrary edge of $F_\Omega(G)|_{A_1}$. We wish to show this is already an edge of $F_\Omega(H)$. That it is an edge of $F_\Omega(G)$ means there exists some $\omega \in \Omega$ and a morphism $f_\omega: \omega \to G$ such that $\im(f_\omega) \ni u, v$.
+
+        We claim that in fact $\im(f_\omega) \subset A_1$, so that $f_\omega$ restricts to a morphism into $H$. If we can show this, this will show that there is an edge $uv$ also in $F_\Omega(H)$, and we will be done.
+
+        So let $w$ be an arbitrary vertex in $\im(f_\omega)$. Now $f_\omega$ is also a morphism from something in $\Omega$ that hits both $w$ and $v$, so there is an edge $vw$ in $F_\Omega(G)$. But this of course means that $w$ and $v$ are in the same connected component -- and this connected component is precisely $A_1$. So $w \in A_1$, and we are done.
+    \end{proof}
+\end{lemma}
+
+\begin{lemma} \label{lemma_exc_and_funct_implies_repr}
+    An excisive and functorial clustering scheme is representable.
+
+    \begin{proof}
+        Let $\Clust$ be some excsive and functorial clustering scheme, and let
+        $$\Omega = \left\{G \in \G \given \Clust(G) = (V_G, V_G^2)\right\},$$
+        that is, $\Omega$ is the set of all graphs clustered by $\Clust$ into a single part. We will show that in fact $\Clust = F_\Omega$.
+
+        So, let $G$ be some graph. We need to show two things:
+        \begin{enumerate}
+            \item Whenever $u$ and $v$ are clustered in the same part by $\Clust$, they are in the same connected component of $F_\Omega(G)$.
+            \item Whenever $uv$ is an edge of $F_\Omega(G)$, $u$ and $v$ are clustered in the same part by $\Clust$. This of course implies that whenever $u$ and $v$ are in the same connected component, they are also clustered in the same part by $\Clust$, which is what we really need.
+        \end{enumerate}
+        
+        We start with the first direction, letting $u$ and $v$ be two vertices that are sent to the same part by $\Clust$ -- call this part $A$, and let $H = G|_A$. By excisiveness of $\Clust$, we have that $\Clust$ sends $H$ to a single part, so $H \in \Omega$. Therefore, the inclusion morphism $f: H \hookrightarrow G$ is a morphism from something in $\Omega$ that hits both $u$ and $v$, showing there is an edge $uv$ in $F_\Omega(G)$, as desired.
+
+        In the second direction, assume that $uv$ is an edge of $F_\Omega(G)$. Thus, there is some $\omega \in \Omega$ and $f_\omega: \omega \to G$ such that $\im(f_\omega) \ni u, v$. By functoriality of $\Clust$, $f$ will also be a morphism from $\Clust(\omega)$ into $\Clust(G)$ -- which by how we defined morphisms in the category of partitioned sets means that any two vertices equivalent in $\Clust(\omega)$ must also be equivalent in $\Clust(G)$. However, we defined $\Omega$ as precisely the set of things such that $\Clust(\omega)$ has only a single part -- so everything is equivalent in $\Clust(\omega)$ and in particular $u \sim_{\Clust(\Omega)} v$, and so they are also equivalent in $\Clust(G)$, as desired.
+    \end{proof}
+\end{lemma}
+
+Finally, let us think about what we need to show to demonstrate that there are no other implications between these concepts. An implication between these concepts is logically the same thing as a proof that some combination of them is impossible -- so what we will do is just to draw a two-by-two-by-two table of all combinations, and fill in which cells our theorems already rule out, and give examples of clustering schemes for every other cell.
+
+\include{2by2by2_table_paper}
+
+\begin{example}\label{ex_allthreeprops}
+    The connected components functor $\Pi$ is representable and excisive -- we can take its representation to be $\Omega = \{K_2\}$.
+\end{example}
+    
+\begin{example}\label{ex_excnotfunctnotrepr}
+    For a scheme that is excisive but not functorial (and thus not representable), consider the scheme that partitions all graphs into a single part except $K_2$, which it partitions into two parts.
+\end{example}
+    
+\begin{example}\label{ex_functnotexcnotrepr}
+    For a scheme which is functorial but neither excisive nor representable, cluster all connected components on more than two vertices as well as all isolated vertices as their own parts. 
+    
+    If there is exactly one component on two vertices, i.e. an isolated edge, cluster it as two parts, otherwise cluster all isolated edges as single parts.
+\end{example}
+    
+\begin{example}\label{ex_noprops}
+    Finally, for a scheme which has none of the properties, cluster all graphs as a single part except for $K_2$, which we cluster as two parts, and the disjoint union of two copies of $K_2$, which we cluster as two parts -- that is, each of the copies is its own part.
+\end{example}
+    
+    
 
 \section{Representability for hierarchical clustering}
 
