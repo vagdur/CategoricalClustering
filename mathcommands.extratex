@@ -173,6 +173,7 @@
 \DeclareMathOperator{\compsupp}{\mathcal{E}}
 \DeclareMathOperator{\Ext}{Ext}
 \DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Hom}{Hom}
 
 
 \newcommand{\blank}{\,\cdot\,}

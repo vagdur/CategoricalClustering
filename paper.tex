@@ -226,10 +226,63 @@ Finally, let us think about what we need to show to demonstrate that there are n
 \begin{example}\label{ex_noprops}
     Finally, for a scheme which has none of the properties, cluster all graphs as a single part except for $K_2$, which we cluster as two parts, and the disjoint union of two copies of $K_2$, which we cluster as two parts -- that is, each of the copies is its own part.
 \end{example}
-    
-    
+
+\hl{Maybe add a remark outlining the results for the non-injective morphisms case.}
 
 \section{Representability for hierarchical clustering}
+
+\begin{definition}
+    A functorial hierarchical clustering scheme is a functor from the product category $\G \times \R$ into $\Pset$, where we make $\R^+ = [0,\infty)$ into a category by saying there is a morphism from $a$ to $b$ whenever $a \geq b$.
+\end{definition}
+
+There is actually a natural extension of our definition of a representable clustering scheme also to this setting, but it requires that we set up some more machinery.
+
+\begin{definition}
+    The category $\G^w$ of weighted simple graphs has as its objects simple graphs together with a function assigning a real-valued positive weight to each edge of the graph. A morphism from $(V, E, w)$ to $(V', E', w')$ is an injective set function $f: V \to V'$ such that whenever $uEv$, $f(u)E'f(w)$ and $w(uv) \leq w'(f(u)f(v))$.
+\end{definition}
+
+\begin{definition}
+    The scissors functor $\Sigma$ from $\G^w \times \R^+$ into $\G$ takes in a weighted graph $G = (V, E, w)$ and a non-negative real number $\tau$, removes all edges whose weight is below $\tau$, and then forgets all the remaining weights, getting just a simple graph.
+\end{definition}
+
+\begin{lemma}
+    The scissors functor is actually a functor.
+
+    \begin{proof}
+        Similarly to how we proved that the representable endofunctors are in fact functors, most of the required properties are obvious. There are only two things we need to check:
+        \begin{enumerate}
+            \item If $f$ is a morphism of weighted graphs sending $G = (V, E, w)$ to $G' = (V', E', w')$, then for every $\tau \in \R^+$, $f$ is also a morphism in $\G$ from $\Sigma(G,\tau)$ to $\Sigma(G',\tau)$,
+            \item and if $\alpha \geq \beta \geq 0$, then for any weighted graph $G = (V, E, w)$, the identity function $\Id: V \to V$ is a morphism from $\Sigma(G, \alpha)$ to $\Sigma(G, \beta)$.
+        \end{enumerate}
+
+        \hl{Finish proof.}
+    \end{proof}
+\end{lemma}
+
+\begin{definition}
+    A representable functor $F_\Omega$ from $\G$ to $\G^w$ is determined by a set $\Omega$ of pairs $(\omega, w)$ of simple graphs $\omega$ and positive weights $w$. For any graph $G$, there is an edge $uv$ of $F_\Omega(G)$ if there is some subgraph of $G$ containing $u$ and $v$ which is isomorphic to some graph in $\Omega$. The weight of this edge is then given by
+    $$w(uv) = \sum_{(\omega, w) \in \Omega} \sum_{f \in \Hom(\omega, G)} \frac{w}{\abs{\Aut(\omega)}} \ind{u, v \in \im(f)}.$$
+\end{definition}
+
+\begin{lemma}
+    The representable functors from $\G$ to $\G^w$ are actually functors.
+
+    \begin{proof}
+        \hl{Fill in proof.}
+    \end{proof}
+\end{lemma}
+
+\begin{definition}
+    A representable hierarchical clustering scheme is a functor from $\G\times\R^+$ into $\Pset$ that can be written as $(F_\Omega \times \Id) \circ \Sigma \circ \Pi$ for some representable functor $F_\Omega$ from $\G$ to $\G^w$.
+\end{definition}
+
+\begin{remark}
+    We can of course turn such a representable hierarchical clustering scheme into a non-hierarchical clustering functor by just fixing a threshold. However, unfortunately, it turns out that this will \emph{not} in general result in an excisive, and thus also not a representable, functor!
+
+    \hl{Fill in example}
+\end{remark}
+
+\hl{Figure out the right notion of excisiveness for hierarchical clustering schemes -- I have some vague ideas for this.}
 
 \printbibliography
 
