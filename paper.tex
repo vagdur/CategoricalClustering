@@ -227,7 +227,16 @@ Finally, let us think about what we need to show to demonstrate that there are n
     Finally, for a scheme which has none of the properties, cluster all graphs as a single part except for $K_2$, which we cluster as two parts, and the disjoint union of two copies of $K_2$, which we cluster as two parts -- that is, each of the copies is its own part.
 \end{example}
 
-\hl{Maybe add a remark outlining the results for the non-injective morphisms case.}
+\begin{remark}
+    It is possible to carry out this entire argument, showing equivalence between representability and excisiveness, also in the setting where we do not require morphisms in the category of graphs to be injective. The arguments only need minor modifications to deal with this.
+
+    However, it turns out that this setting is much less interesting: There are in fact only three different representable clustering schemes in this setting. They are, respectively,
+    \begin{enumerate}
+        \item the scheme that always sends every vertex to its own part, represented by the empty set or by $K_1$,
+        \item the connected components functor, represented by any set of connected graphs containing at least one graph on at least two vertices,
+        \item the scheme that always sends all vertices to the same part, represented by any set of graphs containing a disconnected graph.
+    \end{enumerate}
+\end{remark}
 
 \section{Representability for hierarchical clustering}
 
