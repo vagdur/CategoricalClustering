@@ -264,7 +264,9 @@ There is actually a natural extension of our definition of a representable clust
             \item and if $\alpha \geq \beta \geq 0$, then for any weighted graph $G = (V, E, w)$, the identity function $\Id: V \to V$ is a morphism from $\Sigma(G, \alpha)$ to $\Sigma(G, \beta)$.
         \end{enumerate}
 
-        \hl{Finish proof.}
+        We start with the first item, and suppose that $f: G \to G'$ is a morphism of weighted graphs, and $\tau \geq 0$ some threshold. We wish to show that whenever $uv$ is an edge of $\Sigma(G,\tau)$, $f(u)f(v)$ is an edge of $\Sigma(G',\tau)$. That $uv$ is an edge of $\Sigma(G,\tau)$ means that $uv$ is an edge of $G$ with weight at least $\tau$, and since $f$ is a morphism of weighted graphs, $f(u)f(v)$ must be an edge of $G'$, and since such morphisms are weight non-decreasing, its weight must still be at least $\tau$. So it is an edge of $\Sigma(G',\tau)$ as well.
+
+        The second item is even more trivial than the first -- if we unwrap the definitions, all it says is that if we lower the threshold for when edges are removed, then we will not lose any edges.
     \end{proof}
 \end{lemma}
 
