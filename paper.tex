@@ -145,7 +145,7 @@ With this result in hand, we can now give a proof of the existence of a represen
     Now suppose for contradiction that $\Gamma$ is a finite set of graphs such that $F_\Gamma = F_{\bar{\Omega}}$. Lemma \ref{lemma_representation_hull} implies that we must have $\Gamma \subset \bar{\Omega}$, since if there were a $\gamma \in \Gamma \setminus \bar{\Omega}$ it'd be sent to a clique by $F_\Gamma$, and thus also by $F_{\bar{\Omega}}$, since we've assumed they are equal -- but we chose $\bar{\Omega}$ so that it already contains everything sent to a clique by $F_{\bar{\Omega}}$.
 
     So, let
-    $$\delta = \max_{\gamma \in \Gamma} \max \left\{ d(u, v) \given u, v \in V_\gamma, v\text{ is in a triangle} \right\}.$$
+    $$\delta = \max_{\gamma \in \Gamma} \max_{u \in V_\gamma} \min_{\substack{v \in V_\gamma\\v \text{ is in a triangle}}} d(u, v).$$
     That is, $\delta$ is the furthest any vertex in any graph in $\Gamma$ is from a triangle. We claim that $F_\Gamma$ will not send $\omega_{\delta + 1}$ to a clique, proving it is not equal to $F_{\bar{\Omega}}$, giving our contradiction.
 
     That this is so is actually easy to see -- if $\omega_{\delta + 1}$ were sent to a clique, that must in particular mean there is an edge in $F_\Gamma(\omega_{\delta + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $\gamma \in \Gamma$ that hits both vertices. However, such a morphism must also map the triangle in $\gamma$ onto the triangle in $\omega_{\delta + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $\gamma$ is from the triangle. So no such morphism can exist, and we are done.
