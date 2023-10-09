@@ -16,6 +16,8 @@
 
 \usepackage{multirow}
 
+\usepackage{subfig}
+
 \usepackage{tikz}
 \usetikzlibrary{matrix,arrows,decorations.pathmorphing}
 \usepackage{tikz-cd}
