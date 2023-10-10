@@ -53,7 +53,9 @@ In particular, modularity suffers from a ``resolution limit'', wherein it cannot
     \label{fig:resolution_limit}
 \end{figure}
 
-some talk about why an axiomatic approach gives algorithms that run in polynomial time, unlike the generally NP-hard optimization problems
+Another issue with studying modularity optimization from a theoretical perspective is the fact that computing it is likely NP-hard.\footnote{The paper originally proving this, \cite{modularity_NP_hard}, has an error in a lemma that, at the time of writing, has not yet been fixed. It does however seem likely that the result holds, and it is certainly still true that we know of no tractable exact algorithm even if one could exist.} This means that when using modularity maximization in practice, one always needs a heuristic algorithm for finding good partitions, such as the Louvain~\cite{louvain} or Leiden~\cite{leiden} algorithms, which themselves do not have many known theoretical guarantees connecting them to modularity. So one is left having to either study modularity itself, and hoping that the results say something about the results of these algorithms, or studying the algorithms directly, and not directly saying anything about modularity.
+
+These issues with the varying optimization based approaches to clustering lead us to investigating a more ``axiomatic'' approach to the problem -- that is, we want to specify a few properties that the clustering method has to have, and then seeing what methods there are that satisfy these properties. Other than of course giving us guarantees on the behaviour of our methods, this approach also gives us much more straightforward algorithms which run in polynomial time, since we are no longer doing optimization, but in some sense just applying a decision rule for when vertices should be in the same part or not.
 
 soft heuristic statement of what our axioms/properties are and why they might be desirable
 
