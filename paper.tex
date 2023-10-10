@@ -57,9 +57,14 @@ Another issue with studying modularity optimization from a theoretical perspecti
 
 These issues with the varying optimization based approaches to clustering lead us to investigating a more ``axiomatic'' approach to the problem -- that is, we want to specify a few properties that the clustering method has to have, and then seeing what methods there are that satisfy these properties. Other than of course giving us guarantees on the behaviour of our methods, this approach also gives us much more straightforward algorithms which run in polynomial time, since we are no longer doing optimization, but in some sense just applying a decision rule for when vertices should be in the same part or not.
 
-soft heuristic statement of what our axioms/properties are and why they might be desirable
-
-statement of our results
+Our particular approach to this is motivated by the results of Carlsson and Mémoli~\cite{metric_space_clustering} for the analogous problem of clustering finite metric spaces. Like in their setting, there are three properties that are of interest:
+\begin{enumerate}
+    \item \emph{Functoriality} is essentially a form of monotonicity under addition of edges or vertices to the graph. Adding a new edge or new vertex should only ever make communities more tightly connected, it should never split them.
+    \item \emph{Excisiveness} is a very strict version of requiring that there be no resolution limit -- instead we require that the method be idempotent on the parts it has found. That is, if we take some graph $G$, cluster it, and then look at the subgraph induced by any part, that graph has to be clustered into just a single large component, so we never discover new features at smaller scales.
+    \item \emph{Representability} is a type of explainability of the clustering method. A representable clustering method $F_\Omega$ is determined by a set $\Omega$ of simple graphs, and the rule that two vertices of a graph $G$ will be in the same part if their neighbourhood looks like something in $\Omega$. This also gives us a simple algorithm to actually compute the partitioning of a graph, that runs in polynomial time for each fixed $\Omega$.
+\end{enumerate}
+ 
+Our main result is that for functorial clustering schemes, the properties of excisiveness and representability are equivalent.
 
 \section{Definitions of our terms}
 
