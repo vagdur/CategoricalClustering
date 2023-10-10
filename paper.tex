@@ -64,7 +64,9 @@ Our particular approach to this is motivated by the results of Carlsson and Mém
     \item \emph{Representability} is a type of explainability of the clustering method. A representable clustering method $F_\Omega$ is determined by a set $\Omega$ of simple graphs, and the rule that two vertices of a graph $G$ will be in the same part if their neighbourhood looks like something in $\Omega$. This also gives us a simple algorithm to actually compute the partitioning of a graph, that runs in polynomial time for each fixed $\Omega$.
 \end{enumerate}
  
-Our main result is that for functorial clustering schemes, the properties of excisiveness and representability are equivalent.
+Our main result is that for functorial clustering schemes, the properties of excisiveness and representability are equivalent. We also give a structural result for when two representable clustering schemes are equal, and use this to prove that there exist representable clustering schemes that are not finitely representable.
+
+We also choose to extend our definition of a representable clustering scheme into the setting of hierarchical clustering schemes. Here, instead of just assigning a single clustering to each graph, we give one clustering for each ``scale'', giving a spectrum of clusterings of the graph from coarsest to finest. In this setting, we find that the connection to excisiveness no longer works out.
 
 \section{Definitions of our terms}
 
