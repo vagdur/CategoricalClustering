@@ -268,7 +268,7 @@ As stated in the introduction, one benefit of this approach to clustering is tha
 
 The most naïve possible algorithm given a fixed set $\Omega$ of representing graphs and an $n$-vertex graph $G$ is to, for each $\omega \in \Omega$ and each $H \in \binom{V(G)}{\abs{\omega}}$, that is, each $\abs{\omega}$-sized subset of the vertices of $G$, check whether $G|_H$ contains a subgraph isomorphic to $\omega$. It is easy to see that this will give an algorithm that is polynomial in $n$, but with an exponent and constant depending on $\Omega$.
 
-What is more interesting is that we can get a far more efficient algorithm on a large class of graphs, using the following lemma from \cite[p.~407]{sparsity_book}:
+What is more interesting is that we can get a far more efficient algorithm on a large class of graphs, using the following lemma from~\cite[p.~407]{sparsity_book}:
 
 \begin{lemma}\label{lemma_subgraph_counting_bounded_exp}
     Let $\mathcal{C}$ be a class with bounded expansion and let $H$ be a fixed graph. Then there exists a linear time algorithm which computes, from a pair $(G,S)$ formed by a graph $G \in \mathcal{C}$ and a subset $S$ of vertices of $G$, the number of isomorphs of $H$ in $G$ that include some vertex in $S$. There also exists an algorithm running in time $O(n) + O(k)$ listing all such isomorphs, where $k$ denotes the number of isomorphs.
