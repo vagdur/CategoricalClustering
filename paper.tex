@@ -255,16 +255,26 @@ Finally, let us think about what we need to show to demonstrate that there are n
     Finally, for a scheme which has none of the properties, cluster all graphs as a single part except for $K_2$, which we cluster as two parts, and the disjoint union of two copies of $K_2$, which we cluster as two parts -- that is, each of the copies is its own part.
 \end{example}
 
-\begin{remark}
-    It is possible to carry out this entire argument, showing equivalence between representability and excisiveness, also in the setting where we do not require morphisms in the category of graphs to be injective. The arguments only need minor modifications to deal with this.
+It is possible to carry out this entire argument, showing equivalence between representability and excisiveness, also in the setting where we do not require morphisms in the category of graphs to be injective. The arguments only need minor modifications to deal with this.
 
-    However, it turns out that this setting is much less interesting: There are in fact only three different representable clustering schemes in this setting. They are, respectively,
+However, it turns out that this setting is much less interesting: There are in fact only three different representable clustering schemes.
+
+\begin{theorem}
+    If we do not require our morphisms to be injective, there are exactly three possible representable clustering schemes:
     \begin{enumerate}
-        \item the scheme that always sends every vertex to its own part, represented by the empty set or by $K_1$,
+        \item The scheme that always sends every vertex to its own part, represented by the empty set or by $K_1$,
         \item the connected components functor, represented by any set of connected graphs containing at least one graph on at least two vertices,
-        \item the scheme that always sends all vertices to the same part, represented by any set of graphs containing a disconnected graph.
+        \item and the scheme that always sends all vertices to the same part, represented by any set of graphs containing a disconnected graph.
     \end{enumerate}
-\end{remark}
+
+    \begin{proof}
+        Suppose we have some set of simple graphs $\Omega$, and some graph $G$. If $\Omega$ is empty, or contains only a $K_1$, it is clear that there are no morphisms at all from any $\omega \in \Omega$ that hit two vertices of $G$, and so there can trivially be no edges in $F_\Omega(G)$, and the resulting clustering scheme always sends every vertex to its own part.
+        
+        Now suppose $\Omega$ contains some graph that is not $K_1$, say $\omega$, but this $\omega$ is disconnected. Then, for any two vertices $u, v \in G$, we can send one connected component of $\omega$ to $u$ and all the other connected components to $v$. Thus there is an edge $uv$ in $F_\Omega(G)$, and we have shown that $F_\Omega$ must send all graphs to cliques, and thus the clustering scheme clusters all graphs as a single part.
+
+        Finally, suppose $\Omega$ contains some graph on at least two vertices, and every $\omega \in \Omega$ is connected. Then, pick some $\omega \in \Omega$ and a vertex $w_\omega \in \omega$. For any edge $uv$ in $G$, we can send $w_\omega$ to $u$ and every other vertex of $\omega$ to $v$. Thus, $uv$ must also be an edge of $F_\Omega(G)$. That we cannot get an edge in $F_\Omega(G)$ between two vertices in different connected components of $G$ is clear from that $\Omega$ contains only connected graphs. Therefore, $F_\Omega(G)$ must have the same connected components as $G$, and so the induced clustering scheme must be just the connected components functor.
+    \end{proof}
+\end{theorem}
 
 \section{Computational complexity of representable clustering schemes}
 
