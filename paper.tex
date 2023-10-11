@@ -278,7 +278,7 @@ What is more interesting is that we can get a far more efficient algorithm on a 
     Let $\Omega$ be any finite set of simple graphs, and $F_\Omega$ the representable clustering scheme represented by it. For any class $\mathcal{C}$ with bounded expansion, there exists an algorithm that given any graph $G \in \mathcal{C}$ and vertex $v$ of $G$ computes the part containing $v$ of $F_\Omega(G)$ running in time $O(n^2) + O(w)$, where $w$ is the number of subgraphs of $G$ isomorphic to a graph in $\Omega$.
 
     \begin{proof}
-        It is clear that if we can compute the part containing $v$ in $F_{\{\omega\}}(G)$ for each $\omega \in \Omega$, then we can just take the union of these parts to get $v$'s part in $F_\Omega(G)$ -- and if we can do this for each $\omega$ in time $O(n^2) + O(w_\omega)$, with $w_\omega$ the number of copies of $\omega$ in $G$\footnote{\hl{There is a standard notation for this, right, from extremal graph theory? I just don't remember it right now.}}, it will sum up to the running time we give in the statement.
+        It is clear that if we can compute the part containing $v$ in $F_{\{\omega\}}(G)$ for each $\omega \in \Omega$, then we can just take the union of these parts to get $v$'s part in $F_\Omega(G)$ -- and if we can do this for each $\omega$ in time $O(n^2) + O(\#(\omega,G))$, with $\#(\omega,G)$ the number of copies of $\omega$ in $G$, it will sum up to the running time we give in the statement.
 
         So, let us restrict to the case of $\Omega = \{\omega\}$. We will of course use the algorithm from Lemma~\ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way.
 
