@@ -392,7 +392,17 @@ For the reader of a more combinatorial bent, who might not recall all the defini
 It is worth remarking that the use of the word \emph{class} instead of \emph{set} is not accidental -- the collection of all finite simple graphs is of course too big to be a set. However, since this is only so for ``dumb reasons'' -- that there are class-many different labelings of the same graph -- and the collection of isomorphism classes of finite simple graphs \emph{is} a set, this distinction will never actually affect us, and we will elide it throughout the text.
 
 \begin{definition}
-    A \emph{functor} from a category $\mathcal{A}$ to a category $\mathcal{B}$ is 
+    A \emph{functor} $F$ from a category $\mathcal{A}$ to a category $\mathcal{B}$ is a mapping that associates to each $a \in \mathcal{A}$ an $F(a) \in \mathcal{B}$, and that for each pair of objects $a, a' \in \mathcal{A}$ associates each morphism $f \in \Hom(a, a')$ to a morphism $F(f) \in \Hom(F(a), F(a'))$. We require that this mapping respect the identity morphisms, in the sense that $F(\mathrm{id}_a) = \mathrm{id}_{F(a)}$, and composition of morphisms, so that $F(fg) = F(f)F(g)$.
+
+    A functor from a category to itself is called an \emph{endofunctor}.
+\end{definition}
+
+The categories we study in this paper are all concrete, that is, their objects are sets with some extra structure on them, and the morphisms are just functions between the sets that respect the structure in an appropriate sense. Our functors never do anything strange -- they all leave the underlying set unchanged, only changing what structure we have on the set, and they do ``nothing'' on the morphisms, that is, as set functions they are just the same function again between the same sets.
+
+In this setting most of the requirements of a functor are trivial -- of course it will behave correctly with identity morphisms and composition, because in a sense it isn't doing anything to the morphisms. So the one thing we need to check when proving that things are functors will be that morphisms do map to morphisms, that is, that a function that respects the structure on the sets in the first category will also respect the structure we have in the second category.
+
+\begin{definition}
+    Given two categories $\mathcal{A}$ and $\mathcal{B}$, the \emph{product category} $\mathcal{A} \times \mathcal{B}$ is the category whose objects are pairs $(a,b)$ of an object $a$ from $\mathcal{A}$ and an object $b$ from $\mathcal{B}$. A morphism in $\mathcal{A} \times \mathcal{B}$ from $(a,b)$ to $(a',b')$ is a pair of a morphism in $\mathcal{A}$ from $a$ to $a'$ and a morphism in $\mathcal{B}$ from $b$ to $b'$.
 \end{definition}
 
 \end{document}
