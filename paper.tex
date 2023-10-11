@@ -136,7 +136,7 @@ In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines w
     For any set $\Omega$ of simple graphs and any simple graph $G = (V, E)$, it holds that $F_{\Omega \cup \{G\}} = F_\Omega$ if and only if $F_\Omega(G) = (V, V^2)$, that is, if $G$ is sent to a clique on its vertices by $F_\Omega$.
 
     \begin{proof}
-        Suppose $F_{\Omega \cup \{G\}} = F_\Omega$. That $F_{\Omega \cup \{G\}}(G) = (V, V^2)$ is immediate by Remark \ref{remark_omegas_sent_to_cliques}, and so since $F_{\Omega \cup \{G\}} = F_\Omega$, we also have $F_\Omega(G) = (V, V^2)$, as desired.
+        Suppose $F_{\Omega \cup \{G\}} = F_\Omega$. That $F_{\Omega \cup \{G\}}(G) = (V, V^2)$ is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, and so since $F_{\Omega \cup \{G\}} = F_\Omega$, we also have $F_\Omega(G) = (V, V^2)$, as desired.
 
         Now suppose $F_\Omega(G) = (V, V^2)$, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Omega \cup \{G\}}(H) = F_\Omega(H)$. 
         
@@ -148,8 +148,8 @@ In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines w
 
 With this result in hand, we can now give a proof of the existence of a representable but not finitely representable endofunctor.
 
-\begin{proof}[Proof of Theorem \ref{theorem_exists_not_finitely_representable}]
-    Let, for each $i$, $\omega_i$ consist of a triangle with a tail of $i$ vertices, as shown in Figure \ref{figure_triangles_w_tails}, and let $\Omega = \left\{\omega_i \given i \in \N\right\}$. We claim that $F_\Omega$ is not equal to $F_\Gamma$ for any finite set of simple graphs $\Gamma$.
+\begin{proof}[Proof of Theorem~\ref{theorem_exists_not_finitely_representable}]
+    Let, for each $i$, $\omega_i$ consist of a triangle with a tail of $i$ vertices, as shown in Figure~\ref{figure_triangles_w_tails}, and let $\Omega = \left\{\omega_i \given i \in \N\right\}$. We claim that $F_\Omega$ is not equal to $F_\Gamma$ for any finite set of simple graphs $\Gamma$.
 
     \begin{figure}
         \centering
@@ -160,11 +160,11 @@ With this result in hand, we can now give a proof of the existence of a represen
 
     To prove this, let us first define
     $$\bar{\Omega} = \left\{G \in \G \given F_\Omega(G) = (V_G, V_G^2)\right\}$$
-    as the set of all things which $F_\Omega$ sends to cliques. By Lemma \ref{lemma_representation_hull}, $F_\Omega = F_{\bar{\Omega}}$, and $\bar{\Omega}$ is the greatest set with this property.
+    as the set of all things which $F_\Omega$ sends to cliques. By Lemma~\ref{lemma_representation_hull}, $F_\Omega = F_{\bar{\Omega}}$, and $\bar{\Omega}$ is the greatest set with this property.
 
     A little bit of reflection will make it clear that $\bar{\Omega}$ is precisely the set of connected graphs which contain a triangle. Particularly, for any edge in such a graph, we can map the tail end of some $\omega_i$ onto that edge, the rest of the tail onto a path to the triangle in the graph, and the triangle of the $\omega_i$ onto the triangle of the graph. That $F_\Omega$ will send any triangle-free graph to a graph with no edges is clear, since there is no morphism from any triangle-containing graph such as $\omega_i$ into a triangle-free graph. Likewise, that it cannot send a disconnected graph to a clique is obvious.
 
-    Now suppose for contradiction that $\Gamma$ is a finite set of graphs such that $F_\Gamma = F_{\bar{\Omega}}$. Lemma \ref{lemma_representation_hull} implies that we must have $\Gamma \subset \bar{\Omega}$, since if there were a $\gamma \in \Gamma \setminus \bar{\Omega}$ it'd be sent to a clique by $F_\Gamma$, and thus also by $F_{\bar{\Omega}}$, since we've assumed they are equal -- but we chose $\bar{\Omega}$ so that it already contains everything sent to a clique by $F_{\bar{\Omega}}$.
+    Now suppose for contradiction that $\Gamma$ is a finite set of graphs such that $F_\Gamma = F_{\bar{\Omega}}$. Lemma~\ref{lemma_representation_hull} implies that we must have $\Gamma \subset \bar{\Omega}$, since if there were a $\gamma \in \Gamma \setminus \bar{\Omega}$ it'd be sent to a clique by $F_\Gamma$, and thus also by $F_{\bar{\Omega}}$, since we've assumed they are equal -- but we chose $\bar{\Omega}$ so that it already contains everything sent to a clique by $F_{\bar{\Omega}}$.
 
     So, let
     $$\delta = \max_{\gamma \in \Gamma} \max_{u \in V_\gamma} \min_{\substack{v \in V_\gamma\\v \text{ is in a triangle}}} d(u, v).$$
@@ -189,7 +189,7 @@ We are able to exactly characterize the relationship between the three concepts 
     A representable clustering scheme is excisive. An excisive and functorial clustering scheme is representable. No other implications hold between these concepts.
 \end{theorem}
 
-We divide the proof of Theorem \ref{main_theorem} into two lemmas and a collection of examples.
+We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collection of examples.
 
 \begin{lemma} \label{lemma_repr_implies_excisive}
     A representable clustering scheme is excisive.
@@ -280,7 +280,7 @@ What is more interesting is that we can get a far more efficient algorithm on a 
     \begin{proof}
         It is clear that if we can compute the part containing $v$ in $F_{\{\omega\}}(G)$ for each $\omega \in \Omega$, then we can just take the union of these parts to get $v$'s part in $F_\Omega(G)$ -- and if we can do this for each $\omega$ in time $O(n^2) + O(w_\omega)$, with $w_\omega$ the number of copies of $\omega$ in $G$\footnote{\hl{There is a standard notation for this, right, from extremal graph theory? I just don't remember it right now.}}, it will sum up to the running time we give in the statement.
 
-        So, let us restrict to the case of $\Omega = \{\omega\}$. We will of course use the algorithm from Lemma \ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way.
+        So, let us restrict to the case of $\Omega = \{\omega\}$. We will of course use the algorithm from Lemma~\ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way.
 
         \begin{algorithm}
 			\caption{Computation of part of $v$ in $G$}\label{alg:compute_part}
@@ -288,7 +288,7 @@ What is more interesting is that we can get a far more efficient algorithm on a 
 				\State $P_0 \gets \{v\}, P_{-1} \gets \emptyset$
 				\For{$i = 1,2,\ldots, n$}
 				\If{$P_{i-1} \setminus P_{i-2} \neq \emptyset$}
-				\State Run the algorithm of Lemma \ref{lemma_subgraph_counting_bounded_exp} with input $(G, P_{i-1} \setminus P_{i-2})$, getting a list of isomorphs $\gamma_1, \ldots, \gamma_k$
+				\State Run the algorithm of Lemma~\ref{lemma_subgraph_counting_bounded_exp} with input $(G, P_{i-1} \setminus P_{i-2})$, getting a list of isomorphs $\gamma_1, \ldots, \gamma_k$
                 \State $P_{i} \gets P_{i-1} \cup \bigcup_{j=1}^k V(\gamma_j)$
 				\Else
 				\State\Return $P_{i-1}$
@@ -372,7 +372,7 @@ There is actually a natural extension of our definition of a representable clust
         \label{fig:hierarchically_repr_not_excisive}
     \end{figure}
 
-    To see this, take the triangle and the four-cycle as your representing set, both with weight one, and consider what is happening in Figure \ref{fig:hierarchically_repr_not_excisive}. If we apply the scissors functor at threshold $1.5$, we will keep only the edge between $u$ and $v$, so they get clustered as one part. However, if we zoom in on just this part, and try to cluster this $K_2$, it will get clustered as two parts. So we have seen that at this threshold, it is in fact not excisive.
+    To see this, take the triangle and the four-cycle as your representing set, both with weight one, and consider what is happening in Figure~\ref{fig:hierarchically_repr_not_excisive}. If we apply the scissors functor at threshold $1.5$, we will keep only the edge between $u$ and $v$, so they get clustered as one part. However, if we zoom in on just this part, and try to cluster this $K_2$, it will get clustered as two parts. So we have seen that at this threshold, it is in fact not excisive.
 \end{remark}
 
 \printbibliography
