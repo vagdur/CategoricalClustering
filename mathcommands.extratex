@@ -18,6 +18,9 @@
 
 \usepackage{subfig}
 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 \usepackage{tikz}
 \usetikzlibrary{matrix,arrows,decorations.pathmorphing}
 \usepackage{tikz-cd}

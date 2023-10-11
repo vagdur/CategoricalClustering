@@ -337,6 +337,44 @@ There is actually a natural extension of our definition of a representable clust
 
 \section{Computational complexity of representable clustering schemes}
 
+As stated in the introduction, one benefit of this approach to clustering is that it yields tractable algorithms for exactly computing the partitioning. In this section, we give a proof of this.
+
+The most naïve possible algorithm given a fixed set $\Omega$ of representing graphs and an $n$-vertex graph $G$ is to, for each $\omega \in \Omega$ and each $H \in \binom{V(G)}{\abs{\omega}}$, that is, each $\abs{\omega}$-sized subset of the vertices of $G$, check whether $G|_H$ contains a subgraph isomorphic to $\omega$. It is easy to see that this will give an algorithm that is polynomial in $n$, but with an exponent and constant depending on $\Omega$.
+
+What is more interesting is that we can get a far more efficient algorithm on a large class of graphs, using the following lemma from \cite[p.~407]{sparsity_book}:
+
+\begin{lemma}\label{lemma_subgraph_counting_bounded_exp}
+    Let $\mathcal{C}$ be a class with bounded expansion and let $H$ be a fixed graph. Then there exists a linear time algorithm which computes, from a pair $(G,S)$ formed by a graph $G \in \mathcal{C}$ and a subset $S$ of vertices of $G$, the number of isomorphs of $H$ in $G$ that include some vertex in $S$. There also exists an algorithm running in time $O(n) + O(k)$ listing all such isomorphs, where $k$ denotes the number of isomorphs.
+\end{lemma}
+
+\begin{theorem}
+    Let $\Omega$ be any finite set of simple graphs, and $F_\Omega$ the representable clustering scheme represented by it. There exists an algorithm that given any graph $G$ and vertex $v$ of $G$ computes the part containing $v$ of $F_\Omega(G)$ running in time $O(n^2) + O(w)$, where $w$ is the number of subgraphs of $G$ isomorphic to a graph in $\Omega$.
+
+    \begin{proof}
+        It is clear that if we can compute the part containing $v$ in $F_{\{\omega\}}(G)$ for each $\omega \in \Omega$, then we can just take the union of these parts to get $v$'s part in $F_\Omega(G)$ -- and if we can do this for each $\omega$ in time $O(n^2) + O(w_\omega)$, with $w_\omega$ the number of copies of $\omega$ in $G$\footnote{\hl{There is a standard notation for this, right, from extremal graph theory? I just don't remember it right now.}}, it will sum up to the running time we give in the statement.
+
+        So, let us restrict to the case of $\Omega = \{\omega\}$. We will of course use the algorithm from Lemma \ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way.
+
+        \begin{algorithm}
+			\caption{Computation of part of $v$ in $G$}\label{alg:compute_part}
+			\begin{algorithmic}
+				\State $P_0 \gets \{v\}, P_{-1} \gets \emptyset$
+				\For{$i = 1,2,\ldots, n$}
+				\If{$P_{i-1} \setminus P_{i-2} \neq \emptyset$}
+				\State Run the algorithm of Lemma \ref{lemma_subgraph_counting_bounded_exp} with input $(G, P_{i-1} \setminus P_{i-2})$, getting a list of isomorphs $\gamma_1, \ldots, \gamma_k$
+                \State $P_{i} \gets P_{i-1} \cup \bigcup_{j=1}^k V(\gamma_j)$
+				\Else
+				\State\Return $P_{i-1}$
+				\EndIf
+				\EndFor
+                \State\Return $P_n$
+			\end{algorithmic}
+		\end{algorithm}
+
+        Each step in the loop takes time $O(n)$ plus the number of isomorphs found in the step, so since the loop can take at most $n$ steps, the total runtime must be at most $O(n^2)$ plus the total number of isomorphs in the graph, as desired. 
+    \end{proof}
+\end{theorem}
+
 \printbibliography
 
 \appendix
