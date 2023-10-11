@@ -343,6 +343,8 @@ There is actually a natural extension of our definition of a representable clust
     $$w(uv) = \sum_{(\omega, w) \in \Omega} \sum_{f \in \Hom(\omega, G)} \frac{w}{\abs{\Aut(\omega)}} \ind{u, v \in \im(f)}.$$
 \end{definition}
 
+Intuitively, the weight $w(uv)$ counts how many subgraphs of $G$ contain both $u$ and $v$ and are isomorphic to something in $\Omega$, except the sum is weighted. We include the division by the size of the automorphism group so that we are actually counting \emph{subgraphs}, not embeddings. One illustration of what is going on in this definition can be found in Figure~\ref{fig:hierarchically_repr_not_excisive}.
+
 \begin{lemma}
     The representable functors from $\G$ to $\G^w$ are actually functors.
 
