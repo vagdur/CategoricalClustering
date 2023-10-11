@@ -379,6 +379,20 @@ There is actually a natural extension of our definition of a representable clust
 
 \appendix
 
-\section{Definitions of categorical language}
+\section{Definitions of categorical language}\label{cat_theory_appendix}
+
+For the reader of a more combinatorial bent, who might not recall all the definitions of category theory used in this paper, we include a short appendix stating them.
+
+\begin{definition}
+    A \emph{category} $\mathcal{C}$ consists of a class of \emph{objects} $\mathrm{ob}(\mathcal{C})$, and for each pair of objects $a, b \in \mathcal{C}$ a (possibly empty) class $\Hom(a,b)$ of \emph{morphisms} from $a$ to $b$. 
+    
+    We require these morphisms to compose, in the sense that for any $f \in \Hom(a,b)$ and $g \in \Hom(b,c)$ there exists an $fg \in \Hom(a,c)$, and this composition must be associative. There must also, for each $a \in \mathcal{C}$, be an identity morphism $\mathrm{id}_a \in \Hom(a,a)$, with the property that $f\mathrm{id}_a = f$ and $\mathrm{id}_a g = g$ whenever these compositions make sense.
+\end{definition}
+
+It is worth remarking that the use of the word \emph{class} instead of \emph{set} is not accidental -- the collection of all finite simple graphs is of course too big to be a set. However, since this is only so for ``dumb reasons'' -- that there are class-many different labelings of the same graph -- and the collection of isomorphism classes of finite simple graphs \emph{is} a set, this distinction will never actually affect us, and we will elide it throughout the text.
+
+\begin{definition}
+    A \emph{functor} from a category $\mathcal{A}$ to a category $\mathcal{B}$ is 
+\end{definition}
 
 \end{document}
