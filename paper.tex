@@ -197,7 +197,7 @@ We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collecti
     \begin{proof}
         Let $\Omega$ be some set of simple graphs, and $G$ be some simple graph. Assume the equivalence classes of $(F_\Omega \circ \Pi)(G)$ are $\{A_1, A_2, \ldots A_k\}$, and let $H = G|_{A_1}$ be the induced subgraph of $G$ on $A_1$. What we need to show is that $(F_\Omega \circ \Pi)(H) = (A_1, A_1^2)$, that is, that every vertex is equivalent in the clustering of $H$.
         
-        It is obvious that this is equivalent to showing that $F_\Omega(H)$ is a connected graph. We will in fact show something stronger -- that $F_\Omega(H) = F_\Omega(G_{A_1}) = (F_\Omega(G))|_{A_1}$. Since $A_1$ is by assumption a connected component of $F_\Omega(G)$, this will show what we want.
+        It is obvious that this is equivalent to showing that $F_\Omega(H)$ is a connected graph. We will in fact show something stronger -- that $F_\Omega(H) = F_\Omega(G|_{A_1}) = (F_\Omega(G))|_{A_1}$. Since $A_1$ is by assumption a connected component of $F_\Omega(G)$, this will show what we want.
 
         First, let $f: H \hookrightarrow G$ be the subgraph inclusion morphism of $H$ into $G$. By functoriality of $F_\Omega$, $f$ is also a morphism from $F_\Omega(H)$ into $F_\Omega(G)$, showing that $F_\Omega(H)$ is a subgraph of $F_\Omega(G)$, so every edge of $F_\Omega(H)$ is an edge of $F_\Omega(G)$
 
