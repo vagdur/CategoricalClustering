@@ -21,6 +21,8 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
+\usepackage{hyperref}
+
 \usepackage{tikz}
 \usetikzlibrary{matrix,arrows,decorations.pathmorphing}
 \usepackage{tikz-cd}
