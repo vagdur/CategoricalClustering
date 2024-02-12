@@ -8,3 +8,5 @@
 *.synctex*
 *.bcf
 *.xml
+*.bcf
+*.run.xml
