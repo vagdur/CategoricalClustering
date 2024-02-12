@@ -1,0 +1,75 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{mathtools}
+
+\begin{document}
+\begin{tikzpicture}[vertex/.style={circle,draw,minimum size=2em,inner sep=3pt}, edge/.style={-}]
+    % omega_0
+
+    \node at (-1,0.7) {$\omega_0$};
+  
+    % Vertices
+    \node[vertex] (a) at (-2,0) {$\,$};
+    \node[vertex] (b) at (0,0) {$\,$};
+    \node[vertex] (c) at (-1,2) {$\,$};
+
+    % Edges
+    \draw[edge] (a) -- (b);
+    \draw[edge] (a) -- (c);
+    \draw[edge] (b) -- (c);
+
+    % omega_1
+
+    \node at (7,0.7) {$\omega_1$};
+  
+    % Vertices
+    \node[vertex] (a1) at (6,0) {$\,$};
+    \node[vertex] (b1) at (8,0) {$\,$};
+    \node[vertex] (c1) at (7,2) {$\,$};
+    \node[vertex] (d11) at (10,0) {$\,$};
+
+    % Edges
+    \draw[edge] (a1) -- (b1);
+    \draw[edge] (a1) -- (c1);
+    \draw[edge] (b1) -- (c1);
+    \draw[edge] (b1) -- (d11);
+
+    % omega_2
+
+    \node at (-3,-3.3) {$\omega_2$};
+  
+    % Vertices
+    \node[vertex] (a2) at (-4,-4) {$\,$};
+    \node[vertex] (b2) at (-2,-4) {$\,$};
+    \node[vertex] (c2) at (-3,-2) {$\,$};
+    \node[vertex] (d21) at (0,-4) {$\,$};
+    \node[vertex] (d22) at (2,-4) {$\,$};
+
+    % Edges
+    \draw[edge] (a2) -- (b2);
+    \draw[edge] (a2) -- (c2);
+    \draw[edge] (b2) -- (c2);
+    \draw[edge] (b2) -- (d21);
+    \draw[edge] (d21) -- (d22);
+
+    % omega_3
+
+    \node at (5,-3.3) {$\omega_3$};
+  
+    % Vertices
+    \node[vertex] (a3) at (4,-4) {$\,$};
+    \node[vertex] (b3) at (6,-4) {$\,$};
+    \node[vertex] (c3) at (5,-2) {$\,$};
+    \node[vertex] (d31) at (8,-4) {$\,$};
+    \node[vertex] (d32) at (10,-4) {$\,$};
+    \node[vertex] (d33) at (12,-4) {$\,$};
+
+    % Edges
+    \draw[edge] (a3) -- (b3);
+    \draw[edge] (a3) -- (c3);
+    \draw[edge] (b3) -- (c3);
+    \draw[edge] (b3) -- (d31);
+    \draw[edge] (d31) -- (d32);
+    \draw[edge] (d32) -- (d33);
+\end{tikzpicture}
+\end{document}
