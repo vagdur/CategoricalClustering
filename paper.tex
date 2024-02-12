@@ -82,11 +82,11 @@ We also extend our definition of a representable clustering scheme into the sett
 \end{definition}
 
 \begin{definition}
-    The category of partitioned sets $\Pset$ has as its objects sets $V$ with an equivalence relation $\sim$. A morphism in $\Pset$ from $(V, \sim)$ to $(W, \approx)$ is a set function $f: V \to W$ such that whenever $v\sim w$, $f(v) \approx f(w)$.
+    The category of partitioned sets $\Pset$ has as its objects finite sets $V$ with an equivalence relation $\sim$. A morphism in $\Pset$ from $(V, \sim)$ to $(W, \approx)$ is a set function $f: V \to W$ such that whenever $v\sim w$, $f(v) \approx f(w)$.
 \end{definition}
 
 \begin{definition}
-    A clustering scheme is a function $\Clust$ that sends simple graphs to partitioned sets, with the same underlying set. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$.
+    A clustering scheme is a function $\Clust$ that sends simple graphs to partitioned sets, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E)$ to $P = (W, \sim)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$.
 \end{definition}
 
 One good way to think of these definitions is as a kind of generalization of monotonicity. If we were restricting to only studying clustering of graphs on a fixed underlying set, the statement that there is a morphism from $G$ to $H$ becomes precisely the statement that $G \subseteq H$, that is that $G$ is less than $H$ in the inclusion order. Likewise there is a natural partial order on the set of equivalence relations on the underlying vertex set, given by that $\sim < \approx$ if $\sim$ is a refinement of $\approx$, or equivalently if $\approx$ is a coarsening of $\sim$.
@@ -94,7 +94,9 @@ One good way to think of these definitions is as a kind of generalization of mon
 In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges.
 
 \begin{definition}
-    A clustering scheme $\Clust$ is \emph{excisive} if, for all graphs $G = (V, E)$, it holds for every equivalence class $A$ of $\Clust(G)$ that $\Clust(G|_A) = (A, A^2)$. That is, if we take a graph, cluster it, pick out one of the parts, and cluster that part alone, that part will be clustered into a single part.
+    A clustering scheme $\Clust$ is \emph{excisive} if, for all graphs $G = (V, E)$, it holds for every equivalence class $A$ of $\Clust(G)$ that $\Clust$ sends $G|_A$, the subgraph of $G$ induced by $A$, to $(A,\sim_{\text{cpl}})$, where $\sim_{\text{cpl}}$ is the complete equivalence relation that declares all objects in $A$ equivalent.
+    
+    That is, if we take a graph, cluster it, pick out one of the parts, and cluster that part alone, that part will be clustered into a single part.
 \end{definition}
 
 \section{Representability}
@@ -106,6 +108,8 @@ In this restricted setting, the statement that a clustering scheme is functorial
 
     On morphisms, $F_\Omega$ is always just the identity.
 \end{definition}
+
+That this definition does in fact always give us a functor is something that needs to be checked -- it is not immediate from the definition, even though we said in the definition that it is an endofunctor.
 
 \begin{lemma}\label{lemma_representable_endofunctor_is_functor}
     For any representing set $\Omega$ of simple graphs, $F_\Omega$ is indeed an endofunctor on $\G$.
@@ -122,11 +126,11 @@ In this restricted setting, the statement that a clustering scheme is functorial
 What is going on in the proof of Lemma~\ref{lemma_representable_endofunctor_is_functor} is much clearer if we just think about it in terms of things being subgraphs of each other, forgetting the data of \emph{how} exactly they are subgraphs. Then the statement that $F_\Omega$ is a functor boils down to the statement that if $\omega$ is a subgraph of $H$ and $H$ is a subgraph of $G$, then certainly $\omega$ is a subgraph of $G$, and so $F_\Omega(G)$ must have all the edges $F_\Omega(H)$ has, since edges in $F_\Omega(G)$ represent the presence of a certain subgraph in $G$.
 
 \begin{definition}
-    The functor $\Pi: \G \to \Pset$ which sends a graph to its partition into connected components is called the connected components functor. Equivalently, we can think of it as taking the equivalence relation hull of the binary relation $E$ defining the edges.
+    The functor $\Pi: \G \to \Pset$ which sends a graph to its partition into connected components is called the connected components functor. Equivalently, we can think of this functor as finding the least equivalence relation that contains the relation $E$ defining the edges, where we by ``least'' mean least in the subset relation.
 \end{definition}
 
 \begin{definition}\label{definition_representable_clustscheme}
-    A clustering scheme $\Clust$ is \emph{representable} if we can write it as $F_\Omega \circ \Pi$ for some representable endofunctor $F_\Omega$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
+    A clustering scheme $\Clust$ is \emph{representable} if $\Clust = F_\Omega \circ \Pi$ for some representable endofunctor $F_\Omega$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
 \end{definition}
 
 \begin{example}
@@ -175,7 +179,7 @@ With this result in hand, we can now give a proof of the existence of a represen
 
     To prove this, let us first define
     $$\bar{\Omega} = \left\{G \in \G \given F_\Omega(G) = (V_G, V_G^2)\right\}$$
-    as the set of all things which $F_\Omega$ sends to cliques. By Lemma~\ref{lemma_representation_hull}, $F_\Omega = F_{\bar{\Omega}}$, and $\bar{\Omega}$ is the greatest set with this property.
+    as the set of all graphs which $F_\Omega$ sends to cliques. By Lemma~\ref{lemma_representation_hull}, $F_\Omega = F_{\bar{\Omega}}$, and $\bar{\Omega}$ is the greatest set with this property.
 
     A little bit of reflection will make it clear that $\bar{\Omega}$ is precisely the set of connected graphs which contain a triangle. Particularly, for any edge in such a graph, we can map the tail end of some $\omega_i$ onto that edge, the rest of the tail onto a path to the triangle in the graph, and the triangle of the $\omega_i$ onto the triangle of the graph. That $F_\Omega$ will send any triangle-free graph to a graph with no edges is clear, since there is no morphism from any triangle-containing graph such as $\omega_i$ into a triangle-free graph. Likewise, that it cannot send a disconnected graph to a clique is obvious.
 
@@ -210,9 +214,9 @@ We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collecti
     A representable clustering scheme is excisive.
 
     \begin{proof}
-        Let $\Omega$ be some set of simple graphs, and $G$ be some simple graph. Assume the equivalence classes of $(F_\Omega \circ \Pi)(G)$ are $\{A_1, A_2, \ldots A_k\}$, and let $H = G|_{A_1}$ be the induced subgraph of $G$ on $A_1$. What we need to show is that $(F_\Omega \circ \Pi)(H) = (A_1, A_1^2)$, that is, that every vertex is equivalent in the clustering of $H$.
+        Let $\Omega$ be some set of simple graphs, and $G$ be some simple graph. Assume the equivalence classes of $(F_\Omega \circ \Pi)(G)$ are $\{A_1, A_2, \ldots A_k\}$, and let $H = G|_{A_1}$ be the induced subgraph of $G$ on $A_1$. What we need to show is that $(F_\Omega \circ \Pi)(H) = (A_1, \sim_{\text{cpl}})$, that is, that every vertex is equivalent in the clustering of $H$.
         
-        It is obvious that this is equivalent to showing that $F_\Omega(H)$ is a connected graph. We will in fact show something stronger -- that $F_\Omega(H) = F_\Omega(G|_{A_1}) = (F_\Omega(G))|_{A_1}$. Since $A_1$ is by assumption a connected component of $F_\Omega(G)$, this will show what we want.
+        It is obvious that this is equivalent to showing that $F_\Omega(H)$ is a connected graph. We will in fact show something stronger -- that $F_\Omega(H) = F_\Omega(G|_{A_1}) = (F_\Omega(G))|_{A_1}$. Since $A_1$ is an equivalence class of $F_\Omega \circ \Pi$, it must be a connected component of $F_\Omega(G)$, and so this will show what we want.
 
         First, let $f: H \hookrightarrow G$ be the subgraph inclusion morphism of $H$ into $G$. By functoriality of $F_\Omega$, $f$ is also a morphism from $F_\Omega(H)$ into $F_\Omega(G)$, showing that $F_\Omega(H)$ is a subgraph of $F_\Omega(G)$, so every edge of $F_\Omega(H)$ is an edge of $F_\Omega(G)$
 
@@ -229,7 +233,7 @@ We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collecti
 
     \begin{proof}
         Let $\Clust$ be some excsive and functorial clustering scheme, and let
-        $$\Omega = \left\{G \in \G \given \Clust(G) = (V_G, V_G^2)\right\},$$
+        $$\Omega = \left\{G \in \G \given \Clust(G) = (V_G, \sim_{\text{cpl}})\right\},$$
         that is, $\Omega$ is the set of all graphs clustered by $\Clust$ into a single part. We will show that in fact $\Clust = F_\Omega$.
 
         So, let $G$ be some graph. We need to show two things:
@@ -330,13 +334,13 @@ What is more interesting is that we can get a far more efficient algorithm on a 
 \section{Representability for hierarchical clustering}
 
 \begin{definition}
-    A functorial hierarchical clustering scheme is a functor from the product category $\G \times \R$ into $\Pset$, where we make $\R^+ = [0,\infty)$ into a category by saying there is a morphism from $a$ to $b$ whenever $a \geq b$.
+    A functorial hierarchical clustering scheme is a functor from the product category $\G \times \R^+$ into $\Pset$, where we make $\R^+ = [0,\infty)$ into a category by saying there is a morphism from $a$ to $b$ whenever $a \geq b$.
 \end{definition}
 
 There is actually a natural extension of our definition of a representable clustering scheme also to this setting, but it requires that we set up some more machinery.
 
 \begin{definition}
-    The category $\G^w$ of weighted simple graphs has as its objects simple graphs together with a function assigning a real-valued positive weight to each edge of the graph. A morphism from $(V, E, w)$ to $(V', E', w')$ is an injective set function $f: V \to V'$ such that whenever $uEv$, $f(u)E'f(w)$ and $w(uv) \leq w'(f(u)f(v))$.
+    The category $\G^w$ of weighted simple graphs has as its objects simple graphs together with a function assigning a real-valued positive weight to each edge of the graph. A morphism from $(V, E, w)$ to $(V', E', w')$ is an injective set function $f: V \to V'$ such that whenever $uEv$, $f(u)E'f(v)$ and $w(uv) \leq w'(f(u)f(v))$.
 \end{definition}
 
 \begin{definition}
@@ -372,7 +376,7 @@ Intuitively, the weight $w(uv)$ counts how many subgraphs of $G$ contain both $u
     \begin{proof}
         As before, the only thing we need to explicitly check is that whenever $f: G \to G'$ is a morphism in $\G$, it is also a morphism from $F_\Omega(G)$ to $F_\Omega(G')$. So, in particular, assume that $uv$ is an edge of $F_\Omega(G)$ with weight $\alpha$ -- what we need to show is that $f(u)f(v)$ is an edge of $F_\Omega(G')$ with weight at least $\alpha$.
 
-        That it is an edge at all is easy to see -- that it is an edge in $F_\Omega(G)$ means there is some $\omega \in \Omega$ and a morphism $f_\omega: \omega \to G$ whose image contains both $u$ and $v$. If we just compose this $f_\omega$ with $f$, we get a morphism from $\omega$ into $G'$ whose image of course contains $f(u)$ and $f(v)$.
+        That it is an edge at all is easy to see -- that it is an edge in $F_\Omega(G)$ means there is some $\omega \in \Omega$ and a morphism $f_\omega: \omega \to G$ whose image contains both $u$ and $v$. If we just compose this $f_\omega$ with $f$, we get a morphism from $\omega$ into $G'$ whose image contains $f(u)$ and $f(v)$.
         
         To show that its weight is at least $\alpha$, we compute
         \begin{align*}
@@ -390,7 +394,9 @@ Intuitively, the weight $w(uv)$ counts how many subgraphs of $G$ contain both $u
 \end{definition}
 
 \begin{remark}
-    We can of course turn such a representable hierarchical clustering scheme into a non-hierarchical clustering functor by just fixing a threshold. However, unfortunately, it turns out that this will \emph{not} in general result in an excisive, and thus also not a representable, functor!
+    We can turn such any hierarchical clustering scheme into a non-hierarchical clustering functor by just fixing a threshold. That is, given $F: \G \times \R^+ \to \Pset$, we can pick a threshold $\tau \in [0,\infty)$, and get a clustering scheme $F_\tau: \G \to \Pset$ by precomposing $F$ with the functor $T_{\tau}: \G \to \G \times \R^+$ which sends $G$ to $(G, \tau)$.
+    
+    Unfortunately, it turns out that applying this process to a representable hierarchical clustering scheme will \emph{not} in general result in an excisive, and thus also not a representable, functor!
 
     \begin{figure}[H]
         \centering
@@ -419,7 +425,7 @@ For the reader of a more combinatorial bent, who might not recall all the defini
 It is worth remarking that the use of the word \emph{class} instead of \emph{set} is not accidental -- the collection of all finite simple graphs is of course too big to be a set. However, since this is only so for ``dumb reasons'' -- that there are class-many different labelings of the same graph -- and the collection of isomorphism classes of finite simple graphs \emph{is} a set, this distinction will never actually affect us, and we will elide it throughout the text.
 
 \begin{definition}
-    A \emph{functor} $F$ from a category $\mathcal{A}$ to a category $\mathcal{B}$ is a mapping that associates to each $a \in \mathcal{A}$ an $F(a) \in \mathcal{B}$, and that for each pair of objects $a, a' \in \mathcal{A}$ associates each morphism $f \in \Hom(a, a')$ to a morphism $F(f) \in \Hom(F(a), F(a'))$. We require that this mapping respect the identity morphisms, in the sense that $F(\mathrm{id}_a) = \mathrm{id}_{F(a)}$, and composition of morphisms, so that $F(fg) = F(f)F(g)$.
+    A \emph{functor} $F$ from a category $\mathcal{A}$ to a category $\mathcal{B}$ is a mapping that associates to each $a \in \mathcal{A}$ an $F(a) \in \mathcal{B}$, and that for each pair of objects $a, a' \in \mathcal{A}$ associates each morphism $f \in \Hom(a, a')$ to a morphism $F(f) \in \Hom(F(a), F(a'))$. We require this mapping to respect the identity morphisms, in the sense that $F(\mathrm{id}_a) = \mathrm{id}_{F(a)}$, and composition of morphisms, so that $F(fg) = F(f)F(g)$.
 
     A functor from a category to itself is called an \emph{endofunctor}.
 \end{definition}
