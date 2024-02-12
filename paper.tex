@@ -205,10 +205,10 @@ With this result in hand, we can now give a proof of the existence of a represen
 We are able to exactly characterise the relationship between the three concepts of functoriality, representability, and excisiveness for clustering schemes.
 
 \begin{theorem} \label{main_theorem}
-    A representable clustering scheme is excisive. An excisive and functorial clustering scheme is representable. No other implications hold between these concepts.
+    A clustering scheme is representable if and only if it is excisive and functorial. No other implications hold between these concepts.
 \end{theorem}
 
-We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collection of examples.
+We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collection of examples. We have already seen from Lemma~\ref{lemma_representable_endofunctor_is_functor} that representability implies functoriality, so it remains to see that it also implies excisiveness, and then to show the necessity of the condition.
 
 \begin{lemma} \label{lemma_repr_implies_excisive}
     A representable clustering scheme is excisive.
@@ -248,9 +248,7 @@ We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collecti
     \end{proof}
 \end{lemma}
 
-Finally, let us think about what we need to show to demonstrate that there are no other implications between these concepts. An implication between these concepts is logically the same thing as a proof that some combination of them is impossible -- so what we will do is just to draw a two-by-two-by-two table of all combinations, and fill in which cells our theorems already rule out, and give examples of clustering schemes for every other cell.
-
-\include{2by2by2_table_paper}
+Finally, in order to show that there is no other implication that holds between these concepts, it suffices to give examples of clustering schemes with every combination of properties not already ruled out.
 
 \begin{example}\label{ex_allthreeprops}
     The connected components functor $\Pi$ is representable and excisive -- we can take its representation to be $\Omega = \{K_2\}$.
