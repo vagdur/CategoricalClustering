@@ -70,10 +70,14 @@ Our particular approach to this is motivated by the results of Carlsson and Mém
     \item \emph{Excisiveness} is a very strict version of requiring that there be no resolution limit -- instead we require that the method be idempotent on the parts it has found. That is, if we take some graph $G$, cluster it, and then look at the subgraph induced by any part, that graph has to be clustered into just a single large component, so we never discover new features at smaller scales.
     \item \emph{Representability} is a type of explainability of the clustering method. A representable clustering method $F_\Omega$ is determined by a set $\Omega$ of simple graphs, and the rule that two vertices of a graph $G$ will be in the same part if their neighbourhood looks like something in $\Omega$. This also gives us a simple algorithm to actually compute the partitioning of a graph, that runs in polynomial time for each fixed $\Omega$.
 \end{enumerate}
- 
-Our main result is that for functorial clustering schemes, the properties of excisiveness and representability are equivalent. We also give a structural result for when two representable clustering schemes are equal, and use this to prove that there exist representable clustering schemes that are not finitely representable. Finally, we prove that on any class with bounded expansion, we can, for any finite representing set $\Omega$, in fact compute the part to which a vertex belongs in time $O(n^2) + O(w)$, where $w$ is the number of subgraphs isomorphic to something in the representing set.
 
-We also extend our definition of a representable clustering scheme into the setting of hierarchical clustering schemes. Here, instead of just assigning a single clustering to each graph, we give one clustering for each ``scale'', giving a spectrum of clusterings of the graph from coarsest to finest. In this setting, we find that the connection to excisiveness no longer works out.
+Our main result classifies exactly the relationship between these properties, and shows that all representable clustering schemes are tractable on a large class of sparse graphs:
+
+\begin{theorem}[Main results]
+    A clustering scheme is representable if and only if it is excisive and functorial. Further, any such representable clustering scheme is computable in quadratic time on any graph class of bounded expansion.
+\end{theorem}
+ 
+We also give a structural result for when two representable clustering schemes are equal, and use this to prove that there exist representable clustering schemes that are not finitely representable. Finally, we extend our definition of a representable clustering scheme into the setting of hierarchical clustering schemes. Here, instead of just assigning a single clustering to each graph, we give one clustering for each ``scale'', giving a spectrum of clusterings of the graph from coarsest to finest. In this setting, we find that the connection to excisiveness no longer works.
 
 \section{Definitions of our terms}
 
