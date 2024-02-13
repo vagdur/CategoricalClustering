@@ -311,30 +311,30 @@ To get our quadratic time algorithm, we will use the following result from~\cite
 \end{lemma}
 
 \begin{theorem}
-    Let $\Omega$ be any finite set of simple graphs, and $F_\Omega$ the representable clustering scheme represented by it. For any class $\mathcal{C}$ with bounded expansion, there exists an algorithm that given any graph $G \in \mathcal{C}$ and vertex $v$ of $G$ computes the part containing $v$ of $F_\Omega(G)$ running in time $O(n^2) + O(w)$, where $w$ is the number of subgraphs of $G$ isomorphic to a graph in $\Omega$.
+    Let $\Omega$ be any finite set of simple graphs, and $F_\Omega$ the representable clustering scheme represented by it. For any class $\mathcal{C}$ with bounded expansion, there exists an algorithm that given any graph $G \in \mathcal{C}$ and vertex $v$ of $G$ computes the part containing $v$ of $F_\Omega(G)$ running in time $O\left(n^2\right) + O(w)$, where $w$ is the number of subgraphs of $G$ isomorphic to a graph in $\Omega$.
 
     \begin{proof}
-        It is clear that if we can compute the part containing $v$ in $F_{\{\omega\}}(G)$ for each $\omega \in \Omega$, then we can just take the union of these parts to get $v$'s part in $F_\Omega(G)$ -- and if we can do this for each $\omega$ in time $O(n^2) + O(\#(\omega,G))$, with $\#(\omega,G)$ the number of copies of $\omega$ in $G$, it will sum up to the running time we give in the statement.
-
-        So, let us restrict to the case of $\Omega = \{\omega\}$. We will of course use the algorithm from Lemma~\ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way.
+        We will of course use the algorithm from Lemma~\ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way.
 
         \begin{algorithm}
 			\caption{Computation of part of $v$ in $G$}\label{alg:compute_part}
 			\begin{algorithmic}
 				\State $P_0 \gets \{v\}, P_{-1} \gets \emptyset$
 				\For{$i = 1,2,\ldots, n$}
-				\If{$P_{i-1} \setminus P_{i-2} \neq \emptyset$}
-				\State Run the algorithm of Lemma~\ref{lemma_subgraph_counting_bounded_exp} with input $(G, P_{i-1} \setminus P_{i-2})$, getting a list of isomorphs $\gamma_1, \ldots, \gamma_k$
-                \State $P_{i} \gets P_{i-1} \cup \bigcup_{j=1}^k V(\gamma_j)$
-				\Else
-				\State\Return $P_{i-1}$
-				\EndIf
+				    \If{$P_{i-1} \setminus P_{i-2} \neq \emptyset$}
+                        \For{$\omega \in \Omega$}
+				            \State Run the algorithm of Lemma~\ref{lemma_subgraph_counting_bounded_exp} with input $(G, P_{i-1} \setminus P_{i-2})$, getting a list of isomorphs $\gamma_{\omega,1}, \ldots, \gamma_{\omega,k_\omega}$ of $\omega$.
+                        \EndFor
+                        \State $P_{i} \gets P_{i-1} \cup \bigcup_{\omega\in\Omega} \bigcup_{j=1}^{k_\omega} V(\gamma_{\omega,j})$
+				    \Else
+				        \State\Return $P_{i-1}$
+				    \EndIf
 				\EndFor
                 \State\Return $P_n$
 			\end{algorithmic}
 		\end{algorithm}
 
-        Each step in the loop takes time $O(n)$ plus the number of isomorphs found in the step, so since the loop can take at most $n$ steps, the total runtime must be at most $O(n^2)$ plus the total number of isomorphs in the graph, as desired. 
+        In the absolute worst case, each time-step of the algorithm discovers exactly one new vertex, so the loop can take at most $n$ steps, and each step takes time $O(n)$ plus some time linear in the number of isomorphs found. It is not too hard to see that each isomorph will only be found in exactly two steps, so the sum of this term over all time steps will be linear in the total number of isomorphs.
     \end{proof}
 \end{theorem}
 
