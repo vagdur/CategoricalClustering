@@ -144,7 +144,7 @@ What is going on in the proof of Lemma~\ref{lemma_representable_endofunctor_is_f
 One somewhat surprising fact is that there are actually representable clustering schemes that are not finitely representable.
 
 \begin{theorem} \label{theorem_exists_not_finitely_representable}
-    There exists a representable endofunctor $F_\Omega$ which is not \emph{finitely} representable, that is, it is not equal to $F_\Gamma$ for any finite set of simple graphs $\Gamma$.
+    There exists a representable clustering scheme $F_\Omega \circ \Pi$ which is not \emph{finitely} representable, that is, it is not equal to $F_\Gamma \circ \Pi$ for any finite set of simple graphs $\Gamma$.
 \end{theorem}
 
 In order to give a proof of this, we first need a structural result about how these endofunctors behave.
@@ -153,7 +153,7 @@ In order to give a proof of this, we first need a structural result about how th
     For any $\omega \in \Omega$, it is trivial to see that $F_\Omega(\omega)$ must be a clique, since we can just take the identity morphism on $\omega$ to show that all edges must exist.
 \end{remark}
 
-In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines what it does as a functor. We will see this even more precisely in the next section, but for now this lemma will suffice for our needs:
+In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines what it does as a functor. Similarly, if we are interested in the weaker equivalence of inducing the same clustering scheme, this is determined by which graphs are sent to a connected graph.
 
 \begin{lemma} \label{lemma_representation_hull}
     For any set $\Omega$ of simple graphs and any simple graph $G = (V, E)$, it holds that $F_{\Omega \cup \{G\}} = F_\Omega$ if and only if $F_\Omega(G) = (V, V^2)$, that is, if $G$ is sent to a clique on its vertices by $F_\Omega$.
@@ -166,6 +166,26 @@ In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines w
         That edges of $F_\Omega(H)$ must also be edges of $F_{\Omega \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Omega \cup \{G\}}(H)$ are also edges of $F_\Omega(H)$. So suppose $uv$ is an edge of $F_{\Omega \cup \{G\}}(H)$ -- that this is so must be because there is some $\omega \in \Omega \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
 
         If this $\omega$ is not $G$, then we are done. If it is $G$, we recall that since $F_\Omega(G)$ is a clique, there must be an edge $f^{-1}(u)f^{-1}(v)$ in it. Therefore there must exist some $\omega \in \Omega$ and some $g: \omega \to G$ such that $f(\omega) \ni f^{-1}(u), f^{-1}(v)$. But then the composition $g \circ f: \omega \to H$ will be a morphism from an $\omega \in \Omega$ into $H$ whose image contains $u$ and $v$, proving that $uv$ is an edge of $F_\Omega(H)$.
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}\label{lemma_connected_representation_hull}
+    For any set of simple graphs $\Omega$ and any simple graph $G$, $\Omega$ and $\Omega \cup \{G\}$ induce the same representable clustering scheme if and only if $F_\Omega(G)$ is a connected graph.
+
+    \begin{proof}
+        Suppose $\Omega$ and $\Omega \cup \{G\}$ induce the same clustering scheme, that is, that $F_\Omega \circ \Pi = F_{\Omega \cup \{G\}} \circ \Pi$. What we need to show is that $F_\Omega(G)$ is connected -- which is the same thing as showing that $(F_\Omega \circ \Pi)(G)$ is a clique. By assumption $F_\Omega \circ \Pi = F_{\Omega \cup \{G\}} \circ \Pi$, so it suffices to show that $(F_{\Omega \cup \{G\}} \circ \Pi)(G)$ is a clique. This, however, is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, since it gives us that already $F_{\Omega\cup\{G\}}(G)$ is a clique.
+
+        For the other direction, assume that $F_\Omega(G)$ is connected. To show that $\Omega$ and $\Omega \cup \{G\}$ induce equivalent clustering schemes, it is sufficient to show that for every graph $H$, $F_\Omega(H)$ and $F_{\Omega \cup \{G\}}(H)$ have the same partition into connected components.
+
+        First observe, as we did in the proof of Lemma~\ref{lemma_representation_hull}, that in fact $F_\Omega(H)$ is a subgraph of $F_{\Omega \cup \{G\}}$, so it suffices to show that whenever there is a path connecting $u$ and $v$ in $F_{\Omega \cup \{G\}}(H)$, there is already such a path in $F_\Omega(H)$.
+
+        To show this, we show that whenever there is an edge between $u$ and $v$ in $F_{\Omega \cup \{G\}}(H)$, there is a path between $u$ and $v$ in $F_\Omega(H)$.
+
+        Now, this edge between $u$ and $v$ has to be created by some $\omega \in \Omega$ and a morphism $f: \omega \to H$ such that $\im f \ni u, v$. If this $\omega$ is not $G$, we are already done, so suppose it is $G$.
+
+        So let $v' = f^{-1}(v)$ and $u' = f^{-1}(u)$. Since $F_\Omega(G)$ is by assumption connected, it contains a path $v' e_1 w_1 e_2 \ldots w_k e_k u'$. Each of the edges $e_i$ is created by an $\omega_i \in \Omega$ and $f_i: \omega_i \to G$ such that $\im f_i \ni w_{i-1}, w_i$.
+
+        If we just compose these $f_i$s with $f$ we get functions from $\omega_i \in \Omega$ into $H$ whose images contain $f(w_i)$, so we get edges between these $f(w_i)$s, and so we get a path between them, which will be precisely a path connecting $u$ and $v$.
     \end{proof}
 \end{lemma}
 
@@ -182,18 +202,18 @@ With this result in hand, we can now give a proof of the existence of a represen
     \end{figure}
 
     To prove this, let us first define
-    $$\bar{\Omega} = \left\{G \in \G \given F_\Omega(G) = (V_G, V_G^2)\right\}$$
-    as the set of all graphs which $F_\Omega$ sends to cliques. By Lemma~\ref{lemma_representation_hull}, $F_\Omega = F_{\bar{\Omega}}$, and $\bar{\Omega}$ is the greatest set with this property.
+    $$\bar{\Omega} = \left\{G \in \G \given F_\Omega(G) \text{ is connected.}\right\}$$
+    as the set of all graphs which $F_\Omega$ sends to connected graphs. By Lemma~\ref{lemma_connected_representation_hull}, $F_\Omega = F_{\bar{\Omega}}$, and $\bar{\Omega}$ is the greatest set with this property.
 
-    A little bit of reflection will make it clear that $\bar{\Omega}$ is precisely the set of connected graphs which contain a triangle. Particularly, for any edge in such a graph, we can map the tail end of some $\omega_i$ onto that edge, the rest of the tail onto a path to the triangle in the graph, and the triangle of the $\omega_i$ onto the triangle of the graph. That $F_\Omega$ will send any triangle-free graph to a graph with no edges is clear, since there is no morphism from any triangle-containing graph such as $\omega_i$ into a triangle-free graph. Likewise, that it cannot send a disconnected graph to a clique is obvious.
+    A little bit of reflection will make it clear that $\bar{\Omega}$ is precisely the set of connected graphs which contain a triangle. Particularly, for any edge in such a graph, we can map the tail end of some $\omega_i$ onto that edge, the rest of the tail onto a path to the triangle in the graph, and the triangle of the $\omega_i$ onto the triangle of the graph. That $F_\Omega$ will send any triangle-free graph to a graph with no edges is clear, since there is no morphism from any triangle-containing graph such as $\omega_i$ into a triangle-free graph. Likewise, that it cannot send a disconnected graph to a connected graph is immediate from that $\Omega$ contains only connected graphs.
 
-    Now suppose for contradiction that $\Gamma$ is a finite set of graphs such that $F_\Gamma = F_{\bar{\Omega}}$. Lemma~\ref{lemma_representation_hull} implies that we must have $\Gamma \subset \bar{\Omega}$, since if there were a $\gamma \in \Gamma \setminus \bar{\Omega}$ it'd be sent to a clique by $F_\Gamma$, and thus also by $F_{\bar{\Omega}}$, since we've assumed they are equal -- but we chose $\bar{\Omega}$ so that it already contains everything sent to a clique by $F_{\bar{\Omega}}$.
+    Now suppose for contradiction that $\Gamma$ is a finite set of graphs such that $F_\Gamma = F_{\bar{\Omega}}$. Lemma~\ref{lemma_connected_representation_hull} implies that we must have $\Gamma \subset \bar{\Omega}$, since if there were a $\gamma \in \Gamma \setminus \bar{\Omega}$ it'd be sent to a connected graph by $F_\Gamma$, and thus also by $F_{\bar{\Omega}}$, since we've assumed they are equal -- but we chose $\bar{\Omega}$ so that it already contains everything sent to a connected graph by $F_{\bar{\Omega}}$.
 
     So, let
     $$\delta = \max_{\gamma \in \Gamma} \max_{u \in V_\gamma} \min_{\substack{v \in V_\gamma\\v \text{ is in a triangle}}} d(u, v).$$
-    That is, $\delta$ is the furthest any vertex in any graph in $\Gamma$ is from a triangle. We claim that $F_\Gamma$ will not send $\omega_{\delta + 1}$ to a clique, proving it is not equal to $F_{\bar{\Omega}}$, giving our contradiction.
+    That is, $\delta$ is the furthest any vertex in any graph in $\Gamma$ is from a triangle. We claim that $F_\Gamma$ will not send $\omega_{\delta + 1}$ to a connected graph, proving it is not equal to $F_{\bar{\Omega}}$, giving our contradiction.
 
-    That this is so is actually easy to see -- if $\omega_{\delta + 1}$ were sent to a clique, that must in particular mean there is an edge in $F_\Gamma(\omega_{\delta + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $\gamma \in \Gamma$ that hits both vertices. However, such a morphism must also map the triangle in $\gamma$ onto the triangle in $\omega_{\delta + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $\gamma$ is from the triangle. So no such morphism can exist, and we are done.
+    That this is so is actually easy to see -- if $\omega_{\delta + 1}$ were sent to a connected graph, that must in particular mean there is an edge in $F_\Gamma(\omega_{\delta + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $\gamma \in \Gamma$ that hits both vertices. However, such a morphism must also map the triangle in $\gamma$ onto the triangle in $\omega_{\delta + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $\gamma$ is from the triangle. So no such morphism can exist, and we are done.
 \end{proof}
 
 \begin{remark}
