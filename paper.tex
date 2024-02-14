@@ -60,7 +60,7 @@ In particular, modularity suffers from a ``resolution limit'', wherein it cannot
     \label{fig:resolution_limit}
 \end{figure}
 
-Another issue with studying modularity optimization from a theoretical perspective is the fact that computing it is NP-hard~\cite{modularity_NP_hard}. This means that when using modularity maximization in practice, one always needs a heuristic algorithm for finding good partitions, such as the Louvain~\cite{louvain} or Leiden~\cite{leiden} algorithms, which themselves do not have many known theoretical guarantees connecting them to modularity. So one is left having to either study modularity itself, and hoping that the results say something about the results of these algorithms, or studying the algorithms directly, and not directly saying anything about modularity.
+Another issue with studying modularity optimization from a theoretical perspective is the fact that computing it is NP-hard~\cite{modularity_NP_hard}. This means that when using modularity maximization in practice, one always needs a heuristic algorithm for finding good partitions, such as the Louvain~\cite{louvain} or Leiden~\cite{leiden} algorithms, which themselves do not have many known theoretical guarantees connecting them to modularity. Thus, one is left having to either study modularity itself, and hoping that the results say something about the results of these algorithms, or studying the algorithms themselves, and not directly saying anything about modularity.
 
 These issues with the varying optimization based approaches to clustering lead us to investigating a more ``axiomatic'' approach to the problem -- that is, we want to specify a few properties that the clustering method must have, and then see what methods there are that satisfy these properties. Other than of course giving us guarantees on the behaviour of our methods, this approach also gives us much more straightforward algorithms which run in polynomial time, since we are no longer doing optimization, but in some sense just applying a decision rule for when vertices should be in the same part or not.
 
@@ -163,7 +163,7 @@ In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines w
 
         Now suppose $F_\Omega(G) = (V, V^2)$, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Omega \cup \{G\}}(H) = F_\Omega(H)$. 
         
-        That edges of $F_\Omega(H)$ must also be edges of $F_{\Omega \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Omega \cup \{G\}}(H)$ are also edges of $F_\Omega(H)$. So suppose $uv$ is an edge of $F_{\Omega \cup \{G\}}(H)$ -- that this is so must be because there is some $\omega \in \Omega \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
+        That edges of $F_\Omega(H)$ must also be edges of $F_{\Omega \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Omega \cup \{G\}}(H)$ are also edges of $F_\Omega(H)$. Thus, suppose $uv$ is an edge of $F_{\Omega \cup \{G\}}(H)$ -- that this edge exists must be because there is some $\omega \in \Omega \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
 
         If this $\omega$ is not $G$, then we are done. If it is $G$, we recall that since $F_\Omega(G)$ is a clique, there must be an edge $f^{-1}(u)f^{-1}(v)$ in it. Therefore there must exist some $\omega \in \Omega$ and some $g: \omega \to G$ such that $f(\omega) \ni f^{-1}(u), f^{-1}(v)$. But then the composition $g \circ f: \omega \to H$ will be a morphism from an $\omega \in \Omega$ into $H$ whose image contains $u$ and $v$, proving that $uv$ is an edge of $F_\Omega(H)$.
     \end{proof}
@@ -183,7 +183,7 @@ In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines w
 
         Now, this edge between $u$ and $v$ has to be created by some $\omega \in \Omega$ and a morphism $f: \omega \to H$ such that $\im f \ni u, v$. If this $\omega$ is not $G$, we are already done, so suppose it is $G$.
 
-        So let $v' = f^{-1}(v)$ and $u' = f^{-1}(u)$. Since $F_\Omega(G)$ is by assumption connected, it contains a path $v' e_1 w_1 e_2 \ldots w_k e_k u'$. Each of the edges $e_i$ is created by an $\omega_i \in \Omega$ and $f_i: \omega_i \to G$ such that $\im f_i \ni w_{i-1}, w_i$.
+        Let $v' = f^{-1}(v)$ and $u' = f^{-1}(u)$. Since $F_\Omega(G)$ is by assumption connected, it contains a path $v' e_1 w_1 e_2 \ldots w_k e_k u'$. Each of the edges $e_i$ is created by an $\omega_i \in \Omega$ and $f_i: \omega_i \to G$ such that $\im f_i \ni w_{i-1}, w_i$.
 
         If we just compose these $f_i$s with $f$ we get functions from $\omega_i \in \Omega$ into $H$ whose images contain $f(w_i)$, so we get edges between these $f(w_i)$s, and so we get a path between them, which will be precisely a path connecting $u$ and $v$.
     \end{proof}
@@ -213,7 +213,7 @@ With this result in hand, we can now give a proof of the existence of a represen
     $$\delta = \max_{\gamma \in \Gamma} \max_{u \in V_\gamma} \min_{\substack{v \in V_\gamma\\v \text{ is in a triangle}}} d(u, v).$$
     That is, $\delta$ is the furthest any vertex in any graph in $\Gamma$ is from a triangle. We claim that $F_\Gamma$ will not send $\omega_{\delta + 1}$ to a connected graph, proving it is not equal to $F_{\bar{\Omega}}$, giving our contradiction.
 
-    That this is so is actually easy to see -- if $\omega_{\delta + 1}$ were sent to a connected graph, that must in particular mean there is an edge in $F_\Gamma(\omega_{\delta + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $\gamma \in \Gamma$ that hits both vertices. However, such a morphism must also map the triangle in $\gamma$ onto the triangle in $\omega_{\delta + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $\gamma$ is from the triangle. So no such morphism can exist, and we are done.
+    That this is so is actually easy to see -- if $\omega_{\delta + 1}$ were sent to a connected graph, that must in particular mean there is an edge in $F_\Gamma(\omega_{\delta + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $\gamma \in \Gamma$ that hits both vertices. However, such a morphism must also map the triangle in $\gamma$ onto the triangle in $\omega_{\delta + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $\gamma$ is from the triangle. Thus, no such morphism can exist, and we are done.
 \end{proof}
 
 \begin{remark}
@@ -255,7 +255,7 @@ We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collecti
 
         We claim that in fact $\im(f_\omega) \subset A_1$, so that $f_\omega$ restricts to a morphism into $H$. If we can show this, this will show that there is an edge $uv$ also in $F_\Omega(H)$, and we will be done.
 
-        So let $w$ be an arbitrary vertex in $\im(f_\omega)$. Now $f_\omega$ is also a morphism from something in $\Omega$ that hits both $w$ and $v$, so there is an edge $vw$ in $F_\Omega(G)$. But this of course means that $w$ and $v$ are in the same connected component -- and this connected component is precisely $A_1$. So $w \in A_1$, and we are done.
+        Let $w$ be an arbitrary vertex in $\im(f_\omega)$. Now $f_\omega$ is also a morphism from something in $\Omega$ that hits both $w$ and $v$, so there is an edge $vw$ in $F_\Omega(G)$. But this of course means that $w$ and $v$ are in the same connected component -- and this connected component is precisely $A_1$. Thus, $w \in A_1$, and we are done.
     \end{proof}
 \end{lemma}
 
@@ -395,7 +395,7 @@ There is actually a natural extension of our definition of a representable clust
             \item and if $\alpha \geq \beta \geq 0$, then for any weighted graph $G = (V, E, w)$, the identity function $\Id: V \to V$ is a morphism from $\Sigma(G, \alpha)$ to $\Sigma(G, \beta)$.
         \end{enumerate}
 
-        We start with the first item, and suppose that $f: G \to G'$ is a morphism of weighted graphs, and $\tau \geq 0$ some threshold. We wish to show that whenever $uv$ is an edge of $\Sigma(G,\tau)$, $f(u)f(v)$ is an edge of $\Sigma(G',\tau)$. That $uv$ is an edge of $\Sigma(G,\tau)$ means that $uv$ is an edge of $G$ with weight at least $\tau$, and since $f$ is a morphism of weighted graphs, $f(u)f(v)$ must be an edge of $G'$, and since such morphisms are weight non-decreasing, its weight must still be at least $\tau$. So it is an edge of $\Sigma(G',\tau)$ as well.
+        We start with the first item, and suppose that $f: G \to G'$ is a morphism of weighted graphs, and $\tau \geq 0$ some threshold. We wish to show that whenever $uv$ is an edge of $\Sigma(G,\tau)$, $f(u)f(v)$ is an edge of $\Sigma(G',\tau)$. That $uv$ is an edge of $\Sigma(G,\tau)$ means that $uv$ is an edge of $G$ with weight at least $\tau$, and since $f$ is a morphism of weighted graphs, $f(u)f(v)$ must be an edge of $G'$, and since such morphisms are weight non-decreasing, its weight must still be at least $\tau$. Thus it is an edge of $\Sigma(G',\tau)$ as well.
 
         The second item is even more trivial than the first -- if we unwrap the definitions, all it says is that if we lower the threshold for when edges are removed, then we will not lose any edges.
     \end{proof}
@@ -443,7 +443,7 @@ Intuitively, the weight $w(uv)$ counts how many subgraphs of $G$ contain both $u
         \label{fig:hierarchically_repr_not_excisive}
     \end{figure}
 
-    To see this, take the triangle and the four-cycle as your representing set, both with weight one, and consider what is happening in Figure~\ref{fig:hierarchically_repr_not_excisive}. If we apply the scissors functor at threshold $1.5$, we will keep only the edge between $u$ and $v$, so they get clustered as one part. However, if we zoom in on just this part, and try to cluster this $K_2$, it will get clustered as two parts. So we have seen that at this threshold, it is in fact not excisive.
+    To see this, take the triangle and the four-cycle as your representing set, both with weight one, and consider what is happening in Figure~\ref{fig:hierarchically_repr_not_excisive}. If we apply the scissors functor at threshold $1.5$, we will keep only the edge between $u$ and $v$, so they get clustered as one part. However, if we zoom in on just this part, and try to cluster this $K_2$, it will get clustered as two parts. Thus, what we have seen is that at this threshold, it is in fact not excisive.
 \end{remark}
 
 \printbibliography
@@ -470,7 +470,7 @@ It is worth remarking that the use of the word \emph{class} instead of \emph{set
 
 The categories we study in this paper are all concrete, that is, their objects are sets with some extra structure on them, and the morphisms are just functions between the sets that respect the structure in an appropriate sense. Our functors never do anything strange -- they all leave the underlying set unchanged, only changing what structure we have on the set, and they do ``nothing'' on the morphisms, that is, as set functions they are just the same function again between the same sets.
 
-In this setting most of the requirements of a functor are trivial -- of course it will behave correctly with identity morphisms and composition, because in a sense it isn't doing anything to the morphisms. So the one thing we need to check when proving that things are functors will be that morphisms do map to morphisms, that is, that a function that respects the structure on the sets in the first category will also respect the structure we have in the second category.
+In this setting most of the requirements of a functor are trivial -- of course it will behave correctly with identity morphisms and composition, because in a sense it isn't doing anything to the morphisms. Therefore, the one thing we need to check when proving that things are functors will be that morphisms do map to morphisms, that is, that a function that respects the structure on the sets in the first category will also respect the structure we have in the second category.
 
 \begin{definition}
     Given two categories $\mathcal{A}$ and $\mathcal{B}$, the \emph{product category} $\mathcal{A} \times \mathcal{B}$ is the category whose objects are pairs $(a,b)$ of an object $a$ from $\mathcal{A}$ and an object $b$ from $\mathcal{B}$. A morphism in $\mathcal{A} \times \mathcal{B}$ from $(a,b)$ to $(a',b')$ is a pair of a morphism in $\mathcal{A}$ from $a$ to $a'$ and a morphism in $\mathcal{B}$ from $b$ to $b'$.
