@@ -232,7 +232,14 @@ We are able to exactly characterise the relationship between the three concepts 
     A clustering scheme is representable if and only if it is excisive and functorial. No other implications hold between these concepts.
 \end{theorem}
 
-We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collection of examples. We have already seen from Lemma~\ref{lemma_representable_endofunctor_is_functor} that representability implies functoriality, so it remains to see that it also implies excisiveness, and then to show the necessity of the condition.
+We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collection of examples, as illustrated in Figure~\ref{venn_diagram}. We have already seen from Lemma~\ref{lemma_representable_endofunctor_is_functor} that representability implies functoriality, so it remains to see that it also implies excisiveness, and then to show the necessity of the condition.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{graphics/venn_diagram.pdf}
+    \caption{A Venn diagram illustrating the structure of the proof of Theorem~\ref{main_theorem}. Impossible combinations of properties are in red, possible ones (other than having no property) are in green, and the labels indicate the lemma or example proving the intersection is empty or non-empty.}
+    \label{venn_diagram}
+\end{figure}
 
 \begin{lemma} \label{lemma_repr_implies_excisive}
     A representable clustering scheme is excisive.
