@@ -329,7 +329,7 @@ To get our quadratic time algorithm, we will use the following result from~\cite
 \end{theorem}
 
 \begin{proof}
-    We will of course use the algorithm from Lemma~\ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way.
+    We will of course use the algorithm from Lemma~\ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way, as specified in Algorithm~\ref{alg:compute_part_of_v}.
 
     \begin{algorithm}
         \caption{Computation of part of $v$ in $G$}\label{alg:compute_part}
@@ -347,6 +347,7 @@ To get our quadratic time algorithm, we will use the following result from~\cite
             \EndFor
             \State\Return $P_n$
         \end{algorithmic}
+        \label{alg:compute_part_of_v}
     \end{algorithm}
 
     In the absolute worst case, each time-step of the algorithm discovers exactly one new vertex, so the loop can take at most $n$ steps, and each step takes time $O(n)$ plus some time linear in the number of isomorphs found. It is not too hard to see that each isomorph will only be found in exactly two steps, so the sum of this term over all time steps will be linear in the total number of isomorphs.
