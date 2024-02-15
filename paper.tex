@@ -136,41 +136,15 @@ In order to give a proof of this, we first need a structural result about how th
     For any $\omega \in \Omega$, it is trivial to see that $F_\Omega(\omega)$ must be a clique, since we can just take the identity morphism on $\omega$ to show that all edges must exist.
 \end{remark}
 
-In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines what it does as a functor. Similarly, if we are interested in the weaker equivalence of inducing the same clustering scheme, this is determined by which graphs are sent to a connected graph.
+In fact, which graphs are sent to cliques by $F_\Omega$ essentially determines what it does as a functor. Similarly, if we are interested in the weaker equivalence of inducing the same clustering scheme, this is determined by which graphs are sent to a connected graph. The proofs of these two lemmas are deferred to the appendix.
 
 \begin{lemma} \label{lemma_representation_hull}
     For any set $\Omega$ of simple graphs and any simple graph $G = (V, E)$, it holds that $F_{\Omega \cup \{G\}} = F_\Omega$ if and only if $F_\Omega(G) = (V, V^2)$, that is, if $G$ is sent to a clique on its vertices by $F_\Omega$.
 \end{lemma}
 
-\begin{proof}
-    Suppose $F_{\Omega \cup \{G\}} = F_\Omega$. That $F_{\Omega \cup \{G\}}(G) = (V, V^2)$ is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, and so since $F_{\Omega \cup \{G\}} = F_\Omega$, we also have $F_\Omega(G) = (V, V^2)$, as desired.
-
-    Now suppose $F_\Omega(G) = (V, V^2)$, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Omega \cup \{G\}}(H) = F_\Omega(H)$. 
-    
-    That edges of $F_\Omega(H)$ must also be edges of $F_{\Omega \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Omega \cup \{G\}}(H)$ are also edges of $F_\Omega(H)$. Thus, suppose $uv$ is an edge of $F_{\Omega \cup \{G\}}(H)$ -- that this edge exists must be because there is some $\omega \in \Omega \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
-
-    If this $\omega$ is not $G$, then we are done. If it is $G$, we recall that since $F_\Omega(G)$ is a clique, there must be an edge $f^{-1}(u)f^{-1}(v)$ in it. Therefore there must exist some $\omega \in \Omega$ and some $g: \omega \to G$ such that $f(\omega) \ni f^{-1}(u), f^{-1}(v)$. But then the composition $g \circ f: \omega \to H$ will be a morphism from an $\omega \in \Omega$ into $H$ whose image contains $u$ and $v$, proving that $uv$ is an edge of $F_\Omega(H)$.
-\qed\end{proof}
-
 \begin{lemma}\label{lemma_connected_representation_hull}
     For any set of simple graphs $\Omega$ and any simple graph $G$, $\Omega$ and $\Omega \cup \{G\}$ induce the same representable clustering scheme if and only if $F_\Omega(G)$ is a connected graph.
 \end{lemma}
-
-\begin{proof}
-    Suppose $\Omega$ and $\Omega \cup \{G\}$ induce the same clustering scheme, that is, that $F_\Omega \circ \Pi = F_{\Omega \cup \{G\}} \circ \Pi$. What we need to show is that $F_\Omega(G)$ is connected -- which is the same thing as showing that $(F_\Omega \circ \Pi)(G)$ is a clique. By assumption $F_\Omega \circ \Pi = F_{\Omega \cup \{G\}} \circ \Pi$, so it suffices to show that $(F_{\Omega \cup \{G\}} \circ \Pi)(G)$ is a clique. This, however, is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, since it gives us that already $F_{\Omega\cup\{G\}}(G)$ is a clique.
-
-    For the other direction, assume that $F_\Omega(G)$ is connected. To show that $\Omega$ and $\Omega \cup \{G\}$ induce equivalent clustering schemes, it is sufficient to show that for every graph $H$, $F_\Omega(H)$ and $F_{\Omega \cup \{G\}}(H)$ have the same partition into connected components.
-
-    First observe, as we did in the proof of Lemma~\ref{lemma_representation_hull}, that in fact $F_\Omega(H)$ is a subgraph of $F_{\Omega \cup \{G\}}$, so it suffices to show that whenever there is a path connecting $u$ and $v$ in $F_{\Omega \cup \{G\}}(H)$, there is already such a path in $F_\Omega(H)$.
-
-    To show this, we show that whenever there is an edge between $u$ and $v$ in $F_{\Omega \cup \{G\}}(H)$, there is a path between $u$ and $v$ in $F_\Omega(H)$.
-
-    Now, this edge between $u$ and $v$ has to be created by some $\omega \in \Omega$ and a morphism $f: \omega \to H$ such that $\im f \ni u, v$. If this $\omega$ is not $G$, we are already done, so suppose it is $G$.
-
-    Let $v' = f^{-1}(v)$ and $u' = f^{-1}(u)$. Since $F_\Omega(G)$ is by assumption connected, it contains a path $v' e_1 w_1 e_2 \ldots w_k e_k u'$. Each of the edges $e_i$ is created by an $\omega_i \in \Omega$ and $f_i: \omega_i \to G$ such that $\im f_i \ni w_{i-1}, w_i$.
-
-    If we just compose these $f_i$s with $f$ we get functions from $\omega_i \in \Omega$ into $H$ whose images contain $f(w_i)$, so we get edges between these $f(w_i)$s, and so we get a path between them, which will be precisely a path connecting $u$ and $v$.
-\qed\end{proof}
 
 With this result in hand, we can now give a proof of the existence of a representable but not finitely representable endofunctor.
 
@@ -284,9 +258,9 @@ Finally, in order to show that there is no other implication that holds between 
 
 It is possible to carry out this entire argument, showing equivalence between representability and excisiveness, also in the setting where we do not require morphisms in the category of graphs to be injective. The arguments only need minor modifications to deal with this.
 
-However, it turns out that this setting is much less interesting: There are in fact only three different representable clustering schemes.
+However, it turns out that this setting is much less interesting: There are in fact only three different representable clustering schemes. We defer the proof of this to the appendix, since it is not part of the main line of argument.
 
-\begin{theorem}
+\begin{theorem}\label{theorem:uninjective_uninteresting}
     If we do not require our morphisms to be injective, there are exactly three possible representable clustering schemes:
     \begin{enumerate}
         \item The scheme that always sends every vertex to its own part, represented by the empty set or by $K_1$,
@@ -294,14 +268,6 @@ However, it turns out that this setting is much less interesting: There are in f
         \item and the scheme that always sends all vertices to the same part, represented by any set of graphs containing a disconnected graph.
     \end{enumerate}
 \end{theorem}
-
-\begin{proof}
-    Suppose we have some set of simple graphs $\Omega$, and some graph $G$. If $\Omega$ is empty, or contains only a $K_1$, it is clear that there are no morphisms at all from any $\omega \in \Omega$ that hit two vertices of $G$, and so there can trivially be no edges in $F_\Omega(G)$, and the resulting clustering scheme always sends every vertex to its own part.
-    
-    Now suppose $\Omega$ contains some graph that is not $K_1$, say $\omega$, but this $\omega$ is disconnected. Then, for any two vertices $u, v \in G$, we can send one connected component of $\omega$ to $u$ and all the other connected components to $v$. Thus there is an edge $uv$ in $F_\Omega(G)$, and we have shown that $F_\Omega$ must send all graphs to cliques, and thus the clustering scheme clusters all graphs as a single part.
-
-    Finally, suppose $\Omega$ contains some graph on at least two vertices, and every $\omega \in \Omega$ is connected. Then, pick some $\omega \in \Omega$ and a vertex $w_\omega \in \omega$. For any edge $uv$ in $G$, we can send $w_\omega$ to $u$ and every other vertex of $\omega$ to $v$. Thus, $uv$ must also be an edge of $F_\Omega(G)$. That we cannot get an edge in $F_\Omega(G)$ between two vertices in different connected components of $G$ is clear from that $\Omega$ contains only connected graphs. Therefore, $F_\Omega(G)$ must have the same connected components as $G$, and so the induced clustering scheme must be just the connected components functor.
-\qed\end{proof}
 
 \section{Computational complexity of representable clustering schemes}
 
@@ -369,21 +335,11 @@ There is actually a natural extension of our definition of a representable clust
     The scissors functor $\Sigma$ from $\G^w \times \R^+$ into $\G$ takes in a weighted graph $G = (V, E, w)$ and a non-negative real number $\tau$, removes all edges whose weight is below $\tau$, and then forgets all the remaining weights, getting just a simple graph.
 \end{definition}
 
-\begin{lemma}
+That this definition does indeed yield a functor is relatively straightforward to check by just unwrapping the definitions, so we defer the proof to the appendix.
+
+\begin{lemma}\label{lemma:scissors_is_functor}
     The scissors functor is actually a functor.
 \end{lemma}
-
-\begin{proof}
-    Similarly to how we proved that the representable endofunctors are in fact functors, most of the required properties are obvious. There are only two things we need to check:
-    \begin{enumerate}
-        \item If $f$ is a morphism of weighted graphs sending $G = (V, E, w)$ to $G' = (V', E', w')$, then for every $\tau \in \R^+$, $f$ is also a morphism in $\G$ from $\Sigma(G,\tau)$ to $\Sigma(G',\tau)$,
-        \item and if $\alpha \geq \beta \geq 0$, then for any weighted graph $G = (V, E, w)$, the identity function $\Id: V \to V$ is a morphism from $\Sigma(G, \alpha)$ to $\Sigma(G, \beta)$.
-    \end{enumerate}
-
-    We start with the first item, and suppose that $f: G \to G'$ is a morphism of weighted graphs, and $\tau \geq 0$ some threshold. We wish to show that whenever $uv$ is an edge of $\Sigma(G,\tau)$, $f(u)f(v)$ is an edge of $\Sigma(G',\tau)$. That $uv$ is an edge of $\Sigma(G,\tau)$ means that $uv$ is an edge of $G$ with weight at least $\tau$, and since $f$ is a morphism of weighted graphs, $f(u)f(v)$ must be an edge of $G'$, and since such morphisms are weight non-decreasing, its weight must still be at least $\tau$. Thus it is an edge of $\Sigma(G',\tau)$ as well.
-
-    The second item is even more trivial than the first -- if we unwrap the definitions, all it says is that if we lower the threshold for when edges are removed, then we will not lose any edges.
-\qed\end{proof}
 
 \begin{definition}
     A representable functor $F_\Omega$ from $\G$ to $\G^w$ is determined by a set $\Omega$ of pairs $(\omega, w)$ of simple graphs $\omega$ and positive weights $w$. For any graph $G$, there is an edge $uv$ of $F_\Omega(G)$ if there is some subgraph of $G$ containing $u$ and $v$ which is isomorphic to some graph in $\Omega$. The weight of this edge is then given by
@@ -466,5 +422,53 @@ In this setting most of the requirements of a functor are trivial -- of course i
 \begin{definition}
     Given two categories $\mathcal{A}$ and $\mathcal{B}$, the \emph{product category} $\mathcal{A} \times \mathcal{B}$ is the category whose objects are pairs $(a,b)$ of an object $a$ from $\mathcal{A}$ and an object $b$ from $\mathcal{B}$. A morphism in $\mathcal{A} \times \mathcal{B}$ from $(a,b)$ to $(a',b')$ is a pair of a morphism in $\mathcal{A}$ from $a$ to $a'$ and a morphism in $\mathcal{B}$ from $b$ to $b'$.
 \end{definition}
+
+\section{Omitted proofs from the main text}
+
+\begin{proof}[Lemma~\ref{lemma_representation_hull}]
+    Suppose $F_{\Omega \cup \{G\}} = F_\Omega$. That $F_{\Omega \cup \{G\}}(G) = (V, V^2)$ is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, and so since $F_{\Omega \cup \{G\}} = F_\Omega$, we also have $F_\Omega(G) = (V, V^2)$, as desired.
+
+    Now suppose $F_\Omega(G) = (V, V^2)$, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Omega \cup \{G\}}(H) = F_\Omega(H)$. 
+    
+    That edges of $F_\Omega(H)$ must also be edges of $F_{\Omega \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Omega \cup \{G\}}(H)$ are also edges of $F_\Omega(H)$. Thus, suppose $uv$ is an edge of $F_{\Omega \cup \{G\}}(H)$ -- that this edge exists must be because there is some $\omega \in \Omega \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
+
+    If this $\omega$ is not $G$, then we are done. If it is $G$, we recall that since $F_\Omega(G)$ is a clique, there must be an edge $f^{-1}(u)f^{-1}(v)$ in it. Therefore there must exist some $\omega \in \Omega$ and some $g: \omega \to G$ such that $f(\omega) \ni f^{-1}(u), f^{-1}(v)$. But then the composition $g \circ f: \omega \to H$ will be a morphism from an $\omega \in \Omega$ into $H$ whose image contains $u$ and $v$, proving that $uv$ is an edge of $F_\Omega(H)$.
+\qed\end{proof}
+
+\begin{proof}[Of Lemma~\ref{lemma_connected_representation_hull}]
+    Suppose $\Omega$ and $\Omega \cup \{G\}$ induce the same clustering scheme, that is, that $F_\Omega \circ \Pi = F_{\Omega \cup \{G\}} \circ \Pi$. What we need to show is that $F_\Omega(G)$ is connected -- which is the same thing as showing that $(F_\Omega \circ \Pi)(G)$ is a clique. By assumption $F_\Omega \circ \Pi = F_{\Omega \cup \{G\}} \circ \Pi$, so it suffices to show that $(F_{\Omega \cup \{G\}} \circ \Pi)(G)$ is a clique. This, however, is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, since it gives us that already $F_{\Omega\cup\{G\}}(G)$ is a clique.
+
+    For the other direction, assume that $F_\Omega(G)$ is connected. To show that $\Omega$ and $\Omega \cup \{G\}$ induce equivalent clustering schemes, it is sufficient to show that for every graph $H$, $F_\Omega(H)$ and $F_{\Omega \cup \{G\}}(H)$ have the same partition into connected components.
+
+    First observe, as we did in the proof of Lemma~\ref{lemma_representation_hull}, that in fact $F_\Omega(H)$ is a subgraph of $F_{\Omega \cup \{G\}}$, so it suffices to show that whenever there is a path connecting $u$ and $v$ in $F_{\Omega \cup \{G\}}(H)$, there is already such a path in $F_\Omega(H)$.
+
+    To show this, we show that whenever there is an edge between $u$ and $v$ in $F_{\Omega \cup \{G\}}(H)$, there is a path between $u$ and $v$ in $F_\Omega(H)$.
+
+    Now, this edge between $u$ and $v$ has to be created by some $\omega \in \Omega$ and a morphism $f: \omega \to H$ such that $\im f \ni u, v$. If this $\omega$ is not $G$, we are already done, so suppose it is $G$.
+
+    Let $v' = f^{-1}(v)$ and $u' = f^{-1}(u)$. Since $F_\Omega(G)$ is by assumption connected, it contains a path $v' e_1 w_1 e_2 \ldots w_k e_k u'$. Each of the edges $e_i$ is created by an $\omega_i \in \Omega$ and $f_i: \omega_i \to G$ such that $\im f_i \ni w_{i-1}, w_i$.
+
+    If we just compose these $f_i$s with $f$ we get functions from $\omega_i \in \Omega$ into $H$ whose images contain $f(w_i)$, so we get edges between these $f(w_i)$s, and so we get a path between them, which will be precisely a path connecting $u$ and $v$.
+\qed\end{proof}
+
+\begin{proof}[Theorem~\ref{theorem:uninjective_uninteresting}]
+    Suppose we have some set of simple graphs $\Omega$, and some graph $G$. If $\Omega$ is empty, or contains only a $K_1$, it is clear that there are no morphisms at all from any $\omega \in \Omega$ that hit two vertices of $G$, and so there can trivially be no edges in $F_\Omega(G)$, and the resulting clustering scheme always sends every vertex to its own part.
+    
+    Now suppose $\Omega$ contains some graph that is not $K_1$, say $\omega$, but this $\omega$ is disconnected. Then, for any two vertices $u, v \in G$, we can send one connected component of $\omega$ to $u$ and all the other connected components to $v$. Thus there is an edge $uv$ in $F_\Omega(G)$, and we have shown that $F_\Omega$ must send all graphs to cliques, and thus the clustering scheme clusters all graphs as a single part.
+
+    Finally, suppose $\Omega$ contains some graph on at least two vertices, and every $\omega \in \Omega$ is connected. Then, pick some $\omega \in \Omega$ and a vertex $w_\omega \in \omega$. For any edge $uv$ in $G$, we can send $w_\omega$ to $u$ and every other vertex of $\omega$ to $v$. Thus, $uv$ must also be an edge of $F_\Omega(G)$. That we cannot get an edge in $F_\Omega(G)$ between two vertices in different connected components of $G$ is clear from that $\Omega$ contains only connected graphs. Therefore, $F_\Omega(G)$ must have the same connected components as $G$, and so the induced clustering scheme must be just the connected components functor.
+\qed\end{proof}
+
+\begin{proof}[Lemma~\ref{lemma:scissors_is_functor}]
+    Similarly to how we proved that the representable endofunctors are in fact functors, most of the required properties are obvious. There are only two things we need to check:
+    \begin{enumerate}
+        \item If $f$ is a morphism of weighted graphs sending $G = (V, E, w)$ to $G' = (V', E', w')$, then for every $\tau \in \R^+$, $f$ is also a morphism in $\G$ from $\Sigma(G,\tau)$ to $\Sigma(G',\tau)$,
+        \item and if $\alpha \geq \beta \geq 0$, then for any weighted graph $G = (V, E, w)$, the identity function $\Id: V \to V$ is a morphism from $\Sigma(G, \alpha)$ to $\Sigma(G, \beta)$.
+    \end{enumerate}
+
+    We start with the first item, and suppose that $f: G \to G'$ is a morphism of weighted graphs, and $\tau \geq 0$ some threshold. We wish to show that whenever $uv$ is an edge of $\Sigma(G,\tau)$, $f(u)f(v)$ is an edge of $\Sigma(G',\tau)$. That $uv$ is an edge of $\Sigma(G,\tau)$ means that $uv$ is an edge of $G$ with weight at least $\tau$, and since $f$ is a morphism of weighted graphs, $f(u)f(v)$ must be an edge of $G'$, and since such morphisms are weight non-decreasing, its weight must still be at least $\tau$. Thus it is an edge of $\Sigma(G',\tau)$ as well.
+
+    The second item is even more trivial than the first -- if we unwrap the definitions, all it says is that if we lower the threshold for when edges are removed, then we will not lose any edges.
+\qed\end{proof}
 
 \end{document}
