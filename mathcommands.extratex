@@ -29,8 +29,7 @@
 \usepackage{tikz-cd}
 \tikzset{commutative diagrams/.cd}
 
-\usepackage[natbib, backend=biber, style=alphabetic, backref=true]{biblatex}
-\bibliography{references}
+\usepackage{cite}
 
 \usepackage{pgf,tikz}
 \usepackage{mathrsfs}
