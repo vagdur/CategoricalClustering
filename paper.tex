@@ -98,21 +98,9 @@ In this restricted setting, the statement that a clustering scheme is functorial
     On morphisms, $F_\Omega$ is always just the identity.
 \end{definition}
 
-That this definition does in fact always give us a functor is something that needs to be checked -- it is not immediate from the definition, even though we said in the definition that it is an endofunctor.
+That this definition does in fact always give us a functor is something that needs to be checked -- it is not immediate from the definition, even though we said in the definition that it is an endofunctor. A rigorous proof of this is given in the appendix as Lemma~\ref{lemma_representable_endofunctor_is_functor}.
 
-\begin{lemma}\label{lemma_representable_endofunctor_is_functor}
-    For any representing set $\Omega$ of simple graphs, $F_\Omega$ is indeed an endofunctor on $\G$.
-\end{lemma}
-
-\begin{proof}
-    That it always gives a simple graph and that it respects identity morphisms and composition of morphisms is easy to see. The only thing we actually need to check is that if $f: H \to G$ is a morphism, then $F_\Omega(f) = f: F_\Omega(H) \to F_\Omega(G)$ is also a morphism.
-
-    Unwrapping this statement, what we need is that, for any morphism $f: H \to G$, whenever $uv$ is an edge in $F_\Omega(H)$, $f(u)f(v)$ is an edge in $F_\Omega(G)$. Now, that $uv$ is an edge in $F_\Omega(H)$ means that there is an $\omega \in \Omega$ and $f_\omega: \omega \to H$ such that $f(\omega) \ni u, v$.
-
-    But consider what happens if we just compose $f_\omega$ and $f$ -- this will be a morphism from $\omega$ into $G$, and trivially we must have that $f(f_\omega(\omega)) \ni f(u), f(v)$, and so there must be an edge $f(u)f(v)$ in $F_\Omega(G)$, by definition of $F_\Omega$.
-\qed\end{proof}
-
-What is going on in the proof of Lemma~\ref{lemma_representable_endofunctor_is_functor} is much clearer if we just think about it in terms of things being subgraphs of each other, forgetting the data of \emph{how} exactly they are subgraphs. Then the statement that $F_\Omega$ is a functor boils down to the statement that if $\omega$ is a subgraph of $H$ and $H$ is a subgraph of $G$, then certainly $\omega$ is a subgraph of $G$, and so $F_\Omega(G)$ must have all the edges $F_\Omega(H)$ has, since edges in $F_\Omega(G)$ represent the presence of a certain subgraph in $G$.
+Intuitively, the statement is clear if we just think about the condition for being a morphism in the category of graphs in terms of things being subgraphs of each other, forgetting the data of \emph{how} exactly they are subgraphs. Then the statement that $F_\Omega$ is a functor boils down to the statement that if $\omega$ is a subgraph of $H$ and $H$ is a subgraph of $G$, then certainly $\omega$ is a subgraph of $G$, and so $F_\Omega(G)$ must have all the edges $F_\Omega(H)$ has, since edges in $F_\Omega(G)$ represent the presence of a certain subgraph in $G$.
 
 \begin{definition}
     The functor $\Pi: \G \to \Pset$ which sends a graph to its partition into connected components is called the connected components functor. Equivalently, we can think of this functor as finding the least equivalence relation that contains the relation $E$ defining the edges, where we by ``least'' mean least in the subset relation.
@@ -292,34 +280,11 @@ To get our quadratic time algorithm, we will use the following result from~\cite
     Let $\mathcal{C}$ be a class with bounded expansion and let $H$ be a fixed graph. Then there exists a linear time algorithm which computes, from a pair $(G,S)$ formed by a graph $G \in \mathcal{C}$ and a subset $S$ of vertices of $G$, the number of isomorphs of $H$ in $G$ that include some vertex in $S$. There also exists an algorithm running in time $O(n) + O(k)$ listing all such isomorphs, where $k$ denotes the number of isomorphs.
 \end{lemma}
 
-\begin{theorem}
+Applying the algorithm from this lemma straightforwardly yields a quadratic-time algorithm for computing the part of a given vertex. A proof of this is given in the appendix.
+
+\begin{theorem}\label{thm:comp_complex_of_alg}
     Let $\Omega$ be any finite set of simple graphs, and $F_\Omega$ the representable clustering scheme represented by it. For any class $\mathcal{C}$ with bounded expansion, there exists an algorithm that given any graph $G \in \mathcal{C}$ and vertex $v$ of $G$ computes the part containing $v$ of $F_\Omega(G)$ running in time $O\left(n^2\right) + O(w)$, where $w$ is the number of subgraphs of $G$ isomorphic to a graph in $\Omega$.
 \end{theorem}
-
-\begin{proof}
-    We will of course use the algorithm from Lemma~\ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way, as specified in Algorithm~\ref{alg:compute_part_of_v}.
-
-    \begin{algorithm}
-        \caption{Computation of part of $v$ in $G$}\label{alg:compute_part}
-        \begin{algorithmic}
-            \State $P_0 \gets \{v\}, P_{-1} \gets \emptyset$
-            \For{$i = 1,2,\ldots, n$}
-                \If{$P_{i-1} \setminus P_{i-2} \neq \emptyset$}
-                    \For{$\omega \in \Omega$}
-                        \State Run the algorithm of Lemma~\ref{lemma_subgraph_counting_bounded_exp} with input $(G, P_{i-1} \setminus P_{i-2})$, getting a list of isomorphs $\gamma_{\omega,1}, \ldots, \gamma_{\omega,k_\omega}$ of $\omega$.
-                    \EndFor
-                    \State $P_{i} \gets P_{i-1} \cup \bigcup_{\omega\in\Omega} \bigcup_{j=1}^{k_\omega} V(\gamma_{\omega,j})$
-                \Else
-                    \State\Return $P_{i-1}$
-                \EndIf
-            \EndFor
-            \State\Return $P_n$
-        \end{algorithmic}
-        \label{alg:compute_part_of_v}
-    \end{algorithm}
-
-    In the absolute worst case, each time-step of the algorithm discovers exactly one new vertex, so the loop can take at most $n$ steps, and each step takes time $O(n)$ plus some time linear in the number of isomorphs found. It is not too hard to see that each isomorph will only be found in exactly two steps, so the sum of this term over all time steps will be linear in the total number of isomorphs.
-\qed\end{proof}
 
 \section{Representability for hierarchical clustering}
 
@@ -348,26 +313,7 @@ That this definition does indeed yield a functor is relatively straightforward t
     $$w(uv) = \sum_{(\omega, w) \in \Omega} \sum_{f \in \Hom(\omega, G)} \frac{w}{\abs{\Aut(\omega)}} \ind{u, v \in \im(f)}.$$
 \end{definition}
 
-Intuitively, the weight $w(uv)$ counts how many subgraphs of $G$ contain both $u$ and $v$ and are isomorphic to something in $\Omega$, except the sum is weighted. We include the division by the size of the automorphism group so that we are actually counting \emph{subgraphs}, not embeddings. One illustration of what is going on in this definition can be found in Figure~\ref{fig:hierarchically_repr_not_excisive}.
-
-\begin{lemma}
-    The representable functors from $\G$ to $\G^w$ are actually functors.
-\end{lemma}
-
-\begin{proof}
-    As before, the only thing we need to explicitly check is that whenever $f: G \to G'$ is a morphism in $\G$, it is also a morphism from $F_\Omega(G)$ to $F_\Omega(G')$. So, in particular, assume that $uv$ is an edge of $F_\Omega(G)$ with weight $\alpha$ -- what we need to show is that $f(u)f(v)$ is an edge of $F_\Omega(G')$ with weight at least $\alpha$.
-
-    That it is an edge at all is easy to see -- that it is an edge in $F_\Omega(G)$ means there is some $\omega \in \Omega$ and a morphism $f_\omega: \omega \to G$ whose image contains both $u$ and $v$. If we just compose this $f_\omega$ with $f$, we get a morphism from $\omega$ into $G'$ whose image contains $f(u)$ and $f(v)$.
-    
-    To show that its weight is at least $\alpha$, we compute
-    \begin{align*}
-        w_{F_\Omega(G')}(uv) &= \sum_{(\omega, w) \in \Omega} \sum_{f'_\omega \in \Hom(\omega, G')} \frac{w}{\abs{\Aut(\omega)}} \ind{f(u), f(v) \in \im(f'_\omega)}\\
-        &\geq \sum_{(\omega, w) \in \Omega} \sum_{\substack{f'_\omega \in \Hom(\omega, G')\\\exists f_\omega \in \Hom(\omega, G): f'_\omega = f_\omega \circ f}} \frac{w}{\abs{\Aut(\omega)}} \ind{f(u), f(v) \in \im(f'_\omega)}\\
-        &= \sum_{(\omega, w) \in \Omega} \sum_{f_\omega \in \Hom(\omega, G)} \frac{w}{\abs{\Aut(\omega)}} \ind{f(u), f(v) \in \im(f_\omega \circ f)}\\
-        &= \sum_{(\omega, w) \in \Omega} \sum_{f_\omega \in \Hom(\omega, G)} \frac{w}{\abs{\Aut(\omega)}} \ind{u, v \in \im(f_\omega)} = w_{F_\Omega(G)}(uv) = \alpha,
-    \end{align*}
-    where the inequality is just that we sum over a subset of the summands, and the second equality follows from that our morphisms are injective.
-\qed\end{proof}
+Intuitively, the weight $w(uv)$ is a weighted count of how many subgraphs of $G$ contain both $u$ and $v$ and are isomorphic to something in $\Omega$. We include the division by the size of the automorphism group so that we are actually counting \emph{subgraphs}, not embeddings. One illustration of what is going on in this definition can be found in Figure~\ref{fig:hierarchically_repr_not_excisive}. A proof that this does in fact yield a functor is given in the appendix as Lemma~\ref{lemma:hierarchical_repr_funct_is_functor}.
 
 \begin{definition}
     A representable hierarchical clustering scheme is a functor from $\G\times\R^+$ into $\Pset$ that can be written as $(F_\Omega \times \Id) \circ \Sigma \circ \Pi$ for some representable functor $F_\Omega$ from $\G$ to $\G^w$.
@@ -427,6 +373,18 @@ In this setting most of the requirements of a functor are trivial -- of course i
 
 \section{Omitted proofs from the main text}
 
+\begin{lemma}\label{lemma_representable_endofunctor_is_functor}
+    For any representing set $\Omega$ of simple graphs, $F_\Omega$ is indeed an endofunctor on $\G$.
+\end{lemma}
+
+\begin{proof}
+    That it always gives a simple graph and that it respects identity morphisms and composition of morphisms is easy to see. The only thing we actually need to check is that if $f: H \to G$ is a morphism, then $F_\Omega(f) = f: F_\Omega(H) \to F_\Omega(G)$ is also a morphism.
+
+    Unwrapping this statement, what we need is that, for any morphism $f: H \to G$, whenever $uv$ is an edge in $F_\Omega(H)$, $f(u)f(v)$ is an edge in $F_\Omega(G)$. Now, that $uv$ is an edge in $F_\Omega(H)$ means that there is an $\omega \in \Omega$ and $f_\omega: \omega \to H$ such that $f(\omega) \ni u, v$.
+
+    But consider what happens if we just compose $f_\omega$ and $f$ -- this will be a morphism from $\omega$ into $G$, and trivially we must have that $f(f_\omega(\omega)) \ni f(u), f(v)$, and so there must be an edge $f(u)f(v)$ in $F_\Omega(G)$, by definition of $F_\Omega$.
+\qed\end{proof}
+
 \begin{proof}[Lemma~\ref{lemma_representation_hull}]
     Suppose $F_{\Omega \cup \{G\}} = F_\Omega$. That $F_{\Omega \cup \{G\}}(G) = (V, V^2)$ is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, and so since $F_{\Omega \cup \{G\}} = F_\Omega$, we also have $F_\Omega(G) = (V, V^2)$, as desired.
 
@@ -461,6 +419,31 @@ In this setting most of the requirements of a functor are trivial -- of course i
     Finally, suppose $\Omega$ contains some graph on at least two vertices, and every $\omega \in \Omega$ is connected. Then, pick some $\omega \in \Omega$ and a vertex $w_\omega \in \omega$. For any edge $uv$ in $G$, we can send $w_\omega$ to $u$ and every other vertex of $\omega$ to $v$. Thus, $uv$ must also be an edge of $F_\Omega(G)$. That we cannot get an edge in $F_\Omega(G)$ between two vertices in different connected components of $G$ is clear from that $\Omega$ contains only connected graphs. Therefore, $F_\Omega(G)$ must have the same connected components as $G$, and so the induced clustering scheme must be just the connected components functor.
 \qed\end{proof}
 
+\begin{proof}[Theorem \ref{thm:comp_complex_of_alg}]
+    We will of course use the algorithm from Lemma~\ref{lemma_subgraph_counting_bounded_exp}, and we do so in the most straightforward way, as specified in Algorithm~\ref{alg:compute_part_of_v}.
+
+    \begin{algorithm}
+        \caption{Computation of part of $v$ in $G$}\label{alg:compute_part}
+        \begin{algorithmic}
+            \State $P_0 \gets \{v\}, P_{-1} \gets \emptyset$
+            \For{$i = 1,2,\ldots, n$}
+                \If{$P_{i-1} \setminus P_{i-2} \neq \emptyset$}
+                    \For{$\omega \in \Omega$}
+                        \State Run the algorithm of Lemma~\ref{lemma_subgraph_counting_bounded_exp} with input $(G, P_{i-1} \setminus P_{i-2})$, getting a list of isomorphs $\gamma_{\omega,1}, \ldots, \gamma_{\omega,k_\omega}$ of $\omega$.
+                    \EndFor
+                    \State $P_{i} \gets P_{i-1} \cup \bigcup_{\omega\in\Omega} \bigcup_{j=1}^{k_\omega} V(\gamma_{\omega,j})$
+                \Else
+                    \State\Return $P_{i-1}$
+                \EndIf
+            \EndFor
+            \State\Return $P_n$
+        \end{algorithmic}
+        \label{alg:compute_part_of_v}
+    \end{algorithm}
+
+    In the absolute worst case, each time-step of the algorithm discovers exactly one new vertex, so the loop can take at most $n$ steps, and each step takes time $O(n)$ plus some time linear in the number of isomorphs found. It is not too hard to see that each isomorph will only be found in exactly two steps, so the sum of this term over all time steps will be linear in the total number of isomorphs.
+\qed\end{proof}
+
 \begin{proof}[Lemma~\ref{lemma:scissors_is_functor}]
     Similarly to how we proved that the representable endofunctors are in fact functors, most of the required properties are obvious. There are only two things we need to check:
     \begin{enumerate}
@@ -471,6 +454,25 @@ In this setting most of the requirements of a functor are trivial -- of course i
     We start with the first item, and suppose that $f: G \to G'$ is a morphism of weighted graphs, and $\tau \geq 0$ some threshold. We wish to show that whenever $uv$ is an edge of $\Sigma(G,\tau)$, $f(u)f(v)$ is an edge of $\Sigma(G',\tau)$. That $uv$ is an edge of $\Sigma(G,\tau)$ means that $uv$ is an edge of $G$ with weight at least $\tau$, and since $f$ is a morphism of weighted graphs, $f(u)f(v)$ must be an edge of $G'$, and since such morphisms are weight non-decreasing, its weight must still be at least $\tau$. Thus it is an edge of $\Sigma(G',\tau)$ as well.
 
     The second item is even more trivial than the first -- if we unwrap the definitions, all it says is that if we lower the threshold for when edges are removed, then we will not lose any edges.
+\qed\end{proof}
+
+\begin{lemma}\label{lemma:hierarchical_repr_funct_is_functor}
+    The representable functors from $\G$ to $\G^w$ are actually functors.
+\end{lemma}
+
+\begin{proof}
+    As before, the only thing we need to explicitly check is that whenever $f: G \to G'$ is a morphism in $\G$, it is also a morphism from $F_\Omega(G)$ to $F_\Omega(G')$. So, in particular, assume that $uv$ is an edge of $F_\Omega(G)$ with weight $\alpha$ -- what we need to show is that $f(u)f(v)$ is an edge of $F_\Omega(G')$ with weight at least $\alpha$.
+
+    That it is an edge at all is easy to see -- that it is an edge in $F_\Omega(G)$ means there is some $\omega \in \Omega$ and a morphism $f_\omega: \omega \to G$ whose image contains both $u$ and $v$. If we just compose this $f_\omega$ with $f$, we get a morphism from $\omega$ into $G'$ whose image contains $f(u)$ and $f(v)$.
+    
+    To show that its weight is at least $\alpha$, we compute
+    \begin{align*}
+        w_{F_\Omega(G')}(uv) &= \sum_{(\omega, w) \in \Omega} \sum_{f'_\omega \in \Hom(\omega, G')} \frac{w}{\abs{\Aut(\omega)}} \ind{f(u), f(v) \in \im(f'_\omega)}\\
+        &\geq \sum_{(\omega, w) \in \Omega} \sum_{\substack{f'_\omega \in \Hom(\omega, G')\\\exists f_\omega \in \Hom(\omega, G): f'_\omega = f_\omega \circ f}} \frac{w}{\abs{\Aut(\omega)}} \ind{f(u), f(v) \in \im(f'_\omega)}\\
+        &= \sum_{(\omega, w) \in \Omega} \sum_{f_\omega \in \Hom(\omega, G)} \frac{w}{\abs{\Aut(\omega)}} \ind{f(u), f(v) \in \im(f_\omega \circ f)}\\
+        &= \sum_{(\omega, w) \in \Omega} \sum_{f_\omega \in \Hom(\omega, G)} \frac{w}{\abs{\Aut(\omega)}} \ind{u, v \in \im(f_\omega)} = w_{F_\Omega(G)}(uv) = \alpha,
+    \end{align*}
+    where the inequality is just that we sum over a subset of the summands, and the second equality follows from that our morphisms are injective.
 \qed\end{proof}
 
 \end{document}
