@@ -82,26 +82,36 @@ We also give a structural result for when two representable clustering schemes a
 \section{Definitions of our terms}
 
 \begin{definition}
-    The category of simple graphs $\G$ has as its objects simple graphs, which we consider to be a finite set $V$ equipped with a reflexive and symmetric binary relation $E$ -- that is, our simple graphs are finite, have no double edges, and have loops at every vertex. A morphism from $H = (V, E)$ to $G = (V', E')$ is an injective set function $f: V \to V'$ such that whenever $uEv$, we also have $f(u)E'f(v)$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a subgraph of $G$.
-\end{definition}
-
-\begin{definition}
-    The category of partitioned sets $\Pset$ has as its objects finite sets $V$ with an equivalence relation $\sim$. A morphism in $\Pset$ from $(V, \sim)$ to $(W, \approx)$ is a set function $f: V \to W$ such that whenever $v\sim w$, $f(v) \approx f(w)$.
-\end{definition}
-
-\begin{definition}
-    A clustering scheme is a function $\Clust$ that sends simple graphs to partitioned sets, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E)$ to $P = (W, \sim)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$.
-\end{definition}
-
-One good way to think of these definitions is as a kind of generalization of monotonicity. If we were restricting to only studying clustering of graphs on a fixed underlying set, the statement that there is a morphism from $G$ to $H$ becomes precisely the statement that $G \subseteq H$, that is that $G$ is less than $H$ in the inclusion order. Likewise there is a natural partial order on the set of equivalence relations on the underlying vertex set, given by that $\sim < \approx$ if $\sim$ is a refinement of $\approx$, or equivalently if $\approx$ is a coarsening of $\sim$.
-
-In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges.
-
-\begin{definition}
-    A clustering scheme $\Clust$ is \emph{excisive} if, for all graphs $G = (V, E)$, it holds for every equivalence class $A$ of $\Clust(G)$ that $\Clust$ sends $G|_A$, the subgraph of $G$ induced by $A$, to $(A,\sim_{\text{cpl}})$, where $\sim_{\text{cpl}}$ is the complete equivalence relation that declares all objects in $A$ equivalent.
+    The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a finite set $V$ of vertices together with a finite set $E \subseteq 2^V$ of edges. To simplify some technical points, we will assume for all hypergraphs throughout that $\{v\} \in E$ for every $v \in V$, that is, that all our hypergraphs have loops at every vertex.
     
-    That is, if we take a graph, cluster it, pick out one of the parts, and cluster that part alone, that part will be clustered into a single part.
+    A morphism from $H = (V,E)$ to $G = (V', E')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, $f(e) \in E'$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
 \end{definition}
+
+Notice how if we restrict to requiring that $\abs{e} = 2$ for each edge $e$, we recover the category of simple graphs with the normal subgraph relation as its morphisms.
+
+\begin{definition}
+    The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$.
+
+    A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $p \subseteq q$.
+\end{definition}
+
+Here it is worth remarking that the categories $\G$ and $\Pset$ are very similar, in that they have the same objects, but we have a smaller set of morphisms among the hypergraphs than among the sets with overlapping partitions. However, for clarity's sake, we shall usually forget this fact, and treat these as two unrelated categories, instead of thinking of them as one contained within the other.
+
+If we added the assumption that all our sets in $P$ are disjoint, we would recover the usual category of partitioned sets, although then we normally prefer to think not of a partition of $V$ but of an equivalence relation on $V$.
+
+\begin{definition}
+    An overlapping clustering scheme is a function $\Clust$ that sends hypergraphs to sets with overlapping partitions, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E)$ to $P = (W, P)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$. We will often abuse our notation slightly and write $p \in \Clust(G)$ when what we mean is that $\Clust(G) = (V,P)$ and $p \in P$.
+\end{definition}
+
+One good way to think of these definitions is as a kind of generalization of monotonicity. If we were restricting to only studying clustering of graphs on a fixed underlying set, the statement that there is a morphism from $G$ to $H$ becomes precisely the statement that $G \subseteq H$, that is that $G$ is less than $H$ in the inclusion order. Likewise, if we restricted to only studying non-overlapping partitions, there is a natural partial order on the set of equivalence relations on the underlying vertex set, given by that $\sim < \approx$ if $\sim$ is a refinement of $\approx$, or equivalently if $\approx$ is a coarsening of $\sim$.
+
+In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges, and it becomes easier to speak about monotonicity with respect to non-overlapping set partitions.
+
+\begin{definition}
+    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $p \in \Clust(G|_p)$. That is, whenever we look at the hypergraph induced by a part of the partition, and cluster just that sub-hypergraph, we get back a partition where the entire vertex set is one of the parts.
+\end{definition}
+
+In the setting of non-overlapping partitions, this property is more intuitive to state: If we cluster some graph, pick out one of the parts, and cluster just the subgraph induced by that part, we get back a trivial partition into a single part. Adapting this into the overlapping clustering world unfortunately gets us a less transparent definition.
 
 \section{Representability}
 
