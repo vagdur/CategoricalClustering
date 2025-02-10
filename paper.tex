@@ -82,12 +82,12 @@ We also give a structural result for when two representable clustering schemes a
 \section{Definitions of our terms}
 
 \begin{definition}
-    The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a finite set $V$ of vertices together with a finite set $E \subseteq 2^V$ of edges. To simplify some technical points, we will assume for all hypergraphs throughout that $\{v\} \in E$ for every $v \in V$, that is, that all our hypergraphs have loops at every vertex.
+    The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a triple $(V,E,\ea)$ of a finite set $V$ of vertices, a finite set $E$ of edges that is disjoint from $V$, and a function $\ea: E \to 2^V$ assigning each edge its vertex set. Notice that this allows us to have multiple edges with the same edge set. To simplify some technical points, we will assume that all our hypergraphs have loops at every vertex, that is, that for each $v \in V$ there is an $e \in E$ such that $\ea(e) = \{v\}$.
     
-    A morphism from $H = (V,E)$ to $G = (V', E')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, $f(e) \in E'$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
+    A morphism from $H = (V,E)$ to $G = (V', E')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, there is an $e' \in E'$ such that $f(\ea(e)) = \ea(e')$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
 \end{definition}
 
-Notice how if we restrict to requiring that $\abs{e} = 2$ for each edge $e$, we recover the category of simple graphs with the normal subgraph relation as its morphisms.
+Notice how if we restrict to requiring that $\abs{\ea(e)} = 2$ for each edge $e$, we recover the category of simple graphs with the normal subgraph relation as its morphisms. Whenever we use just the word ``graph'', we mean a hypergraph.
 
 \begin{definition}
     The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$.
@@ -100,10 +100,10 @@ Here it is worth remarking that the categories $\G$ and $\Pset$ are very similar
 If we added the assumption that all our sets in $P$ are disjoint, we would recover the usual category of partitioned sets, although then we normally prefer to think not of a partition of $V$ but of an equivalence relation on $V$.
 
 \begin{definition}
-    An overlapping clustering scheme is a function $\Clust$ that sends hypergraphs to sets with overlapping partitions, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E)$ to $P = (W, P)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$. We will often abuse our notation slightly and write $p \in \Clust(G)$ when what we mean is that $\Clust(G) = (V,P)$ and $p \in P$.
+    An overlapping clustering scheme is a function $\Clust$ that sends hypergraphs to sets with overlapping partitions, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E,\ea)$ to $P = (W, P)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$. We will often abuse our notation slightly and write $p \in \Clust(G)$ when what we mean is that $\Clust(G) = (V,P)$ and $p \in P$.
 \end{definition}
 
-One good way to think of these definitions is as a kind of generalization of monotonicity. If we were restricting to only studying clustering of graphs on a fixed underlying set, the statement that there is a morphism from $G$ to $H$ becomes precisely the statement that $G \subseteq H$, that is that $G$ is less than $H$ in the inclusion order. Likewise, if we restricted to only studying non-overlapping partitions, there is a natural partial order on the set of equivalence relations on the underlying vertex set, given by that $\sim < \approx$ if $\sim$ is a refinement of $\approx$, or equivalently if $\approx$ is a coarsening of $\sim$.
+One good way to think of these definitions is as a kind of generalization of monotonicity. If we were restricting to only studying clustering of graphs on a fixed underlying set, the statement that there is a morphism from $G$ to $H$ becomes precisely the statement that $G \subseteq H$, that is that $G$ is less than $H$ in the subgraph inclusion order. Likewise, if we restricted to only studying non-overlapping partitions, there is a natural partial order on the set of equivalence relations on the underlying vertex set, given by that $\sim < \approx$ if $\sim$ is a refinement of $\approx$, or equivalently if $\approx$ is a coarsening of $\sim$.
 
 In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges, and it becomes easier to speak about monotonicity with respect to non-overlapping set partitions.
 
@@ -116,12 +116,19 @@ In the setting of non-overlapping partitions, this property is more intuitive to
 \section{Representability}
 
 \begin{definition}
-    Given a not necessarily finite set $\Omega$ of simple graphs, we define the endofunctor $F_\Omega$ on $\G$ as follows: For any graph $G = (V, E)$, $F_\Omega(G)$ is a graph on the same vertex set, and there is an edge between $u$ and $v$ in $F_\Omega(G)$ whenever there exists some subgraph of $G$ containing both $u$ and $v$ which is isomorphic to some $\omega \in \Omega$.
+    Given a not necessarily finite set $\Omega$ of graphs, we define the endofunctor $F_\Omega$ on $\G$ by that, for any graph $G = (V,E)$,
+    \begin{enumerate}
+        \item the vertices of $F_\Omega(G)$ are simply $V$,
+        \item the edges of $F_\Omega(G)$ are given by
+        $$E(F_\Omega(G)) = \bigcup_{\omega \in \Omega} \hom(\omega, G),$$
+        the set of all morphisms from a graph in $\Omega$ into $G$,
+        \item and the edge-assigning function $\ea: E(F_\Omega(G)) \to 2^V$ simply assigns each morphism to its image, i.e. $\ea(f) = \im(f)$. 
+    \end{enumerate}
 
-    Equivalently, there is an edge $uv$ in $F_\Omega(G)$ whenever there exists an $\omega \in \Omega$ and a morphism $f: \omega \to G$ such that $f(\omega) \ni u, v$.
-
-    On morphisms, $F_\Omega$ is always just the identity.
+    On morphisms, $F_\Omega$ is always just the identity on set functions, so if $f: G \to H$ is a morphism, $F_\Omega(f) = f$ as a set function.
 \end{definition}
+
+In other words, more concretely, we get a hyperedge in $F_\Omega(G)$ for every copy of a graph in $\Omega$ inside of $G$.
 
 That this definition does in fact always give us a functor is something that needs to be checked -- it is not immediate from the definition, even though we said in the definition that it is an endofunctor.
 
