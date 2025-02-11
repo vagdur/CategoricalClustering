@@ -171,6 +171,27 @@ When constructing this theory for the case of non-overlapping partitions, the cr
     For any morphism $f: G \to H$, we simply take $\Pi_k(f)$ to be the same underlying set function, now seen as a morphism of partitioned sets.
 \end{definition}
 
+As before, while we stated in the definition that $\Pi_k$ is a functor, this is something that does need a proof.
+
+\begin{lemma}\label{lem:kly_connected_is_functor}
+    For each $k \geq 1$, $\Pi_k$ is a functor from $\G$ into $\Pset$.
+\end{lemma}
+\begin{proof}
+    That $\Pi_k$ respects identity morphisms and composition of morphisms is trivial, so again, what we need to see is that if $(G,E,\ea)$ and $(H,F,\ea')$ are two graphs and $f: G \to H$ is a morphism between them, $\Pi_k(f) = f: \Pi_k(G) \to \Pi_k(H)$ is a morphism in $\Pset$.
+
+    So suppose $p$ is some part of $\Pi_k(G)$ -- what we need to show is that there exists a part $q$ of $\Pi_k(H)$ such that $f(p) \subseteq q$. So let $A \subseteq E$ be the connected component of the auxiliary graph in the construction of $\Pi_k(G)$ corresponding to the part $p$.
+    
+    Since $f$ is a morphism from $G$ to $H$, for each $e \in A$, there is an $e' \in F$ such that $f(\ea(e)) = \ea'(e')$. Let $A'$ be a set of such corresponding edges in $H$.
+    
+    We claim that this $A'$ is in fact a connected subgraph of the auxiliary graph of $H$. This follows from the more general fact that if $e_1, e_2 \in E$ are adjacent in the auxiliary graph of $G$ then their corresponding edges $e_1', e_2'$ are adjacent in the auxiliary graph of $H$.
+    
+    To see this, note that $e_1$ and $e_2$ being adjacent means that $\abs{\ea(e_1)\cap\ea(e_2)}\geq k$, and clearly since all our morphisms are assumed to be injective, $\abs{f(\ea(e_1)\cap\ea(e_2))} = \abs{\ea(e_1)\cap\ea(e_2)}$ and so if $e_1', e_2'$ are the corresponding edges in $H$,
+    $$f(\ea(e_1)\cap\ea(e_2)) = f(\ea(e_1))\cap f(\ea(e_2)) = \ea'(e_1')\cap \ea'(e_2'),$$
+    again by injectivity of $f$, and so indeed $e_1'$ and $e_2'$ are adjacent in the auxiliary graph of $H$.
+
+    So let $A'' \supseteq A'$ be the connected component of the auxiliary graph of $H$ containing $A'$, and $q$ be the corresponding part of $\Pi_k(H)$. We claim that $f(p) \subseteq q$ -- for each vertex $v \in p$ there is an edge $e \in A$ such that $v \in \ea(e)$, and so $f(v) \in f(\ea(e)) = \ea'(e')$ for the edge $e' \in A' \subseteq A''$ corresponding to $e$. But then $f(v) \in q$ by the definition of $q$, and we are done.
+\end{proof}
+
 \begin{definition}\label{definition_representable_clustscheme}
     A clustering scheme $\Clust$ is \emph{representable} if $\Clust = F_\Rset \circ \Pi$ for some representable endofunctor $F_\Rset$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
 \end{definition}
