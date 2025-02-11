@@ -102,7 +102,7 @@ Notice how if we restrict to requiring that $\abs{\ea(e)} = 2$ for each edge $e$
 \begin{definition}
     The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$.
 
-    A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $p \subseteq q$.
+    A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $f(p) \subseteq q$.
 \end{definition}
 
 Here it is worth remarking that the categories $\G$ and $\Pset$ are very similar, in that they have the same objects, but we have a smaller set of morphisms among the hypergraphs than among the sets with overlapping partitions. However, for clarity's sake, we shall usually forget this fact, and treat these as two unrelated categories, instead of thinking of them as one contained within the other.
