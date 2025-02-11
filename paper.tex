@@ -154,7 +154,7 @@ That this definition does in fact always give us a functor is something that nee
     \end{proof}
 \end{lemma}
 
-What is going on in the proof of Lemma~\ref{lemma_representable_endofunctor_is_functor} is much clearer if we just think about it in terms of things being subgraphs of each other, forgetting the data of \emph{how} exactly they are subgraphs. Then the statement that $F_\Rset$ is a functor boils down to the statement that if $\omega$ is a subgraph of $H$ and $H$ is a subgraph of $G$, then certainly $\omega$ is a subgraph of $G$, and so $F_\Rset(G)$ must have all the edges $F_\Rset(H)$ has, since edges in $F_\Rset(G)$ represent the presence of a certain subgraph in $G$.
+What is going on in the proof of Lemma~\ref{lemma_representable_endofunctor_is_functor} is much clearer if we just think about it in terms of things being subgraphs of each other, forgetting the data of \emph{how} exactly they are subgraphs. Then the statement that $F_\Rset$ is a functor boils down to the statement that if $\omega$ is a subgraph of $H$ and $H$ is a subgraph of $G$, then $\omega$ is a subgraph of $G$, and so $F_\Rset(G)$ must have all the edges $F_\Rset(H)$ has, since edges in $F_\Rset(G)$ represent the presence of a certain subgraph in $G$.
 
 \begin{definition}
     The functor $\Pi: \G \to \Pset$ which sends a graph to its partition into connected components is called the connected components functor. Equivalently, we can think of this functor as finding the least equivalence relation that contains the relation $E$ defining the edges, where we by ``least'' mean least in the subset relation.
