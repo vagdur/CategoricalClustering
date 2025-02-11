@@ -94,7 +94,7 @@ We also give a structural result for when two representable clustering schemes a
 \begin{definition}
     The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a triple $(V,E,\ea)$ of a finite set $V$ of vertices, a finite set $E$ of edges that is disjoint from $V$, and a function $\ea: E \to 2^V$ assigning each edge its vertex set. Notice that this allows us to have multiple edges with the same edge set. To simplify some technical points, we will assume that all our hypergraphs have loops at every vertex, that is, that for each $v \in V$ there is an $e \in E$ such that $\ea(e) = \{v\}$.
     
-    A morphism from $H = (V,E)$ to $G = (V', E')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, there is an $e' \in E'$ such that $f(\ea(e)) = \ea(e')$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
+    A morphism from $H = (V,E,\ea)$ to $G = (V', E',\ea')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, there is an $e' \in E'$ such that $f(\ea(e)) = \ea'(e')$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
 \end{definition}
 
 Notice how if we restrict to requiring that $\abs{\ea(e)} = 2$ for each edge $e$, we recover the category of simple graphs with the normal subgraph relation as its morphisms. Whenever we use just the word ``graph'', we mean a hypergraph.
