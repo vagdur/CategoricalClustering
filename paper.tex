@@ -197,7 +197,11 @@ As before, while we stated in the definition that $\Pi_k$ is a functor, this is 
 \end{definition}
 
 \begin{example}
-    The connected components functor is representable, with representing set $\Rset = \{K_2\}$. In fact any set $\Rset$ of connected graphs containing $K_2$ will represent the connected components functor -- but note that they will in general give inequivalent endofunctors on $\G$.
+    If we restrict to considering only simple graphs, it is very easy to see that the connected components functor $\Pi_1$ is representable, since we can simply take $\Rset = \{K_2\}$ -- then $F_\Rset$ just sends a graph to itself, the auxiliary graph will just be the line graph, and of course connected components of the line graph and connected components of the graph itself are the same thing.
+    
+    For hypergraphs, we need to take $\Rset = \left\{E_n \given n \in \N\right\}$, where $E_n$ is the hypergraph with $n$ vertices and a single edge containing all the vertices. Then all $F_\Rset$ will do to a graph is to replace each edge with $k$ vertices with $k!$ copies of itself, which does not change connectivity, and the process with the auxiliary graph is just the usual notion of connectedness for hypergraphs.
+    
+    In fact any set $\Rset$ of connected graphs containing $E_n$ for each $n$ will represent $\Pi_1$ -- but note that they will in general give inequivalent endofunctors on $\G$.
 \end{example}
 
 One somewhat surprising fact is that there are actually representable clustering schemes that are not finitely representable.
