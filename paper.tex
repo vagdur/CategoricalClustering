@@ -202,7 +202,7 @@ That this line graph functor is in fact a functor definitely requires a proof, s
 So, now we have the line graph functor, which gives us a simple graph which we can take connected components of. This nearly gets us where we want to be -- except of course the connected components of the line graph of $G$ will be a partitioning of the vertex sets of the edges of $G$, not a partitioning of the vertices of $G$. So our last step to getting a generalized connected components functor is to turn this into a partitioning of the vertices.
 
 \begin{definition}
-    The part-union functor $\Upsilon: \Pset \to \Pset$ is defined as follows:
+    The part-union operation $\Upsilon: \Pset \to \Pset$ is defined as follows:
 
     For each $\mathcal{A} = (V, P) \in \Pset$, we let $\Upsilon(\mathcal{A}) = \mathcal{B} = (W,Q)$, where
     \begin{enumerate}
@@ -215,22 +215,26 @@ So, now we have the line graph functor, which gives us a simple graph which we c
     \end{enumerate}
 \end{definition}
 
-Again, the statement that this part-union functor is in fact a functor merits a proof.
+Unfortunately, this $\Upsilon$ is not in general a functor, since there is no way to define what it does on morphisms between partitioned sets. However, it will still be useful to us.
 
-\begin{lemma}\label{lem:part_union_is_functor}
-    The part-union functor $\Upsilon$ is in fact a functor.
-\end{lemma}
-\begin{proof}
-    
-\end{proof}
+\begin{example}
+    \hl{Add example proving that $\Upsilon$ cannot be made into a functor.}
+\end{example}
 
 With all this in hand, we are finally able to define the connected components of a hypergraph.
 
 \begin{definition}
-    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by $\Pi_k = \Lambda_k \circ \Pi \circ \Upsilon$.
+    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by that, for any $G$, $\Pi_k(G) = \left(\Lambda_k \circ \Pi \circ \Upsilon\right)(G)$. On morphisms, $\Pi_k(f)$ is simply the same underlying set function -- this is well defined, since clearly the underlying set of $\Pi_k(G)$ will be the same set as the vertex set of $G$.
 \end{definition}
 
-That this one is a functor is immediate, since it is a composition of three things we have shown to be functors.
+That this one is a functor also requires a proof, since it is defined as a composition of some things one of which is not itself a functor. However, the fact that the first two things are functors will be helpful in the proof.
+
+\begin{lemma}\label{lem:k_conn_is_functor}
+    For each $k$, $\Pi_k$ is a functor.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
 
 \begin{definition}\label{definition_representable_clustscheme}
     A clustering scheme $\Clust$ is \emph{representable} if $\Clust = F_\Rset \circ \Pi_k$ for some representable endofunctor $F_\Rset$ and some $k \geq 1$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
