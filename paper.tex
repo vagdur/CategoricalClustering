@@ -210,27 +210,33 @@ One somewhat surprising fact is that there are actually representable clustering
     For each $k \geq 1$, there exists a representable clustering scheme $F_\Rset \circ \Pi_k$ which is not \emph{finitely} representable, that is, it is not equal to $F_{\mathfrak{S}} \circ \Pi$ for any finite set of graphs $\mathfrak{S}$.
 \end{theorem}
 
-In order to give a proof of this, we first need a structural result about how these endofunctors behave.
+In order to give a proof of this, we first need a structural result about how these endofunctors behave. Let us say that an edge in a hypergraph which contains all vertices is a \emph{spanning edge}, and a hypergraph which has a spanning edge is \emph{spanned}.
 
 \begin{remark}\label{remark_omegas_sent_to_cliques}
-    For any $\omega \in \Rset$, it is trivial to see that $F_\Rset(\omega)$ must be a clique, since we can just take the identity morphism on $\omega$ to show that all edges must exist.
+    For any $R \in \Rset$, it is trivial to see that $F_\Rset(R)$ must be spanned -- specifically we can take the identity morphism on $R$ as the spanning edge.
 \end{remark}
 
-In fact, which graphs are sent to cliques by $F_\Rset$ essentially determines what it does as a functor. Similarly, if we are interested in the weaker equivalence of inducing the same clustering scheme, this is determined by which graphs are sent to a connected graph.
+In fact, which graphs are sent to spanned graphs by $F_\Rset$ essentially determines what it does as a functor. Similarly, if we are interested in the weaker equivalence of inducing the same clustering scheme, this is determined by which graphs are sent to a connected graph.
 
 \begin{lemma} \label{lemma_representation_hull}
-    For any set $\Rset$ of simple graphs and any simple graph $G = (V, E)$, it holds that $F_{\Rset \cup \{G\}} = F_\Rset$ if and only if $F_\Rset(G) = (V, V^2)$, that is, if $G$ is sent to a clique on its vertices by $F_\Rset$.
+    For any set $\Rset$ of graphs and any graph $G = (V, E, \ea)$, it holds that $F_{\Rset \cup \{G\}} = F_\Rset$ if and only if $G$ is sent to a spanned graph by $F_\Rset$.
 
     \begin{proof}
-        Suppose $F_{\Rset \cup \{G\}} = F_\Rset$. That $F_{\Rset \cup \{G\}}(G) = (V, V^2)$ is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, and so since $F_{\Rset \cup \{G\}} = F_\Rset$, we also have $F_\Rset(G) = (V, V^2)$, as desired.
+        Suppose $F_{\Rset \cup \{G\}} = F_\Rset$. That $F_{\Rset \cup \{G\}}(G)$ is spanned is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, and so since $F_{\Rset \cup \{G\}} = F_\Rset$, $F_\Rset(G)$ is spanned, as desired.
 
-        Now suppose $F_\Rset(G) = (V, V^2)$, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Rset \cup \{G\}}(H) = F_\Rset(H)$. 
+        Now suppose $F_\Rset(G)$ is spanned, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Rset \cup \{G\}}(H) = F_\Rset(H)$. 
         
-        That edges of $F_\Rset(H)$ must also be edges of $F_{\Rset \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Rset \cup \{G\}}(H)$ are also edges of $F_\Rset(H)$. Thus, suppose $uv$ is an edge of $F_{\Rset \cup \{G\}}(H)$ -- that this edge exists must be because there is some $\omega \in \Rset \cup \{G\}$ and an $f: \omega \to H$ such that $f(\omega) \ni u, v$.
+        That edges of $F_\Rset(H)$ must also be edges of $F_{\Rset \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Rset \cup \{G\}}(H)$ are also edges of $F_\Rset(H)$. Thus, suppose $e$ is an edge of $F_{\Rset \cup \{G\}}(H)$ -- by construction, this edge is a morphism $\omega$ from some $R \in \Rset \cup \{G\}$ into $H$, whose image is the vertex set of this edge.
 
-        If this $\omega$ is not $G$, then we are done. If it is $G$, we recall that since $F_\Rset(G)$ is a clique, there must be an edge $f^{-1}(u)f^{-1}(v)$ in it. Therefore there must exist some $\omega \in \Rset$ and some $g: \omega \to G$ such that $f(\omega) \ni f^{-1}(u), f^{-1}(v)$. But then the composition $g \circ f: \omega \to H$ will be a morphism from an $\omega \in \Rset$ into $H$ whose image contains $u$ and $v$, proving that $uv$ is an edge of $F_\Rset(H)$.
+        If this $R$ is not $G$, then we are done. If it is $G$, we recall that $F_\Rset(G)$ is spanned, and so we can take $e'$ to be a spanning edge of $F_\Rset(G)$. Again, this edge is by construction a morphism $\omega'$ from some $R'$ -- this time an $R' \in \Rset$ -- into $G$, whose image, since it is spanning, must be the entirety of $G$.
+
+        So, if we compose $\omega': R' \to G$ and $\omega: G \to H$, we get a morphism from $R'$ into $H$, which by definition is an edge of $F_\Rset(H)$, and since $\omega'$ was onto, the image of this composition must be the same as the image of $\omega$, and so this edge has the right vertex set, and we are done.
     \end{proof}
 \end{lemma}
+
+\begin{remark}
+    \hl{Rephrase lemma according to the following?:} When one reads the above proof one can notice that the $\omega'$ we found must in fact have been an isomorphism, since it was onto, and all morphisms are assumed injective, and so it was a bijective morphism, which in this category must be an isomorphism.
+\end{remark}
 
 \begin{lemma}\label{lemma_connected_representation_hull}
     For any set of simple graphs $\Rset$ and any simple graph $G$, $\Rset$ and $\Rset \cup \{G\}$ induce the same representable clustering scheme if and only if $F_\Rset(G)$ is a connected graph.
