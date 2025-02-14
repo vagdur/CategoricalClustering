@@ -90,6 +90,7 @@
 \newcommand{\Lgr}{\mathcal{L}} % Lagrangian
 \newcommand{\Clust}{\mathfrak{C}}
 \newcommand{\Pset}{\mathcal{P}}
+\newcommand{\Psetno}{\mathcal{P}_{\mathrm{no}}}
 \newcommand{\Rset}{\mathfrak{R}}
 
 %Fouriertransform:

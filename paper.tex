@@ -92,12 +92,16 @@ We also give a structural result for when two representable clustering schemes a
 \section{Definitions of our terms}
 
 \begin{definition}
-    The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a triple $(V,E,\ea)$ of a finite set $V$ of vertices, a finite set $E$ of edges that is disjoint from $V$, and a function $\ea: E \to 2^V$ assigning each edge its vertex set. Notice that this allows us to have multiple edges with the same edge set. To simplify some technical points, we will assume that all our hypergraphs have loops at every vertex, that is, that for each $v \in V$ there is an $e \in E$ such that $\ea(e) = \{v\}$.
+    The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a triple $(V,E,\ea)$ of a finite set $V$ of vertices, a finite set $E$ of edges that is disjoint from $V$, and a function $\ea: E \to 2^V$ assigning each edge its vertex set. Notice that this allows us to have multiple edges with the same edge set. To simplify some technical points, we will assume that all our hypergraphs have loops at every vertex, that is, that for each $v \in V$ there is an $e \in E$ such that $\ea(e) = \{v\}$. \hl{Where do we actually need the assumption of loops at every vertex?}
     
     A morphism from $H = (V,E,\ea)$ to $G = (V', E',\ea')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, there is an $e' \in E'$ such that $f(\ea(e)) = \ea'(e')$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
 \end{definition}
 
-Notice how if we restrict to requiring that $\abs{\ea(e)} = 2$ for each edge $e$, we recover the category of simple graphs with the normal subgraph relation as its morphisms. Whenever we use just the word ``graph'', we mean a hypergraph.
+\begin{definition}
+    The category of simple graphs $\G_s$ is the full subcategory of $\G$ whose objects are the simple graphs, that is, the graphs all of whose edges contain either one or two vertices. Again, we allow edges with a single vertex for technical reasons.
+
+    Whenever we use just the word ``graph'', we mean a hypergraph, since those are more common for us.
+\end{definition}
 
 \begin{definition}
     The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$.
@@ -105,9 +109,11 @@ Notice how if we restrict to requiring that $\abs{\ea(e)} = 2$ for each edge $e$
     A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $f(p) \subseteq q$.
 \end{definition}
 
-Here it is worth remarking that the categories $\G$ and $\Pset$ are very similar, in that they have the same objects, but we have a smaller set of morphisms among the hypergraphs than among the sets with overlapping partitions. However, for clarity's sake, we shall usually forget this fact, and treat these as two unrelated categories, instead of thinking of them as one contained within the other.
+\begin{definition}
+    The category $\Psetno$ of sets with non-overlapping partitions is the full subcategory of $\Pset$ whose objects have disjoint set covers. We may equivalently think of it as the category of sets equipped with equivalence relations.
+\end{definition}
 
-If we added the assumption that all our sets in $P$ are disjoint, we would recover the usual category of partitioned sets, although then we normally prefer to think not of a partition of $V$ but of an equivalence relation on $V$.
+Here it is worth remarking that the categories $\G$ and $\Pset$ are very similar, in that they have the same objects, but we have a smaller set of morphisms among the hypergraphs than among the sets with overlapping partitions. However, for clarity's sake, we shall usually forget this fact, and treat these as two unrelated categories, instead of thinking of them as one contained within the other.
 
 \begin{definition}
     An overlapping clustering scheme is a function $\Clust$ that sends hypergraphs to sets with overlapping partitions, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E,\ea)$ to $P = (W, P)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$. We will often abuse our notation slightly and write $p \in \Clust(G)$ when what we mean is that $\Clust(G) = (V,P)$ and $p \in P$.
@@ -159,45 +165,79 @@ What is going on in the proof of Lemma~\ref{lemma_representable_endofunctor_is_f
 When constructing this theory for the case of non-overlapping partitions, the crucial step is to take the connected components of the graph $F_\Omega(G)$, and so get a functor taking $G$ to a set partition. By generalizing the notion of connected components a bit, we get many more options that will output also overlapping partitions.
 
 \begin{definition}
-    The functor $\Pi_1: \G \to \Pset$ which sends a graph to its partition into connected components is called the connected components functor. Equivalently, we can think of this functor as finding the least equivalence relation that contains the relation of sharing an edge, where we by ``least'' mean least in the subset relation.
-
-    More generally, we define the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ through the following construction:
-    \begin{enumerate}
-        \item For a graph $G = (V, E, \ea)$, construct an auxiliary simple graph $H = (E, F)$ whose vertices are the edges of $G$, and where we say two vertices $e, f \in V(H) = E$ are adjacent if and only if $\abs{\ea(e) \cap \ea(f)} \geq k$, that is, if the underlying edges share at least $k$ vertices of $G$.
-        \item For each connected component $A$ of $H$, let $p(A) = \bigcup_{e\in A} \ea(e)$.
-        \item We take the set of parts of $\Pi_k(G)$ to be precisely the set of $p(A)$ over all connected components $A$ of $H$.
-    \end{enumerate}
-
-    For any morphism $f: G \to H$, we simply take $\Pi_k(f)$ to be the same underlying set function, now seen as a morphism of partitioned sets.
+    The functor $\Pi: \G_s \to \Psetno$ which sends a graph to its partition into connected components is called the connected components functor.
 \end{definition}
 
-As before, while we stated in the definition that $\Pi_k$ is a functor, this is something that does need a proof.
+Checking that this is indeed a functor is an easy exercise, and so we omit the proof -- it essentially boils down to the statement that adding an edge to a graph cannot disconnect a connected component, or equivalently that connectedness is a monotone increasing property in the edges.
 
-\begin{lemma}\label{lem:kly_connected_is_functor}
-    For each $k \geq 1$, $\Pi_k$ is a functor from $\G$ into $\Pset$.
+In order to generalize this notion to hypergraphs, let us notice that for simple graphs, taking the line graph of the graph and looking at its connected components changes nothing -- the set of vertices incident to the edges of a connected component of the line graph is a connected component of the original graph.
+
+For hypergraphs, we get more than one possible notion of line graph, and therefore we get more than one notion of connected components.
+
+\begin{definition}
+    For each $k \geq 1$, we define the $k$-line graph functor $\Lambda_k: \G \to \G_s$ as follows:
+    
+    For each $G = (V,E,\ea)$:
+    \begin{enumerate}
+        \item The vertices of $\Lambda_k(G)$ are the vertex sets of the edges of $G$. That is, 
+        $$E(\Lambda_k(G)) = \left\{\ea(e) \given e \in E\right\}.$$
+        Notice that this means that if there are multiple edges in $E$ with the same vertex set, we still only get one vertex of $\Lambda_k(G)$ corresponding to them.
+        \item there is an edge $uv \in E(\Lambda_k(G))$ whenever $\abs{u \cap v} \geq k$, that is, if the two edges of $G$ overlap in at least $k$ vertices.
+    \end{enumerate}
+
+    In order to define define $\Lambda_k(f)$ for a morphism $f: G \to H$ in $\G$, observe that $f$ being a morphism in $\G$ means that for each $e \in E(G)$ there is an $e' \in E(H)$ such that $f(\ea_G(e)) = \ea_H(e')$. So any vertex $v \in \Lambda_k(G)$ is a vertex set of some edge $e \in E(G)$, which then has a corresponding $e'$ whose vertex set is an edge of $\Lambda_k(H)$. So we may define $\Lambda_k(f)(v)$ to be $\ea_H(e')$.
+
+    Notice that, since the vertices of $\Lambda_k(G)$ are vertex sets of edges, not edges themselves, this definition of $\Lambda_k(f)$ does not in fact involve any arbitrary choices -- while there may be multiple choices for an $e' \in E(H)$, they all have the same vertex set, and so $\ea_H(e')$ is uniquely determined even if $e'$ itself is not.
+\end{definition}
+
+That this line graph functor is in fact a functor definitely requires a proof, since the statement is far from obvious.
+
+\begin{lemma}\label{lem:line_graph_is_functor}
+    For each $k$, $\Lambda_k$ is in fact a functor from $\G$ to $\G_s$.
 \end{lemma}
 \begin{proof}
-    That $\Pi_k$ respects identity morphisms and composition of morphisms is trivial, so again, what we need to see is that if $(G,E,\ea)$ and $(H,F,\ea')$ are two graphs and $f: G \to H$ is a morphism between them, $\Pi_k(f) = f: \Pi_k(G) \to \Pi_k(H)$ is a morphism in $\Pset$.
-
-    So suppose $p$ is some part of $\Pi_k(G)$ -- what we need to show is that there exists a part $q$ of $\Pi_k(H)$ such that $f(p) \subseteq q$. So let $A \subseteq E$ be the connected component of the auxiliary graph in the construction of $\Pi_k(G)$ corresponding to the part $p$.
     
-    Since $f$ is a morphism from $G$ to $H$, for each $e \in A$, there is an $e' \in F$ such that $f(\ea(e)) = \ea'(e')$. Let $A'$ be a set of such corresponding edges in $H$.
-    
-    We claim that this $A'$ is in fact a connected subgraph of the auxiliary graph of $H$. This follows from the more general fact that if $e_1, e_2 \in E$ are adjacent in the auxiliary graph of $G$ then their corresponding edges $e_1', e_2'$ are adjacent in the auxiliary graph of $H$.
-    
-    To see this, note that $e_1$ and $e_2$ being adjacent means that $\abs{\ea(e_1)\cap\ea(e_2)}\geq k$, and clearly since all our morphisms are assumed to be injective, $\abs{f(\ea(e_1)\cap\ea(e_2))} = \abs{\ea(e_1)\cap\ea(e_2)}$ and so if $e_1', e_2'$ are the corresponding edges in $H$,
-    $$f(\ea(e_1)\cap\ea(e_2)) = f(\ea(e_1))\cap f(\ea(e_2)) = \ea'(e_1')\cap \ea'(e_2'),$$
-    again by injectivity of $f$, and so indeed $e_1'$ and $e_2'$ are adjacent in the auxiliary graph of $H$.
-
-    So let $A'' \supseteq A'$ be the connected component of the auxiliary graph of $H$ containing $A'$, and $q$ be the corresponding part of $\Pi_k(H)$. We claim that $f(p) \subseteq q$ -- for each vertex $v \in p$ there is an edge $e \in A$ such that $v \in \ea(e)$, and so $f(v) \in f(\ea(e)) = \ea'(e')$ for the edge $e' \in A' \subseteq A''$ corresponding to $e$. But then $f(v) \in q$ by the definition of $q$, and we are done.
 \end{proof}
+
+So, now we have the line graph functor, which gives us a simple graph which we can take connected components of. This nearly gets us where we want to be -- except of course the connected components of the line graph of $G$ will be a partitioning of the vertex sets of the edges of $G$, not a partitioning of the vertices of $G$. So our last step to getting a generalized connected components functor is to turn this into a partitioning of the vertices.
+
+\begin{definition}
+    The part-union functor $\Upsilon: \Pset \to \Pset$ is defined as follows:
+
+    For each $\mathcal{A} = (V, P) \in \Pset$, we let $\Upsilon(\mathcal{A}) = \mathcal{B} = (W,Q)$, where
+    \begin{enumerate}
+        \item The underlying set of $\mathcal{B}$ is given by
+        $$W = \bigcup_{p \in P} p,$$
+        that is, we view each part of $P$ as itself being a set, and take the union of all these sets.\footnote{\hl{Jokes:} For the first time in my mathematical life, the fact that all mathematical objects under ZFC are themselves sets has turned out to be useful for simplifying things.}
+        \item and the parts of $\mathcal{B}$ are given by
+        $$Q = \left\{\bigcup_{v \in p} v \given p \in P\right\},$$
+        that is, for each part of $\mathcal{A}$, we take the union of its members as sets, and declare that to be a part of $\mathcal{B}$.
+    \end{enumerate}
+\end{definition}
+
+Again, the statement that this part-union functor is in fact a functor merits a proof.
+
+\begin{lemma}\label{lem:part_union_is_functor}
+    The part-union functor $\Upsilon$ is in fact a functor.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+With all this in hand, we are finally able to define the connected components of a hypergraph.
+
+\begin{definition}
+    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by $\Pi_k = \Lambda_k \circ \Pi \circ \Upsilon$.
+\end{definition}
+
+That this one is a functor is immediate, since it is a composition of three things we have shown to be functors.
 
 \begin{definition}\label{definition_representable_clustscheme}
     A clustering scheme $\Clust$ is \emph{representable} if $\Clust = F_\Rset \circ \Pi_k$ for some representable endofunctor $F_\Rset$ and some $k \geq 1$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
 \end{definition}
 
 \begin{example}
-    If we restrict to considering only simple graphs, it is very easy to see that the connected components functor $\Pi_1$ is representable, since we can simply take $\Rset = \{K_2\}$ -- then $F_\Rset$ just sends a graph to itself, the auxiliary graph will just be the line graph, and of course connected components of the line graph and connected components of the graph itself are the same thing.
+    If we restrict to considering only simple graphs, it is very easy to see that the connected components functor $\Pi$ is representable, since we can simply take $\Rset = \{K_2\}$ -- then $F_\Rset$ just sends a graph to itself, the auxiliary graph will just be the line graph, and of course connected components of the line graph and connected components of the graph itself are the same thing.
     
     For hypergraphs, we need to take $\Rset = \left\{E_n \given n \in \N\right\}$, where $E_n$ is the hypergraph with $n$ vertices and a single edge containing all the vertices. Then all $F_\Rset$ will do to a graph is to replace each edge with $k$ vertices with $k!$ copies of itself, which does not change connectivity, and the process with the auxiliary graph is just the usual notion of connectedness for hypergraphs.
     
