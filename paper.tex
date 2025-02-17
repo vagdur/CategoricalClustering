@@ -176,25 +176,25 @@ In order to generalize this notion to hypergraphs, let us notice that for simple
 For hypergraphs, we get more than one possible notion of line graph, and therefore we get more than one notion of connected components.
 
 \begin{definition}
-    For each $k \geq 1$, we define the $k$-line graph functor $\Lambda_k: \G \to \G_s$ as follows:
+    For each $k \geq 1$, we define the $k$-line graph functor $\Lk: \G \to \G_s$ as follows:
     
     For each $G = (V,E,\ea)$:
     \begin{enumerate}
-        \item The vertices of $\Lambda_k(G)$ are the vertex sets of the edges of $G$. That is, 
-        $$E(\Lambda_k(G)) = \left\{\ea(e) \given e \in E\right\}.$$
-        Notice that this means that if there are multiple edges in $E$ with the same vertex set, we still only get one vertex of $\Lambda_k(G)$ corresponding to them.
-        \item there is an edge $uv \in E(\Lambda_k(G))$ whenever $\abs{u \cap v} \geq k$, that is, if the two edges of $G$ overlap in at least $k$ vertices.
+        \item The vertices of $\Lk(G)$ are the vertex sets of the edges of $G$. That is, 
+        $$E(\Lk(G)) = \left\{\ea(e) \given e \in E\right\}.$$
+        Notice that this means that if there are multiple edges in $E$ with the same vertex set, we still only get one vertex of $\Lk(G)$ corresponding to them.
+        \item there is an edge $uv \in E(\Lk(G))$ whenever $\abs{u \cap v} \geq k$, that is, if the two edges of $G$ overlap in at least $k$ vertices.
     \end{enumerate}
 
-    In order to define define $\Lambda_k(f)$ for a morphism $f: G \to H$ in $\G$, observe that $f$ being a morphism in $\G$ means that for each $e \in E(G)$ there is an $e' \in E(H)$ such that $f(\ea_G(e)) = \ea_H(e')$. So any vertex $v \in \Lambda_k(G)$ is a vertex set of some edge $e \in E(G)$, which then has a corresponding $e'$ whose vertex set is an edge of $\Lambda_k(H)$. So we may define $\Lambda_k(f)(v)$ to be $\ea_H(e')$.
+    In order to define define $\Lk(f)$ for a morphism $f: G \to H$ in $\G$, observe that $f$ being a morphism in $\G$ means that for each $e \in E(G)$ there is an $e' \in E(H)$ such that $f(\ea_G(e)) = \ea_H(e')$. So any vertex $v \in \Lk(G)$ is a vertex set of some edge $e \in E(G)$, which then has a corresponding $e'$ whose vertex set is an edge of $\Lk(H)$. So we may define $\Lk(f)(v)$ to be $\ea_H(e')$.
 
-    Notice that, since the vertices of $\Lambda_k(G)$ are vertex sets of edges, not edges themselves, this definition of $\Lambda_k(f)$ does not in fact involve any arbitrary choices -- while there may be multiple choices for an $e' \in E(H)$, they all have the same vertex set, and so $\ea_H(e')$ is uniquely determined even if $e'$ itself is not.
+    Notice that, since the vertices of $\Lk(G)$ are vertex sets of edges, not edges themselves, this definition of $\Lk(f)$ does not in fact involve any arbitrary choices -- while there may be multiple choices for an $e' \in E(H)$, they all have the same vertex set, and so $\ea_H(e')$ is uniquely determined even if $e'$ itself is not.
 \end{definition}
 
 That this line graph functor is in fact a functor definitely requires a proof, since the statement is far from obvious.
 
 \begin{lemma}\label{lem:line_graph_is_functor}
-    For each $k$, $\Lambda_k$ is in fact a functor from $\G$ to $\G_s$.
+    For each $k$, $\Lk$ is in fact a functor from $\G$ to $\G_s$.
 \end{lemma}
 \begin{proof}
     
@@ -225,7 +225,7 @@ Unfortunately, this $\Upsilon$ is not in general a functor, since there is no wa
 With all this in hand, we are finally able to define the connected components of a hypergraph.
 
 \begin{definition}
-    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by that, for any $G$, $\Pi_k(G) = \left(\Lambda_k \circ \Pi \circ \Upsilon\right)(G)$. On morphisms, $\Pi_k(f)$ is simply the same underlying set function -- this is well defined, since clearly the underlying set of $\Pi_k(G)$ will be the same set as the vertex set of $G$.
+    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by that, for any $G$, $\Pi_k(G) = \left(\Lk \circ \Pi \circ \Upsilon\right)(G)$. On morphisms, $\Pi_k(f)$ is simply the same underlying set function -- this is well defined, since clearly the underlying set of $\Pi_k(G)$ will be the same set as the vertex set of $G$.
 \end{definition}
 
 That this one is a functor also requires a proof, since it is defined as a composition of some things one of which is not itself a functor. However, the fact that the first two things are functors will be helpful in the proof.

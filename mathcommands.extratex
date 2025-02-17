@@ -92,6 +92,7 @@
 \newcommand{\Pset}{\mathcal{P}}
 \newcommand{\Psetno}{\mathcal{P}_{\mathrm{no}}}
 \newcommand{\Rset}{\mathfrak{R}}
+\newcommand{\Lk}{\Lambda_k}
 
 %Fouriertransform:
 \newcommand{\Fou}{\mathscr{F}}
