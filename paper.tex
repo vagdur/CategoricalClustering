@@ -186,9 +186,9 @@ For hypergraphs, we get more than one possible notion of line graph, and therefo
         \item there is an edge $uv \in E(\Lk(G))$ whenever $\abs{u \cap v} \geq k$, that is, if the two edges of $G$ overlap in at least $k$ vertices.
     \end{enumerate}
 
-    In order to define define $\Lk(f)$ for a morphism $f: G \to H$ in $\G$, observe that $f$ being a morphism in $\G$ means that for each $e \in E(G)$ there is an $e' \in E(H)$ such that $f(\ea_G(e)) = \ea_H(e')$. So any vertex $v \in \Lk(G)$ is a vertex set of some edge $e \in E(G)$, which then has a corresponding $e'$ whose vertex set is an edge of $\Lk(H)$. So we may define $\Lk(f)(v)$ to be $\ea_H(e')$.
+    We define, for a morphism $f: G \to H$ in $\G$, that $\Lk(f) = f_*: 2^{V(G)} \to 2^{V(G)}$. This does at least send objects of the right type to objects of the right type, because the vertices of $\Lk(G)$ and $\Lk(H)$ are by construction sets of vertices of $G$ and $H$ respectively.
 
-    Notice that, since the vertices of $\Lk(G)$ are vertex sets of edges, not edges themselves, this definition of $\Lk(f)$ does not in fact involve any arbitrary choices -- while there may be multiple choices for an $e' \in E(H)$, they all have the same vertex set, and so $\ea_H(e')$ is uniquely determined even if $e'$ itself is not.
+    However, since $E(\Lk(H))$ does not contain \emph{every} subset of $V(H)$, we do need to check that for a vertex $v$ of $\Lk(G)$, $f_*(v)$ is indeed a vertex of $\Lk(H)$. To see this, note that this $v$ is by construction the vertex set of some edge $e \in E(G)$, and since $f$ is a morphism, there exists some edge $e' \in E(H)$ such that $f(\ea_G(e)) = \ea_H(e')$ -- and this $\ea_H(e')$ is a vertex of $\Lk(H)$.
 \end{definition}
 
 That this line graph functor is in fact a functor definitely requires a proof, since the statement is far from obvious.
