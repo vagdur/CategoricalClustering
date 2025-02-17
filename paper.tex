@@ -197,7 +197,17 @@ That this line graph functor is in fact a functor definitely requires a proof, s
     For each $k$, $\Lk$ is in fact a functor from $\G$ to $\G_s$.
 \end{lemma}
 \begin{proof}
+    That $\Lk(G)$ is indeed a simple graph for each $G \in \G$ is clear, so suppose $f: G \to H$ is a morphism in $\G$. We need to check that $\Lk(f): \Lk(G) \to \Lk(H)$ is a morphism in $\G_s$.
+
+    So, to check this, there are two things we need to show: That $\Lk(f)$ is injective as a set function, and that, for each each edge $uv \in E(\Lk(G))$, there is an edge $f(u)f(v)$ in $E(\Lk(H))$. 
     
+    If we unwrap our definitions a bit, what we end up with is that this boils down to the following two statements, both of which are easily verified facts about the image of functions:
+    \begin{enumerate}
+        \item Whenever $f$ is an injective function, $f_*$ is as well.
+        \item If $f$ is injective, then $\abs{a \cap b} = \abs{f_*(a) \cap f_*(b)}$.
+    \end{enumerate}
+
+    That $\Lk$ sends identity morphisms to identity morphisms and respects composition of morphisms is easily seen from the corresponding statements about images of functions.
 \end{proof}
 
 So, now we have the line graph functor, which gives us a simple graph which we can take connected components of. This nearly gets us where we want to be -- except of course the connected components of the line graph of $G$ will be a partitioning of the vertex sets of the edges of $G$, not a partitioning of the vertices of $G$. So our last step to getting a generalized connected components functor is to turn this into a partitioning of the vertices.
