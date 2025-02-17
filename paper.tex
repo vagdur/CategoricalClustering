@@ -506,7 +506,7 @@ There is actually a natural extension of our definition of a representable clust
         Similarly to how we proved that the representable endofunctors are in fact functors, most of the required properties are obvious. There are only two things we need to check:
         \begin{enumerate}
             \item If $f$ is a morphism of weighted graphs sending $G = (V, E, w)$ to $G' = (V', E', w')$, then for every $\tau \in \R^+$, $f$ is also a morphism in $\G$ from $\Sigma(G,\tau)$ to $\Sigma(G',\tau)$,
-            \item and if $\alpha \geq \beta \geq 0$, then for any weighted graph $G = (V, E, w)$, the identity function $\Id: V \to V$ is a morphism from $\Sigma(G, \alpha)$ to $\Sigma(G, \beta)$.
+            \item and if $\alpha \geq \beta \geq 0$, then for any weighted graph $G = (V, E, w)$, the identity function $\id: V \to V$ is a morphism from $\Sigma(G, \alpha)$ to $\Sigma(G, \beta)$.
         \end{enumerate}
 
         We start with the first item, and suppose that $f: G \to G'$ is a morphism of weighted graphs, and $\tau \geq 0$ some threshold. We wish to show that whenever $uv$ is an edge of $\Sigma(G,\tau)$, $f(u)f(v)$ is an edge of $\Sigma(G',\tau)$. That $uv$ is an edge of $\Sigma(G,\tau)$ means that $uv$ is an edge of $G$ with weight at least $\tau$, and since $f$ is a morphism of weighted graphs, $f(u)f(v)$ must be an edge of $G'$, and since such morphisms are weight non-decreasing, its weight must still be at least $\tau$. Thus it is an edge of $\Sigma(G',\tau)$ as well.
@@ -542,7 +542,7 @@ Intuitively, the weight $w(uv)$ counts how many subgraphs of $G$ contain both $u
 \end{lemma}
 
 \begin{definition}
-    A representable hierarchical clustering scheme is a functor from $\G\times\R^+$ into $\Pset$ that can be written as $(\Phi_\Rset \times \Id) \circ \Sigma \circ \Pi$ for some representable functor $\Phi_\Rset$ from $\G$ to $\G^w$.
+    A representable hierarchical clustering scheme is a functor from $\G\times\R^+$ into $\Pset$ that can be written as $(\Phi_\Rset \times \id) \circ \Sigma \circ \Pi$ for some representable functor $\Phi_\Rset$ from $\G$ to $\G^w$.
 \end{definition}
 
 \begin{remark}
