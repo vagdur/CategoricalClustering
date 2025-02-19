@@ -105,7 +105,7 @@ We also give a structural result for when two representable clustering schemes a
 \end{definition}
 
 \begin{definition}
-    The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$.
+    The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$. \hl{This is where we needed the assumption of loops at every vertex -- we could also instead remove both that assumption and the assumption that all vertices are in at least one part.}
 
     A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $f(p) \subseteq q$.
 \end{definition}
