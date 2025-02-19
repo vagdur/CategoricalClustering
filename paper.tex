@@ -279,7 +279,7 @@ That this one is a functor also requires a proof, since it is defined as a compo
 One somewhat surprising fact is that there are actually representable clustering schemes that are not finitely representable.
 
 \begin{theorem} \label{theorem_exists_not_finitely_representable}
-    For each $k \geq 1$, there exists a representable clustering scheme $\Phi_\Rset \circ \Pi_k$ which is not \emph{finitely} representable, that is, it is not equal to $F_{\mathfrak{S}} \circ \Pi$ for any finite set of graphs $\mathfrak{S}$.
+    For each $k \geq 1$, there exists a representable clustering scheme $\Phi_\Rset \circ \Pi_k$ which is not \emph{finitely} representable, that is, it is not equal to $\Phi_{\mathfrak{S}} \circ \Pi$ for any finite set of graphs $\mathfrak{S}$.
 \end{theorem}
 
 In order to give a proof of this, we first need a structural result about how these endofunctors behave. Let us say that an edge in a hypergraph which contains all vertices is a \emph{spanning edge}, and a hypergraph which has a spanning edge is \emph{spanned}.
@@ -291,14 +291,14 @@ In order to give a proof of this, we first need a structural result about how th
 In fact, which graphs are sent to spanned graphs by $\Phi_\Rset$ essentially determines what it does as a functor. Similarly, if we are interested in the weaker equivalence of inducing the same clustering scheme, this is determined by which graphs are sent to a connected graph.
 
 \begin{lemma} \label{lemma_representation_hull}
-    For any set $\Rset$ of graphs and any graph $G = (V, E, \ea)$, it holds that $F_{\Rset \cup \{G\}} = \Phi_\Rset$ if and only if $G$ is sent to a spanned graph by $\Phi_\Rset$.
+    For any set $\Rset$ of graphs and any graph $G = (V, E, \ea)$, it holds that $\Phi_{\Rset \cup \{G\}} = \Phi_\Rset$ if and only if $G$ is sent to a spanned graph by $\Phi_\Rset$.
 
     \begin{proof}
-        Suppose $F_{\Rset \cup \{G\}} = \Phi_\Rset$. That $F_{\Rset \cup \{G\}}(G)$ is spanned is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, and so since $F_{\Rset \cup \{G\}} = \Phi_\Rset$, $\Phi_\Rset(G)$ is spanned, as desired.
+        Suppose $\Phi_{\Rset \cup \{G\}} = \Phi_\Rset$. That $\Phi_{\Rset \cup \{G\}}(G)$ is spanned is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, and so since $\Phi_{\Rset \cup \{G\}} = \Phi_\Rset$, $\Phi_\Rset(G)$ is spanned, as desired.
 
-        Now suppose $\Phi_\Rset(G)$ is spanned, and let $H$ be some arbitrary simple graph. We wish to show that $F_{\Rset \cup \{G\}}(H) = \Phi_\Rset(H)$. 
+        Now suppose $\Phi_\Rset(G)$ is spanned, and let $H$ be some arbitrary simple graph. We wish to show that $\Phi_{\Rset \cup \{G\}}(H) = \Phi_\Rset(H)$. 
         
-        That edges of $\Phi_\Rset(H)$ must also be edges of $F_{\Rset \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $F_{\Rset \cup \{G\}}(H)$ are also edges of $\Phi_\Rset(H)$. Thus, suppose $e$ is an edge of $F_{\Rset \cup \{G\}}(H)$ -- by construction, this edge is a morphism $\omega$ from some $R \in \Rset \cup \{G\}$ into $H$, whose image is the vertex set of this edge.
+        That edges of $\Phi_\Rset(H)$ must also be edges of $\Phi_{\Rset \cup \{G\}}(H)$ is obvious, so all we need to show is that edges of $\Phi_{\Rset \cup \{G\}}(H)$ are also edges of $\Phi_\Rset(H)$. Thus, suppose $e$ is an edge of $\Phi_{\Rset \cup \{G\}}(H)$ -- by construction, this edge is a morphism $\omega$ from some $R \in \Rset \cup \{G\}$ into $H$, whose image is the vertex set of this edge.
 
         If this $R$ is not $G$, then we are done. If it is $G$, we recall that $\Phi_\Rset(G)$ is spanned, and so we can take $e'$ to be a spanning edge of $\Phi_\Rset(G)$. Again, this edge is by construction a morphism $\omega'$ from some $R'$ -- this time an $R' \in \Rset$ -- into $G$, whose image, since it is spanning, must be the entirety of $G$.
 
