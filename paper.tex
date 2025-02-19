@@ -245,7 +245,23 @@ That this one is a functor also requires a proof, since it is defined as a compo
     For each $k$, $\Pi_k$ is a functor.
 \end{lemma}
 \begin{proof}
+    As usual, once we have checked that $\Pi_k$ does send morphisms to morphisms, it is trivial that it respects identity morphisms and composition.
+
+    So, suppose $G = (V,E)$ and $H = (W,F)$ are two graphs, and $f: V \to W$ is a morphism from $G$ to $H$. Let $E' = \left\{\ea(e) \given e \in E\right\}$ and $F'$ similarly be the set of vertex sets of $H$.
     
+    Now let $\mathcal{A} = (E',P) = \Pi(\Lk(G))$, $\mathcal{B} = (F',P') = \Pi(\Lk(G))$ be the connected components of the $k$-line graphs of $G$ and $H$ respectively. Further let $\tilde{\mathcal{A}} = (V,Q) = \Upsilon(\mathcal{A})$ and $\tilde{\mathcal{B}} = (W,Q') = \Upsilon(\mathcal{B})$.
+
+    What we need to show is that $f$ is a morphism from $\Upsilon(\mathcal{A})$ to $\Upsilon(\mathcal{B})$ in $\Pset$. This concretely means that we need to show that, for each $q \in Q$, there is a $q' \in Q'$ such that $f_*(q) \subseteq q'$.
+
+    Now, for each $q \in Q$, there is a part $p \in P$ such that $q = \bigcup_{e \in p} e$. By functoriality of $\Lk$ and $\Pi$, we already know that $f_*$ is a morphism from $\mathcal{A}$ to $\mathcal{B}$. This means that there has to exist a $p' \in P'$ such that $(f_*)_*(p) \subseteq p'$.
+
+    Now, by definition
+    $$(f_*)_*(p) = \left\{f_*(e) \given e \in p\right\},$$
+    so if we let $q' = \bigcup_{e \in p'} e$, this must lie in $Q'$ by construction, and we get that
+    \begin{align*}
+        f_*(q) = f_*\left(\bigcup_{e \in p} e\right) &= \bigcup_{e \in p} f_*(e) = \bigcup_{e' \in (f_*)_*(p)} e' \subseteq \bigcup_{e' \in p'} e' = q',
+    \end{align*}
+    as desired.
 \end{proof}
 
 \begin{definition}\label{definition_representable_clustscheme}
