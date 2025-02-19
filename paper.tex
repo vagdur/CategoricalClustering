@@ -313,7 +313,7 @@ In fact, which graphs are sent to spanned graphs by $\Phi_\Rset$ essentially det
 \end{remark}
 
 \begin{lemma}\label{lemma_connected_representation_hull}
-    For any set of simple graphs $\Rset$ and any simple graph $G$, $\Rset$ and $\Rset \cup \{G\}$ induce the same representable clustering scheme if and only if $\Phi_\Rset(G)$ is a connected graph.
+    For any set of simple graphs $\Rset$ , simple graph $G$, and integer $k$, $(\Rset,k)$ and $(\Rset \cup \{G\},k)$ induce the same representable clustering scheme if and only if $\Phi_\Rset(G)$ is a $k$-ly connected graph.
 
     \begin{proof}
         Suppose $\Rset$ and $\Rset \cup \{G\}$ induce the same clustering scheme, that is, that $\Phi_\Rset \circ \Pi = F_{\Rset \cup \{G\}} \circ \Pi$. What we need to show is that $\Phi_\Rset(G)$ is connected -- which is the same thing as showing that $(\Phi_\Rset \circ \Pi)(G)$ is a clique. By assumption $\Phi_\Rset \circ \Pi = F_{\Rset \cup \{G\}} \circ \Pi$, so it suffices to show that $(F_{\Rset \cup \{G\}} \circ \Pi)(G)$ is a clique. This, however, is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, since it gives us that already $F_{\Rset\cup\{G\}}(G)$ is a clique.
