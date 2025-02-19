@@ -88,6 +88,7 @@ We also give a structural result for when two representable clustering schemes a
     \item For functors, we use capital Greek letters, e.g. $\Phi$, $\Pi$, $\Lambda$.
     \item For clustering schemes of graphs, and also for representing sets for representable clustering schemes, we use Fraktur letters, e.g. $\Clust$, $\Rset$.
     \item For morphisms between graphs we normally use small Roman letters, e.g. $f$, $g$, except when considering morphisms from a graph $R$ in a representing set $\Rset$, where we instead use small Greek letters, e.g. $\omega$.
+    \item If $f: X \to Y$ is a set function, we write $f_*$ for the function from $2^X$ to $2^Y$ that sends a subset of $X$ to its image under $f$ in $Y$.
 \end{enumerate}
 
 \section{Definitions of our terms}
@@ -95,7 +96,7 @@ We also give a structural result for when two representable clustering schemes a
 \begin{definition}
     The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a triple $(V,E,\ea)$ of a finite set $V$ of vertices, a finite set $E$ of edges that is disjoint from $V$, and a function $\ea: E \to 2^V$ assigning each edge its vertex set. Notice that this allows us to have multiple edges with the same edge set. To simplify some technical points, we will assume that all our hypergraphs have loops at every vertex, that is, that for each $v \in V$ there is an $e \in E$ such that $\ea(e) = \{v\}$. \hl{Where do we actually need the assumption of loops at every vertex?}
     
-    A morphism from $H = (V,E,\ea)$ to $G = (V', E',\ea')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, there is an $e' \in E'$ such that $f(\ea(e)) = \ea'(e')$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
+    A morphism from $H = (V,E,\ea)$ to $G = (V', E',\ea')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, there is an $e' \in E'$ such that $f_*(\ea(e)) = \ea'(e')$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
 \end{definition}
 
 \begin{definition}
@@ -107,7 +108,7 @@ We also give a structural result for when two representable clustering schemes a
 \begin{definition}
     The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$. \hl{This is where we needed the assumption of loops at every vertex -- we could also instead remove both that assumption and the assumption that all vertices are in at least one part.}
 
-    A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $f(p) \subseteq q$.
+    A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $f_*(p) \subseteq q$.
 \end{definition}
 
 \begin{definition}
@@ -139,7 +140,7 @@ In the setting of non-overlapping partitions, this property is more intuitive to
         \item the edges of $\Phi_\Rset(G)$ are given by
         $$E(\Phi_\Rset(G)) = \bigcup_{R \in \Rset} \hom(R, G),$$
         the set of all morphisms from a graph in $\Rset$ into $G$,
-        \item and the edge-assigning function $\ea_{\Phi_\Rset(G)}: E(\Phi_\Rset(G)) \to 2^V$ simply assigns each morphism to its image, i.e. for $\omega \in \hom(R, G)$, we set $\ea_{\Phi_\Rset(G)}(\omega) = \omega(R)$.
+        \item and the edge-assigning function $\ea_{\Phi_\Rset(G)}: E(\Phi_\Rset(G)) \to 2^V$ simply assigns each morphism to its image, i.e. for $\omega \in \hom(R, G)$, we set $\ea_{\Phi_\Rset(G)}(\omega) = \omega_*(R)$.
     \end{enumerate}
 
     On morphisms, $\Phi_\Rset$ is always just the identity on set functions, so if $f: G \to H$ is a morphism, $\Phi_\Rset(f) = f$ as a set function.
@@ -155,9 +156,9 @@ That this definition does in fact always give us a functor is something that nee
     \begin{proof}
         That it always gives a graph and that it respects identity morphisms and composition of morphisms is easy to see. The only thing we actually need to check is that if $f: H \to G$ is a morphism, then $\Phi_\Rset(f) = f: \Phi_\Rset(H) \to \Phi_\Rset(G)$ is also a morphism.
 
-        Unwrapping this statement, what we need is that, for any two graphs $(G, E, \ea)$ and $(G', E', \ea')$ and any morphism $f: G \to G'$, whenever $e$ is an edge of $\Phi_\Rset(G)$, there is an edge $e'$ of $\Phi_\Rset(G')$ such that $f(\ea_{\Phi_\Rset(G)}(e)) = \ea'_{\Phi_\Rset(G')}(e')$.
+        Unwrapping this statement, what we need is that, for any two graphs $(G, E, \ea)$ and $(G', E', \ea')$ and any morphism $f: G \to G'$, whenever $e$ is an edge of $\Phi_\Rset(G)$, there is an edge $e'$ of $\Phi_\Rset(G')$ such that $f_*(\ea_{\Phi_\Rset(G)}(e)) = \ea'_{\Phi_\Rset(G')}(e')$.
 
-        Now, this $e$ is itself a morphism $\omega: R \to G$ for some $R \in \Rset$, and so if we compose $e$ with $f$ we get a morphism $e' = e \circ f: R \to G'$, which by definition is an edge of $\Phi_\Rset(G')$. That $f(\ea_{\Phi_\Rset(G)}(e)) = \ea'_{\Phi_\Rset(G')}(e')$ is then, if we unwrap our definitions, merely the statement that $f(e(R)) = (f \circ e)(R)$, which is trivial.
+        Now, this $e$ is itself a morphism $\omega: R \to G$ for some $R \in \Rset$, and so if we compose $e$ with $f$ we get a morphism $e' = f \circ e: R \to G'$, which by definition is an edge of $\Phi_\Rset(G')$. That $f_*(\ea_{\Phi_\Rset(G)}(e)) = \ea'_{\Phi_\Rset(G')}(e')$ is then, if we unwrap our definitions, merely the statement that $f_*(e_*(R)) = (f \circ e)_*(R)$, which is trivial.
     \end{proof}
 \end{lemma}
 
@@ -188,7 +189,7 @@ For hypergraphs, we get more than one possible notion of line graph, and therefo
 
     We define, for a morphism $f: G \to H$ in $\G$, that $\Lk(f) = f_*: 2^{V(G)} \to 2^{V(G)}$. This does at least send objects of the right type to objects of the right type, because the vertices of $\Lk(G)$ and $\Lk(H)$ are by construction sets of vertices of $G$ and $H$ respectively.
 
-    However, since $E(\Lk(H))$ does not contain \emph{every} subset of $V(H)$, we do need to check that for a vertex $v$ of $\Lk(G)$, $f_*(v)$ is indeed a vertex of $\Lk(H)$. To see this, note that this $v$ is by construction the vertex set of some edge $e \in E(G)$, and since $f$ is a morphism, there exists some edge $e' \in E(H)$ such that $f(\ea_G(e)) = \ea_H(e')$ -- and this $\ea_H(e')$ is a vertex of $\Lk(H)$.
+    However, since $E(\Lk(H))$ does not contain \emph{every} subset of $V(H)$, we do need to check that for a vertex $v$ of $\Lk(G)$, $f_*(v)$ is indeed a vertex of $\Lk(H)$. To see this, note that this $v$ is by construction the vertex set of some edge $e \in E(G)$, and since $f$ is a morphism, there exists some edge $e' \in E(H)$ such that $f_*(\ea_G(e)) = \ea_H(e')$ -- and this $\ea_H(e')$ is a vertex of $\Lk(H)$.
 \end{definition}
 
 That this line graph functor is in fact a functor definitely requires a proof, since the statement is far from obvious.
