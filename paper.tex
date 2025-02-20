@@ -338,7 +338,7 @@ In fact, which graphs are sent to spanned graphs by $\Phi_\Rset$ essentially det
 With this result in hand, we can now give a proof of the existence of a representable but not finitely representable endofunctor.
 
 \begin{proof}[Proof of Theorem~\ref{theorem_exists_not_finitely_representable}]
-    Let, for each $i$, $\omega_i$ consist of a triangle with a tail of $i$ vertices, as shown in Figure~\ref{figure_triangles_w_tails}, and let $\Rset = \left\{\omega_i \given i \in \N\right\}$. We claim that $\Phi_\Rset$ is not equal to $F_\Gamma$ for any finite set of simple graphs $\Gamma$.
+    Let, for each $i$, $\omega_i$ consist of a triangle with a tail of $i$ vertices, as shown in Figure~\ref{figure_triangles_w_tails}, and let $\Rset = \left\{\omega_i \given i \in \N\right\}$. We claim that $\Phi_\Rset$ is not equal to $\Phi_\Gamma$ for any finite set of simple graphs $\Gamma$.
 
     \begin{figure}
         \centering
@@ -349,17 +349,17 @@ With this result in hand, we can now give a proof of the existence of a represen
 
     To prove this, let us first define
     $$\bar{\Rset} = \left\{G \in \G \given \Phi_\Rset(G) \text{ is connected.}\right\}$$
-    as the set of all graphs which $\Phi_\Rset$ sends to connected graphs. By Lemma~\ref{lemma_connected_representation_hull}, $\Phi_\Rset = F_{\bar{\Rset}}$, and $\bar{\Rset}$ is the greatest set with this property.
+    as the set of all graphs which $\Phi_\Rset$ sends to connected graphs. By Lemma~\ref{lemma_connected_representation_hull}, $\Phi_\Rset = \Phi_{\bar{\Rset}}$, and $\bar{\Rset}$ is the greatest set with this property.
 
     A little bit of reflection will make it clear that $\bar{\Rset}$ is precisely the set of connected graphs which contain a triangle. Particularly, for any edge in such a graph, we can map the tail end of some $\omega_i$ onto that edge, the rest of the tail onto a path to the triangle in the graph, and the triangle of the $\omega_i$ onto the triangle of the graph. That $\Phi_\Rset$ will send any triangle-free graph to a graph with no edges is clear, since there is no morphism from any triangle-containing graph such as $\omega_i$ into a triangle-free graph. Likewise, that it cannot send a disconnected graph to a connected graph is immediate from that $\Rset$ contains only connected graphs.
 
-    Now suppose for contradiction that $\Gamma$ is a finite set of graphs such that $F_\Gamma = F_{\bar{\Rset}}$. Lemma~\ref{lemma_connected_representation_hull} implies that we must have $\Gamma \subset \bar{\Rset}$, since if there were a $\gamma \in \Gamma \setminus \bar{\Rset}$ it'd be sent to a connected graph by $F_\Gamma$, and thus also by $F_{\bar{\Rset}}$, since we've assumed they are equal -- but we chose $\bar{\Rset}$ so that it already contains everything sent to a connected graph by $F_{\bar{\Rset}}$.
+    Now suppose for contradiction that $\Gamma$ is a finite set of graphs such that $\Phi_\Gamma = \Phi_{\bar{\Rset}}$. Lemma~\ref{lemma_connected_representation_hull} implies that we must have $\Gamma \subset \bar{\Rset}$, since if there were a $\gamma \in \Gamma \setminus \bar{\Rset}$ it'd be sent to a connected graph by $\Phi_\Gamma$, and thus also by $\Phi_{\bar{\Rset}}$, since we've assumed they are equal -- but we chose $\bar{\Rset}$ so that it already contains everything sent to a connected graph by $\Phi_{\bar{\Rset}}$.
 
     So, let
     $$\delta = \max_{\gamma \in \Gamma} \max_{u \in V_\gamma} \min_{\substack{v \in V_\gamma\\v \text{ is in a triangle}}} d(u, v).$$
-    That is, $\delta$ is the furthest any vertex in any graph in $\Gamma$ is from a triangle. We claim that $F_\Gamma$ will not send $\omega_{\delta + 1}$ to a connected graph, proving it is not equal to $F_{\bar{\Rset}}$, giving our contradiction.
+    That is, $\delta$ is the furthest any vertex in any graph in $\Gamma$ is from a triangle. We claim that $\Phi_\Gamma$ will not send $\omega_{\delta + 1}$ to a connected graph, proving it is not equal to $\Phi_{\bar{\Rset}}$, giving our contradiction.
 
-    That this is so is actually easy to see -- if $\omega_{\delta + 1}$ were sent to a connected graph, that must in particular mean there is an edge in $F_\Gamma(\omega_{\delta + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $\gamma \in \Gamma$ that hits both vertices. However, such a morphism must also map the triangle in $\gamma$ onto the triangle in $\omega_{\delta + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $\gamma$ is from the triangle. Thus, no such morphism can exist, and we are done.
+    That this is so is actually easy to see -- if $\omega_{\delta + 1}$ were sent to a connected graph, that must in particular mean there is an edge in $\Phi_\Gamma(\omega_{\delta + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $\gamma \in \Gamma$ that hits both vertices. However, such a morphism must also map the triangle in $\gamma$ onto the triangle in $\omega_{\delta + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $\gamma$ is from the triangle. Thus, no such morphism can exist, and we are done.
 \end{proof}
 
 \begin{remark}
