@@ -236,7 +236,7 @@ Unfortunately, this $\Upsilon$ is not in general a functor, since there is no wa
 With all this in hand, we are finally able to define the connected components of a hypergraph.
 
 \begin{definition}
-    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by that, for any $G$, $\Pi_k(G) = \left(\Lk \circ \Pi \circ \Upsilon\right)(G)$. On morphisms, $\Pi_k(f)$ is simply the same underlying set function -- this is well defined, since clearly the underlying set of $\Pi_k(G)$ will be the same set as the vertex set of $G$.
+    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by that, for any $G$, $\Pi_k(G) = \left(\Upsilon \circ \Pi \circ \Lk\right)(G)$. On morphisms, $\Pi_k(f)$ is simply the same underlying set function -- this is well defined, since clearly the underlying set of $\Pi_k(G)$ will be the same set as the vertex set of $G$.
 
     We say that a graph is $k$-ly connected if $\Pi_k(G)$ has the entire vertex set of $G$ as a part.
 \end{definition}
@@ -267,7 +267,7 @@ That this one is a functor also requires a proof, since it is defined as a compo
 \end{proof}
 
 \begin{definition}\label{definition_representable_clustscheme}
-    A clustering scheme $\Clust$ is \emph{representable} if $\Clust = \Phi_\Rset \circ \Pi_k$ for some representable endofunctor $\Phi_\Rset$ and some $k \geq 1$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
+    A clustering scheme $\Clust$ is \emph{representable} if $\Clust = \Pi_k \circ \Phi_\Rset$ for some representable endofunctor $\Phi_\Rset$ and some $k \geq 1$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
 \end{definition}
 
 \begin{example}
