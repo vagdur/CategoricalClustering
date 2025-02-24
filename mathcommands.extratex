@@ -92,6 +92,7 @@
 \newcommand{\Pset}{\mathcal{P}}
 \newcommand{\Psetno}{\mathcal{P}_{\mathrm{no}}}
 \newcommand{\Rset}{\mathfrak{R}}
+\newcommand{\Gset}{\mathfrak{G}}
 \newcommand{\Lk}{\Lambda_k}
 \newcommand{\LOne}{\Lambda_1}
 
