@@ -284,7 +284,9 @@ That this one is a functor also requires a proof, since it is defined as a compo
 One somewhat surprising fact is that there are actually representable clustering schemes that are not finitely representable.
 
 \begin{theorem} \label{theorem_exists_not_finitely_representable}
-    For each $k \geq 1$, there exists a representable clustering scheme $\Phi_\Rset \circ \Pi_k$ which is not \emph{finitely} representable, that is, it is not equal to $\Phi_{\mathfrak{S}} \circ \Pi$ for any finite set of graphs $\mathfrak{S}$.
+    There exists a representable endofunctor that is not \emph{finitely} representable, that is, there exists a set $\Rset$ of graphs such that $\Phi_\Rset \neq \Phi_\Gset$ for any finite set $\Gset$.
+    
+    There exists a representable clustering scheme $\Pi_{\Rset,1}$ which is not \emph{finitely} representable, that is, it is not equal to $\Pi_{\Gset,1}$ for any finite set of graphs $\Gset$.
 \end{theorem}
 
 In order to give a proof of this, we first need a structural result about how these endofunctors behave. Let us say that an edge in a hypergraph which contains all vertices is a \emph{spanning edge}, and a hypergraph which has a spanning edge is \emph{spanned}.
