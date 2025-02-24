@@ -316,24 +316,30 @@ In fact, which graphs are sent to spanned graphs by $\Phi_\Rset$ essentially det
 \end{remark}
 
 \begin{lemma}\label{lemma_connected_representation_hull}
-    For any set of simple graphs $\Rset$ , simple graph $G$, and integer $k$, $(\Rset,k)$ and $(\Rset \cup \{G\},k)$ induce the same representable clustering scheme if and only if $\Phi_\Rset(G)$ is a $k$-ly connected graph.
-
-    \begin{proof}
-        Suppose $\Rset$ and $\Rset \cup \{G\}$ induce the same clustering scheme, that is, that $\Phi_\Rset \circ \Pi = F_{\Rset \cup \{G\}} \circ \Pi$. What we need to show is that $\Phi_\Rset(G)$ is connected -- which is the same thing as showing that $(\Phi_\Rset \circ \Pi)(G)$ is a clique. By assumption $\Phi_\Rset \circ \Pi = F_{\Rset \cup \{G\}} \circ \Pi$, so it suffices to show that $(F_{\Rset \cup \{G\}} \circ \Pi)(G)$ is a clique. This, however, is immediate by Remark~\ref{remark_omegas_sent_to_cliques}, since it gives us that already $F_{\Rset\cup\{G\}}(G)$ is a clique.
-
-        For the other direction, assume that $\Phi_\Rset(G)$ is connected. To show that $\Rset$ and $\Rset \cup \{G\}$ induce equivalent clustering schemes, it is sufficient to show that for every graph $H$, $\Phi_\Rset(H)$ and $F_{\Rset \cup \{G\}}(H)$ have the same partition into connected components.
-
-        First observe, as we did in the proof of Lemma~\ref{lemma_representation_hull}, that in fact $\Phi_\Rset(H)$ is a subgraph of $F_{\Rset \cup \{G\}}$, so it suffices to show that whenever there is a path connecting $u$ and $v$ in $F_{\Rset \cup \{G\}}(H)$, there is already such a path in $\Phi_\Rset(H)$.
-
-        To show this, we show that whenever there is an edge between $u$ and $v$ in $F_{\Rset \cup \{G\}}(H)$, there is a path between $u$ and $v$ in $\Phi_\Rset(H)$.
-
-        Now, this edge between $u$ and $v$ has to be created by some $\omega \in \Rset$ and a morphism $f: \omega \to H$ such that $\im f \ni u, v$. If this $\omega$ is not $G$, we are already done, so suppose it is $G$.
-
-        Let $v' = f^{-1}(v)$ and $u' = f^{-1}(u)$. Since $\Phi_\Rset(G)$ is by assumption connected, it contains a path $v' e_1 w_1 e_2 \ldots w_k e_k u'$. Each of the edges $e_i$ is created by an $\omega_i \in \Rset$ and $f_i: \omega_i \to G$ such that $\im f_i \ni w_{i-1}, w_i$.
-
-        If we just compose these $f_i$s with $f$ we get functions from $\omega_i \in \Rset$ into $H$ whose images contain $f(w_i)$, so we get edges between these $f(w_i)$s, and so we get a path between them, which will be precisely a path connecting $u$ and $v$.
-    \end{proof}
+    For any set of graphs $\Rset$ and any graph $G$, if $\Pi_{\Rset,k} = \Pi_{\Rset\cup\{G\},k}$, then $\Phi_\Rset(G)$ is $k$-ly connected. The reverse implication holds only if $k = 1$.
 \end{lemma}
+
+\begin{proof}
+    Suppose $\Pi_{\Rset,k} = \Pi_{\Rset\cup\{G\},k}$. We know from Remark~\ref{remark_omegas_sent_to_cliques} that $\Phi_{\Rset \cup \{G\}}(G)$ is spanned, which immediately gives that it is $k$-ly connected. So since $\Pi_{\Rset,k} = \Pi_{\Rset\cup\{G\},k}$, $\Phi_{\Rset \cup \{G\}}(G)$ and $\Phi_{\Rset}(G)$ have to have the same $k$-ly connected components, and therefore $\Phi_\Rset(G)$ is also $k$-ly connected, as desired.
+
+    In the other direction, for the $k = 1$ case, suppose $\Phi_\Rset(G)$ is $1$-ly connected. This means $\Upsilon(\Pi(\LOne(\Phi_{\Rset}(G))))$ has a part containing every vertex, and by definition of $\Upsilon$ and $\Pi$, this means there is some connected component $p$ of $\LOne(\Phi_{\Rset}(G))$ whose edges together contain every vertex. Let us call these edges $e_1, e_2, \ldots, e_n$, and observe that for each of these edges there exists an $R_i \in \Rset$ and an $\omega_i: R_i \to G$, where $\im(\omega_i) = \ea(e_i)$.
+
+    So let $H$ be some arbitrary graph, for which we wish to show that $\Pi_{\Rset,1}(H) = \Pi_{\Rset\cup\{G\},1}(H)$. It is easily seen that $\Phi_\Rset(H)$ is a subgraph of $\Phi_{\Rset\cup\{G\}}(H)$, so it will suffice to show that whenever there is a path in the line graph of $\Phi_{\Rset\cup\{G\}}(H)$ between two edges $e, e'$, there is a path between them also in $\Phi_{\Rset}(H)$.
+    
+    To lessen the potential confusion of terminology, we will from now on refer to the vertices of the line graph as ``edges'' and avoid using the word edge for the edges of the line graph, only referring to paths in the line graph and to edges (i.e. line-graph-vertices) being adjacent in such paths. The word ``vertex'', similarly, refers exclusively to a vertex of $H$.
+
+    So suppose we have such edges $e, e'$ and a path between them in $\LOne(\Phi_{\Rset\cup\{G\}}(H))$. If this path does not contain any edge induced by a copy of $G$ in $H$, then the same path exists also in $\LOne(\Phi_\Rset(H))$, and so we are done.
+
+    So, assume $f$ is such an edge on this path, and say $\omega: G \to H$ is the morphism creating this edge. Let $e_p$ be the edge previous to $f$ on this path, and $e_s$ be the edge subsequent to $f$. Since these edges are adjacent, there has to exist $v_p \in \ea(e_p)\cap\ea(f)$ and $v_s \in \ea(f)\cap\ea(e_s)$.
+
+    Now, since $f$ arises as a copy of $G$ in $H$, and the line graph of $G$ has a connected component covering it, whose members are the edges $e_i$, the following has to be true: There exists $i_1, i_2, \ldots, i_m$ such that $v_p \in \omega(\ea(e_{i_1}))$, $v_s \in \omega(\ea(e_{i_m}))$, and $e_{i_1}, e_{i_2}, \ldots, e_{i_m}$ form a path in the line graph of $G$.
+
+    So, if we compose the morphisms $\omega_i$ with $\omega$, we get a collection of morphisms from graphs in $\Rset$ into $H$ -- that is, edges in $\Phi_\Rset(H)$. Call these edges $e'_1, e'_2, \ldots, e'_n$. Since $v_p \in \ea(e_p)$ and $v_p \in \ea(e'_{i_1})$, we must have that $e_p$ is adjacent to $e'_{i_1}$, and similarly $e_s$ is adjacent to $e'_{i_m}$. Notice that this is where we use the fact that $k = 1$ -- this is the step that fails for $k > 1$.
+
+    It is easy to see that the rest of the edges on the path $e_{i_1}, e_{i_2}, \ldots, e_{i_m}$ are also still adjacent, and so we can replace $f$ on the path from $e$ to $e'$ by this longer path, getting a path that does not use $f$, and so is a path also in $\Phi_\Rset(H)$, which is what we needed to show.
+
+    That the reverse implication fails for $k > 1$ is shown by the example in Figure~\hl{draw and add figure}.
+\end{proof}
 
 With this result in hand, we can now give a proof of the existence of a representable but not finitely representable endofunctor.
 

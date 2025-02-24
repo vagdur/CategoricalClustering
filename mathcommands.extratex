@@ -93,6 +93,7 @@
 \newcommand{\Psetno}{\mathcal{P}_{\mathrm{no}}}
 \newcommand{\Rset}{\mathfrak{R}}
 \newcommand{\Lk}{\Lambda_k}
+\newcommand{\LOne}{\Lambda_1}
 
 %Fouriertransform:
 \newcommand{\Fou}{\mathscr{F}}
