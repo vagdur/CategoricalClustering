@@ -126,7 +126,9 @@ One good way to think of these definitions is as a kind of generalization of mon
 In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges, and it becomes easier to speak about monotonicity with respect to non-overlapping set partitions.
 
 \begin{definition}
-    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $p \in \Clust(G|_p)$. That is, whenever we look at the hypergraph induced by a part of the partition, and cluster just that sub-hypergraph, we get back a partition where the entire vertex set is one of the parts.
+    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $p \in \Clust(G|_p)$. Here, $G|_p$ is the subgraph induced by $p$, so that the vertex set of $G|_p$ is $p$, $E(G|_p) = \left\{e \in E \given \ea_G(e) \subseteq p\right\}$, and $\ea_{G|_p} = \ea_{G|_{E({G|_p})}}$.
+    
+    That is, whenever we look at the hypergraph induced by a part of the partition, and cluster just that sub-hypergraph, we get back a partition where the entire vertex set is one of the parts.
 \end{definition}
 
 In the setting of non-overlapping partitions, this property is more intuitive to state: If we cluster some graph, pick out one of the parts, and cluster just the subgraph induced by that part, we get back a trivial partition into a single part. Adapting this into the overlapping clustering world unfortunately gets us a less transparent definition.
