@@ -126,9 +126,9 @@ One good way to think of these definitions is as a kind of generalization of mon
 In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges, and it becomes easier to speak about monotonicity with respect to non-overlapping set partitions.
 
 \begin{definition}
-    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $p \in \Clust(G|_p)$. Here, $G|_p$ is the subgraph induced by $p$, so that the vertex set of $G|_p$ is $p$, $E(G|_p) = \left\{e \in E \given \ea_G(e) \subseteq p\right\}$, and $\ea_{G|_p} = \ea_{G|_{E({G|_p})}}$.
+    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p) = \Clust(G)|_p$. Here, $G|_p$ is the subgraph induced by $p$, so that the vertex set of $G|_p$ is $p$, $E(G|_p) = \left\{e \in E \given \ea_G(e) \subseteq p\right\}$, and $\ea_{G|_p} = \ea_{G|_{E({G|_p})}}$, and similarly for a partitioned set $\Clust(G) = (V,P)$ its sub-partitioned set induced by a set $p \subseteq V$ has as its set of objects $p$, and its parts are all the parts in $P$ which are subsets of $p$. Notice that, since we assumed here that $p \in P$, this means that $\Clust(G)|_p$ will always have $p$ itself as a part.
     
-    That is, whenever we look at the hypergraph induced by a part of the partition, and cluster just that sub-hypergraph, we get back a partition where the entire vertex set is one of the parts.
+    That is, whenever we look at the hypergraph induced by a part of the partition, and cluster just that sub-hypergraph, we get back the same thing as if we just restricted our clustering to that part.
 \end{definition}
 
 In the setting of non-overlapping partitions, this property is more intuitive to state: If we cluster some graph, pick out one of the parts, and cluster just the subgraph induced by that part, we get back a trivial partition into a single part. Adapting this into the overlapping clustering world unfortunately gets us a less transparent definition.
@@ -403,25 +403,27 @@ We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collecti
     A representable clustering scheme is excisive.
 
     \begin{proof}
-        Let $\Rset$ be some set of graphs, and $G = (V,E)$ be some graph. Assume $\Pi_{\Rset,k}(G) = (V, P)$, and let $p \in P$ be some part. What we need to show is that $\Pi_{\Rset,k}(G|_p)$ contains a part that contains all vertices, that is, that $\Phi_\Rset(G|_p)$ is $k$-ly connected.
+        Let $\Rset$ be some set of graphs, and $G = (V,E)$ be some graph. Assume $\Pi_{\Rset,k}(G) = (V, P)$, and let $p \in P$ be some part. What we need to show is that $\Pi_{\Rset,k}(G|_p) = \Pi_{\Rset,k}(G)|_p$.
+
+        Let $p'$ be the edge set of $\Phi_\Rset(G|_p)$, and let $p''$ be the connected component of $\Lk(\Phi_\Rset(G))$ which is sent to $p$ by $\Upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\hl{draw and add example of this}.
         
-        Let $p'$ be the edge set of $\Phi_\Rset(G|_p)$. We will show the stronger statement that $\Pi_{\Rset,k}(G|_p) = \Pi_{\Rset,k}(G)|_p$, where we by the restriction of a partitioned set mean the same construction as for graphs, by showing the following statements:
+        To simplify our notation, let $H = \Phi_\Rset(G)$. We will show our result by proving the following statements:
         \begin{enumerate}
-            \item $\Phi_\Rset(G|_p) = \Phi_\Rset(G)|_p$,
-            \item $\Lk(\Phi_\Rset(G)|_p) = \Lk(\Phi_\Rset(G))|_{p'}$,
-            \item $\Pi(\Lk(\Phi_\Rset(G))|_{p'}) = \Pi(\Lk(\Phi_\Rset(G)))|_{p'}$, and
-            \item $\Upsilon(\Pi(\Lk(\Phi_\Rset(G)))|_{p'}) = \Upsilon(\Pi(\Lk(\Phi_\Rset(G))))|_p$.
+            \item $\Phi_\Rset(G|_q) = \Phi_\Rset(G)|_q = H|_q$ for any set $q \subseteq V$,
+            \item $\Lk(H|_q) = \Lk(H)|_{q'}$ for any set $q \subseteq V$, where $q'$ is the edge set of $H|_q$,
+            \item $\Pi(\Lk(H)|_{p''}) = \Pi(\Lk(H))|_{p''}$, and
+            \item $\Upsilon(\Pi(\Lk(H))|_{p'}) = \Upsilon(\Pi(\Lk(H)))|_p$.
         \end{enumerate}
 
-        For the first statement, that they have the same vertex sets is obvious, and since $G|_p$ is a subgraph of $G$ and $\Phi_\Rset$ is a functor, we must have that $\Phi_\Rset(G|_p)$ is a subgraph of $\Phi_\Rset(G)$. So if we can show that any edge of $\Phi_\Rset(G)|p$ is also an edge of $\Phi_\Rset(G|_p)$, we will be done.
+        For the first statement, that they have the same vertex sets is obvious, and since $G|_q$ is a subgraph of $G$ and $\Phi_\Rset$ is a functor, we must have that $\Phi_\Rset(G|_q)$ is a subgraph of $\Phi_\Rset(G)$. So if we can show that any edge of $\Phi_\Rset(G)|q$ is also an edge of $\Phi_\Rset(G|_q)$, we will be done.
 
-        So suppose $e$ is such an edge, and take $R \in \Rset$ and $\omega: R \to G$ to witness this edge. We must have that $\omega(R) \subseteq p$ -- but this means we can simply consider $\omega$ as a morphism into $G|_p$, and so it will also be an edge of $\Phi_\Rset(G|_p)$, as needed.
+        So suppose $e$ is such an edge, and take $R \in \Rset$ and $\omega: R \to G$ to witness this edge. We must have that $\omega(R) \subseteq q$ -- but this means we can simply consider $\omega$ as a morphism into $G|_q$, and so it will also be an edge of $\Phi_\Rset(G|_q)$, as needed.
 
-        For the second statement, functoriality of $\Lk$ immediately gives us that $\Lk(\Phi_\Rset(G)|_p)$ is a subgraph of $\Lk(\Phi_\Rset(G))$, and by definition the vertex set of $\Lk(\Phi_\Rset(G)|_p)$ is $p'$. So again, what we need to show is that any edge of $\Lk(\Phi_\Rset(G))|_{p'}$ is already an edge of $\Lk(\Phi_\Rset(G)|_p)$. Suppose we have two vertices $e, f \in p'$ which are adjacent -- that is, $\abs{e\cap f}\geq k$, since a vertex of the line graph is a vertex set of an edge of the underlying graph.
+        For the second statement, functoriality of $\Lk$ immediately gives us that $\Lk(H|_q)$ is a subgraph of $\Lk(H)$, and by definition the vertex set of $\Lk(H|_q)$ is $q'$. So again, what we need to show is that any edge of $\Lk(H)|_{q'}$ is already an edge of $\Lk(H|_q)$. Suppose we have two vertices $e, f \in q'$ which are adjacent -- that is, $\abs{e\cap f}\geq k$, since a vertex of the line graph is a vertex set of an edge of the underlying graph.
 
-        Now, clearly, that $e, f \in p'$ implies that $e, f \subseteq p$, and so their intersection also lies in $p$. Thus they also overlap in at least $k$ vertices also seen as vertices of $\Phi_\Rset(G)|_p$, and so they are adjacent in the line graph of $\Phi_\Rset(G)|_p$, as desired.
+        Now, clearly, that $e, f \in q'$ implies that $e, f \subseteq q$, and so their intersection also lies in $q$. Thus they also overlap in at least $k$ vertices also seen as vertices of $H|_q$, and so they are adjacent in the line graph of $H|_q$, as desired.
 
-        The third statement is just a statement about 
+        The third statement is a nearly trivial statement about the connected components functor -- if we take the subgraph of a simple graph induced by one of its connected components, and then take the connected components of that, we get back just the connected component we started with.
     \end{proof}
 \end{lemma}
 
