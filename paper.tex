@@ -390,7 +390,7 @@ We are able to exactly characterise the relationship between the three concepts 
     A clustering scheme is representable if and only if it is excisive and functorial. No other implications hold between these concepts.
 \end{theorem}
 
-We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collection of examples, as illustrated in Figure~\ref{venn_diagram}. We have already seen from Lemma~\ref{lemma_representable_endofunctor_is_functor} that representability implies functoriality, so it remains to see that it also implies excisiveness, and then to show the necessity of the condition.
+We divide the proof of Theorem~\ref{main_theorem} into two main lemmas and a collection of examples, as illustrated in Figure~\ref{venn_diagram}. We have already seen from Lemma~\ref{lemma_representable_endofunctor_is_functor} that representability implies functoriality, so it remains to see that it also implies excisiveness, and then to show the necessity of the condition.
 
 \begin{figure}
     \centering
@@ -399,32 +399,47 @@ We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collecti
     \label{venn_diagram}
 \end{figure}
 
+A representable clustering scheme is by definition a composition of a representable endofunctor with the connected components functor -- it turns out that in general, composing a representable endofunctor with any excisive clustering scheme will give another excisive clustering scheme, so this allows us to break the problem of showing that representable clustering schemes are excisive into two parts.
+
+\begin{lemma}\label{lem:endofunctor_circ_excisive_is_excisive}
+    For any representable endofunctor $\Phi_\Rset: \G \to \G$ and any excisive clustering scheme $\Clust: \G \to \Pset$, $\Phi_\Rset \circ \Clust$ is also an excisive clustering scheme.
+\end{lemma}
+\begin{proof}
+    Let $G = (V,E)$ be some graph. If we could show that for any $q \subseteq V$, $\Phi_\Rset(G|_q) = \Phi_\Rset(G)|_q$, we would be done, since then, taking $p$ to be a part of $\Clust(\Phi_\Rset(G))$, we would have $\Clust(\Phi_\Rset(G|_p)) = \Clust(\Phi_\Rset(G)|_p) = \Clust(\Phi_\Rset(G))|_p$, as required.
+
+    So let $q \subseteq V$ be arbitrary, and we will show that $\Phi_\Rset(G|_q) = \Phi_\Rset(G)|_q$. That they have the same vertex sets is obvious, and since $G|_q$ is a subgraph of $G$ and $\Phi_\Rset$ is a functor, we must have that $\Phi_\Rset(G|_q)$ is a subgraph of $\Phi_\Rset(G)$. So if we can show that any edge of $\Phi_\Rset(G)|q$ is also an edge of $\Phi_\Rset(G|_q)$, we will be done.
+
+    So suppose $e$ is such an edge, and take $R \in \Rset$ and $\omega: R \to G$ to witness this edge. We must have that $\omega(R) \subseteq q$ -- but this means we can simply consider $\omega$ as a morphism into $G|_q$, and so it will also be an edge of $\Phi_\Rset(G|_q)$, as needed.
+\end{proof}
+
+Proving that the $k$-ly connected components functor is excisive will be considerably trickier, because of the involvement of the non-functor $\Upsilon$.
+
+\begin{lemma}\label{lem:pi_k_is_excisive}
+    The $k$-ly connected components functor $\Pi_k$ is excisive.
+\end{lemma}
+\begin{proof}
+    Let $G = (V,E)$ be some graph, and assume $\Pi_k(G) = (V,P)$. Let $p \in P$ be some part -- what we need to show is that $\Pi_k(G|_p) = \Pi_k(G)|_p$.
+
+    Let $p'$ be the edge set of $G|_p$, and let $p''$ be the connected component of $\Lambda_k(G)$ which is sent to $p$ by $\Upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\hl{draw and add example of this}.
+
+    We will prove our result by showing the following statements:
+    \begin{enumerate}
+        \item $\Lk(G|_q) = \Lk(G)|_{q'}$ for any set $q \subseteq V$, where $q'$ is the edge set of $G|_q$,
+        \item $\Pi(\Lk(G)|_{p''}) = \Pi(\Lk(G))|_{p''}$, and
+        \item $\Upsilon(\Pi(\Lk(G))|_{p'}) = \Upsilon(\Pi(\Lk(G)))|_p$.
+    \end{enumerate}
+
+    For the first statement, functoriality of $\Lk$ immediately gives us that $\Lk(G|_q)$ is a subgraph of $\Lk(G)$, and by definition the vertex set of $\Lk(G|_q)$ is $q'$. So what we need to show is that any edge of $\Lk(G)|_{q'}$ is already an edge of $\Lk(G|_q)$. Suppose we have two vertices $e, f \in q'$ which are adjacent -- that is, $\abs{e\cap f}\geq k$, since a vertex of the line graph is a vertex set of an edge of the underlying graph.
+
+    Now, clearly, that $e, f \in q'$ implies that $e, f \subseteq q$, and so their intersection also lies in $q$. Thus they also overlap in at least $k$ vertices also seen as vertices of $G|_q$, and so they are adjacent in the line graph of $G|_q$, as desired.
+
+    The second statement is a nearly trivial statement about the connected components functor -- if we take the subgraph of a simple graph induced by one of its connected components, and then take the connected components of that, we get back just the connected component we started with.
+\end{proof}
+
+With Lemma~\ref{lem:endofunctor_circ_excisive_is_excisive} and Lemma~\ref{lem:pi_k_is_excisive} in hand, it is an easy corollary that all representable clustering schemes are excisive.
+
 \begin{lemma} \label{lemma_repr_implies_excisive}
-    A representable clustering scheme is excisive.
-
-    \begin{proof}
-        Let $\Rset$ be some set of graphs, and $G = (V,E)$ be some graph. Assume $\Pi_{\Rset,k}(G) = (V, P)$, and let $p \in P$ be some part. What we need to show is that $\Pi_{\Rset,k}(G|_p) = \Pi_{\Rset,k}(G)|_p$.
-
-        Let $p'$ be the edge set of $\Phi_\Rset(G|_p)$, and let $p''$ be the connected component of $\Lk(\Phi_\Rset(G))$ which is sent to $p$ by $\Upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\hl{draw and add example of this}.
-        
-        To simplify our notation, let $H = \Phi_\Rset(G)$. We will show our result by proving the following statements:
-        \begin{enumerate}
-            \item $\Phi_\Rset(G|_q) = \Phi_\Rset(G)|_q = H|_q$ for any set $q \subseteq V$,
-            \item $\Lk(H|_q) = \Lk(H)|_{q'}$ for any set $q \subseteq V$, where $q'$ is the edge set of $H|_q$,
-            \item $\Pi(\Lk(H)|_{p''}) = \Pi(\Lk(H))|_{p''}$, and
-            \item $\Upsilon(\Pi(\Lk(H))|_{p'}) = \Upsilon(\Pi(\Lk(H)))|_p$.
-        \end{enumerate}
-
-        For the first statement, that they have the same vertex sets is obvious, and since $G|_q$ is a subgraph of $G$ and $\Phi_\Rset$ is a functor, we must have that $\Phi_\Rset(G|_q)$ is a subgraph of $\Phi_\Rset(G)$. So if we can show that any edge of $\Phi_\Rset(G)|q$ is also an edge of $\Phi_\Rset(G|_q)$, we will be done.
-
-        So suppose $e$ is such an edge, and take $R \in \Rset$ and $\omega: R \to G$ to witness this edge. We must have that $\omega(R) \subseteq q$ -- but this means we can simply consider $\omega$ as a morphism into $G|_q$, and so it will also be an edge of $\Phi_\Rset(G|_q)$, as needed.
-
-        For the second statement, functoriality of $\Lk$ immediately gives us that $\Lk(H|_q)$ is a subgraph of $\Lk(H)$, and by definition the vertex set of $\Lk(H|_q)$ is $q'$. So again, what we need to show is that any edge of $\Lk(H)|_{q'}$ is already an edge of $\Lk(H|_q)$. Suppose we have two vertices $e, f \in q'$ which are adjacent -- that is, $\abs{e\cap f}\geq k$, since a vertex of the line graph is a vertex set of an edge of the underlying graph.
-
-        Now, clearly, that $e, f \in q'$ implies that $e, f \subseteq q$, and so their intersection also lies in $q$. Thus they also overlap in at least $k$ vertices also seen as vertices of $H|_q$, and so they are adjacent in the line graph of $H|_q$, as desired.
-
-        The third statement is a nearly trivial statement about the connected components functor -- if we take the subgraph of a simple graph induced by one of its connected components, and then take the connected components of that, we get back just the connected component we started with.
-    \end{proof}
+    Any representable clustering scheme is excisive.
 \end{lemma}
 
 \begin{lemma} \label{lemma_exc_and_funct_implies_repr}
