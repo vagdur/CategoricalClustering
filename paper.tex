@@ -403,17 +403,25 @@ We divide the proof of Theorem~\ref{main_theorem} into two lemmas and a collecti
     A representable clustering scheme is excisive.
 
     \begin{proof}
-        Let $\Rset$ be some set of simple graphs, and $G$ be some simple graph. Assume the equivalence classes of $(\Phi_\Rset \circ \Pi)(G)$ are $\{A_1, A_2, \ldots A_k\}$, and let $H = G|_{A_1}$ be the induced subgraph of $G$ on $A_1$. What we need to show is that $(\Phi_\Rset \circ \Pi)(H) = (A_1, \sim_{\text{cpl}})$, that is, that every vertex is equivalent in the clustering of $H$.
+        Let $\Rset$ be some set of graphs, and $G = (V,E)$ be some graph. Assume $\Pi_{\Rset,k}(G) = (V, P)$, and let $p \in P$ be some part. What we need to show is that $\Pi_{\Rset,k}(G|_p)$ contains a part that contains all vertices, that is, that $\Phi_\Rset(G|_p)$ is $k$-ly connected.
         
-        It is obvious that this is equivalent to showing that $\Phi_\Rset(H)$ is a connected graph. We will in fact show something stronger -- that $\Phi_\Rset(H) = \Phi_\Rset(G|_{A_1}) = (\Phi_\Rset(G))|_{A_1}$. Since $A_1$ is an equivalence class of $\Phi_\Rset \circ \Pi$, it must be a connected component of $\Phi_\Rset(G)$, and so this will show what we want.
+        Let $p'$ be the edge set of $\Phi_\Rset(G|_p)$. We will show the stronger statement that $\Pi_{\Rset,k}(G|_p) = \Pi_{\Rset,k}(G)|_p$, where we by the restriction of a partitioned set mean the same construction as for graphs, by showing the following statements:
+        \begin{enumerate}
+            \item $\Phi_\Rset(G|_p) = \Phi_\Rset(G)|_p$,
+            \item $\Lk(\Phi_\Rset(G)|_p) = \Lk(\Phi_\Rset(G))|_{p'}$,
+            \item $\Pi(\Lk(\Phi_\Rset(G))|_{p'}) = \Pi(\Lk(\Phi_\Rset(G)))|_{p'}$, and
+            \item $\Upsilon(\Pi(\Lk(\Phi_\Rset(G)))|_{p'}) = \Upsilon(\Pi(\Lk(\Phi_\Rset(G))))|_p$.
+        \end{enumerate}
 
-        First, let $f: H \hookrightarrow G$ be the subgraph inclusion morphism of $H$ into $G$. By functoriality of $\Phi_\Rset$, $f$ is also a morphism from $\Phi_\Rset(H)$ into $\Phi_\Rset(G)$, showing that $\Phi_\Rset(H)$ is a subgraph of $\Phi_\Rset(G)$, so every edge of $\Phi_\Rset(H)$ is an edge of $\Phi_\Rset(G)$
+        For the first statement, that they have the same vertex sets is obvious, and since $G|_p$ is a subgraph of $G$ and $\Phi_\Rset$ is a functor, we must have that $\Phi_\Rset(G|_p)$ is a subgraph of $\Phi_\Rset(G)$. So if we can show that any edge of $\Phi_\Rset(G)|p$ is also an edge of $\Phi_\Rset(G|_p)$, we will be done.
 
-        Now, let $uv$ be an arbitrary edge of $\Phi_\Rset(G)|_{A_1}$. We wish to show this is already an edge of $\Phi_\Rset(H)$. That it is an edge of $\Phi_\Rset(G)$ means there exists some $\omega \in \Rset$ and a morphism $f_\omega: \omega \to G$ such that $\im(f_\omega) \ni u, v$.
+        So suppose $e$ is such an edge, and take $R \in \Rset$ and $\omega: R \to G$ to witness this edge. We must have that $\omega(R) \subseteq p$ -- but this means we can simply consider $\omega$ as a morphism into $G|_p$, and so it will also be an edge of $\Phi_\Rset(G|_p)$, as needed.
 
-        We claim that in fact $\im(f_\omega) \subset A_1$, so that $f_\omega$ restricts to a morphism into $H$. If we can show this, this will show that there is an edge $uv$ also in $\Phi_\Rset(H)$, and we will be done.
+        For the second statement, functoriality of $\Lk$ immediately gives us that $\Lk(\Phi_\Rset(G)|_p)$ is a subgraph of $\Lk(\Phi_\Rset(G))$, and by definition the vertex set of $\Lk(\Phi_\Rset(G)|_p)$ is $p'$. So again, what we need to show is that any edge of $\Lk(\Phi_\Rset(G))|_{p'}$ is already an edge of $\Lk(\Phi_\Rset(G)|_p)$. Suppose we have two vertices $e, f \in p'$ which are adjacent -- that is, $\abs{e\cap f}\geq k$, since a vertex of the line graph is a vertex set of an edge of the underlying graph.
 
-        Let $w$ be an arbitrary vertex in $\im(f_\omega)$. Now $f_\omega$ is also a morphism from something in $\Rset$ that hits both $w$ and $v$, so there is an edge $vw$ in $\Phi_\Rset(G)$. But this of course means that $w$ and $v$ are in the same connected component -- and this connected component is precisely $A_1$. Thus, $w \in A_1$, and we are done.
+        Now, clearly, that $e, f \in p'$ implies that $e, f \subseteq p$, and so their intersection also lies in $p$. Thus they also overlap in at least $k$ vertices also seen as vertices of $\Phi_\Rset(G)|_p$, and so they are adjacent in the line graph of $\Phi_\Rset(G)|_p$, as desired.
+
+        The third statement is just a statement about 
     \end{proof}
 \end{lemma}
 
