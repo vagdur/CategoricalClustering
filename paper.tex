@@ -126,7 +126,11 @@ One good way to think of these definitions is as a kind of generalization of mon
 In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges, and it becomes easier to speak about monotonicity with respect to non-overlapping set partitions.
 
 \begin{definition}
-    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p) = \Clust(G)|_p$. Here, $G|_p$ is the subgraph induced by $p$, so that the vertex set of $G|_p$ is $p$, $E(G|_p) = \left\{e \in E \given \ea_G(e) \subseteq p\right\}$, and $\ea_{G|_p} = \ea_{G|_{E({G|_p})}}$, and similarly for a partitioned set $\Clust(G) = (V,P)$ its sub-partitioned set induced by a set $p \subseteq V$ has as its set of objects $p$, and its parts are all the parts in $P$ which are subsets of $p$. Notice that, since we assumed here that $p \in P$, this means that $\Clust(G)|_p$ will always have $p$ itself as a part.
+    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p)$ is a sub-partitioned-set of $\Clust(G)|_p$.
+    
+    Here, $G|_p$ is the subgraph induced by $p$, so that the vertex set of $G|_p$ is $p$, $E(G|_p) = \left\{e \in E \given \ea_G(e) \subseteq p\right\}$, and $\ea_{G|_p} = \ea_{G|_{E({G|_p})}}$. similarly for a partitioned set $\Clust(G) = (V,P)$ its sub-partitioned-set induced by a set $p \subseteq V$ has as its set of objects $p$, and its parts are all the parts in $P$ which are subsets of $p$.  By $\Clust(G|_p)$ being a sub-partitioned-set of $\Clust(G)|_p$, we mean that the set of parts of $\Clust(G|_p)$ is a subset of the set of parts of $\Clust(G)|_p$. (In general, if $\mathcal{A}$ is a sub-partitioned-set of $\mathcal{B}$ we would also mean that the underlying set of $\mathcal{A}$ is a subset of the underlying set of $\mathcal{B}$, but in this case they will always be equal.)
+    
+    Notice that, since we assumed here that $p \in P$, this means that $\Clust(G)|_p$ will always have $p$ itself as a part.
     
     That is, whenever we look at the hypergraph induced by a part of the partition, and cluster just that sub-hypergraph, we get back the same thing as if we just restricted our clustering to that part.
 \end{definition}
@@ -414,26 +418,37 @@ A representable clustering scheme is by definition a composition of a representa
 
 Proving that the $k$-ly connected components functor is excisive will be considerably trickier, because of the involvement of the non-functor $\Upsilon$.
 
-\begin{lemma}\label{lem:pi_k_is_excisive}
+\begin{prop}\label{lem:pi_k_is_excisive}
     The $k$-ly connected components functor $\Pi_k$ is excisive.
-\end{lemma}
+\end{prop}
 \begin{proof}
-    Let $G = (V,E)$ be some graph, and assume $\Pi_k(G) = (V,P)$. Let $p \in P$ be some part -- what we need to show is that $\Pi_k(G|_p) = \Pi_k(G)|_p$.
+    Let $G = (V,E)$ be some graph, and assume $\Pi_k(G) = (V,P)$. Let $p \in P$ be some part -- what we need to show is that $\Pi_k(G|_p)$ is a sub-partitioned-set of $\Pi_k(G)|_p$.
 
     Let $p'$ be the edge set of $G|_p$, and let $p''$ be the connected component of $\Lambda_k(G)$ which is sent to $p$ by $\Upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\hl{draw and add example of this}.
 
-    We will prove our result by showing the following statements:
+    We will prove our result by showing the following claims:
     \begin{enumerate}
-        \item $\Lk(G|_q) = \Lk(G)|_{q'}$ for any set $q \subseteq V$, where $q'$ is the edge set of $G|_q$,
-        \item $\Pi(\Lk(G)|_{p''}) = \Pi(\Lk(G))|_{p''}$, and
-        \item $\Upsilon(\Pi(\Lk(G))|_{p'}) = \Upsilon(\Pi(\Lk(G)))|_p$.
+        \item For any set $q'' \subseteq E$ of edges, let $q$ be the union of their vertex sets. Then it holds that $\Lk(G)|_{q''}$ is a subgraph of $\Lk(G|_q)$.\label{claim:pik_excisive_Lk_subgraph}
+        \item It holds that $\Pi(\Lk(G)|_{p''}) = \Pi(\Lk(G))|_{p''}$.\label{claim:pik_excisive_Pi_commutes}
+        \item It holds that $\Upsilon(\Pi(\Lk(G))|_{p''}) = \Upsilon(\Pi(\Lk(G)))|_p$.\label{claim:pik_excisive_upsilon_equality}
+        \item Suppose $\mathcal{A} = (V, P)$ and $\mathcal{B} = (W,Q)$ are two partitioned sets, with $\mathcal{A}$ a sub-partitioned-set of $\mathcal{B}$, that is, with $V \subseteq W$ and $P \subseteq Q$. Then $\Upsilon(\mathcal{A})$ is a sub-partitioned-set of $\Upsilon(\mathcal{B})$.\label{claim:pik_excisive_upsilon_subsets}
     \end{enumerate}
 
-    For the first statement, functoriality of $\Lk$ immediately gives us that $\Lk(G|_q)$ is a subgraph of $\Lk(G)$, and by definition the vertex set of $\Lk(G|_q)$ is $q'$. So what we need to show is that any edge of $\Lk(G)|_{q'}$ is already an edge of $\Lk(G|_q)$. Suppose we have two vertices $e, f \in q'$ which are adjacent -- that is, $\abs{e\cap f}\geq k$, since a vertex of the line graph is a vertex set of an edge of the underlying graph.
+    Before we prove these statements, let us show why they will prove our proposition. Claim~\ref{claim:pik_excisive_upsilon_equality} gives us that $\Pi_k(G)|_p = \Upsilon(\Pi(\Lk(G)))|_p = \Upsilon(\Pi(\Lk(G))|_{p''})$, and then Claim~\ref{claim:pik_excisive_Pi_commutes} gives us that $\Pi_k(G)|_p = \Upsilon(\Pi(\Lk(G)|_{p''}))$. 
+    
+    Now, by construction, the union of the vertex sets of the edges in $p''$ are precisely $p$, so Claim~\ref{claim:pik_excisive_Lk_subgraph} gives us that $\Lk(G)|_{p''}$ is a subgraph of $\Lk(G|_p)$. This in turn means, by functoriality of $\Pi$, that $\Pi(\Lk(G)|_{p''})$ is a sub-partitioned set of $\Pi(\Lk(G|_p))$.
 
-    Now, clearly, that $e, f \in q'$ implies that $e, f \subseteq q$, and so their intersection also lies in $q$. Thus they also overlap in at least $k$ vertices also seen as vertices of $G|_q$, and so they are adjacent in the line graph of $G|_q$, as desired.
+    Thus, by Claim~\ref{claim:pik_excisive_upsilon_subsets}, $\Pi_k(G)|_p = \Upsilon(\Pi(\Lk(G)|_{p''}))$ is a sub-partitioned-set of $\Upsilon(\Pi(\Lk(G|_p))) = \Pi_k(G|_p)$, as desired.
 
-    The second statement is a nearly trivial statement about the connected components functor -- if we take the subgraph of a simple graph induced by one of its connected components, and then take the connected components of that, we get back just the connected component we started with.
+    So, let us proceed to give a proof of each of the claims.
+
+    \paragraph*{Claim~\ref{claim:pik_excisive_Lk_subgraph}:} Let $q'$ be the edge set of $G|_q$. That $q'' \subseteq q'$ is obvious, so the vertices of $\Lk(G)|_{q''}$ are a subset of the vertices of $\Lk(G|_q)$. So suppose $e, f \in q''$ are adjacent in $\Lk(G)$. By definition of the line graph functor, this means that $\ea(e)\cap\ea(f)$ has at least $k$ members -- but clearly $\ea(e), \ea(f) \subseteq q$, and so this intersection has the required size also in $G|_q$, and so these edges are adjacent also in $\Lk(G|_q)$.
+
+    \paragraph*{Claim~\ref{claim:pik_excisive_Pi_commutes}:} This is a nearly trivial statement about the connected components functor -- if we take the subgraph of a simple graph induced by one of its connected components, and then take the connected components of that, we get back just the connected component we started with.
+
+    \paragraph*{Claim~\ref{claim:pik_excisive_upsilon_equality}:}
+
+    \paragraph*{Claim~\ref{claim:pik_excisive_upsilon_subsets}:}   
 \end{proof}
 
 With Lemma~\ref{lem:endofunctor_circ_excisive_is_excisive} and Lemma~\ref{lem:pi_k_is_excisive} in hand, it is an easy corollary that all representable clustering schemes are excisive.
