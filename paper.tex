@@ -126,9 +126,17 @@ One good way to think of these definitions is as a kind of generalization of mon
 In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges, and it becomes easier to speak about monotonicity with respect to non-overlapping set partitions.
 
 \begin{definition}
+    For a graph $G = (V,E,\ea)$ and a subset of its vertices $p \subseteq V$, we define the \emph{restriction} of $G$ to $p$, $G|_p$, by that its vertex set is $p$, and its edges are precisely those edges of $G$ all of whose vertices are contained in $p$.
+
+    For a partitioned set $\mathcal{A} = (V,P)$ and a subset $p$ of its underlying set, we define the restriction of $\mathcal{A}$ to $p$, $\mathcal{A}|_p$, by that its underlying set is $p$, and its set of parts is given by
+    $$\left\{q \cap p \given q \in P, q\cap p \neq \emptyset\right\},$$
+    that is, we take the intersection of each part of $\mathcal{A}$ with $p$, discarding any parts that would become empty.
+
+    It is easily seen that the set inclusion function $i: p \hookrightarrow V$ is a morphism from $G|_p$ into $G$ in $\G$ and from $\mathcal{A}|_p$ into $\mathcal{A}$ in $\Pset$. 
+\end{definition}
+
+\begin{definition}
     A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p)$ is a sub-partitioned-set of $\Clust(G)|_p$.
-    
-    Here, $G|_p$ is the subgraph induced by $p$, so that the vertex set of $G|_p$ is $p$, $E(G|_p) = \left\{e \in E \given \ea_G(e) \subseteq p\right\}$, and $\ea_{G|_p} = \ea_{G|_{E({G|_p})}}$. similarly for a partitioned set $\Clust(G) = (V,P)$ its sub-partitioned-set induced by a set $p \subseteq V$ has as its set of objects $p$, and its parts are all the parts in $P$ which are subsets of $p$.  By $\Clust(G|_p)$ being a sub-partitioned-set of $\Clust(G)|_p$, we mean that the set of parts of $\Clust(G|_p)$ is a subset of the set of parts of $\Clust(G)|_p$. (In general, if $\mathcal{A}$ is a sub-partitioned-set of $\mathcal{B}$ we would also mean that the underlying set of $\mathcal{A}$ is a subset of the underlying set of $\mathcal{B}$, but in this case they will always be equal.)
     
     Notice that, since we assumed here that $p \in P$, this means that $\Clust(G)|_p$ will always have $p$ itself as a part.
     
