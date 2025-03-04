@@ -136,7 +136,7 @@ In this restricted setting, the statement that a clustering scheme is functorial
 \end{definition}
 
 \begin{definition}
-    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p)$ is a sub-partitioned-set of $\Clust(G)|_p$.
+    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p) = \Clust(G)|_p$.
     
     Notice that, since we assumed here that $p \in P$, this means that $\Clust(G)|_p$ will always have $p$ itself as a part.
     
@@ -430,8 +430,21 @@ Proving that the $k$-ly connected components functor is excisive will be conside
     The $k$-ly connected components functor $\Pi_k$ is excisive.
 \end{prop}
 \begin{proof}
-    Let $G = (V,E)$ be some graph, and assume $\Pi_k(G) = (V,P)$. Let $p \in P$ be some part -- what we need to show is that $\Pi_k(G|_p)$ is a sub-partitioned-set of $\Pi_k(G)|_p$.
+    Let $G = (V,E)$ be some graph, and assume $\Pi_k(G) = (V,P)$. Let $p \in P$ be some part -- what we need to show is that $\Pi_k(G|_p) = \Pi_k(G)|_p$. We prove this by showing that each is a sub-partitioned-set of the other.
 
+    \paragraph*{$\Pi_k(G|_p)$ is a sub-partitioned-set of $\Pi_k(G)|_p$.}
+
+    Clearly, the inclusion function $i: p \hookrightarrow V$ is a morphism from $G|_p$ to $G$, and so by functoriality of $\Pi_k$, we get that $\Pi_k(G|_p)$ has to be a sub-partitioned-set of $\Pi_k(G)$.
+
+    So what we need to show is that in fact this $i$ restricts to a morphism into $\Pi_k(G)|_p$. So suppose $r$ is some $k$-ly connected component of $G|_p$, and let $r''$ be the connected component of $\Lk(G)$ which is sent to $r$ by $\Upsilon$.
+
+    By functoriality of $\Pi$ and $\Lk$, we also get that $\Pi(\Lk(G|_p))$ is a sub-partitioned-set of $\Pi(\Lk(G))$, and so in particular there has to exist some connected component $\tilde{r}''$ of $\Lk(G)$ which contains $r''$.
+
+    Now this $\tilde{r}''$ is sent to some $\tilde{r}$ by $\Upsilon$, and this is a part of $\Pi_k(G)$. It is easy to see from the definition of $\Upsilon$ that we must have $r \subseteq \tilde{r}$ whenever $r'' \subseteq \tilde{r}''$.
+
+    Since $\tilde{r}$ is a part of $\Pi_k(G)$, we get that $\tilde{r} \cap p$ is a part of $\Pi_k(G)|_p$, and so from that $r \subseteq \tilde{r}$ and the trivial observation that $r \subseteq p$ we get that $r \subseteq \tilde{r} \cap p$. So $r$ is contained in a part of $\Pi_k(G)|_p$, and so since $r$ was arbitrary, this proves that the identity morphism $i: p \to p$ is a morphism from $\Pi_k(G|_p)$ to $\Pi_k(G)|_p$, as desired.
+
+    \paragraph*{$\Pi_k(G)|_p$ is a sub-partitioned-set of $\Pi_k(G|_p)$}
     Let $p'$ be the edge set of $G|_p$, and let $p''$ be the connected component of $\Lambda_k(G)$ which is sent to $p$ by $\Upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\hl{draw and add example of this}.
 
     We will prove our result by showing the following claims:
