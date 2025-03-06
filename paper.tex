@@ -228,17 +228,11 @@ That this line graph functor is in fact a functor definitely requires a proof, s
 So, now we have the line graph functor, which gives us a simple graph which we can take connected components of. This nearly gets us where we want to be -- except of course the connected components of the line graph of $G$ will be a partitioning of the vertex sets of the edges of $G$, not a partitioning of the vertices of $G$. So our last step to getting a generalized connected components functor is to turn this into a partitioning of the vertices.
 
 \begin{definition}
-    The part-union operation $\Upsilon: \Pset \to \Pset$ is defined as follows:
-
-    For each $\mathcal{A} = (V, P) \in \Pset$, we let $\Upsilon(\mathcal{A}) = \mathcal{B} = (W,Q)$, where
-    \begin{enumerate}
-        \item The underlying set of $\mathcal{B}$ is given by
-        $$W = \bigcup_{p \in P} p,$$
-        that is, we view each part of $P$ as itself being a set, and take the union of all these sets.\footnote{\hl{Jokes:} For the first time in my mathematical life, the fact that all mathematical objects under ZFC are themselves sets has turned out to be useful for simplifying things.}
-        \item and the parts of $\mathcal{B}$ are given by
-        $$Q = \left\{\bigcup_{v \in p} v \given p \in P\right\},$$
-        that is, for each part of $\mathcal{A}$, we take the union of its members as sets, and declare that to be a part of $\mathcal{B}$.
-    \end{enumerate}
+    For any set $X$, let
+    $$\upsilon(X) = \bigcup_{x \in X} x,$$
+    that is, we send $X$ to the union of all its elements.\footnote{\hl{Jokes:} For the first time in my mathematical life, the fact that all mathematical objects under ZFC are themselves sets has turned out to be useful for simplifying things.} 
+    
+    We define the part-union operation $\Upsilon: \Pset \to \Pset$ by that for each $\mathcal{A} = (V, P) \in \Pset$, we let $\Upsilon(\mathcal{A}) = \mathcal{B} = (\upsilon(V),\upsilon_*(P))$.
 \end{definition}
 
 Unfortunately, this $\Upsilon$ is not in general a functor, since there is no way to define what it does on morphisms between partitioned sets. However, it will still be useful to us.
