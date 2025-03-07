@@ -106,9 +106,19 @@ We also give a structural result for when two representable clustering schemes a
 \end{definition}
 
 \begin{definition}
+    For a graph $G = (V,E,\ea)$ and a subset of its vertices $p \subseteq V$, we define the \emph{restriction} of $G$ to $p$, $G|_p$, by that its vertex set is $p$, and its edges are precisely those edges of $G$ all of whose vertices are contained in $p$. It is easy to see that the set inclusion function $i: p \hookrightarrow V$ will be a morphism from $G|_p$ to $G$.
+\end{definition}
+
+\begin{definition}
     The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$. \hl{This is where we needed the assumption of loops at every vertex -- we could also instead remove both that assumption and the assumption that all vertices are in at least one part.}
 
     A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $f_*(p) \subseteq q$.
+\end{definition}
+
+\begin{definition}
+    For a partitioned set $\mathcal{A} = (V,P)$ and a subset $p$ of its underlying set, we define the restriction of $\mathcal{A}$ to $p$, $\mathcal{A}|_p$, by that its underlying set is $p$, and its set of parts is given by
+    $$\left\{q \cap p \given q \in P, q\cap p\right\},$$
+    that is, we take the intersection of each part of $\mathcal{A}$ with $p$. It is easy to see that the set inclusion function $i: p \hookrightarrow V$ is a morphism from $\mathcal{A}|_p$ to $\mathcal{A}$.
 \end{definition}
 
 \begin{definition}
@@ -126,21 +136,19 @@ One good way to think of these definitions is as a kind of generalization of mon
 In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges, and it becomes easier to speak about monotonicity with respect to non-overlapping set partitions.
 
 \begin{definition}
-    For a graph $G = (V,E,\ea)$ and a subset of its vertices $p \subseteq V$, we define the \emph{restriction} of $G$ to $p$, $G|_p$, by that its vertex set is $p$, and its edges are precisely those edges of $G$ all of whose vertices are contained in $p$.
+    If $\mathcal{A} = (V,P)$ and $\mathcal{B} = (V,Q)$ are two partitions of the same underlying set, we say that $\mathcal{A}$ is a \emph{refinement} of $\mathcal{B}$ (and thus $\mathcal{B}$ is a \emph{coarsening} of $\mathcal{A}$) if there exists a function $g: P \to Q$ such that for each $q \in Q$, we have 
+    $$q = \bigcup_{p \in g^{-1}(q)} p.$$
 
-    For a partitioned set $\mathcal{A} = (V,P)$ and a subset $p$ of its underlying set, we define the restriction of $\mathcal{A}$ to $p$, $\mathcal{A}|_p$, by that its underlying set is $p$, and its set of parts is given by
-    $$\left\{q \cap p \given q \in P, q\cap p \neq \emptyset\right\},$$
-    that is, we take the intersection of each part of $\mathcal{A}$ with $p$, discarding any parts that would become empty.
+    Concretely, this means that each part in $Q$ can be written as the union of a collection of parts in $P$, and all the parts in $P$ are used up in this process.
 
-    It is easily seen that the set inclusion function $i: p \hookrightarrow V$ is a morphism from $G|_p$ into $G$ in $\G$ and from $\mathcal{A}|_p$ into $\mathcal{A}$ in $\Pset$. 
+    If $\mathcal{A} = (V,P)$ and $\mathcal{B} = (W,Q)$ instead have different underlying sets, we may still say that $\mathcal{A}$ is a refinement of $\mathcal{B}$ if there exists a morphism $f: V \to W$ together with a function $g: P \to Q$ such that for each $q \in Q$, we have
+    $$q \cap f_*(V) = \bigcup_{p \in g^{-1}(q)} f_*(p).$$
 \end{definition}
 
 \begin{definition}
-    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p) = \Clust(G)|_p$.
+    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p)$ is a refinement of $\Clust(G)|_p$.
     
-    Notice that, since we assumed here that $p \in P$, this means that $\Clust(G)|_p$ will always have $p$ itself as a part.
-    
-    That is, whenever we look at the hypergraph induced by a part of the partition, and cluster just that sub-hypergraph, we get back the same thing as if we just restricted our clustering to that part.
+    Notice that, since we assumed here that $p \in P$, this means that $\Clust(G)|_p$ will always have $p$ itself as a part. However, it may happen that some parts of $\Clust(G|_p)$ are merged in $\Clust(G)|_p$.
 \end{definition}
 
 In the setting of non-overlapping partitions, this property is more intuitive to state: If we cluster some graph, pick out one of the parts, and cluster just the subgraph induced by that part, we get back a trivial partition into a single part. Adapting this into the overlapping clustering world unfortunately gets us a less transparent definition.
