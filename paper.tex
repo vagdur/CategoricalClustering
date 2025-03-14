@@ -136,19 +136,9 @@ One good way to think of these definitions is as a kind of generalization of mon
 In this restricted setting, the statement that a clustering scheme is functorial becomes exactly the statement that it is monotone with respect to the inclusion order and the order on equivalence relations. By using the language of category theory to encode this information, we gain the ability to talk about things being ``monotone under addition of vertices'', not just under addition of edges, and it becomes easier to speak about monotonicity with respect to non-overlapping set partitions.
 
 \begin{definition}
-    If $\mathcal{A} = (V,P)$ and $\mathcal{B} = (V,Q)$ are two partitions of the same underlying set, we say that $\mathcal{A}$ is a \emph{refinement} of $\mathcal{B}$ (and thus $\mathcal{B}$ is a \emph{coarsening} of $\mathcal{A}$) if there exists a function $g: P \to Q$ such that for each $q \in Q$, we have 
-    $$q = \bigcup_{p \in g^{-1}(q)} p.$$
+    A clustering scheme $\Clust$ is \emph{excisive} if, for all graphs $G = (V, E, \ea)$ and all parts $p \in \Clust(G)$, $p$ is a part of $\Clust(G|_p)$.
 
-    Concretely, this means that each part in $Q$ can be written as the union of a collection of parts in $P$, and all the parts in $P$ are used up in this process.
-
-    If $\mathcal{A} = (V,P)$ and $\mathcal{B} = (W,Q)$ instead have different underlying sets, we may still say that $\mathcal{A}$ is a refinement of $\mathcal{B}$ if there exists a morphism $f: V \to W$ together with a function $g: P \to Q$ such that for each $q \in Q$, we have
-    $$q \cap f_*(V) = \bigcup_{p \in g^{-1}(q)} f_*(p).$$
-\end{definition}
-
-\begin{definition}
-    A clustering scheme $\Clust$ is \emph{excisive} if the following property holds for all hypergraphs $G = (V, E, \ea_G)$: If $\Clust(G) = (V, P)$, it holds for every part $p \in P$ that $\Clust(G|_p)$ is a refinement of $\Clust(G)|_p$.
-    
-    Notice that, since we assumed here that $p \in P$, this means that $\Clust(G)|_p$ will always have $p$ itself as a part. However, it may happen that some parts of $\Clust(G|_p)$ are merged in $\Clust(G)|_p$.
+    So what this means is that if we ``zoom in'' on one part of a graph, the part we started with does not break apart into smaller pieces. Notice that this does not put any restrictions on what happens to any parts contained in on overlapping $p$.
 \end{definition}
 
 In the setting of non-overlapping partitions, this property is more intuitive to state: If we cluster some graph, pick out one of the parts, and cluster just the subgraph induced by that part, we get back a trivial partition into a single part. Adapting this into the overlapping clustering world unfortunately gets us a less transparent definition.
@@ -419,11 +409,17 @@ A representable clustering scheme is by definition a composition of a representa
     For any representable endofunctor $\Phi_\Rset: \G \to \G$ and any excisive clustering scheme $\Clust: \G \to \Pset$, $\Phi_\Rset \circ \Clust$ is also an excisive clustering scheme.
 \end{lemma}
 \begin{proof}
-    Let $G = (V,E)$ be some graph. If we could show that for any $q \subseteq V$, $\Phi_\Rset(G|_q) = \Phi_\Rset(G)|_q$, we would be done, since then, taking $p$ to be a part of $\Clust(\Phi_\Rset(G))$, we would have $\Clust(\Phi_\Rset(G|_p)) = \Clust(\Phi_\Rset(G)|_p) = \Clust(\Phi_\Rset(G))|_p$, as required.
+    The proof of this result hinges on the following claim:
+    \begin{claim}
+        For any $G = (V,E)$ and any $p \subseteq V$, $\Phi_\Rset(G|_p) = \Phi_\Rset(G)|_p$.
+    \end{claim}
+    \begin{proof}
+        Let $G = (V,E)$ be some graph, and let $p \subseteq V$ be arbitrary. We need to show that $\Phi_\Rset(G|_p) = \Phi_\Rset(G)|_p$. That they have the same vertex sets is obvious, and since $G|_p$ is a subgraph of $G$ and $\Phi_\Rset$ is a functor, we must have that $\Phi_\Rset(G|_p)$ is a subgraph of $\Phi_\Rset(G)$. So if we can show that any edge of $\Phi_\Rset(G)|p$ is also an edge of $\Phi_\Rset(G|_p)$, we will be done.
 
-    So let $q \subseteq V$ be arbitrary, and we will show that $\Phi_\Rset(G|_q) = \Phi_\Rset(G)|_q$. That they have the same vertex sets is obvious, and since $G|_q$ is a subgraph of $G$ and $\Phi_\Rset$ is a functor, we must have that $\Phi_\Rset(G|_q)$ is a subgraph of $\Phi_\Rset(G)$. So if we can show that any edge of $\Phi_\Rset(G)|q$ is also an edge of $\Phi_\Rset(G|_q)$, we will be done.
+        So suppose $e$ is such an edge, and take $R \in \Rset$ and $\omega: R \to G$ to witness this edge. We must have that $\omega(R) \subseteq p$ -- but this means we can simply consider $\omega$ as a morphism into $G|_p$, and so it will also be an edge of $\Phi_\Rset(G|_p)$, as needed.
+    \end{proof}
 
-    So suppose $e$ is such an edge, and take $R \in \Rset$ and $\omega: R \to G$ to witness this edge. We must have that $\omega(R) \subseteq q$ -- but this means we can simply consider $\omega$ as a morphism into $G|_q$, and so it will also be an edge of $\Phi_\Rset(G|_q)$, as needed.
+    With this claim in hand, proving our lemma is nearly trivial -- so let $G = (V,E)$ be some graph, and $p$ be some part of $\Clust(\Phi_R(G))$. We need to show that $p$ is a part of $\Clust(\Phi_R(G|_p))$. So if we let $H = \Phi_R(G)$, and observe that then $\Phi_R(G|_p) = H|_p$ by our claim and $p$ is a part of $\Clust(H)$ by assumption, the result is immediate by excisiveness of $\Clust$. 
 \end{proof}
 
 Proving that the $k$-ly connected components functor is excisive will be considerably trickier, because of the involvement of the non-functor $\Upsilon$.
@@ -432,46 +428,24 @@ Proving that the $k$-ly connected components functor is excisive will be conside
     The $k$-ly connected components functor $\Pi_k$ is excisive.
 \end{prop}
 \begin{proof}
-    Let $G = (V,E)$ be some graph, and assume $\Pi_k(G) = (V,P)$. Let $p \in P$ be some part -- what we need to show is that $\Pi_k(G|_p) = \Pi_k(G)|_p$. We prove this by showing that each is a sub-partitioned-set of the other.
+    Let $G = (V,E)$ be some graph, and assume $\Pi_k(G) = (V,P)$. Let $p \in P$ be some part -- we need to show that $p$ is a part of $\Pi_k(G|_p)$.
 
-    \paragraph*{$\Pi_k(G|_p)$ is a sub-partitioned-set of $\Pi_k(G)|_p$.}
+    Let $p'$ be the edge set of $G|_p$, and let $p''$ be the connected component of $\Lk(G)$ which is sent to $p$ by $\upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\hl{draw and add example of this}.
 
-    Clearly, the inclusion function $i: p \hookrightarrow V$ is a morphism from $G|_p$ to $G$, and so by functoriality of $\Pi_k$, we get that $\Pi_k(G|_p)$ has to be a sub-partitioned-set of $\Pi_k(G)$.
+    They key to this result is the following claim:
+    \begin{claim}
+        For any set $q'' \subseteq E$ of edges, let $q$ be the union of their vertex sets. Then it holds that $\Lk(G)|_{q''}$ is a subgraph of $\Lk(G|_q)$.\label{claim:pik_excisive_Lk_subgraph}
+    \end{claim}
 
-    So what we need to show is that in fact this $i$ restricts to a morphism into $\Pi_k(G)|_p$. So suppose $r$ is some $k$-ly connected component of $G|_p$, and let $r''$ be the connected component of $\Lk(G)$ which is sent to $r$ by $\Upsilon$.
+    Before we prove the claim, let us show why it will prove our proposition. By construction, the union of the vertex sets of the edges in $p''$ are precisely $p$, so our claim gives us that $\Lk(G)|_{p''}$ is a subgraph of $\Lk(G|_p)$. This in turn means, by functoriality of $\Pi$, that $\Pi(\Lk(G)|_{p''})$ is a sub-partitioned-set of $\Pi(\Lk(G|_p))$.
 
-    By functoriality of $\Pi$ and $\Lk$, we also get that $\Pi(\Lk(G|_p))$ is a sub-partitioned-set of $\Pi(\Lk(G))$, and so in particular there has to exist some connected component $\tilde{r}''$ of $\Lk(G)$ which contains $r''$.
+    Now it is easy to see that $\Upsilon(\Pi(\Lk(G)|_{p''}))$ and $\Upsilon(\Pi(\Lk(G|_p)))$ have the same underlying set, and since we have just seen that the parts of $\Pi(\Lk(G)|_{p''})$ are a subset of the parts of $\Pi(\Lk(G|_p))$, we get that $\Upsilon(\Pi(\Lk(G)|_{p''}))$ is a sub-partitioned-set of $\Upsilon(\Pi(\Lk(G|_p)))$, and the latter is just $\Pi_k(G|_p)$.
 
-    Now this $\tilde{r}''$ is sent to some $\tilde{r}$ by $\Upsilon$, and this is a part of $\Pi_k(G)$. It is easy to see from the definition of $\Upsilon$ that we must have $r \subseteq \tilde{r}$ whenever $r'' \subseteq \tilde{r}''$.
+    So consider $\Upsilon(\Pi(\Lk(G)|_{p''}))$. By assumption $p''$ is a connected component of $\Lk(G)$, which is sent to $p$ by $\upsilon$, and so we must have that $\Upsilon(\Pi(\Lk(G)|_{p''}))$ is precisely $(p,\{p\})$. So this shows that $p$ is a part of $\Pi_k(G|_p)$, as desired.
 
-    Since $\tilde{r}$ is a part of $\Pi_k(G)$, we get that $\tilde{r} \cap p$ is a part of $\Pi_k(G)|_p$, and so from that $r \subseteq \tilde{r}$ and the trivial observation that $r \subseteq p$ we get that $r \subseteq \tilde{r} \cap p$. So $r$ is contained in a part of $\Pi_k(G)|_p$, and so since $r$ was arbitrary, this proves that the identity morphism $i: p \to p$ is a morphism from $\Pi_k(G|_p)$ to $\Pi_k(G)|_p$, as desired.
+    So, let us proceed to give a proof of the claim.
 
-    \paragraph*{$\Pi_k(G)|_p$ is a sub-partitioned-set of $\Pi_k(G|_p)$}
-    Let $p'$ be the edge set of $G|_p$, and let $p''$ be the connected component of $\Lambda_k(G)$ which is sent to $p$ by $\Upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\hl{draw and add example of this}.
-
-    We will prove our result by showing the following claims:
-    \begin{enumerate}
-        \item For any set $q'' \subseteq E$ of edges, let $q$ be the union of their vertex sets. Then it holds that $\Lk(G)|_{q''}$ is a subgraph of $\Lk(G|_q)$.\label{claim:pik_excisive_Lk_subgraph}
-        \item Suppose $\mathcal{A} = (V, P)$ and $\mathcal{B} = (W,Q)$ are two partitioned sets, with $\mathcal{A}$ a sub-partitioned-set of $\mathcal{B}$, that is, with $V \subseteq W$ and $P \subseteq Q$. Then $\Upsilon(\mathcal{A})$ is a sub-partitioned-set of $\Upsilon(\mathcal{B})$.\label{claim:pik_excisive_upsilon_subsets}
-        \item It holds that $\Pi(\Lk(G)|_{p''}) = \Pi(\Lk(G))|_{p''}$, and this partitioned set in fact has just one part, containing all of $p''$.\label{claim:pik_excisive_Pi_commutes}
-        \item $\Pi_k(G)|_p$ is a sub-partitioned-set of $\Upsilon(\Pi(\Lk(G))|_{p''})$.\label{claim:pik_excisive_upsilon_equality} \hl{...this might actually be false}
-    \end{enumerate}
-
-    Before we prove these statements, let us show why they will prove our proposition. By construction, the union of the vertex sets of the edges in $p''$ are precisely $p$, so Claim~\ref{claim:pik_excisive_Lk_subgraph} gives us that $\Lk(G)|_{p''}$ is a subgraph of $\Lk(G|_p)$. This in turn means, by functoriality of $\Pi$, that $\Pi(\Lk(G)|_{p''})$ is a sub-partitioned-set of $\Pi(\Lk(G|_p))$.
-
-    This gives us, by Claim~\ref{claim:pik_excisive_upsilon_subsets}, that $\Upsilon(\Pi(\Lk(G)|_{p''}))$ is a sub-partitioned-set of $\Upsilon(\Pi(\Lk(G|_p)))$, which is just $\Pi_k(G|_p)$. Now Claim~\ref{claim:pik_excisive_Pi_commutes} lets us move the restriction to $p''$ out one step, giving us that $\Upsilon(\Pi(\Lk(G))|_{p''})$ is a sub-partitioned-set of $\Pi_k(G|_p)$.
-    
-    That $\Pi_k(G)|_p$ is a sub-partitioned-set of $\Upsilon(\Pi(\Lk(G))|_{p''})$ is precisely Claim~\ref{claim:pik_excisive_upsilon_equality}, and so this gives us that $\Pi_k(G)|_p$ is a sub-partitioned-set of $\Pi_k(G|_p)$.
-
-    So, let us proceed to give a proof of each of the claims.
-
-    \paragraph*{Claim~\ref{claim:pik_excisive_Lk_subgraph}:} Let $q'$ be the edge set of $G|_q$. That $q'' \subseteq q'$ is obvious, so the vertices of $\Lk(G)|_{q''}$ are a subset of the vertices of $\Lk(G|_q)$. So suppose $e, f \in q''$ are adjacent in $\Lk(G)$. By definition of the line graph functor, this means that $\ea(e)\cap\ea(f)$ has at least $k$ members -- but clearly $\ea(e), \ea(f) \subseteq q$, and so this intersection has the required size also in $G|_q$, and so these edges are adjacent also in $\Lk(G|_q)$.
-
-    \paragraph*{Claim~\ref{claim:pik_excisive_upsilon_subsets}:}  
-
-    \paragraph*{Claim~\ref{claim:pik_excisive_Pi_commutes}:} This is a nearly trivial statement about the connected components functor -- if we take the subgraph of a simple graph induced by one of its connected components, and then take the connected components of that, we get back just the connected component we started with. The second half of the statement is by definition of $p''$ -- it is constructed as the connected component of $\Lk(G)$ that is sent to $p$ by $\Upsilon$, so in particular it is a single connected component, which is of course sent by $\Pi$ to a partition into a single part.
-
-    \paragraph*{Claim~\ref{claim:pik_excisive_upsilon_equality}:} We have from Claim~\ref{claim:pik_excisive_Pi_commutes} that $\Pi(\Lk(G))|_{p''}$ has just a single part, which is $p''$, and by definition $p''$ is sent to $p$ by $\Upsilon$, so $\Upsilon(\Pi(\Lk(G))|_{p''})$ is precisely $(p,\{p\})$. 
+    \paragraph*{Proof of Claim~\ref{claim:pik_excisive_Lk_subgraph}:} Let $q'$ be the edge set of $G|_q$. That $q'' \subseteq q'$ is obvious, so the vertices of $\Lk(G)|_{q''}$ are a subset of the vertices of $\Lk(G|_q)$. So suppose $e, f \in q''$ are adjacent in $\Lk(G)$. By definition of the line graph functor, this means that $\ea(e)\cap\ea(f)$ has at least $k$ members -- but clearly $\ea(e), \ea(f) \subseteq q$, and so this intersection has the required size also in $G|_q$, and so these edges are adjacent also in $\Lk(G|_q)$.
 \end{proof}
 
 With Lemma~\ref{lem:endofunctor_circ_excisive_is_excisive} and Lemma~\ref{lem:pi_k_is_excisive} in hand, it is an easy corollary that all representable clustering schemes are excisive.

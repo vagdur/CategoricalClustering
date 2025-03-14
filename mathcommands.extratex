@@ -53,6 +53,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{prop}[theorem]{Proposition}
 \newtheorem{cor}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
 \newtheorem{conjecture}[theorem]{Conjecture}
 
 \theoremstyle{definition}
