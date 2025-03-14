@@ -189,14 +189,14 @@ In order to generalize this notion to hypergraphs, let us notice that for simple
 For hypergraphs, we get more than one possible notion of line graph, and therefore we get more than one notion of connected components.
 
 \begin{definition}
-    For each $k \geq 1$, we define the $k$-line graph functor $\Lk: \G \to \G_s$ as follows:
+    For each $k \in \N \cup \{\infty\}$, we define the $k$-line graph functor $\Lk: \G \to \G_s$ as follows:
     
     For each $G = (V,E,\ea)$:
     \begin{enumerate}
         \item The vertices of $\Lk(G)$ are the vertex sets of the edges of $G$. That is, 
         $$E(\Lk(G)) = \left\{\ea(e) \given e \in E\right\}.$$
         Notice that this means that if there are multiple edges in $E$ with the same vertex set, we still only get one vertex of $\Lk(G)$ corresponding to them.
-        \item there is an edge $uv \in E(\Lk(G))$ whenever $\abs{u \cap v} \geq k$, that is, if the two edges of $G$ overlap in at least $k$ vertices.
+        \item there is an edge $uv \in E(\Lk(G))$ whenever $\abs{u \cap v} \geq k$, that is, if the two edges of $G$ overlap in at least $k$ vertices. So if $k = \infty$, we get a trivial case where the line graph has no edges.
     \end{enumerate}
 
     We define, for a morphism $f: G \to H$ in $\G$, that $\Lk(f) = f_*: 2^{V(G)} \to 2^{V(G)}$. This does at least send objects of the right type to objects of the right type, because the vertices of $\Lk(G)$ and $\Lk(H)$ are by construction sets of vertices of $G$ and $H$ respectively.
@@ -388,10 +388,18 @@ With this result in hand, we can now give a proof of the existence of a represen
 
 \section{Equivalence of representability and excisiveness}
 
-We are able to exactly characterise the relationship between the three concepts of functoriality, representability, and excisiveness for clustering schemes.
+In the $k = 1$ case, it turns out that representability is equivalent to excisiveness plus functoriality, and so we can give a complete characterization of representable clustering schemes in this case. This is known from \hl{add citation}.
+
+In the case where $k > 1$, interesting things start happening, and so we will need a weaker notion of equivalence of clustering schemes than actual equality.
+
+\begin{definition}
+    Two clustering schemes $\Clust_1, \Clust_2: \G \to \Pset$ are \emph{equivalent} if for each $G \in \G$, it holds for any two vertices $u, v \in V(G)$ that there exists a part of $\Clust_1(G)$ containing $u$ and $v$ if and only if there exists a part of $\Clust_2(G)$ containing $u$ and $v$.
+\end{definition}
+
+Notice that this is a weaker notion of equivalence than equality, since it allows the addition of sub-parts to a part without breaking equivalence, as shown in Figure~\hl{draw and add figure}. However, in the non-overlapping case, this reduces to equality of clustering schemes.
 
 \begin{theorem} \label{main_theorem}
-    A clustering scheme is representable if and only if it is excisive and functorial. No other implications hold between these concepts.
+    Any representable clustering scheme is excisive and functorial. Any excisive and functorial clustering scheme is equivalent to a representable clustering scheme.
 \end{theorem}
 
 We divide the proof of Theorem~\ref{main_theorem} into two main lemmas and a collection of examples, as illustrated in Figure~\ref{venn_diagram}. We have already seen from Lemma~\ref{lemma_representable_endofunctor_is_functor} that representability implies functoriality, so it remains to see that it also implies excisiveness, and then to show the necessity of the condition.
@@ -455,24 +463,24 @@ With Lemma~\ref{lem:endofunctor_circ_excisive_is_excisive} and Lemma~\ref{lem:pi
 \end{lemma}
 
 \begin{lemma} \label{lemma_exc_and_funct_implies_repr}
-    An excisive and functorial clustering scheme is representable.
-
-    \begin{proof}
-        Let $\Clust$ be some excisive and functorial clustering scheme, and let
-        $$\Rset = \left\{G \in \G \given \Clust(G) = (V_G, \sim_{\text{cpl}})\right\},$$
-        that is, $\Rset$ is the set of all graphs clustered by $\Clust$ into a single part. We will show that in fact $\Clust = \Phi_\Rset$.
-
-        So, let $G$ be some graph. We need to show two things:
-        \begin{enumerate}
-            \item Whenever $u$ and $v$ are clustered in the same part by $\Clust$, they are in the same connected component of $\Phi_\Rset(G)$.
-            \item Whenever $uv$ is an edge of $\Phi_\Rset(G)$, $u$ and $v$ are clustered in the same part by $\Clust$. This of course implies that whenever $u$ and $v$ are in the same connected component, they are also clustered in the same part by $\Clust$, which is what we really need.
-        \end{enumerate}
-        
-        We start with the first direction, letting $u$ and $v$ be two vertices that are sent to the same part by $\Clust$ -- call this part $A$, and let $H = G|_A$. By excisiveness of $\Clust$, we have that $\Clust$ sends $H$ to a single part, so $H \in \Rset$. Therefore, the inclusion morphism $f: H \hookrightarrow G$ is a morphism from something in $\Rset$ that hits both $u$ and $v$, showing there is an edge $uv$ in $\Phi_\Rset(G)$, as desired.
-
-        In the second direction, assume that $uv$ is an edge of $\Phi_\Rset(G)$. Thus, there is some $\omega \in \Rset$ and $f_\omega: \omega \to G$ such that $\im(f_\omega) \ni u, v$. By functoriality of $\Clust$, $f$ will also be a morphism from $\Clust(\omega)$ into $\Clust(G)$ -- which by how we defined morphisms in the category of partitioned sets means that any two vertices equivalent in $\Clust(\omega)$ must also be equivalent in $\Clust(G)$. However, we defined $\Rset$ as precisely the set of things such that $\Clust(\omega)$ has only a single part -- so everything is equivalent in $\Clust(\omega)$ and in particular $u \sim_{\Clust(\Rset)} v$, and so they are also equivalent in $\Clust(G)$, as desired.
-    \end{proof}
+    Any excisive and functorial clustering scheme is equivalent to a representable clustering scheme.
 \end{lemma}
+
+\begin{proof}
+    Let $\Clust$ be some excisive and functorial clustering scheme, and let
+    $$\Rset = \left\{G = (V,E) \in \G \given V\text{ is a part of }\Clust(G)\right\}.$$
+    We will show that $\Clust$ is equivalent to $\Pi_{\Rset,\infty}$.
+
+    So, let $G$ be some graph. We need to show two things:
+    \begin{enumerate}
+        \item Whenever $u$ and $v$ share a part in $\Clust(G)$, they share a part in $\Pi_{\Rset,\infty}(G)$.
+        \item Whenever $u$ and $v$ share a part in $\Pi_{\Rset,\infty}(G)$, they share a part in $\Clust(G)$.
+    \end{enumerate}
+
+    So, for the first statement, suppose $p$ is a part of $\Clust(G)$ that contains $u$ and $v$. By excisiveness of $\Clust$, $G|_p$ has $p$ as a part and is thus in $\Rset$. Now consider the inclusion morphism from $G|_p$ into $G$. This is a morphism from something in $\Rset$ into $G$, and so there must be an edge of $\Phi_\Rset(G)$ whose edge set is precisely $p$. It is easy to see that, since there are no edges in $\Lambda_\infty(G)$, its connected components are just each edge in its own part, and so the parts of $\Pi_{\Rset,\infty}(G)$ are precisely the edge sets of the edges of $\Phi_\Rset(G)$, and so $u$ and $v$ share a part in $\Pi_{\Rset,\infty}(G)$, as desired.
+
+    For the second statement, suppose $u$ and $v$ share a part in $\Pi_{\Rset,\infty}(G)$. By what we saw in our proof of the first statement, this must simply mean that there is an edge of $\Phi_\Rset(G)$ containing both $u$ and $v$. Now, this edge arises from a morphism $\omega$ from some $R \in \Rset$ into $G$. By functoriality of $\Clust$, this morphism will also be a morphism from $\Clust(R)$ into $\Clust(G)$, and we know that $\Clust(R)$ has a part containing all the vertices of $R$, and so $u$ and $v$ share a part in $\Clust(R)$, and so also in $\Clust(G)$, as desired.
+\end{proof}
 
 Finally, in order to show that there is no other implication that holds between these concepts, it suffices to give examples of clustering schemes with every combination of properties not already ruled out.
 
