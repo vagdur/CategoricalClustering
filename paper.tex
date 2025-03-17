@@ -346,7 +346,22 @@ In fact, which graphs are sent to spanned graphs by $\Phi_\Rset$ essentially det
 
     It is easy to see that the rest of the edges on the path $e_{i_1}, e_{i_2}, \ldots, e_{i_m}$ are also still adjacent, and so we can replace $f$ on the path from $e$ to $e'$ by this longer path, getting a path that does not use $f$, and so is a path also in $\Phi_\Rset(H)$, which is what we needed to show.
 
-    That the reverse implication fails for $k > 1$ is shown by the example in Figure~\hl{draw and add figure}.
+    \begin{figure}
+        \centering
+        \subfloat[\centering Graph $G$]{
+            {\includegraphics[width=0.35\textwidth,valign=c]{graphics/ex_ineq_conn_hull_graphG.pdf}}
+            \vphantom{\includegraphics[width=0.35\textwidth,valign=c]{graphics/ex_ineq_conn_hull_graphH.pdf}}
+        }%
+        \qquad
+        \subfloat[\centering Graph $H$]{
+            {\includegraphics[width=0.35\textwidth,valign=c]{graphics/ex_ineq_conn_hull_graphH.pdf}}
+        }%
+        \caption{Consider the situation where $\Rset$ consists of just one graph on three vertices with one edge containing all three vertices, and $G$ and $H$ are as in the figures. It is clear that $\Phi_\Rset(G)$ is $k$-ly connected. $\Lambda_2(\Phi_\Rset(H))$ has two connected components, one containing the blue edges and one containing the green edges, and so $\Pi_{\Rset,2}(H)$ will have two parts, $\{v_1, v_2, v_3, v_4\}$ and $\{v_3, v_4, v_5, v_6\}$.\\ \\
+        However, when we add $G$ into $\Rset$, this will add two new edges into $\Phi_{\Rset\cup \{G\}}(H)$, one containing $v_1, v_2, v_3, v_4$ and one containing $v_3, v_4, v_5, v_6$. These two edges overlap in $v_3$ and $v_4$, and so they form a connected component of $\Lambda_2(\Phi_{\Rset\cup \{G\}}(H))$, which will be sent to a part containing all vertices. Thus $\Pi_{\Rset\cup\{G\},2}(H)$ is not equal to $\Pi_{\Rset,2}(H)$.}
+        \label{fig:ineq_conn_hull}
+    \end{figure}
+
+    That the reverse implication fails for $k > 1$ is shown by the example in Figure~\ref{fig:ineq_conn_hull}. 
 \end{proof}
 
 With this result in hand, we can now give a proof of the existence of a representable but not finitely representable endofunctor.

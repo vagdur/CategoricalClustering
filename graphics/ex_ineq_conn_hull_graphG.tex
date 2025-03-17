@@ -1,0 +1,42 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-network}
+
+\usetikzlibrary{calc, backgrounds, positioning}
+\input{tikz-hypergraph}
+
+\usepackage{xcolor}
+
+\definecolor{ACMYellow}{RGB}{255, 214, 0}
+\definecolor{ACMOrange}{RGB}{252, 146, 0}
+\definecolor{ACMRed}{RGB}{253, 27, 20}
+\definecolor{ACMLightBlue}{RGB}{131, 206, 226}
+\definecolor{ACMGreen}{RGB}{166, 188, 9}
+\definecolor{ACMPurple}{RGB}{101, 1, 107}
+\definecolor{ACMDarkBlue}{RGB}{9, 53, 122}
+
+
+\begin{document}
+	
+\begin{tikzpicture}
+\tikzstyle{important}=[draw, circle, minimum size=8mm, fill=white];
+\tikzstyle{unimportant}=[draw, circle, minimum size=4mm, fill=white];
+
+\node at (0,1) (v1) {};
+\node at (0,-1) (v2) {};
+\node at (-2,0) (v3) {};
+\node at (2,0) (v4) {};
+
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v3}{v1}{v2}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v2}{v1}{v4}{6mm};
+
+
+\node[unimportant] at (v1) {};
+\node[unimportant] at (v2) {};
+\node[unimportant] at (v3) {};
+\node[unimportant] at (v4) {};
+
+\end{tikzpicture}
+
+\end{document}
