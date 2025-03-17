@@ -438,7 +438,14 @@ Proving that the $k$-ly connected components functor is excisive will be conside
 \begin{proof}
     Let $G = (V,E)$ be some graph, and assume $\Pi_k(G) = (V,P)$. Let $p \in P$ be some part -- we need to show that $p$ is a part of $\Pi_k(G|_p)$.
 
-    Let $p'$ be the edge set of $G|_p$, and let $p''$ be the connected component of $\Lk(G)$ which is sent to $p$ by $\upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\hl{draw and add example of this}.
+    Let $p'$ be the edge set of $G|_p$, and let $p''$ be the connected component of $\Lk(G)$ which is sent to $p$ by $\upsilon$. Notice that we have $p'' \subseteq p'$, but it can be a strict subset when $k > 1$, as demonstrated by the example in Figure~\ref{fig:overlapping_parts}.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{graphics/example_overlapping_parts.pdf}
+        \caption{An example of a graph $G$ with a connected component $p$ (here, the entire vertex set) where $p''$ is a strict subset of $p'$, in the notation of the proof of Lemma~\ref{lem:pi_k_is_excisive}. In particular, we note that $p''$ consists of the three blue edges, which form a clique in the line graph since they all overlap in the vertices $v_1$ and $v_2$, but the line graph also has an isolated vertex corresponding to the red edge. This red edge is in $p'$, but not in $p''$, and will be sent to a strict subpart of $p$ by $\Upsilon$.}
+        \label{fig:overlapping_parts}
+    \end{figure}
 
     They key to this result is the following claim:
     \begin{claim}
