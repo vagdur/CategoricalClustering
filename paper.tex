@@ -125,7 +125,9 @@ We also give a structural result for when two representable clustering schemes a
     The category $\Psetno$ of sets with non-overlapping partitions is the full subcategory of $\Pset$ whose objects have disjoint set covers. We may equivalently think of it as the category of sets equipped with equivalence relations.
 \end{definition}
 
-Here it is worth remarking that the categories $\G$ and $\Pset$ are very similar, in that they have the same objects, but we have a smaller set of morphisms among the hypergraphs than among the sets with overlapping partitions. However, for clarity's sake, we shall usually forget this fact, and treat these as two unrelated categories, instead of thinking of them as one contained within the other.
+It is worth remarking here that our definition of a morphism of partitioned sets is very weak. While it does, in the case of non-overlapping partitions, behave as expected, some perhaps surprising things can happen in the overlapping case. For example, for any set $V$ and any two subsets $W, W' \subseteq V$, the identity function $V \to V$ is a morphism from $(V, \{V, W\}$ to $(V, \{V, W'\})$ -- so in a sense it looks like the part $W$ was allowed to ``move around'' arbitrarily.
+
+It turns out, however, that we actually need a definition this general -- we will see that such ``scandalous'' morphisms in fact arise as the images of morphisms in the category of graphs under a natural generalization of connected components, which will be central to our results. \hl{add reference to example where this happens}
 
 \begin{definition}
     An overlapping clustering scheme is a function $\Clust$ that sends hypergraphs to sets with overlapping partitions, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E,\ea)$ to $P = (W, P)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$. We will often abuse our notation slightly and write $p \in \Clust(G)$ when what we mean is that $\Clust(G) = (V,P)$ and $p \in P$.
@@ -271,6 +273,25 @@ That this one is a functor also requires a proof, since it is defined as a compo
     \end{align*}
     as desired.
 \end{proof}
+
+\begin{figure}
+    \centering
+    \subfloat[\centering A graph $G$]{{\includegraphics[height=5cm]{graphics/ex_scandalous_morphism_G.pdf} }}%
+    \qquad
+    \subfloat[\centering A graph $H$]{{\includegraphics[height=5cm]{graphics/ex_scandalous_morphism_H.pdf} }}%
+    \caption{An illustration of two graphs in $\G$, with $H$ a subgraph of $G$, where the image of this morphism under $\Lambda_2$ gives a surprising morphism in $\Pset$, as explained in Example~\ref{ex:scandalous_morphism}. Note that $H$ has all the edges of $G$, and an additional two edges, illustrated in red and orange -- the other edges have had their colour faded to help clarity, but are still present.}
+    \label{fig:scandalous_morphism}
+\end{figure}
+
+\begin{example}\label{ex:scandalous_morphism}
+    At this point, we can illustrate why our class of morphisms of partitioned sets has to be so large. Consider the graphs $G$ and $H$ shown in Figure~\ref{fig:scandalous_morphism}. $G$ has eight vertices, and an edge $v_1 v_2 v_i$ for each $i > 2$, illustrated in blue, and an edge $v_3 v_4 v_j$ for $j = 5, 6, 7$, illustrated in green. $H$ is a supergraph of $G$, with all the edges of $G$ and two additional edges, $v_1 v_2 v_3 v_4$ and $v_5 v_6 v_7 v_8 v_9$, illustrated in red and orange. So that the identity function on the vertex set is a morphism from $G$ to $H$ is clear.
+
+    Now consider the images of these two graphs under $\Pi_2$. In $G$, the blue edges will form a clique in the $2$-line graph, and the green edges will form another clique. No green edge overlaps any blue edge in more than a single vertex, so these two cliques will be the connected components, and so the parts of $\Pi_2(G)$ will be the entire vertex set and $\{v_3, v_4, v_5, v_6, v_7\}$.
+
+    The addition of the red edge to $H$ corresponds, in the line graph, to adding a new vertex with an edge to every vertex in the two cliques, so they merge into a new connected component, whose image under $\upsilon$ will be the entire vertex set. The orange edge, however, will not be connected to any of the vertices in the two cliques, and so will form a new connected component, whose image under $\upsilon$ will be $\{v_5, v_6, v_7, v_8\}$.
+
+    So we have seen that there must be a morphism from $(V, \{V, \{v_3, v_4, v_5, v_6, v_7\}\})$ to $(V, \{V, \{v_5, v_6, v_7, v_8\}\})$ in $\Pset$, which may at first have seemed like a bug in our definition, but is in fact a necessary feature.
+\end{example}
 
 \begin{definition}\label{definition_representable_clustscheme}
     A clustering scheme $\Clust$ is \emph{representable} if $\Clust = \Pi_k \circ \Phi_\Rset$ for some representable endofunctor $\Phi_\Rset$ and some $k \geq 1$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
