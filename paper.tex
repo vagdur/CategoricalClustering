@@ -537,7 +537,7 @@ With Lemma~\ref{lem:endofunctor_circ_excisive_is_excisive} and Lemma~\ref{lem:pi
 Finally, in order to show that there is no other implication that holds between these concepts, it suffices to give examples of clustering schemes with every combination of properties not already ruled out.
 
 \begin{example}\label{ex_allthreeprops}
-    The connected components functor $\Pi$ is representable and excisive -- we can take its representation to be $\Rset = \{K_2\}$.
+    The connected components functor $\Pi_1$ is representable and excisive -- we can take its representation to be $\Rset = \left\{E_n \given n \in \N\right\}$, where $E_n$ is the graph with $n$ vertices and a single edge containing all vertices.
 \end{example}
     
 \begin{example}\label{ex_excnotfunctnotrepr}
@@ -545,9 +545,16 @@ Finally, in order to show that there is no other implication that holds between 
 \end{example}
     
 \begin{example}\label{ex_functnotexcnotrepr}
-    For a scheme which is functorial but neither excisive nor representable, cluster all connected components on more than two vertices as well as all isolated vertices as their own parts. 
-    
-    If there is exactly one component on two vertices, i.e. an isolated edge, cluster it as two parts, otherwise cluster all isolated edges as single parts.
+    For a scheme which is functorial but neither excisive nor representable, consider the scheme $\Clust$ that is defined as follows:
+    \begin{enumerate}
+        \item If $G$ contains any edge containing more than two vertices, cluster all of $G$ as a single part.
+        \item Otherwise, if $G$ is simple, for each connected component $p$ of $G$:
+        \begin{enumerate}
+            \item If $\abs{p} = 1$, cluster $p$ as a single part.
+            \item If $\abs{p} = 2$, and there is only one part of size two, cluster $p$ as two parts. If there are multiple parts of size two, cluster each as a single part.
+            \item If $\abs{p} > 2$, cluster $p$ as a single part.
+        \end{enumerate}
+    \end{enumerate}
 \end{example}
     
 \begin{example}\label{ex_noprops}
