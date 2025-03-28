@@ -561,11 +561,18 @@ Finally, in order to show that there is no other implication that holds between 
     Finally, for a scheme which has none of the properties, cluster all graphs as a single part except for $K_2$, which we cluster as two parts, and the disjoint union of two copies of $K_2$, which we cluster as two parts -- that is, each of the copies is its own part. \hl{This bit is fishy.}
 \end{example}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.3\textwidth]{graphics/ex_exc_funct_not_repr-D.pdf}
+    \caption{The graph $D$ used in the proof of Lemma~\ref{lemma:exists_exc_and_funct_not_representable}.}
+    \label{fig:ex_exc_funct_not_repr-D}
+\end{figure}
+
 \begin{lemma}\label{lemma:exists_exc_and_funct_not_representable}
     There exists a clustering scheme which is excisive and functorial, but not equal to any representable clustering scheme. 
 \end{lemma}
 \begin{proof}
-    To define this clustering scheme, we begin by letting $\Rset$ be the set containing only the graph $D$ as in Figure~\hl{add}. Now, for any $G$, consider the graph $\Phi_\Rset(G)$. Each edge of this graph corresponds to a copy of $D$ in $G$, and so for each vertex of $\Lambda_3(\Phi_\Rset(G))$ we can give it two labels, namely the two edges of $G$ that make up the corresponding copy of $D$. So we may define a graph $\Sigma(G)$ by taking $\Lambda_3(\Phi_\Rset(G))$ and keeping an edge $ef$ if and only if $e$ and $f$ share a label.
+    To define this clustering scheme, we begin by letting $\Rset$ be the set containing only the graph $D$ as in Figure~\ref{fig:ex_exc_funct_not_repr-D}. Now, for any $G$, consider the graph $\Phi_\Rset(G)$. Each edge of this graph corresponds to a copy of $D$ in $G$, and so for each vertex of $\Lambda_3(\Phi_\Rset(G))$ we can give it three labels, namely the three edges of $G$ that make up the corresponding copy of $D$. So we may define a graph $\Sigma(G)$ by taking $\Lambda_3(\Phi_\Rset(G))$ and keeping an edge $ef$ if and only if $e$ and $f$ share a label.
 
     Concretely, this means that we will have an edge $ef$ only if the three vertices they overlap in make up an edge of both copies of $D$ to which they correspond.
 
