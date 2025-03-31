@@ -436,10 +436,16 @@ In the case where $k > 1$, interesting things start happening, and so we will ne
     \end{enumerate}
 \end{definition}
 
+\begin{remark}
+    Notice that this means that if $\Clust_1$ refines $\Clust_2$, it holds that for every graph $G = (V,E)$, the identity function on $V$ is a morphism from $\Clust_1(G)$ to $\Clust_2(G)$ and from $\Clust_2(G)$ to $\Clust_1(G)$ -- that is, it is an isomorphism of partitioned sets.
+
+    Thus, if $\Clust_1$ refines $\Clust_2$ and both are functorial, the two clustering schemes are in fact naturally isomorphic as functors from $\G$ to $\Pset$. Our notion of one clustering scheme refining another is therefore, in this case, a stronger notion than isomorphism of functors.
+\end{remark}
+
 Notice that this is a weaker notion than equality of clustering schemes, since it allows the addition of sub-parts to a part, as shown in Figure~\hl{draw and add figure}. However, in the non-overlapping case, it is easily seen that $\Clust_1$ refines $\Clust_2$ if and only if $\Clust_1 = \Clust_2$.
 
 \begin{theorem} \label{main_theorem}
-    Any representable clustering scheme is excisive and functorial. Any excisive and functorial clustering scheme is refined by a representable clustering scheme.
+    Any representable clustering scheme is excisive and functorial. Any excisive and functorial clustering scheme is refined by a representable clustering scheme, and so in particular is isomorphic to a representable clustering scheme.
 \end{theorem}
 
 We divide the proof of Theorem~\ref{main_theorem} into two main lemmas and a collection of examples, as illustrated in Figure~\ref{venn_diagram}. We have already seen from Lemma~\ref{lemma_representable_endofunctor_is_functor} that representability implies functoriality, so it remains to see that it also implies excisiveness, and then to show the necessity of the condition.
