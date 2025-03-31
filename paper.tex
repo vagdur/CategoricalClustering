@@ -597,26 +597,16 @@ Finally, in order to show that there is no other implication that holds between 
     \paragraph*{Functoriality:} That $\Sigma$ is a functor can be proven similarly to how we prove that $\Lk$ is a functor, only keeping track of a little bit more information about the labels of the edges -- here it helps that we know $\Phi_\Rset$ is a functor. Once we know that $\Sigma$ is a functor, functoriality of $\Clust$ follows by essentially the same proof as functoriality of $\Pi_k$.
 \end{proof}
 
-It is possible to carry out this entire argument, showing equivalence between representability and excisiveness, also in the setting where we do not require morphisms in the category of graphs to be injective. The arguments only need minor modifications to deal with this.
-
-However, it turns out that this setting is much less interesting: There are in fact only three different representable clustering schemes.
-
-\begin{theorem}
-    If we do not require our morphisms to be injective, there are exactly three possible representable clustering schemes:
+\begin{remark}
+    One might ask oneself why we have chosen to require all morphisms to be injective throughout. This is because in the non-overlapping case, one can relatively straightforwardly carry out the same arguments in the non-injective case, and find that there are then in fact only three different representable clustering schemes:
     \begin{enumerate}
         \item The scheme that always sends every vertex to its own part, represented by the empty set or by $K_1$,
         \item the connected components functor, represented by any set of connected graphs containing at least one graph on at least two vertices,
         \item and the scheme that always sends all vertices to the same part, represented by any set of graphs containing a disconnected graph.
     \end{enumerate}
 
-    \begin{proof}
-        Suppose we have some set of simple graphs $\Rset$, and some graph $G$. If $\Rset$ is empty, or contains only a $K_1$, it is clear that there are no morphisms at all from any $\omega \in \Rset$ that hit two vertices of $G$, and so there can trivially be no edges in $\Phi_\Rset(G)$, and the resulting clustering scheme always sends every vertex to its own part.
-        
-        Now suppose $\Rset$ contains some graph that is not $K_1$, say $\omega$, but this $\omega$ is disconnected. Then, for any two vertices $u, v \in G$, we can send one connected component of $\omega$ to $u$ and all the other connected components to $v$. Thus there is an edge $uv$ in $\Phi_\Rset(G)$, and we have shown that $\Phi_\Rset$ must send all graphs to cliques, and thus the clustering scheme clusters all graphs as a single part.
-
-        Finally, suppose $\Rset$ contains some graph on at least two vertices, and every $\omega \in \Rset$ is connected. Then, pick some $\omega \in \Rset$ and a vertex $w_\omega \in \omega$. For any edge $uv$ in $G$, we can send $w_\omega$ to $u$ and every other vertex of $\omega$ to $v$. Thus, $uv$ must also be an edge of $\Phi_\Rset(G)$. That we cannot get an edge in $\Phi_\Rset(G)$ between two vertices in different connected components of $G$ is clear from that $\Rset$ contains only connected graphs. Therefore, $\Phi_\Rset(G)$ must have the same connected components as $G$, and so the induced clustering scheme must be just the connected components functor.
-    \end{proof}
-\end{theorem}
+    Something similar seems likely to be true in the overlapping setting, but we choose not to pursue this here, to keep the structure of the paper simpler.
+\end{remark}
 
 \section{Computational complexity of representable clustering schemes}
 
