@@ -1,0 +1,215 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-network}
+
+\usetikzlibrary{calc, backgrounds, positioning}
+\input{tikz-hypergraph}
+
+\usepackage{xcolor}
+
+\definecolor{ACMYellow}{RGB}{255, 214, 0}
+\definecolor{ACMOrange}{RGB}{252, 146, 0}
+\definecolor{ACMRed}{RGB}{253, 27, 20}
+\definecolor{ACMLightBlue}{RGB}{131, 206, 226}
+\definecolor{ACMGreen}{RGB}{166, 188, 9}
+\definecolor{ACMPurple}{RGB}{101, 1, 107}
+\definecolor{ACMDarkBlue}{RGB}{9, 53, 122}
+
+
+\begin{document}
+	
+\begin{tikzpicture}
+
+
+\node[scale=3] at (7, {4*sqrt(3)}) (f1) {$F_1$};
+\node[scale=3] at (17.5, {5.5*sqrt(3)}) (f2) {$F_2$};
+\node[scale=3] at (28, {7*sqrt(3)}) (f3) {$F_3$};
+
+\tikzstyle{important}=[draw, circle, minimum size=8mm, fill=white];
+\tikzstyle{unimportant}=[draw, circle, minimum size=4mm, fill=white];
+
+%\node (v1) at (0, 0) {};
+\node (v2) at (3, 0) {};
+\node (v3) at (1.5, {3*sqrt(3)/2}) {};
+\node (v4) at (6, 0) {};
+\node (v5) at (4.5, {3*sqrt(3)/2}) {};
+\node (v6) at (3, {3*sqrt(3)}) {};
+\node (v7) at (9, 0) {};
+\node (v8) at (7.5, {3*sqrt(3)/2}) {};
+\node (v9) at (6, {3*sqrt(3)}) {};
+\node (v10) at (4.5, {9*sqrt(3)/2}) {};
+%\node (v11) at (12, 0) {};
+%\node (v12) at (10.5, {3*sqrt(3)/2}) {};
+%\node (v13) at (9, {3*sqrt(3)}) {};
+%\node (v14) at (7.5, {9*sqrt(3)/2}) {};
+%\node (v15) at (6, {6*sqrt(3)}) {};
+\node (v16) at (15, 0) {};
+\node (v17) at (13.5, {3*sqrt(3)/2}) {};
+\node (v18) at (12, {3*sqrt(3)}) {};
+%\node (v19) at (10.5, {9*sqrt(3)/2}) {};
+%\node (v20) at (9, {6*sqrt(3)}) {};
+%\node (v21) at (7.5, {15*sqrt(3)/2}) {};
+\node (v22) at (18, 0) {};
+\node (v23) at (16.5, {3*sqrt(3)/2}) {};
+\node (v24) at (15, {3*sqrt(3)}) {};
+\node (v25) at (13.5, {9*sqrt(3)/2}) {};
+%\node (v26) at (12, {6*sqrt(3)}) {};
+%\node (v27) at (10.5, {15*sqrt(3)/2}) {};
+%\node (v28) at (9, {9*sqrt(3)}) {};
+\node (v29) at (21, 0) {};
+\node (v30) at (19.5, {3*sqrt(3)/2}) {};
+\node (v31) at (18, {3*sqrt(3)}) {};
+\node (v32) at (16.5, {9*sqrt(3)/2}) {};
+\node (v33) at (15, {6*sqrt(3)}) {};
+%\node (v34) at (13.5, {15*sqrt(3)/2}) {};
+%\node (v35) at (12, {9*sqrt(3)}) {};
+%\node (v36) at (10.5, {21*sqrt(3)/2}) {};
+%\node (v37) at (24, 0) {};
+%\node (v38) at (22.5, {3*sqrt(3)/2}) {};
+%\node (v39) at (21, {3*sqrt(3)}) {};
+%\node (v40) at (19.5, {9*sqrt(3)/2}) {};
+%\node (v41) at (18, {6*sqrt(3)}) {};
+%\node (v42) at (16.5, {15*sqrt(3)/2}) {};
+%\node (v43) at (15, {9*sqrt(3)}) {};
+%\node (v44) at (13.5, {21*sqrt(3)/2}) {};
+%\node (v45) at (12, {12*sqrt(3)}) {};
+\node (v46) at (27, 0) {};
+\node (v47) at (25.5, {3*sqrt(3)/2}) {};
+\node (v48) at (24, {3*sqrt(3)}) {};
+\node (v49) at (22.5, {9*sqrt(3)/2}) {};
+%\node (v50) at (21, {6*sqrt(3)}) {};
+%\node (v51) at (19.5, {15*sqrt(3)/2}) {};
+%\node (v52) at (18, {9*sqrt(3)}) {};
+%\node (v53) at (16.5, {21*sqrt(3)/2}) {};
+%\node (v54) at (15, {12*sqrt(3)}) {};
+%\node (v55) at (13.5, {27*sqrt(3)/2}) {};
+\node (v56) at (30, 0) {};
+\node (v57) at (28.5, {3*sqrt(3)/2}) {};
+\node (v58) at (27, {3*sqrt(3)}) {};
+\node (v59) at (25.5, {9*sqrt(3)/2}) {};
+\node (v60) at (24, {6*sqrt(3)}) {};
+%\node (v61) at (22.5, {15*sqrt(3)/2}) {};
+%\node (v62) at (21, {9*sqrt(3)}) {};
+%\node (v63) at (19.5, {21*sqrt(3)/2}) {};
+%\node (v64) at (18, {12*sqrt(3)}) {};
+%\node (v65) at (16.5, {27*sqrt(3)/2}) {};
+\node (v66) at (33, 0) {};
+\node (v67) at (31.5, {3*sqrt(3)/2}) {};
+\node (v68) at (30, {3*sqrt(3)}) {};
+\node (v69) at (28.5, {9*sqrt(3)/2}) {};
+\node (v70) at (27, {6*sqrt(3)}) {};
+\node (v71) at (25.5, {15*sqrt(3)/2}) {};
+%\node (v72) at (24, {9*sqrt(3)}) {};
+%\node (v73) at (22.5, {21*sqrt(3)/2}) {};
+%\node (v74) at (21, {12*sqrt(3)}) {};
+%\node (v75) at (19.5, {27*sqrt(3)/2}) {};
+
+
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v3}{v6}{v5}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v6}{v10}{v9}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v5}{v9}{v8}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v2}{v5}{v4}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v4}{v8}{v7}{6mm};
+
+\draw[draw, fill=ACMOrange, fill opacity=0.3] \hedgem{v16}{v23}{v22}{6mm};
+\draw[draw, fill=ACMOrange, fill opacity=0.3] \hedgem{v22}{v30}{v29}{6mm};
+\draw[draw, fill=ACMOrange, fill opacity=0.3] \hedgem{v23}{v31}{v30}{6mm};
+\draw[draw, fill=ACMOrange, fill opacity=0.3] \hedgem{v17}{v24}{v23}{6mm};
+\draw[draw, fill=ACMOrange, fill opacity=0.3] \hedgem{v24}{v32}{v31}{6mm};
+\draw[draw, fill=ACMOrange, fill opacity=0.3] \hedgem{v18}{v25}{v24}{6mm};
+\draw[draw, fill=ACMOrange, fill opacity=0.3] \hedgem{v25}{v33}{v32}{6mm};
+
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v46}{v57}{v56}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v56}{v67}{v66}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v57}{v68}{v67}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v47}{v58}{v57}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v58}{v69}{v68}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v48}{v59}{v58}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v59}{v70}{v69}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v49}{v60}{v59}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v60}{v71}{v70}{6mm};
+
+
+
+%\node[unimportant] at (v1) {};
+\node[unimportant] at (v2) {};
+\node[unimportant] at (v3) {};
+\node[unimportant] at (v4) {};
+\node[unimportant] at (v5) {};
+\node[unimportant] at (v6) {};
+\node[unimportant] at (v7) {};
+\node[unimportant] at (v8) {};
+\node[unimportant] at (v9) {};
+\node[unimportant] at (v10) {};
+%\node[unimportant] at (v11) {};
+%\node[unimportant] at (v12) {};
+%\node[unimportant] at (v13) {};
+%\node[unimportant] at (v14) {};
+%\node[unimportant] at (v15) {};
+\node[unimportant] at (v16) {};
+\node[unimportant] at (v17) {};
+\node[unimportant] at (v18) {};
+%\node[unimportant] at (v19) {};
+%\node[unimportant] at (v20) {};
+%\node[unimportant] at (v21) {};
+\node[unimportant] at (v22) {};
+\node[unimportant] at (v23) {};
+\node[unimportant] at (v24) {};
+\node[unimportant] at (v25) {};
+%\node[unimportant] at (v26) {};
+%\node[unimportant] at (v27) {};
+%\node[unimportant] at (v28) {};
+\node[unimportant] at (v29) {};
+\node[unimportant] at (v30) {};
+\node[unimportant] at (v31) {};
+\node[unimportant] at (v32) {};
+\node[unimportant] at (v33) {};
+%\node[unimportant] at (v34) {};
+%\node[unimportant] at (v35) {};
+%\node[unimportant] at (v36) {};
+%\node[unimportant] at (v37) {};
+%\node[unimportant] at (v38) {};
+%\node[unimportant] at (v39) {};
+%\node[unimportant] at (v40) {};
+%\node[unimportant] at (v41) {};
+%\node[unimportant] at (v42) {};
+%\node[unimportant] at (v43) {};
+%\node[unimportant] at (v44) {};
+%\node[unimportant] at (v45) {};
+\node[unimportant] at (v46) {};
+\node[unimportant] at (v47) {};
+\node[unimportant] at (v48) {};
+\node[unimportant] at (v49) {};
+%\node[unimportant] at (v50) {};
+%\node[unimportant] at (v51) {};
+%\node[unimportant] at (v52) {};
+%\node[unimportant] at (v53) {};
+%\node[unimportant] at (v54) {};
+%\node[unimportant] at (v55) {};
+\node[unimportant] at (v56) {};
+\node[unimportant] at (v57) {};
+\node[unimportant] at (v58) {};
+\node[unimportant] at (v59) {};
+\node[unimportant] at (v60) {};
+%\node[unimportant] at (v61) {};
+%\node[unimportant] at (v62) {};
+%\node[unimportant] at (v63) {};
+%\node[unimportant] at (v64) {};
+%\node[unimportant] at (v65) {};
+\node[unimportant] at (v66) {};
+\node[unimportant] at (v67) {};
+\node[unimportant] at (v68) {};
+\node[unimportant] at (v69) {};
+\node[unimportant] at (v70) {};
+\node[unimportant] at (v71) {};
+%\node[unimportant] at (v72) {};
+%\node[unimportant] at (v73) {};
+%\node[unimportant] at (v74) {};
+%\node[unimportant] at (v75) {};
+
+
+
+\end{tikzpicture}
+
+\end{document}

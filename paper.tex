@@ -785,5 +785,51 @@ In this setting most of the requirements of a functor are trivial -- of course i
 \end{lemma}
 
 \begin{proof}
-    Suppose for contradiction that $\Clust = \Pi_{\Rset,k}$ for some $\Rset$ and $k$, and assume we take $\Rset$ of minimal cardinality. 
+    Suppose for contradiction that $\Clust = \Pi_{\Rset,k}$ for some $\Rset$ and $k$, and assume we take $\Rset$ of minimal cardinality. We need to exclude every possible combination of $\Rset$ and value of $k$ -- so we end up with a lot of casework.
+    
+    \paragraph*{$\Rset$ cannot contain any proper subgraph of $D$, and must contain $D$ itself:}
+
+    It is clear that $\Rset$ cannot contain any graph $G$ which does not have $D$ as a subgraph, since then $\Pi_{\Rset,k}(G)$ would have a part containing all vertices, while $\Clust(G)$ would have no parts at all.
+
+    In particular this means $\Rset$ cannot contain any proper subgraph of $D$, and so, in order for $\Pi_{\Rset,k}(D)$ to have a part containing all vertices, we must have $D \in \Rset$.
+
+    \paragraph*{Excluding the case $k \leq 3$:}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.6\textwidth]{graphics/appendix_graph_G.pdf}
+        \caption{The graph $G$ used in the proof of Lemma~\ref{lemma:excisive_and_functorial_not_representable}.}
+        \label{fig:appendix_graph_G}
+    \end{figure}
+
+    In this case, consider the graph $G$ as in Figure~\ref{fig:appendix_graph_G}. An attentive eye will see that this graph is two copies of $D$, one on the blue edges and one on the orange edges, and they overlap in their corners. It is clear that $\Clust(G)$ will have two parts, since the overlap of the two copies of $D$ is not an edge of either copy. However, since $D \in \Rset$ and $k \leq 3$, we must have a part containing all vertices in $\Pi_{\Rset,k}(G)$, which is a contradiction.
+
+    \paragraph*{Establishing graphs that have to be in $\Rset$ if $k$ is big:}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{graphics/appendix_graphs_Fi.pdf}
+        \caption{The graph family $F_i$ used in the proof of Lemma~\ref{lemma:excisive_and_functorial_not_representable}, illustrated by its first three members.}
+        \label{fig:appendix_graphs_Fi}
+    \end{figure}
+
+    Now consider the family $F_i$ of graphs as in Figure~\ref{fig:appendix_graphs_Fi}. We claim that if $k > 3i$, we must have $F_i \in \Rset$. We proceed by induction -- so, for the base case, suppose that $k > 3$ and consider the graph $F_1$. It is easy to see that $\Clust(F_1)$ has a single part containing all vertices. Now, $\Phi_\Rset(F_1)$ contains at least two edges corresponding to the two copies of $D$ in $F_1$, but these overlap in only three vertices, and so there will not be an edge between them in $\Lk(\Phi_\Rset(F_1))$. So there must be some additional graph $G$ in $\Rset$ that is a subgraph of $F_1$, and overlaps both copies of $D$ in more than three vertices.
+
+    If this $G$ is a proper subgraph of $F_1$, it is easy to see that it will not be sent to a single part by $\Clust$, which would be a contradiction to the fact that $\Pi_{\Rset,k}(G)$ would send this $G$ to a single part. So $G$ must be $F_1$ itself, and so $\Rset$ must contain $F_1$.
+
+    For the inductive step, let us fix an $i$ and suppose that $k > 3i$. Then, by our induction hypothesis, $F_{i-1} \in \Rset$. Again, we have that $\Clust(F_i)$ has a single part containing all vertices. In $\Phi_\Rset(F_i)$ we will have two edges corresponding to the copy of $F_{i-1}$ in $F_i$ created by the first $i$ copies of $D$ and last $i$ copies of $D$ respectively, and these overlap in a copy of $F_{i-2}$, which has $3i < k$ vertices. So there is no edge connecting these two edges in $\Lk(\Phi_\Rset(F_i))$, and so there must be some additional graph $G$ in $\Rset$ that is a subgraph of $F_i$ and overlaps both copies of $D$ in more than $3i$ vertices. The same argument again gives that, if this subgraph were proper, it would be a copy of $F_{i-1}$ with a single edge hanging off of it, which would not be sent to a single part by $\Clust$, and so it must be $F_i$ itself.
+
+    \paragraph*{Excluding the case $3 < k < \infty$:}
+
+    So, suppose $3 < k < \infty$, and let $i$ be such that $3i < k \leq 3(i+1)$. From the preceding section, we know that $F_i \in \Rset$. Our strategy will be to find a graph $G_i$ that has two copies of $F_i$ in it which overlap in all but three vertices, but share no edge. Now, since $F_i$ has $3(i+2)$ vertices, and so the two copies of $F_i$ would be overlapping in $3(i+1) \geq k$ vertices, we would have that $\Pi_{\Rset,k}(G_i)$ would have a part containing all vertices, while $\Clust(G_i)$ would not, since the two copies of $F_i$ do not overlap in any full edge.
+
+    The construction we use here gets too complicated to draw in any case beyond $i = 1$ (that case is illustrated in Figure~\hl{add}), but the idea is the following: The graph $F_i$ has three ``columns'' of vertices, and we can take our two copies of $F_i$ to have the same left- and rightmost columns. For the middle column, we pick three of the vertices in each copy to be distinct, and for the rest, we permute their labels and then identify vertices with the same label. As long as we pick a permutation $\sigma$ such that $\abs{\sigma(j)-j}>1$ for all $i$, we will have that the two copies of $F_i$ do not share any edges.
+
+    That such a permutation $\sigma$ exists for $i > 3$ is easy to see -- in that case, we can even pick such a permutation of the entire middle column first. In the case $i = 1$, there are no middle column vertices left once we remove the three distinct ones, and for the cases $i = 2, 3$, the reader is invited to look at Figure~\ref{fig:appendix_graphs_Fi} and verify that the construction can be performed then as well.
+
+    \paragraph*{Excluding the case $k = \infty$:}
+
+    Finally, we need to exclude the case $k = \infty$. In this case, we know that $\Rset$ must be precisely the set of all graphs that are sent to a partition with a part containing all vertices by $\Clust$, from the reasoning in the proof of Lemma~\ref{lemma_exc_and_funct_implies_repr}. But then, for example, the graph $F_1$ will be sent to a partition that has three parts -- one containing all vertices, and two corresponding to the copies of $D$ in $F_1$, while of course $\Clust(F_1)$ has only one part. So we have a contradiction.
+\end{proof}
+
 \end{document}

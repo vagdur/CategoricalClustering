@@ -1,0 +1,59 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-network}
+
+\usetikzlibrary{calc, backgrounds, positioning}
+\input{tikz-hypergraph}
+
+\usepackage{xcolor}
+
+\definecolor{ACMYellow}{RGB}{255, 214, 0}
+\definecolor{ACMOrange}{RGB}{252, 146, 0}
+\definecolor{ACMRed}{RGB}{253, 27, 20}
+\definecolor{ACMLightBlue}{RGB}{131, 206, 226}
+\definecolor{ACMGreen}{RGB}{166, 188, 9}
+\definecolor{ACMPurple}{RGB}{101, 1, 107}
+\definecolor{ACMDarkBlue}{RGB}{9, 53, 122}
+
+
+\begin{document}
+	
+\begin{tikzpicture}
+\tikzstyle{important}=[draw, circle, minimum size=8mm, fill=white];
+\tikzstyle{unimportant}=[draw, circle, minimum size=4mm, fill=white];
+
+\node at (0, 6) (v1) {};
+\node at (3, 6) (v2) {};
+\node at (6, 6) (v3) {};
+\node at (-2, 3) (v4) {};
+\node at (3, 3) (v5) {};
+\node at (8, 3) (v6) {};
+\node at (0, 0) (v7) {};
+\node at (3, 0) (v8) {};
+\node at (6, 0) (v9) {};
+
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.4] \hedgem{v1}{v2}{v4}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.4] \hedgem{v7}{v1}{v5}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.4] \hedgem{v4}{v8}{v7}{6mm};
+
+\draw[draw, fill=ACMOrange, fill opacity=0.4] \hedgem{v2}{v3}{v6}{6mm};
+\draw[draw, fill=ACMOrange, fill opacity=0.4] \hedgem{v5}{v3}{v9}{6mm};
+\draw[draw, fill=ACMOrange, fill opacity=0.4] \hedgem{v8}{v6}{v9}{6mm};
+
+
+
+
+\node[unimportant] at (v1) {$v_1$};
+\node[unimportant] at (v2) {$v_2$};
+\node[unimportant] at (v3) {$v_3$};
+\node[unimportant] at (v4) {$v_4$};
+\node[unimportant] at (v5) {$v_5$};
+\node[unimportant] at (v6) {$v_6$};
+\node[unimportant] at (v7) {$v_7$};
+\node[unimportant] at (v8) {$v_8$};
+\node[unimportant] at (v9) {$v_9$};
+
+\end{tikzpicture}
+
+\end{document}
