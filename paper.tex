@@ -724,7 +724,14 @@ In this setting most of the requirements of a functor are trivial -- of course i
 
     So, suppose $3 < k < \infty$, and let $i$ be such that $3i < k \leq 3(i+1)$. From the preceding section, we know that $F_i \in \Rset$. Our strategy will be to find a graph $G_i$ that has two copies of $F_i$ in it which overlap in all but three vertices, but share no edge. Now, since $F_i$ has $3(i+2)$ vertices, and so the two copies of $F_i$ would be overlapping in $3(i+1) \geq k$ vertices, we would have that $\Pi_{\Rset,k}(G_i)$ would have a part containing all vertices, while $\Clust(G_i)$ would not, since the two copies of $F_i$ do not overlap in any full edge.
 
-    The construction we use here gets too complicated to draw in any case beyond $i = 1$ (that case is illustrated in Figure~\hl{add}), but the idea is the following: The graph $F_i$ has three ``columns'' of vertices, and we can take our two copies of $F_i$ to have the same left- and rightmost columns. For the middle column, we pick three of the vertices in each copy to be distinct, and for the rest, we permute their labels and then identify vertices with the same label. As long as we pick a permutation $\sigma$ such that $\abs{\sigma(j)-j}>1$ for all $i$, we will have that the two copies of $F_i$ do not share any edges.
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{graphics/appendix_graph_G1.pdf}
+        \caption{The graph $G_1$ used in the proof of Lemma~\ref{lemma:excisive_and_functorial_not_representable}. This graph contains two copies of $F_1$, corresponding to the green and the blue edges. Here, the vertices $v_4$ and $v_9$ are the leftmost column in the standard drawing of $F_1$ (Figure~\ref{fig:appendix_graphs_Fi}), and the vertices $v_5,v_6,v_7$ and $v_8$ are the rightmost column. The vertices $v_1,v_2,v_3$ are the middle column in the green copy of $F_1$, and the vertices $v_{10},v_{11},v_{12}$ are the middle column in the blue copy of $F_1$.}
+        \label{fig:appendix_graph_G1}
+    \end{figure}
+
+    The construction we use here gets too complicated to draw in any case beyond $i = 1$ (that case is illustrated in Figure~\ref{fig:appendix_graph_G1}), but the idea is the following: The graph $F_i$ has three ``columns'' of vertices, and we can take our two copies of $F_i$ to have the same left- and rightmost columns. For the middle column, we pick three of the vertices in each copy to be distinct, and for the rest, we permute their labels and then identify vertices with the same label. As long as we pick a permutation $\sigma$ such that $\abs{\sigma(j)-j}>1$ for all $i$, we will have that the two copies of $F_i$ do not share any edges.
 
     That such a permutation $\sigma$ exists for $i > 3$ is easy to see -- in that case, we can even pick such a permutation of the entire middle column first. In the case $i = 1$, there are no middle column vertices left once we remove the three distinct ones, and for the cases $i = 2, 3$, the reader is invited to look at Figure~\ref{fig:appendix_graphs_Fi} and verify that the construction can be performed then as well.
 
