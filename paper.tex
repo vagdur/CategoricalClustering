@@ -115,6 +115,14 @@ We also give a structural result for when two representable clustering schemes a
     A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $f_*(p) \subseteq q$.
 \end{definition}
 
+\begin{remark}
+    Notice that this definition does not exclude the case of one part properly containing another part. However, if we have a partitioned set $(V,P)$ with two parts $p \subsetneq q$, we can always remove the part $p$ to get a new partitioned set $(V, P \setminus \{p\})$, which will be isomorphic to $(V, P)$ in $\Pset$ via the identity function on the set $V$. We will call such parts which are properly contained in other parts \emph{spurious} parts.
+
+    So, up to isomorphism, we need not care about such parts -- however, allowing them in our definition makes some of our constructions clearer, and so we choose to keep them in our definition. One might think that we should instead have picked a stronger notion of morphism, to make these be non-isomorphic, but we will see in Example~\ref{ex:scandalous_morphism}, this would break the functoriality of our generalized notion of connected components.
+    
+    In particular, partitioned sets of the form $(V, \{V,W\})$ arise as the image of graphs under this connected components functor, and morphisms between graphs turn into morphisms from $(V, \{V,W\})$ to $(V, \{V,W'\})$ for arbitrary choices of $W$ and $W'$. So the fact that the spurious part $W$ was allowed to move around arbitrarily is in fact a feature, not a bug, of our definition.
+\end{remark}
+
 \begin{definition}
     For a partitioned set $\mathcal{A} = (V,P)$ and a subset $p$ of its underlying set, we define the restriction of $\mathcal{A}$ to $p$, $\mathcal{A}|_p$, by that its underlying set is $p$, and its set of parts is given by
     $$\left\{q \cap p \given q \in P, q\cap p\right\},$$
@@ -124,10 +132,6 @@ We also give a structural result for when two representable clustering schemes a
 \begin{definition}
     The category $\Psetno$ of sets with non-overlapping partitions is the full subcategory of $\Pset$ whose objects have disjoint set covers. We may equivalently think of it as the category of sets equipped with equivalence relations.
 \end{definition}
-
-It is worth remarking here that our definition of a morphism of partitioned sets is very weak. While it does, in the case of non-overlapping partitions, behave as expected, some perhaps surprising things can happen in the overlapping case. For example, for any set $V$ and any two subsets $W, W' \subseteq V$, the identity function $V \to V$ is a morphism from $(V, \{V, W\}$ to $(V, \{V, W'\})$ -- so in a sense it looks like the part $W$ was allowed to ``move around'' arbitrarily.
-
-It turns out, however, that we actually need a definition this general -- we will see that such ``scandalous'' morphisms in fact arise as the images of morphisms in the category of graphs under a natural generalization of connected components, which will be central to our results. \hl{add reference to example where this happens}
 
 \begin{definition}
     An overlapping clustering scheme is a function $\Clust$ that sends hypergraphs to sets with overlapping partitions, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E,\ea)$ to $P = (W, P)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$. We will often abuse our notation slightly and write $p \in \Clust(G)$ when what we mean is that $\Clust(G) = (V,P)$ and $p \in P$.
@@ -424,7 +428,7 @@ With this result in hand, we can now give a proof of the existence of a represen
 
 \section{Equivalence of representability and excisiveness}
 
-In the $k = 1$ case, it turns out that representability is equivalent to excisiveness plus functoriality, and so we can give a complete characterization of representable clustering schemes in this case. This is known from \hl{add citation}.
+In the $k = 1$ case, where we get non-overlapping partitions, it turns out that representability is equivalent to excisiveness plus functoriality, and so we can give a complete characterization of representable clustering schemes in this case. This is known from \hl{add citation}.
 
 In the case where $k > 1$, interesting things start happening, and so we will need a weaker notion than equality of clustering schemes.
 
@@ -437,12 +441,14 @@ In the case where $k > 1$, interesting things start happening, and so we will ne
 \end{definition}
 
 \begin{remark}
-    Notice that this means that if $\Clust_1$ refines $\Clust_2$, it holds that for every graph $G = (V,E)$, the identity function on $V$ is a morphism from $\Clust_1(G)$ to $\Clust_2(G)$ and from $\Clust_2(G)$ to $\Clust_1(G)$ -- that is, it is an isomorphism of partitioned sets.
-
-    Thus, if $\Clust_1$ refines $\Clust_2$ and both are functorial, the two clustering schemes are in fact naturally isomorphic as functors from $\G$ to $\Pset$. Our notion of one clustering scheme refining another is therefore, in this case, a stronger notion than isomorphism of functors.
+    Essentially, what this notion is saying is that for every graph $G$, $\Clust_1(G)$ is $\Clust_2(G)$, except possibly with some spurious parts added. Thus, this is a weaker notion than outright equality of clustering schemes. 
+    
+    However, this means that if $\Clust_1$ refines $\Clust_2$, it holds for every graph $G = (V,E)$ that the identity function on $V$ is an isomorphism between $\Clust_1(G)$ and $\Clust_2(G)$. Thus, if $\Clust_1$ refines $\Clust_2$ and both are functorial, the two clustering schemes are in fact naturally isomorphic as functors from $\G$ to $\Pset$.
 \end{remark}
 
-Notice that this is a weaker notion than equality of clustering schemes, since it allows the addition of sub-parts to a part, as shown in Figure~\hl{draw and add figure}. However, in the non-overlapping case, it is easily seen that $\Clust_1$ refines $\Clust_2$ if and only if $\Clust_1 = \Clust_2$.
+\begin{remark}
+    If both $\Clust_1$ and $\Clust_2$ send graphs to non-overlapping partitions, it is easily seen that $\Clust_1$ refines $\Clust_2$ if and only if $\Clust_1 = \Clust_2$, so it should not be too surprising that we get refinement of clustering schemes instead of equality when we generalize from the non-overlapping case.
+\end{remark}
 
 \begin{theorem} \label{main_theorem}
     Any representable clustering scheme is excisive and functorial. Any excisive and functorial clustering scheme is refined by a representable clustering scheme, and so in particular is isomorphic to a representable clustering scheme.
