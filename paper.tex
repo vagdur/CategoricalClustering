@@ -94,7 +94,7 @@ We also give a structural result for when two representable clustering schemes a
 \section{Definitions of our terms}
 
 \begin{definition}
-    The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a triple $(V,E,\ea)$ of a finite set $V$ of vertices, a finite set $E$ of edges that is disjoint from $V$, and a function $\ea: E \to 2^V$ assigning each edge its vertex set. Notice that this allows us to have multiple edges with the same edge set. To simplify some technical points, we will assume that all our hypergraphs have loops at every vertex, that is, that for each $v \in V$ there is an $e \in E$ such that $\ea(e) = \{v\}$. \hl{Where do we actually need the assumption of loops at every vertex?}
+    The category of hypergraphs $\G$ has as its objects hypergraphs, which we consider to be a triple $(V,E,\ea)$ of a finite set $V$ of vertices, a finite set $E$ of edges that is disjoint from $V$, and a function $\ea: E \to 2^V$ assigning each edge its vertex set. Notice that this allows us to have multiple edges with the same edge set.
     
     A morphism from $H = (V,E,\ea)$ to $G = (V', E',\ea')$ is an injective set function $f: V \to V'$ such that, for every $e \in E$, there is an $e' \in E'$ such that $f_*(\ea(e)) = \ea'(e')$. That is, a morphism from $H$ to $G$ is a way of realising $H$ as a sub-hypergraph of $G$.
 \end{definition}
@@ -110,7 +110,7 @@ We also give a structural result for when two representable clustering schemes a
 \end{definition}
 
 \begin{definition}
-    The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set cover $P \subseteq 2^V$. That is, we assume that for each $v \in V$ there is at least one $p \in P$ such that $v \in p$. \hl{This is where we needed the assumption of loops at every vertex -- we could also instead remove both that assumption and the assumption that all vertices are in at least one part.}
+    The category $\Pset$ of sets with overlapping partitions has as its objects finite sets $V$ together with a set of parts $P \subseteq 2^V$. We require neither that the parts be disjoint, nor that they cover the entire set $V$.
 
     A morphism in $\Pset$ from $(V,P)$ to $(W,Q)$ is a set function $f: V \to W$ such that for every $p \in P$, there exists a $q \in Q$ such that $f_*(p) \subseteq q$.
 \end{definition}
@@ -248,10 +248,12 @@ Unfortunately, this $\Upsilon$ is not in general a functor, since there is no wa
 With all this in hand, we are finally able to define the connected components of a hypergraph.
 
 \begin{definition}
-    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by that, for any $G$, $\Pi_k(G) = \left(\Upsilon \circ \Pi \circ \Lk\right)(G)$. On morphisms, $\Pi_k(f)$ is simply the same underlying set function -- this is well defined, since clearly the underlying set of $\Pi_k(G)$ will be the same set as the vertex set of $G$.
+    For each $k$, the $k$-ly connected components functor $\Pi_k: \G \to \Pset$ is given by that, for any $G = (V,E)$, the parts of $\Pi_k(G)$ are the parts of $\left(\Upsilon \circ \Pi \circ \Lk\right)(G)$, and the underlying set of $\Pi_k(G)$ is $V$. On morphisms, $\Pi_k(f)$ is simply the same underlying set function -- this is well defined, since clearly the underlying set of $\Pi_k(G)$ will be the same set as the vertex set of $G$.
 
     We say that a graph is \emph{$k$-ly connected} if $\Pi_k(G)$ has the entire vertex set of $G$ as a part, and call the parts of $\Pi_k(G)$ \emph{$k$-ly connected components} of $G$.
 \end{definition}
+
+The reason we do not simply say that $\Pi_k(G) = \Upsilon(\Pi(\Lk(G)))$ is that if there is an isolated vertex of $G$, this vertex will not be in any edge of $\Lk(G)$, and so when we apply $\Upsilon \circ \Pi$, it would not be in the underlying set. Thus our definition is the necessary choice to not forget about the isolated vertices.
 
 That this one is a functor also requires a proof, since it is defined as a composition of some things one of which is not itself a functor. However, the fact that the first two things are functors will be helpful in the proof.
 
