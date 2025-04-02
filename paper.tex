@@ -403,17 +403,19 @@ With this result in hand, we can now give a proof of the existence of a represen
 
     To prove this, let us first define
     $$\bar{\Rset} = \left\{G \in \G \given \Phi_\Rset(G) \text{ is } 1\text{-ly connected.}\right\}$$
-    as the set of all graphs which $\Phi_\Rset$ sends to $1$-ly connected graphs. By Lemma~\ref{lemma_connected_representation_hull} respectively, $\Pi_{\bar{\Rset},1} = \Pi_{\Rset,1}$, and $\bar{\Rset}$ is the greatest set with this property.
+    as the set of all graphs which $\Phi_\Rset$ sends to $1$-ly connected graphs. By Lemma~\ref{lemma_connected_representation_hull}, $\Pi_{\bar{\Rset},1} = \Pi_{\Rset,1}$, and $\bar{\Rset}$ is the greatest set with this property.
 
     It is not hard to see that any graph in $\bar{\Rset}$ has to contain a triangle, since $\Phi_\Rset$ will send any triangle-free graph to a graph with no edges, which is obviously not connected.
 
     Now suppose for contradiction that $\Gset$ is a finite set of graphs such that $\Phi_\Gset = \Phi_{\bar{\Rset}}$. Lemma~\ref{lemma_connected_representation_hull} implies that we must have $\Gset \subset \bar{\Rset}$, since if there were a $G \in \Gset \setminus \bar{\Rset}$ it'd be sent to a $1$-ly connected graph by $\Phi_\Gset$, and thus also by $\Phi_{\bar{\Rset}}$, since we've assumed $\Phi_\Gset = \Phi_{\bar{\Rset}}$ -- but we chose $\bar{\Rset}$ so that it already contains everything sent to a connected graph by $\Phi_{\bar{\Rset}}$.
 
     So, let
-    $$r = \max_{G \in \Gset} \max_{u \in V(G)} \min_{\substack{v \in V(G)\\v \text{ is in a triangle}}} d(u, v).$$
-    That is, $r$ is the furthest any vertex in any graph in $\Gset$ is from a triangle. We claim that $\Phi_\Gset$ will not send $R_{r + 1}$ to a connected graph, proving it is not equal to $\Phi_{\bar{\Rset}}$, giving our contradiction.
+    $$r = \max_{\substack{G \in \Gset\\G\text{ simple}}} \max_{u \in V(G)} \min_{\substack{v \in V(G)\\v \text{ is in a triangle}}} d(u, v),$$
+    where $d(u,v)$ is the distance between $u$ and $v$ in $G$. That is, $r$ is the furthest any vertex in any graph in $\Gset$ is from a triangle. We claim that $\Phi_\Gset$ will not send $R_{r + 1}$ to a $1$-ly connected graph, proving it is not equal to $\Phi_{\bar{\Rset}}$, giving our contradiction.
 
-    That this is so is actually easy to see -- if $R_{r + 1}$ were sent to a connected graph, that must in particular mean there is an edge in $\Phi_\Gset(R_{r + 1})$ between the tail vertex and its neighbour. So there is some morphism from some $G \in \Gset$ that hits both vertices. However, such a morphism must also map the triangle in $G$ onto the triangle in $R_{r + 1}$, since that is the only place the triangle can go. Then, however, it cannot also reach to the tail -- the tail is further away from the triangle than any vertex in any $G$ is from the triangle. Thus, no such morphism can exist, and we are done. \hl{This paragraph needs a bit more checking that everything still works in the hypergraph case.}
+    That this is so is actually easy to see -- if $R_{r + 1}$ were sent to a $1$-ly connected graph, that must in particular mean there is an edge in $\Phi_\Gset(R_{r + 1})$ containing the tail vertex and its neighbour. So there is some morphism from some $G \in \Gset$ that hits both vertices -- and clearly there is never a morphism from a non-simple graph into a simple graph, and so this $G$ must be simple.
+    
+    Now, we know that $G$ contains a triangle, which has to be sent by this morphism onto the triangle in $R_{r + 1}$, since that is the only place it can go -- and since the morphism is by definition injective, this $G$ cannot contain more than one triangle, since otherwise both triangles would have to be sent onto the one triangle in $R_{r+1}$. Then, however, this morphism cannot also hit the tail of $R_{r+1}$ -- the tail is further away from the triangle than any vertex in any simple $G \in \Gset$ is from a triangle. Thus, no such morphism can exist, and we are done.
 \end{proof}
 
 \begin{remark}
