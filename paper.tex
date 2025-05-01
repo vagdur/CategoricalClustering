@@ -243,7 +243,7 @@ So, now we have the line graph functor, which gives us a simple graph which we c
 \begin{definition}
     For any set $X$, let
     $$\upsilon(X) = \bigcup_{x \in X} x,$$
-    that is, we send $X$ to the union of all its elements.\footnote{\hl{Jokes:} For the first time in my mathematical life, the fact that all mathematical objects under ZFC are themselves sets has turned out to be useful for simplifying things.} 
+    that is, we send $X$ to the union of all its elements. The reader may be momentarily confused that we are taking the union of elements of a set we did not construct as a set of sets -- how do we know that the things we are taking a union of are actually sets, so this is well-defined? However, she can find solace in the fact that, under the axioms of ZFC, \emph{all} objects are sets, and so this is well defined -- and perhaps one of very few instances where ``all objects are sets'' is useful.
     
     We define the part-union operation $\Upsilon: \Pset \to \Pset$ by that for each $\mathcal{A} = (V, P) \in \Pset$, we let $\Upsilon(\mathcal{A}) = \mathcal{B} = (\upsilon(V),\upsilon_*(P))$.
 \end{definition}
