@@ -674,9 +674,21 @@ The categories we study in this paper are all concrete, that is, their objects a
 
 In this setting most of the requirements of a functor are trivial -- of course it will behave correctly with identity morphisms and composition, because in a sense it isn't doing anything to the morphisms. Therefore, the one thing we need to check when proving that things are functors will be that morphisms do map to morphisms, that is, that a function that respects the structure on the sets in the first category will also respect the structure we have in the second category.
 
+The final categorical concept we will need is that of two \emph{functors} being isomorphic, since our classification result ends up giving us not equality but just isomorphism of clustering schemes.
+
 \begin{definition}
-    Given two categories $\mathcal{A}$ and $\mathcal{B}$, the \emph{product category} $\mathcal{A} \times \mathcal{B}$ is the category whose objects are pairs $(a,b)$ of an object $a$ from $\mathcal{A}$ and an object $b$ from $\mathcal{B}$. A morphism in $\mathcal{A} \times \mathcal{B}$ from $(a,b)$ to $(a',b')$ is a pair of a morphism in $\mathcal{A}$ from $a$ to $a'$ and a morphism in $\mathcal{B}$ from $b$ to $b'$.
+    Suppose $\mathcal{A}$ and $\mathcal{B}$ are two categories, and $F$ and $G$ are two functors from $\mathcal{A}$ to $\mathcal{B}$. A \emph{natural transformation} $\eta$ from $F$ to $G$ is a mapping that associates to each object $a \in \mathcal{A}$ an element $\eta_a \in \Hom(F(a), G(a))$, such that for every object $b \in \mathcal{A}$ and each morphism $f \in \Hom(a, b)$, the following diagram commutes:
+    $$\begin{tikzcd}
+        F(a) \arrow[r, "F(f)"] \arrow[d, "\eta_a"'] & F(b) \arrow[d, "\eta_b"]\\
+        G(a) \arrow[r, "G(f)"'] & G(b)
+    \end{tikzcd}$$
+    In other words, the following equation must hold for all $f \in \Hom(a,b)$:
+    $$\eta_b \circ F(f) = G(f) \circ \eta_a.$$
+
+    Two functors $F$ and $G$ are \emph{isomorphc} if there exists a natural transformation $\eta$ from $F$ to $G$ such that $\eta_a$ is an isomorphism for all $a \in \mathcal{A}$.
 \end{definition}
+
+This notion is very general -- in our actual result, both $\mathcal{A}$ and $\mathcal{B}$ will be concrete categories, and for each $a$, $a$, $F(a)$ and $G(a)$ will have the same underlying set, and $f$, $F(f)$, and $G(f)$ will be the same as functions on the underlying sets. So here we will be able to take each $\eta_a$ to be the identity function on the underlying set. So all the notation of the definition ends up referring to very simple things, in the end.
 
 \section{Proof of Lemma~\ref{lemma:excisive_and_functorial_not_representable}}\label{excisive_and_functorial_not_representable_appendix}
 
