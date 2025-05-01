@@ -135,7 +135,9 @@ It is worth remarking here that this is a very permissive definition of a partit
 \end{definition}
 
 \begin{definition}
-    The category $\Psetno$ of sets with non-overlapping partitions is the full subcategory of $\Pset$ whose objects have disjoint set covers. We may equivalently think of it as the category of sets equipped with equivalence relations.
+    The category $\Psetno$ of sets with non-overlapping partitions is the full subcategory of $\Pset$ whose objects have disjoint set covers. We may equivalently think of it as the category of sets equipped with partial equivalence relations, where the equivalence classes are the parts of the partitioned set.
+    
+    The partial-ness of the equivalence relations here comes from the fact that we do not require every vertex to be contained in a part. This is just an artifact of our definitions, which lead to us saying that an isolated vertex belongs to no part, instead of belonging to a part of its own. While this is somewhat unnatural, the only ``fix'' to this would be to require a loop at every vertex of a graph, which comes with its own awkwardness.
 \end{definition}
 
 \begin{definition}
