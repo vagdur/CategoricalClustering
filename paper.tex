@@ -262,7 +262,7 @@ With all this in hand, we are finally able to define the connected components of
     We say that a graph is \emph{$k$-ly connected} if $\Pi_k(G)$ has the entire vertex set of $G$ as a part, and call the parts of $\Pi_k(G)$ \emph{$k$-ly connected components} of $G$.
 \end{definition}
 
-The reason we do not simply say that $\Pi_k(G) = \Upsilon(\Pi(\Lk(G)))$ is that if there is an isolated vertex of $G$, this vertex will not be in any edge of $\Lk(G)$, and so when we apply $\Upsilon \circ \Pi$, it would not be in the underlying set. Thus our definition is the necessary choice to not forget about the isolated vertices.
+The reason we do not simply say that $\Pi_k(G) = \Upsilon(\Pi(\Lk(G)))$ is that if there is an isolated vertex of $G$, this vertex will not be in any edge of $\Lk(G)$, and so when we apply $\Upsilon \circ \Pi$, it would not be in the underlying set. Thus our definition is the necessary choice to not forget about the isolated vertices entirely -- we do still end up declaring that they are in no part, but there seems to be no nice way of defining that problem away.
 
 That this one is a functor also requires a proof, since it is defined as a composition of some things one of which is not itself a functor. However, the fact that the first two things are functors will be helpful in the proof.
 
