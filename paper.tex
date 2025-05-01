@@ -181,7 +181,7 @@ That this definition does in fact always give us a functor is something that nee
     For any representing set $\Rset$ of graphs, $\Phi_\Rset$ is indeed an endofunctor on $\G$.
 
     \begin{proof}
-        That it always gives a graph and that it respects identity morphisms and composition of morphisms is easy to see. The only thing we actually need to check is that if $f: H \to G$ is a morphism, then $\Phi_\Rset(f) = f: \Phi_\Rset(H) \to \Phi_\Rset(G)$ is also a morphism.
+        That it always gives a graph and that it respects identity morphisms and composition of morphisms is easy to see. The only thing we actually need to check is that if $f: G \to G'$ is a morphism, then $\Phi_\Rset(f) = f: \Phi_\Rset(G) \to \Phi_\Rset(G')$ is also a morphism.
 
         Unwrapping this statement, what we need is that, for any two graphs $(G, E, \ea)$ and $(G', E', \ea')$ and any morphism $f: G \to G'$, whenever $e$ is an edge of $\Phi_\Rset(G)$, there is an edge $e'$ of $\Phi_\Rset(G')$ such that $f_*(\ea_{\Phi_\Rset(G)}(e)) = \ea'_{\Phi_\Rset(G')}(e')$.
 
@@ -209,14 +209,14 @@ For hypergraphs, we get more than one possible notion of line graph, and therefo
     For each $G = (V,E,\ea)$:
     \begin{enumerate}
         \item The vertices of $\Lk(G)$ are the vertex sets of the edges of $G$. That is, 
-        $$E(\Lk(G)) = \left\{\ea(e) \given e \in E\right\}.$$
+        $$V(\Lk(G)) = \left\{\ea(e) \given e \in E\right\}.$$
         Notice that this means that if there are multiple edges in $E$ with the same vertex set, we still only get one vertex of $\Lk(G)$ corresponding to them.
         \item there is an edge $uv \in E(\Lk(G))$ whenever $\abs{u \cap v} \geq k$, that is, if the two edges of $G$ overlap in at least $k$ vertices. So if $k = \infty$, we get a trivial case where the line graph has no edges.
     \end{enumerate}
 
-    We define, for a morphism $f: G \to H$ in $\G$, that $\Lk(f) = f_*: 2^{V(G)} \to 2^{V(G)}$. This does at least send objects of the right type to objects of the right type, because the vertices of $\Lk(G)$ and $\Lk(H)$ are by construction sets of vertices of $G$ and $H$ respectively.
+    We define, for a morphism $f: H \to G$ in $\G$, that $\Lk(f) = f_*: 2^{V(H)} \to 2^{V(G)}$. This does at least send objects of the right type to objects of the right type, because the vertices of $\Lk(H)$ and $\Lk(G)$ are by construction sets of vertices of $H$ and $G$ respectively.
 
-    However, since $E(\Lk(H))$ does not contain \emph{every} subset of $V(H)$, we do need to check that for a vertex $v$ of $\Lk(G)$, $f_*(v)$ is indeed a vertex of $\Lk(H)$. To see this, note that this $v$ is by construction the vertex set of some edge $e \in E(G)$, and since $f$ is a morphism, there exists some edge $e' \in E(H)$ such that $f_*(\ea_G(e)) = \ea_H(e')$ -- and this $\ea_H(e')$ is a vertex of $\Lk(H)$.
+    However, since $V(\Lk(G))$ does not contain \emph{every} subset of $V(G)$, we do need to check that for a vertex $v$ of $\Lk(H)$, $f_*(v)$ is indeed a vertex of $\Lk(G)$. To see this, note that this $v$ is by construction the vertex set of some edge $e \in E(H)$, and since $f$ is a morphism, there exists some edge $e' \in E(G)$ such that $f_*(\ea_H(e)) = \ea_G(e')$ -- and this $\ea_G(e')$ is a vertex of $\Lk(H)$.
 \end{definition}
 
 That this line graph functor is in fact a functor definitely requires a proof, since the statement is far from obvious.
@@ -272,7 +272,7 @@ That this one is a functor also requires a proof, since it is defined as a compo
 \begin{proof}
     As usual, once we have checked that $\Pi_k$ does send morphisms to morphisms, it is trivial that it respects identity morphisms and composition.
 
-    So, suppose $G = (V,E)$ and $H = (W,F)$ are two graphs, and $f: V \to W$ is a morphism from $G$ to $H$. Let $E' = \left\{\ea(e) \given e \in E\right\}$ and $F'$ similarly be the set of vertex sets of $H$.
+    So, suppose $G = (V,E)$ and $H = (W,F)$ are two graphs, and $f: V \to W$ is a morphism from $G$ to $H$. Let $E' = \left\{\ea(e) \given e \in E\right\}$ and $F'$ similarly be the set of vertex sets of edges of $H$.
     
     Now let $\mathcal{A} = (E',P) = \Pi(\Lk(G))$, $\mathcal{B} = (F',P') = \Pi(\Lk(G))$ be the connected components of the $k$-line graphs of $G$ and $H$ respectively. Further let $\tilde{\mathcal{A}} = (V,Q) = \Upsilon(\mathcal{A})$ and $\tilde{\mathcal{B}} = (W,Q') = \Upsilon(\mathcal{B})$.
 
@@ -299,7 +299,7 @@ That this one is a functor also requires a proof, since it is defined as a compo
 \end{figure}
 
 \begin{example}\label{ex:scandalous_morphism}
-    At this point, we can illustrate why our class of morphisms of partitioned sets has to be so large. Consider the graphs $G$ and $H$ shown in Figure~\ref{fig:scandalous_morphism}. $G$ has eight vertices, and an edge $v_1 v_2 v_i$ for each $i > 2$, illustrated in blue, and an edge $v_3 v_4 v_j$ for $j = 5, 6, 7$, illustrated in green. $H$ is a supergraph of $G$, with all the edges of $G$ and two additional edges, $v_1 v_2 v_3 v_4$ and $v_5 v_6 v_7 v_8 v_9$, illustrated in red and orange. So that the identity function on the vertex set is a morphism from $G$ to $H$ is clear.
+    At this point, we can illustrate why our class of morphisms of partitioned sets has to be so large. Consider the graphs $G$ and $H$ shown in Figure~\ref{fig:scandalous_morphism}. $G$ has eight vertices, and an edge $v_1 v_2 v_i$ for each $i > 2$, illustrated in blue, and an edge $v_3 v_4 v_j$ for $j = 5, 6, 7$, illustrated in green. $H$ is a supergraph of $G$, with all the edges of $G$ and two additional edges, $v_1 v_2 v_3 v_4$ and $v_5 v_6 v_7 v_8$, illustrated in red and orange. So that the identity function on the vertex set is a morphism from $G$ to $H$ is clear.
 
     Now consider the images of these two graphs under $\Pi_2$. In $G$, the blue edges will form a clique in the $2$-line graph, and the green edges will form another clique. No green edge overlaps any blue edge in more than a single vertex, so these two cliques will be the connected components, and so the parts of $\Pi_2(G)$ will be the entire vertex set and $\{v_3, v_4, v_5, v_6, v_7\}$.
 
@@ -311,8 +311,7 @@ That this one is a functor also requires a proof, since it is defined as a compo
 \begin{definition}\label{definition_representable_clustscheme}
     A clustering scheme $\Clust$ is \emph{representable} if $\Clust = \Pi_k \circ \Phi_\Rset$ for some representable endofunctor $\Phi_\Rset$ and some $k \geq 1$. Notice that this means that all representable clustering schemes are functorial, being the composition of two functors.
 
-    Given a set $\Rset$ of graphs and an integer $k$, we write $\Pi_{\Rset,k}$ for the representable clustering scheme induced by $(\Rset,k)$, that is,
-    $$\Pi_{\Rset,k} = \Pi_k \circ \Phi_\Rset = \Upsilon \circ \Pi \circ \Lk \circ \Phi_\Rset.$$
+    Given a set $\Rset$ of graphs and an integer $k$, we write $\Pi_{\Rset,k}$ for the representable clustering scheme induced by $(\Rset,k)$, that is, $\Pi_{\Rset,k} = \Pi_k \circ \Phi_\Rset$.
 \end{definition}
 
 \begin{example}
