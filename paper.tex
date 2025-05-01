@@ -139,7 +139,9 @@ It is worth remarking here that this is a very permissive definition of a partit
 \end{definition}
 
 \begin{definition}
-    An overlapping clustering scheme is a function $\Clust$ that sends hypergraphs to sets with overlapping partitions, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E,\ea)$ to $P = (W, P)$, we require that $V = W$. We say that it is \emph{functorial} if it is a functor from $\G$ to $\Pset$. We will often abuse our notation slightly and write $p \in \Clust(G)$ when what we mean is that $\Clust(G) = (V,P)$ and $p \in P$.
+    A \emph{(general) clustering scheme} is a function $\Clust$ that sends hypergraphs to partitioned sets, with the same underlying set -- that is, if $\Clust$ sends $G = (V,E,\ea)$ to $P = (W, P)$, we require that $V = W$. If the image of $\Clust$ is in $\Pset$, we say that it is a \emph{non-overlapping} clustering scheme.
+    
+    If, in addition, $\Clust$ becomes a functor from $\G$ to $\Pset$ by defining $\Clust(f) = f$ as functions on the underlying set, we say that it is \emph{functorial}.
 \end{definition}
 
 One good way to think of these definitions is as a kind of generalization of monotonicity. If we were restricting to only studying clustering of graphs on a fixed underlying set, the statement that there is a morphism from $G$ to $H$ becomes precisely the statement that $G \subseteq H$, that is that $G$ is less than $H$ in the subgraph inclusion order. Likewise, if we restricted to only studying non-overlapping partitions, there is a natural partial order on the set of equivalence relations on the underlying vertex set, given by that $\sim < \approx$ if $\sim$ is a refinement of $\approx$, or equivalently if $\approx$ is a coarsening of $\sim$.
