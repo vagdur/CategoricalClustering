@@ -315,17 +315,21 @@ That this one is a functor also requires a proof, since it is defined as a compo
 \end{definition}
 
 \begin{example}
-    If we restrict to considering only simple graphs, it is very easy to see that the connected components functor $\Pi$ is representable, since we can simply take $\Rset = \{K_2\}$ and $k = 1$ -- then $\Phi_\Rset$ just sends a graph to itself, and of course connected components of the $1$-line graph of a simple graph and connected components of the graph itself are the same thing.
+    If we restrict to considering only simple graphs with loops at every vertex, it is very easy to see that the connected components functor $\Pi$ is representable on this subcategory. In particular, we can take $\Rset = \{K_2\}$ and $k = 1$ -- then $\Phi_\Rset(G)$ is just $G$ with every edge replaced with two copies of itself, since for each edge $uv$ there are two morphisms from $K_2$ into $G$ hitting $u$ and $v$, one for each order of the two vertices.
+    
+    So $\Phi_\Rset(G)$ and $G$ have the same connected component, and connected components of the $1$-line graph of a simple graph and connected components of the graph itself are the same thing, and so $\Pi_{\Rset,1}(G) = \Pi(G)$.
     
     For hypergraphs, we need to take $\Rset = \left\{E_n \given n \in \N\right\}$, where $E_n$ is the hypergraph with $n$ vertices and a single edge containing all the vertices. Then all $\Phi_\Rset$ will do to a graph is to replace each edge with $k$ vertices with $k!$ copies of itself, which does not change the set of vertex sets of edges, and so again we recover the usual notion of connected components by looking at the connected components of the $1$-line graph of the graph.
     
     In fact any set $\Rset$ of connected graphs containing $E_n$ for each $n$ will represent $\Pi_1$ -- but note that they will in general give inequivalent endofunctors on $\G$.
 \end{example}
 
-One somewhat surprising fact is that there are actually representable clustering schemes that are not finitely representable.
+It is not too hard to see that there is no \emph{finite} $\Rset$ representing $\Pi_1$ -- for if there were, there would be some $R \in \Rset$ and some $e \in E(R)$ such that $\abs{\ea(e)} = \ell$ is maximal, and so for any $j > \ell$, there would be no morphism from any $R' \in \Rset$ into $E_j$, since there are no edges of $R'$ with more than $\ell$ vertices. So $\Pi_{\Rset,1}(E_j)$ would have no parts, while clearly $\Pi_1(E_j)$ has one part containing all the vertices. So $\Pi_{\Rset,1} \neq \Pi_1$ for any finite $\Rset$.
+
+So far, this is perhaps not too surprising -- letting the size of edges go to infinity breaks the idea of a finite representation. However, something much stronger is true: There is an infinite set $\Rset$ of \emph{simple} graphs such that $\Pi_{\Rset,1}$ is not finitely representable.
 
 \begin{theorem} \label{theorem_exists_not_finitely_representable}
-    There exists a representable clustering scheme $\Pi_{\Rset,1}$ which is not \emph{finitely} representable, that is, it is not equal to $\Pi_{\Gset,1}$ for any finite set of graphs $\Gset$.
+    There exists an infinite set $\Rset$ of simple graphs such that $\Pi_{\Rset,1}$ is not \emph{finitely} representable, that is, it is not equal to $\Pi_{\Gset,1}$ for any finite set of graphs $\Gset$.
 
     A fortiori, there exists a representable endofunctor that is not finitely representable.
 \end{theorem}
