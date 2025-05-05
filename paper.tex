@@ -34,22 +34,23 @@
 %\date{12 October 2023}
 \maketitle
 \begin{abstract}
-    Community detection in graphs is a problem that is likely to be relevant whenever network data appears, and consequently the problem has received much attention with many different methods and algorithms applied. However, many of these methods are hard to study theoretically, and they optimise for somewhat different goals. A general and rigorous account of the problem and possible methods remains elusive.
-
-    We study the class of all clustering methods that are monotone under addition of vertices and edges, phrasing this as a functoriality notion. We show that if additionally we require the methods to have no resolution limit in a strong sense, this is equivalent to a notion of representability, which requires them to be explainable and determined by a representing set of graphs. We show that representable clustering methods are always computable in polynomial time, and in any nowhere dense class they are computable in roughly quadratic time.
-
-    Finally, we extend our definitions to the case of hierarchical clustering, and give a notion of representability for hierarchical clustering schemes.
 \end{abstract}
 
 \section{Introduction}
 
 The problem of inferring community structure from a graph is one that appears in many different guises in different research areas. It is useful for everything from assigning research papers to subfields of physics~\cite{community_structure_physrev}, assessing the development of nano-medicine by studying patent cocitation networks~\cite{canadian_nanotech_patents}, studying brain function via the community structure of the connectome~\cite{connectome_analysis}, understanding how different bird species spread various plant seeds~\cite{bird_seed_networks}, to studying hate speech on Twitter~\cite{twitter_hate_speech}.
 
-Despite, or perhaps because of, the widespread nature of this problem, there is no universally agreed on definition of what is actually meant by community structure. This leads to varying methods being used to solve the problem, that do not necessarily give the same results. One of the most popular definitions in practice is the modularity of a partition, introduced by Newman and Girvan~\cite{NewmanGirvan} -- it is the method used in all the examples given in the previous paragraph. There are however many other methods, such as the flow-based infomap method motivated by information theory~\cite{infomap}, more statistically sound methods assuming a generative model~\cite{Peixoto_clustering_method}, novel graph neural network methods~\cite{node2vec_clustering}, and many more~\cite{multidisciplinary_review_methods}.
+This problem is related to a broader problem of clustering, where the data may take the form of dissimilarity metric on items. In this guise, the study of clustering has a long history, with an early example being the book by Jardine and Sibson~\cite{Jardine_Sibson_1971} on mathematical taxonomy from 1971. In fact, reading the introduction to that book already prefigures many of the issues discussed later in the literature, such as the difficulty of determining what exactly is meant by ``community structure'' or ``clustering'', and the lack of distinction between algorithms for finding partitions and the definitions of the structures we attempt to find.
 
-One thing nearly all of these methods have in common is that they are in a sense black boxes -- they do not give you any way of answering the question of \emph{why} two vertices were put in the same part. They are also generally hard to study in a rigorous mathematical way, resulting in few theoretical guarantees for their behaviour. While modularity has proven itself very useful in practice, it is in fact guaranteed to behave in undesirable ways in certain settings.
+Unfortunately, the development since then has seen the development of many directions of research and varying methods, without much contact between the different approaches. This has lead to a confusion of various methods for community detection on graphs, where there is rarely any clear theoretical justification for preferring one method over another.
 
-In particular, modularity suffers from a ``resolution limit'', wherein it cannot ``see'' things happening in subgraphs that are small compared to the total graph, resulting in very unexpected behaviour~\cite{resolution_limit}. In Figure~\ref{fig:resolution_limit} we see one illustration of this phenomenon -- one would hope that what happens in one connected component cannot affect the other, but the resolution limit results in this undesirable behaviour.
+In the literature on community detection on graphs, the most common approach is to define a quality function on partitions, and then treat community detection as an optimization problem.
+
+One of the most popular methods in practice, namely modularity optimization~\cite{NewmanGirvan}, is of this type -- it is the method used in all the examples given in the first paragraph. Other noteworthy methods in broadly the same strand of research are the flow-based infomap method motivated by information theory~\cite{infomap}, more statistically sound methods assuming a generative model~\cite{Peixoto_clustering_method}, novel graph neural network methods~\cite{node2vec_clustering}, but many more exist~\cite{multidisciplinary_review_methods}.
+
+What the methods in this research direction have in common is that they are generally black boxes  -- they do not give you any interpretable way of answering the question of \emph{why} two vertices were put in the same part. They are also generally hard to study in a rigorous mathematical way, resulting in few theoretical guarantees for their behaviour, and computationally, the optimization problem is normally not tractable.
+
+For example, modularity suffers from a resolution limit, wherein it cannot ``see'' things happening in subgraphs that are small compared to the total graph, resulting in very unexpected behaviour~\cite{resolution_limit}. In Figure~\ref{fig:resolution_limit} we see one illustration of this phenomenon -- one would hope that what happens in one connected component cannot affect the other, but the resolution limit results in this undesirable behaviour.
 
 \begin{figure}
     \centering
@@ -60,24 +61,34 @@ In particular, modularity suffers from a ``resolution limit'', wherein it cannot
     \label{fig:resolution_limit}
 \end{figure}
 
-Another issue with studying modularity optimization from a theoretical perspective is the fact that computing it is NP-hard~\cite{modularity_NP_hard}. This means that when using modularity maximization in practice, one always needs a heuristic algorithm for finding good partitions, such as the Louvain~\cite{louvain} or Leiden~\cite{leiden} algorithms, which themselves do not have many known theoretical guarantees connecting them to modularity. Thus, one is left having to either study modularity itself, and hoping that the results say something about the results of these algorithms, or studying the algorithms themselves, and not directly saying anything about modularity.
+%Another issue with studying modularity optimization from a theoretical perspective is the fact that computing it is NP-Hard~\cite{modularity_NP_hard}. This means that when using modularity maximization in practice, one always needs a heuristic algorithm for finding good partitions, such as the Louvain~\cite{louvain} or Leiden~\cite{leiden} algorithms, which themselves do not have many known theoretical guarantees connecting them to modularity. Thus, one is left having to either study modularity itself, and hoping that the results say something about the results of these algorithms, or studying the algorithms directly, and not directly saying anything about modularity.
 
-These issues with the varying optimization based approaches to clustering lead us to investigating a more ``axiomatic'' approach to the problem -- that is, we want to specify a few properties that the clustering method must have, and then see what methods there are that satisfy these properties. Other than of course giving us guarantees on the behaviour of our methods, this approach also gives us much more straightforward algorithms which run in polynomial time, since we are no longer doing optimization, but in some sense just applying a decision rule for when vertices should be in the same part or not.
+In the literature on clustering based on dissimilarity measures, there has been much more attention to simpler methods, developing from the earliest studies of single-linkage clustering to more sophisticated versions of the same idea. In single-linkage clustering, we simply declare two objects to belong to the same part if they are sufficiently close, which leads to a very tractable and easily-analyzed method. However, it struggles with ``chaining'' effects, where two objects that are far apart are joined together by a chain of objects that are all close to each other.
 
-Our particular approach to this is motivated by the results of Carlsson and Mémoli~\cite{metric_space_clustering} for the analogous problem of clustering finite metric spaces. Like in their setting, there are three properties that are of interest:
+This class of methods has received sophisticated theoretical analysis beginning with the work of Carlsson and Mémoli~\cite{carlsson_mémoli_2013}, casting the problem of determining possible clustering methods in category-theoretical language as understanding properties of functors from the category of finite metric spaces to the category of sets with partitions. This line of research has also been extended into settings that cannot be represented as finite metric spaces, such as hypergraphs~\cite{} and directed graphs~\cite{}.
+
+In this line of research, we end up with three related concepts to describe our clustering methods:
 \begin{enumerate}
     \item \emph{Functoriality} is essentially a form of monotonicity under addition of edges or vertices to the graph. Adding a new edge or new vertex should only ever make communities more closely connected, it should never split them.
     \item \emph{Excisiveness} is a very strict version of requiring that there be no resolution limit -- instead we require that the method be idempotent on the parts it has found. That is, if we take some graph $G$, cluster it, and then look at the subgraph induced by any part, that graph has to be clustered into just a single large component, so we never discover new features at smaller scales.
-    \item \emph{Representability} is a type of explainability of the clustering method. A representable clustering method $\Phi_\Rset$ is determined by a set $\Rset$ of simple graphs, and the rule that two vertices of a graph $G$ will be in the same part if their neighbourhood looks like something in $\Rset$. This also gives us a simple algorithm to actually compute the partitioning of a graph, that runs in polynomial time for each fixed $\Rset$.
+    \item \emph{Representability} is a type of explainability of the clustering method. A representable clustering method $\Phi_\Rset$ is determined by a set $\Rset$ of graphs, and the rule that two vertices of a graph $G$ will be in the same part if their neighbourhood looks like something in $\Rset$. This also gives us, for simple graphs, an algorithm to actually compute the partitioning of a graph that runs in polynomial time for each fixed $\Rset$.
 \end{enumerate}
 
-Our main result classifies exactly the relationship between these properties, and shows that all representable clustering schemes are tractable on a large class of sparse graphs:
+Sometimes additional concepts are studied, but the basic picture is that we expect a clustering scheme to be representable if and only if it is functorial and excisive -- this is the well-known picture for simple graphs.
+
+We extend these results into the setting of finding \emph{overlapping} partitions of hypergraphs, where vertices are allowed to belong to more than one part. This direction has already begun to be explored in the setting of finite metric spaces~\cite{Culbertson_Guralnik_Hansen_Stiller_2016,Culbertson_Guralnik_Stiller_2018,Shiebler_2020}, but their results do not immediately apply to hypergraphs, since a finite metric space cannot model the full combinatorial structure of a hypergraph. They also do not extend the notion of representability to the overlapping setting.
+
+A similar idea to ours, of finding overlapping communities by looking for certain subgraphs (``motifs'' in their language), has recently seen some attention in the applied literature as well~\cite{Chen_Tsourakakis_2024,Hajibabaei_Seydi_Koochari_2024}.
+
+We very nearly get the same classification result as for simple graphs, except that one direction of the equivalence weakens to become only an isomorphism.
 
 \begin{theorem}[Main results]
-    A clustering scheme is representable if and only if it is excisive and functorial. Further, any such representable clustering scheme is computable in quadratic time on any graph class of bounded expansion.
+    Any representable clustering scheme is excisive and functorial. Any excisive and functorial clustering scheme is isomorphic to a representable clustering scheme. 
+    
+    Further, for any class $\mathcal{C}$ of simple graphs of bounded expansion and any finitely representable clustering scheme $\Pi_{\Rset,k}$, there exists an algorithm that computes $\Pi_{\Rset,k}(G)$ in time $O\left(\abs{V(G)}^{\alpha(\Rset)}\right)$ for any $G \in \mathcal{C}$, where $\alpha(\Rset)$ is the maximum independence number of any graph in the representing set $\Rset$.
 \end{theorem}
  
-We also give a structural result for when two representable clustering schemes are equal, and use this to prove that there exist representable clustering schemes that are not finitely representable. Finally, we extend our definition of a representable clustering scheme into the setting of hierarchical clustering schemes. Here, instead of just assigning a single clustering to each graph, we give one clustering for each ``scale'', giving a spectrum of clusterings of the graph from coarsest to finest. In this setting, we find that the connection to excisiveness no longer works.
+Finally, we also give a structural result for when two representable clustering schemes are equal, and use this to prove that there exist representable clustering schemes that are not finitely representable.
 
 \section{Preliminaries}
 
