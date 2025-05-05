@@ -621,40 +621,45 @@ Finally, in order to show that there is no other implication that holds between 
 
 \section{Computational complexity of representable clustering schemes}
 
-As stated in the introduction, one benefit of this approach to clustering is that it yields tractable algorithms for exactly computing the partitioning. In this section, we give a proof of this.
+As stated in the introduction, one benefit of this approach to clustering is that it, for simple graphs, yields tractable algorithms for exactly computing the partitioning. In this section, we give a proof of this.
 
 It should be clear that the only step in computing $\Pi_{\Rset,k}(G)$ that might be computationally hard is the step of computing $\Phi_\Rset(G)$, since the other steps are all obviously computable in linear time.
 
 The most naïve possible algorithm for computing $\Phi_\Rset(G)$ given a fixed set $\Rset$ of representing graphs and an $n$-vertex graph $G$ is to, for each $\omega \in \Rset$ and each $H \in \binom{V(G)}{\abs{\omega}}$, that is, each $\abs{\omega}$-sized subset $H$ of the vertices of $G$, check whether $G|_H$ contains a subgraph isomorphic to $\omega$. It is easy to see that this will give an algorithm that is polynomial in $n$, but with an exponent and constant depending on $\Rset$.
 
-What is more interesting is that we can get a quadratic time algorithm on any class of graphs of bounded expansion. Let us first recall what this means, before stating the lemma we will use.
+What is more interesting is that we can get an algorithm that is linear in $n$ and the number of edges in $\Phi_\Rset(G)$ on any class of graphs of bounded expansion. Let us first recall what this means, before stating the lemma we will use.
 
 \begin{definition}
-    A class of graphs $\mathcal{C}$ is said to have \emph{bounded expansion} if for every $t \in \N$ there exists a $c_t$ such that, whenever $H$ is a shallow minor of depth $t$ of some graph in $\mathcal{C}$, it holds that
+    A class of simple graphs $\mathcal{C}$ is said to have \emph{bounded expansion} if for every $t \in \N$ there exists a $c_t$ such that, whenever $H$ is a shallow minor of depth $t$ of some graph in $\mathcal{C}$, it holds that
     $$\frac{\abs{E(H)}}{\abs{V(H)}} \leq c(t).$$
 
     This notion generalizes both proper minor closed classes and classes of bounded degree, and can equivalently be defined in terms of low tree-depth decompositions.\cite{NESETRIL_bounded_expansion}
 \end{definition}
 
-To get our quadratic time algorithm, we will use the following result from~\cite[Corollary 18.2, p.~407]{sparsity_book}:
+Since bounded expansion is a sparseness property, it makes sense to expect that it cannot contain too many copies of any given graph, and so in particular $\Phi_\Rset(G)$ will not have too many edges.
+
+\begin{lemma}\label{lem:bound_edges_of_phirsetG}
+    For any finite set $\Rset$ of simple graphs, let $\alpha(\Rset) = \max_{H \in \Rset} \alpha(H)$ be the maximum independence number of any graph in $\Rset$. Then, for any graph class $\mathcal{C}$, there exists a constant $C_{\Rset,\mathcal{C}}$ such that for any graph $G \in \mathcal{C}$, $\abs{E\left(\Phi_\Rset(G)\right)} = O\left(\abs{V(G)}^{\alpha(\Rset)}\right)$.
+\end{lemma}
+\begin{proof}
+    Clearly it suffices to show this for the case $\Rset = \{H\}$ for a fixed graph $H$. Now, any graph class of bounded expansion has bounded degeneracy -- in particular, $c_0$ bounds the degeneracy.
+
+    Now, it is known from for example~\cite[Exercise 3.2, p.~59]{sparsity_book} that if $G$ is $c_0$-degenerate and $H$ is any graph, the number of copies of $H$ in $G$ is at most
+    $$\sum_{t=1}^{\alpha(H)} \mathrm{Acyc}_t(H) c_0^{\abs{H}-t} \abs{V(G)}^t,$$
+    where $\mathrm{Acyc}_t(H)$ is the number of acyclic orientations of $H$ with $t$ sinks, which clearly gives us the result.
+\end{proof}
+
+To get our algorithm, we will use the following result from~\cite[Corollary 18.2, p.~407]{sparsity_book}:
 
 \begin{lemma}\label{lemma_subgraph_counting_bounded_exp}
     Let $\mathcal{C}$ be a class with bounded expansion and let $H$ be a fixed graph. Then there exists a linear time algorithm which computes, from a pair $(G,S)$ formed by a graph $G \in \mathcal{C}$ and a subset $S$ of vertices of $G$, the number of isomorphs of $H$ in $G$ that include some vertex in $S$. There also exists an algorithm running in time $O(n) + O(k)$ listing all such isomorphs, where $k$ denotes the number of isomorphs.
 \end{lemma}
 
-Just applying this lemma for each $\omega \in \Rset$ with $S = V(G)$ immediately gets us that we can, for fixed $\Rset$, compute $\Phi_\Rset(G)$ in polynomial time.
+Just applying this lemma for each $\omega \in \Rset$ with $S = V(G)$ immediately gets us that we can, for fixed $\Rset$, compute $\Phi_\Rset(G)$ in time linear in $n$ and the number of edges of $\Phi_\Rset(G)$, which together with Lemma~\ref{lem:bound_edges_of_phirsetG} gets us a bound on the complexity in terms of $\alpha(\Rset)$.
 
 \begin{theorem}
-    For any finite set $\Rset$ of simple graphs and any class $\mathcal{C}$ of bounded expansion, there exists an algorithm that computes $\Phi_\Rset(G)$ for any graph $G \in \mathcal{C}$, which runs in time $O\left(\abs{V(G)} + \abs{E(\Phi_\Rset(G))}\right)$. 
-    
-    Since we always have $\abs{E(\Phi_\Rset(G))} = O\left(n^\rho\right)$, where $\rho = \max_{\omega \in \Rset} \abs{V(\omega)}$, this algorithm is polynomial in $n$.
+    For any finite set $\Rset$ of simple graphs and any class $\mathcal{C}$ of bounded expansion, there exists an algorithm that computes $\Phi_\Rset(G)$ for any graph $G \in \mathcal{C}$, which runs in time $O\left(\abs{V(G)} + \abs{E(\Phi_\Rset(G))}\right) = O\left(\abs{V(G)}^{\alpha(\Rset)}\right)$.
 \end{theorem}
-
-\begin{remark}
-    The bound on the number of edges in $\Phi_\Rset(G)$ should be possible to improve in any class of bounded expansion, since we got it by just counting the number of subsets of $V(G)$ of size $\abs{\omega}$ for each $\omega \in \Rset$. Of course, for a sparse graph, it will not in fact be the case that every subset of $V(G)$ of size $\abs{\omega}$ will contain a subgraph isomorphic to $\omega$, so the bound drastically overestimates the number of edges there actually can be.
-
-    \hl{Maybe pursue this a little bit?}
-\end{remark}
 
 \section*{Acknowledgments}
 
