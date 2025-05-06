@@ -433,7 +433,7 @@ With this result in hand, we can now give a proof of the existence of a represen
 
     It is not hard to see that any graph in $\bar{\Rset}$ has to contain a triangle, since $\Phi_\Rset$ will send any triangle-free graph to a graph with no edges, which is obviously not connected.
 
-    Now suppose for contradiction that $\Gset$ is a finite set of graphs such that $\Phi_\Gset = \Phi_{\bar{\Rset}}$. Lemma~\ref{lemma_connected_representation_hull} implies that we must have $\Gset \subset \bar{\Rset}$, since if there were a $G \in \Gset \setminus \bar{\Rset}$ it'd be sent to a $1$-ly connected graph by $\Phi_\Gset$, and thus also by $\Phi_{\bar{\Rset}}$, since we've assumed $\Phi_\Gset = \Phi_{\bar{\Rset}}$ -- but we chose $\bar{\Rset}$ so that it already contains everything sent to a connected graph by $\Phi_{\bar{\Rset}}$.
+    Now suppose for contradiction that $\Gset$ is a finite set of graphs such that $\Pi_{\Gset,1} = \Pi_{\bar{\Rset},1}$. Lemma~\ref{lemma_connected_representation_hull} implies that we must have $\Gset \subset \bar{\Rset}$, since if there were a $G \in \Gset \setminus \bar{\Rset}$ it would be sent to a $1$-ly connected graph by $\Phi_\Gset$, and thus also by $\Phi_{\bar{\Rset}}$, since we assumed $\Pi_{\Gset,1} = \Pi_{\bar{\Rset},1}$ -- but we chose $\bar{\Rset}$ so that it already contains everything sent to a connected graph by $\Phi_{\bar{\Rset}}$. So any graph $G \in \Gset$ contains a triangle.
 
     So, let
     $$r = \max_{\substack{G \in \Gset\\G\text{ simple}}} \max_{u \in V(G)} \min_{\substack{v \in V(G)\\v \text{ is in a triangle}}} d(u, v),$$
