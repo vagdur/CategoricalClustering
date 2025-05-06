@@ -567,12 +567,12 @@ With Lemma~\ref{lem:endofunctor_circ_excisive_is_excisive} and Lemma~\ref{lem:pi
     We will show that $\Pi_{\Rset,\infty}$ refines $\Clust$. So, let $G$ be some graph. There are two things we need to show:
     \begin{enumerate}
         \item Every part $p$ of $\Clust(G)$ is also a part of $\Pi_{\Rset,\infty}(G)$.
-        \item Every part $p$ of $\Pi_{\Rset,\infty}$ is contained in some part $p'$ of $\Pi_{\Rset,\infty}(G)$.
+        \item Every part $p$ of $\Pi_{\Rset,\infty}(G)$ is contained in some part $p'$ of $\Clust(G)$.
     \end{enumerate}
 
-    First, suppose $p$ is a part of $\Clust(G)$. By excisiveness of $\Clust$, $G|_p$ has $p$ as a part and is thus in $\Rset$. Now consider the inclusion morphism from $G|_p$ into $G$. This is a morphism from something in $\Rset$ into $G$, and so there must be an edge of $\Phi_\Rset(G)$ whose edge set is precisely $p$. It now follows from Lemma~\ref{lemma_pi_infty_parts} that $p$ is a part of $\Pi_{\infty}(\Phi_\Rset(G)) = \Pi_{\Rset,\infty}(G)$.
+    First, suppose $p$ is a part of $\Clust(G)$. By excisiveness of $\Clust$, $\Clust(G|_p)$ has $p$ as a part, and thus $G|_p \in \Rset$. Now consider the inclusion morphism from $G|_p$ into $G$. This is a morphism from something in $\Rset$ into $G$, and so there must be an edge of $\Phi_\Rset(G)$ whose vertex set is precisely $p$. It now follows from Lemma~\ref{lemma_pi_infty_parts} that $p$ is a part of $\Pi_{\infty}(\Phi_\Rset(G)) = \Pi_{\Rset,\infty}(G)$.
 
-    In the other direction, suppose $p$ is a part of $\Pi_{\Rset,\infty}(G)$. By Lemma~\ref{lemma_pi_infty_parts}, this must simply mean that there is an edge of $\Phi_\Rset(G)$ whose vertex set is $p$. Now, this edge arises from a morphism $\omega$ from some $R \in \Rset$ into $G$. By functoriality of $\Clust$, this morphism will also be a morphism from $\Clust(R)$ into $\Clust(G)$ whose image is $p$. So by definition of what it means to be a morphism, there has to be a part of $\Clust(G)$ containing $p$.
+    In the other direction, suppose $p$ is a part of $\Pi_{\Rset,\infty}(G)$. By Lemma~\ref{lemma_pi_infty_parts}, this must simply mean that there is an edge of $\Phi_\Rset(G)$ whose vertex set is $p$. Now, this edge arises from a morphism $\omega$ from some $R \in \Rset$ into $G$. By functoriality of $\Clust$, this morphism will also be a morphism from $\Clust(R)$ into $\Clust(G)$ whose image is $p$. By our construction of $\Rset$, $\Clust(R)$ must have a part containing all of its vertices, and so by definition of what it means to be a morphism, there has to be a part of $\Clust(G)$ containing $p$.
 \end{proof}
 
 Finally, in order to show that there is no other implication that holds between these concepts, it suffices to give examples of clustering schemes with every combination of properties not already ruled out.
