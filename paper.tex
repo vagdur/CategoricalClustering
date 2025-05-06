@@ -524,7 +524,7 @@ Proving that the $k$-ly connected components functor is excisive will be conside
     \begin{figure}
         \centering
         \includegraphics[width=0.5\textwidth]{graphics/example_overlapping_parts.pdf}
-        \caption{An example of a graph $G$ with a connected component $p$ (here, the entire vertex set) where $p''$ is a strict subset of $p'$, in the notation of the proof of Lemma~\ref{lem:pi_k_is_excisive}. In particular, we note that $p''$ consists of the three blue edges, which form a clique in the line graph since they all overlap in the vertices $v_1$ and $v_2$, but the line graph also has an isolated vertex corresponding to the red edge. This red edge is in $p'$, but not in $p''$, and will be sent to a strict subpart of $p$ by $\Upsilon$.}
+        \caption{An example of a graph $G$ with a $2$-connected component $p$ (here, the entire vertex set) where $p''$ is a strict subset of $p'$, in the notation of the proof of Proposition~\ref{lem:pi_k_is_excisive}. In particular, we note that $p''$ consists of the three blue edges, which form a clique in the $2$-line graph since they all overlap in the vertices $v_1$ and $v_2$, but the $2$-line graph also has an isolated vertex corresponding to the red edge. This red edge is in $p'$, but not in $p''$, and will be sent to a strict subpart of $p$ by $\Upsilon$.}
         \label{fig:overlapping_parts}
     \end{figure}
 
@@ -539,7 +539,7 @@ Proving that the $k$-ly connected components functor is excisive will be conside
 
     So consider $\Upsilon(\Pi(\Lk(G)|_{p''}))$. By assumption $p''$ is a connected component of $\Lk(G)$, which is sent to $p$ by $\upsilon$, and so we must have that $\Upsilon(\Pi(\Lk(G)|_{p''}))$ is precisely $(p,\{p\})$. So this shows that $p$ is a part of $\Pi_k(G|_p)$, as desired.
 
-    So, let us proceed to give a proof of the claim.
+    Finally, let us give a proof of the claim.
 
     \paragraph*{Proof of Claim~\ref{claim:pik_excisive_Lk_subgraph}:} Let $q'$ be the edge set of $G|_q$. That $q'' \subseteq q'$ is obvious, so the vertices of $\Lk(G)|_{q''}$ are a subset of the vertices of $\Lk(G|_q)$. So suppose $e, f \in q''$ are adjacent in $\Lk(G)$. By definition of the line graph functor, this means that $\ea(e)\cap\ea(f)$ has at least $k$ members -- but clearly $\ea(e), \ea(f) \subseteq q$, and so this intersection has the required size also in $G|_q$, and so these edges are adjacent also in $\Lk(G|_q)$.
 \end{proof}
