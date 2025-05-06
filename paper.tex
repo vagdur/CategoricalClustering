@@ -314,6 +314,14 @@ That this one is a functor also requires a proof, since it is defined as a compo
     \label{fig:scandalous_morphism}
 \end{figure}
 
+\begin{remark}\label{remark:k1_case_nonoverlapping}
+    In the case where $k=1$, $\Pi_1$ always gives a non-overlapping clustering, and if we also restrict ourselves to simple graphs , $\Pi_1 = \tilde{\Pi}$, where $\tilde{\Pi}$ is the usual connected components functor, except with isolated vertices assigned to no part.
+
+    To see the first statement, suppose there were a vertex in two different parts. Then, it would be in each of these parts because it is in the vertex sets of two different edges belonging to these different parts -- but then, since $k=1$, these edges are adjacent in the $1$-line graph, and so the two parts must in fact be one part.
+
+    For the second statement, notice that for simple graphs $\Lambda_1$ is just the usual construction of the line graph -- and so the claim is elementary graph theory.
+\end{remark}
+
 \begin{example}\label{ex:scandalous_morphism}
     At this point, we can illustrate why our class of morphisms of partitioned sets has to be so large. Consider the graphs $G$ and $H$ shown in Figure~\ref{fig:scandalous_morphism}. $G$ has eight vertices, and an edge $v_1 v_2 v_i$ for each $i > 2$, illustrated in blue, and an edge $v_3 v_4 v_j$ for $j = 5, 6, 7$, illustrated in green. $H$ is a supergraph of $G$, with all the edges of $G$ and two additional edges, $v_1 v_2 v_3 v_4$ and $v_5 v_6 v_7 v_8$, illustrated in red and orange. So that the identity function on the vertex set is a morphism from $G$ to $H$ is clear.
 
