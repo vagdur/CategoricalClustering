@@ -740,7 +740,7 @@ This notion is very general -- in our actual result, both $\mathcal{A}$ and $\ma
 
     \paragraph*{Excluding the case $k \leq 3$:}
 
-    \begin{figure}
+    \begin{figure}[p]
         \centering
         \includegraphics[width=0.6\textwidth]{graphics/appendix_graph_G.pdf}
         \caption{The graph $G$ used in the proof of Lemma~\ref{lemma:excisive_and_functorial_not_representable}.}
@@ -751,7 +751,7 @@ This notion is very general -- in our actual result, both $\mathcal{A}$ and $\ma
 
     \paragraph*{Establishing graphs that have to be in $\Rset$ if $k$ is big:}
 
-    \begin{figure}
+    \begin{figure}[p]
         \centering
         \includegraphics[width=\textwidth]{graphics/appendix_graphs_Fi.pdf}
         \caption{The graph family $F_i$ used in the proof of Lemma~\ref{lemma:excisive_and_functorial_not_representable}, illustrated by its first three members.}
@@ -774,6 +774,7 @@ This notion is very general -- in our actual result, both $\mathcal{A}$ and $\ma
         \caption{The graph $G_1$ used in the proof of Lemma~\ref{lemma:excisive_and_functorial_not_representable}. This graph contains two copies of $F_1$, corresponding to the green and the blue edges. Here, the vertices $v_4$ and $v_9$ are the leftmost column in the standard drawing of $F_1$ (Figure~\ref{fig:appendix_graphs_Fi}), and the vertices $v_5,v_6,v_7$ and $v_8$ are the rightmost column. The vertices $v_1,v_2,v_3$ are the middle column in the green copy of $F_1$, and the vertices $v_{10},v_{11},v_{12}$ are the middle column in the blue copy of $F_1$.}
         \label{fig:appendix_graph_G1}
     \end{figure}
+    \clearpage
 
     The construction we use here gets too complicated to draw in any case beyond $i = 1$ (that case is illustrated in Figure~\ref{fig:appendix_graph_G1}), but the idea is the following: The graph $F_i$ has three ``columns'' of vertices, and we can take our two copies of $F_i$ to have the same left- and rightmost columns. For the middle column, we pick three of the vertices in each copy to be distinct, and for the rest, we permute their labels and then identify vertices with the same label. As long as we pick a permutation $\sigma$ such that $\abs{\sigma(j)-j}>1$ for all $i$, we will have that the two copies of $F_i$ do not share any edges.
 
@@ -784,4 +785,29 @@ This notion is very general -- in our actual result, both $\mathcal{A}$ and $\ma
     Finally, we need to exclude the case $k = \infty$. In this case, we know that $\Rset$ must be precisely the set of all graphs that are sent to a partition with a part containing all vertices by $\Clust$, from the reasoning in the proof of Lemma~\ref{lemma_exc_and_funct_implies_repr}. But then, for example, the graph $F_1$ will be sent to a partition that has three parts -- one containing all vertices, and two corresponding to the copies of $D$ in $F_1$, while of course $\Clust(F_1)$ has only one part. So we have a contradiction.
 \end{proof}
 
+\section{Further examples}
+
+In this section, we record a few more interesting examples that do not fit into the main text.
+
+\begin{example}\label{example:equal_parts_different_edgesets}
+    There exists a graph $G$ such that $\Pi_2(G)$ has two parts, both of which contain all vertices of $G$, arising from two different connected components of $\Lambda_2(G)$.
+\end{example}
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.8\textwidth]{graphics/equal_parts_different_edgesets.pdf}
+    \caption{The graph $G$ used in the proof of Example~\ref{example:equal_parts_different_edgesets}.}
+    \label{fig:equal_parts_different_edgesets}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.5\textwidth]{graphics/equal_parts_diff_edgesets_linegraph.pdf}
+    \caption{The line graph $\Lambda_2(G)$ of the graph $G$ in Figure~\ref{fig:equal_parts_different_edgesets}. The vertices are coloured according to the colour of the corresponding edge in Figure~\ref{fig:equal_parts_different_edgesets}.}
+    \label{fig:equal_parts_different_edgesets_linegraph}
+\end{figure}
+
+\begin{proof}
+    Consider the graph $G$ as in Figure~\ref{fig:equal_parts_different_edgesets}, with $2$-line graph as in Figure~\ref{fig:equal_parts_different_edgesets_linegraph}.
+\end{proof}
 \end{document}
