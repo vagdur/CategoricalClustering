@@ -654,6 +654,8 @@ The most naïve possible algorithm for computing $\Phi_\Rset(G)$ given a fixed f
 What is more interesting is that we can get an algorithm that is linear in $n$ and the number of edges in $\Phi_\Rset(G)$ on any class of graphs of bounded expansion, which in turn will get us a better exponent on the $n$ from a bound on the number of edges in $\Phi_\Rset(G)$. Let us first recall what this means, before stating the lemma we will use.
 
 \begin{definition}
+    A graph $H$ is a \emph{shallow minor} of depth $t$ of a graph $G$ if it is a subgraph of a graph which can be obtained from $G$ by contracting connected subgraphs of radius at most $t$. So a shallow minor of depth $0$ is just a subgraph, while for $t$ greater than the number of vertices in $G$, a shallow minor of depth $t$ is just a minor.
+
     A class of simple graphs $\mathcal{C}$ is said to have \emph{bounded expansion} if for every $t \in \N$ there exists a $c_t$ such that, whenever $H$ is a shallow minor of depth $t$ of some graph in $\mathcal{C}$, it holds that
     $$\frac{\abs{E(H)}}{\abs{V(H)}} \leq c(t).$$
 
