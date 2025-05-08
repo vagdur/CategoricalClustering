@@ -615,7 +615,7 @@ Finally, in order to show that there is no other implication that holds between 
 \begin{proof}
     To define this clustering scheme, we begin by letting $\Rset$ be the set containing only the graph $D$ as in Figure~\ref{fig:ex_exc_funct_not_repr-D}. Now, for any $G$, consider the graph $\Phi_\Rset(G)$. Each edge of this graph corresponds to a copy of $D$ in $G$, and so for each vertex of $\Lambda_3(\Phi_\Rset(G))$ we can give it three labels, namely the three edges of $G$ that make up the corresponding copy of $D$. So we may define a graph $\Sigma(G)$ by taking $\Lambda_3(\Phi_\Rset(G))$ and keeping an edge $ef$ if and only if $e$ and $f$ share a label.
 
-    Concretely, this means that we will have an edge $ef$ only if the three vertices they overlap in make up an edge of both copies of $D$ to which they correspond.
+    Concretely, this means that we will have an edge $ef$ only if they overlap in three vertices which make up an edge of both copies of $D$ to which they correspond.
 
     Finally, we can define our clustering scheme $\Clust$ by that $\Clust = \Upsilon\circ\Pi\circ\Sigma$, analogously to how we normally define $\Pi_{\Rset,k}$, except here $\Sigma$ plays the role of $\Lambda_3\circ\Phi_\Rset$.
     
@@ -627,7 +627,7 @@ Finally, in order to show that there is no other implication that holds between 
     \end{enumerate}
     For the first two, the proofs are relatively straightforward adaptations of the proof that a representable clustering scheme is excsive and of functoriality of the line graph functor, respectively, and so we will only give a sketch of the proofs here. For the final point, we end up with a complicated mess of casework, that we defer to the appendix as Lemma~\ref{lemma:excisive_and_functorial_not_representable}.
 
-    \paragraph*{Excisiveness:} Let $G$ be some graph, and $p$ be a part of $\Clust(G)$. Recall that, from Claim~\ref{claim:phi_commutes_with_restriction}, we have that $\Phi_\Rset(G|_p) = \Phi_\Rset(G)|_p$. So let $p''$ be the set of edges of $\Phi_\Rset(G)$ that induce the part $p$. Then, entirely analogously to Claim~\ref{claim:pik_excisive_Lk_subgraph}, $\Sigma(G)|_{p''}$ is a subgraph of $\Sigma(G|_p)$. Clearly, $\Sigma(G)|_{p''}$ is a connected graph, and so $\Sigma(G|_p)$ must have a connected component containing $p''$ (in fact, $p''$ must be one of the connected components of $\Sigma(G|_p)$). This connected component is then sent to $p$ by $\upsilon$ and so $p$ is a part of $\Clust(G|_p)$.
+    \paragraph*{Excisiveness:} Let $G$ be some graph, and $p$ be a part of $\Clust(G)$. Recall that, from Claim~\ref{claim:phi_commutes_with_restriction}, we have that $\Phi_\Rset(G|_p) = \Phi_\Rset(G)|_p$. So let $p''$ be a set of edges of $\Phi_\Rset(G)$ that induce the part $p$. Then, entirely analogously to Claim~\ref{claim:pik_excisive_Lk_subgraph}, $\Sigma(G)|_{p''}$ is a subgraph of $\Sigma(G|_p)$. Clearly, $\Sigma(G)|_{p''}$ is a connected graph, and so $\Sigma(G|_p)$ must have a connected component containing $p''$ (in fact, $p''$ must be one of the connected components of $\Sigma(G|_p)$). This connected component is then sent to $p$ by $\upsilon$ and so $p$ is a part of $\Clust(G|_p)$.
 
     \paragraph*{Functoriality:} That $\Sigma$ is a functor can be proven similarly to how we prove that $\Lk$ is a functor, only keeping track of a little bit more information about the labels of the edges -- here it helps that we know $\Phi_\Rset$ is a functor. Once we know that $\Sigma$ is a functor, functoriality of $\Clust$ follows by essentially the same proof as functoriality of $\Pi_k$.
 \end{proof}
@@ -649,9 +649,9 @@ As stated in the introduction, one benefit of this approach to clustering is tha
 
 It should be clear that the only step in computing $\Pi_{\Rset,k}(G)$ that might be computationally hard is the step of computing $\Phi_\Rset(G)$, since the other steps are all obviously computable in linear time.
 
-The most naïve possible algorithm for computing $\Phi_\Rset(G)$ given a fixed set $\Rset$ of representing graphs and an $n$-vertex graph $G$ is to, for each $\omega \in \Rset$ and each $H \in \binom{V(G)}{\abs{\omega}}$, that is, each $\abs{\omega}$-sized subset $H$ of the vertices of $G$, check whether $G|_H$ contains a subgraph isomorphic to $\omega$. It is easy to see that this will give an algorithm that is polynomial in $n$, but with an exponent and constant depending on $\Rset$.
+The most naïve possible algorithm for computing $\Phi_\Rset(G)$ given a fixed finite set $\Rset$ of representing graphs and an $n$-vertex graph $G$ is to, for each $\omega \in \Rset$ and each $H \in \binom{V(G)}{\abs{\omega}}$, that is, each $\abs{\omega}$-sized subset $H$ of the vertices of $G$, check whether $G|_H$ contains a subgraph isomorphic to $\omega$. It is easy to see that this will give an algorithm that is polynomial in $n$, but with an exponent given by the maximum size of the vertex set of any graph in $\Rset$.
 
-What is more interesting is that we can get an algorithm that is linear in $n$ and the number of edges in $\Phi_\Rset(G)$ on any class of graphs of bounded expansion. Let us first recall what this means, before stating the lemma we will use.
+What is more interesting is that we can get an algorithm that is linear in $n$ and the number of edges in $\Phi_\Rset(G)$ on any class of graphs of bounded expansion, which in turn will get us a better exponent on the $n$ from a bound on the number of edges in $\Phi_\Rset(G)$. Let us first recall what this means, before stating the lemma we will use.
 
 \begin{definition}
     A class of simple graphs $\mathcal{C}$ is said to have \emph{bounded expansion} if for every $t \in \N$ there exists a $c_t$ such that, whenever $H$ is a shallow minor of depth $t$ of some graph in $\mathcal{C}$, it holds that
@@ -795,7 +795,7 @@ This notion is very general -- in our actual result, both $\mathcal{A}$ and $\ma
 
 \section{Further examples}
 
-In this section, we record a few more interesting examples that do not fit into the main text.
+In this section, we record additional interesting examples that do not fit into the main text.
 
 \begin{example}\label{example:equal_parts_different_edgesets}
     There exists a graph $G$ such that $\Pi_2(G)$ has two parts, both of which contain all vertices of $G$, arising from two different connected components of $\Lambda_2(G)$.
