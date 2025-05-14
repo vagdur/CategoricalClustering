@@ -261,11 +261,7 @@ So, now we have the line graph functor, which gives us a simple graph which we c
     We define the part-union operation $\Upsilon: \Pset \to \Pset$ by that for each $\mathcal{A} = (V, P) \in \Pset$, we let $\Upsilon(\mathcal{A}) = \mathcal{B} = (\upsilon(V),\upsilon_*(P))$.
 \end{definition}
 
-Unfortunately, this $\Upsilon$ is not in general a functor, since there is no way to define what it does on morphisms between partitioned sets. However, it will still be useful to us.
-
-\begin{example}
-    \hl{Add example proving that $\Upsilon$ cannot be made into a functor.}
-\end{example}
+Unfortunately, $\Upsilon$ cannot be made into a functor in any natural way, as we discuss in Lemma~\ref{lemma:Upsilon_not_functorial}. However, when we apply $\Upsilon$ to the connected components of the line graph, we do know what to do with the morphisms, since we still ``remember'' what they were on the underlying graph we took the line graph of. So despite not itself being a functor, we can still use $\Upsilon$ to get a functor from $\G$ to $\Pset$.
 
 With all this in hand, we are finally able to define the connected components of a hypergraph.
 
@@ -817,4 +813,48 @@ In this section, we record additional interesting examples that do not fit into 
 \begin{proof}
     Consider the graph $G$ as in Figure~\ref{fig:equal_parts_different_edgesets}, with $2$-line graph as in Figure~\ref{fig:equal_parts_different_edgesets_linegraph}.
 \end{proof}
+
+\section{Proof of non-functoriality of $\Upsilon$}
+
+If we wanted to turn $\Upsilon$ into a functor, we would need to define it on morphisms in $\Pset$. Now, thinking about how we use it to map from sets of edges to sets of vertices, what we would be doing is defining a map from vertices to vertices which was coherent with the mapping from edges to edges which we had been given. For this to be at all natural, we would want to have that $\Upsilon(f)_*(e) = f(e)$ for all edges $e$, so that we ``get the right thing when we go in the other direction''.
+
+However, this is not possible, essentially because there are morphisms between line graphs that do not arise from morphisms between the original graphs. To see this, consider for example the graphs $G = (\{1,2,3\}, \{\{1,2\}, \{2,3\}\})$ and $H = (\{a,b\}, \{\{a\}, \{b\}\})$ -- $\Lambda_2(G)$ and $\Lambda_2(H)$ are both the graph with two vertices and no edges, and so they are isomorphic, but clearly $H$ and $G$ themselves are not isomorphic. This is essentially the idea of the proof of the following lemma.
+
+\begin{lemma}\label{lemma:Upsilon_not_functorial}
+    There is no way of defining $\Upsilon(f)$ on morphisms in $\Pset$ such that $\Upsilon$ becomes a functor, and $\Upsilon(f)_* = f$ for all morphisms $f$ in $\Pset$.
+\end{lemma}
+    
+\begin{proof}
+    Suppose, to the contrary, that $\Upsilon$ could be defined on morphisms, and let
+    \[
+    \begin{aligned}
+    A &= \bigl(V_A,P_A\bigr),
+    &&
+    V_A=\bigl\{\{1,2\},\,\{2,3\}\bigr\},\quad
+    P_A=\bigl\{\{\{1,2\}\},\,\{\{2,3\}\}\bigr\},\\
+    B &= \bigl(V_B,P_B\bigr),
+    &&
+    V_B=\bigl\{\{a\},\,\{b\}\bigr\},\quad
+    P_B=\bigl\{\{\{a\}\},\,\{\{b\}\}\bigr\}.
+    \end{aligned}
+    \]
+    Define a morphism \(f\colon A\to B\) in \(\Pset\) by
+    \[
+    f(\{1,2\})=\{a\}, 
+    \quad
+    f(\{2,3\})=\{b\}.
+    \]
+    So when we apply \(\Upsilon\) to $A$ and $B$, we get
+    \[
+    \Upsilon(A)
+    =\bigl(\{1,2,3\},\,\{\{1,2\},\{2,3\}\}\bigr),
+    \qquad
+    \Upsilon(B)
+    =\bigl(\{a,b\},\,\{\{a\},\{b\}\}\bigr).
+    \]
+    
+    Now, we see easily that the only morphisms from $\Upsilon(A)$ to $\Upsilon(B)$ are the two constant functions sending all vertices to $a$ or all vertices to $b$. So suppose without loss of generality that we have defined $\Upsilon(f)(x) = a$ for $x = 1,2,3$ -- but then we get $\Upsilon(f)_*(\{2,3\}) = \{a\}$, while $f(\{2,3\}) = \{b\}$. So we have a contradiction -- the opposite choice of $\Upsilon(f)$ of course gives the same contradiction, and so we are done.
+\end{proof}
+       
+    
 \end{document}
