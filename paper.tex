@@ -70,7 +70,7 @@ For example, modularity suffers from a resolution limit, wherein it cannot ``see
 
 In the literature on clustering based on dissimilarity measures, there has been much more attention to simpler methods, developing from the earliest studies of single-linkage clustering to more sophisticated versions of the same idea. In single-linkage clustering, we simply declare two objects to belong to the same part if they are sufficiently close, which leads to a very tractable and easily-analyzed method. However, it struggles with ``chaining'' effects, where two objects that are far apart are joined together by a chain of objects that are all close to each other.
 
-This class of methods has received sophisticated theoretical analysis beginning with the work of Carlsson and Mémoli~\cite{carlsson_mémoli_2013}, casting the problem of determining possible clustering methods in category-theoretical language as understanding properties of functors from the category of finite metric spaces to the category of sets with partitions. This line of research has also been extended into settings that cannot be represented as finite metric spaces, such as hypergraphs~\cite{} and directed graphs~\cite{}.
+This class of methods has received sophisticated theoretical analysis beginning with the work of Carlsson and Mémoli~\cite{carlsson_mémoli_2013}, casting the problem of determining possible clustering methods in category-theoretical language as understanding properties of functors from the category of finite metric spaces to the category of sets with partitions. This line of research has also been extended into settings that cannot be represented as finite metric spaces, such as directed graphs~\cite{Carlsson_Memoli_Segarra_2021}, and the original work of Carlsson and Mémoli straightforwardly extends into the hypergraph setting without any major modifications.
 
 In this line of research, we end up with three related concepts to describe our clustering methods:
 \begin{enumerate}
@@ -464,7 +464,7 @@ With this result in hand, we can now give a proof of the existence of a represen
 
 \section{Equivalence of representability and excisiveness}
 
-As we saw in Remark~\ref{remark:k1_case_nonoverlapping}, we get the setting of non-overlapping partitions by setting $k=1$. In this simpler setting it is known from \hl{add citation} that representability is equivalent to excisiveness plus functoriality.
+As we saw in Remark~\ref{remark:k1_case_nonoverlapping}, we get the setting of non-overlapping partitions by setting $k=1$. In this simpler setting it is known that representability is equivalent to excisiveness plus functoriality~\cite{Carlsson_Memoli_Segarra_2021}.
 
 In the case where $k > 1$, more interesting things start happening, so we end up not quite getting equivalence, since one of the directions of the equivalence weakens slightly. The right notion turns out to be that of one clustering scheme \emph{refining} another, which is a stronger notion than isomorphism but not quite equality.
 
@@ -633,7 +633,7 @@ Finally, in order to show that there is no other implication that holds between 
 \end{proof}
 
 \begin{remark}
-    One might ask oneself why we have chosen to require all morphisms to be injective throughout. This is because in the non-overlapping case, one can relatively straightforwardly carry out the same arguments in the non-injective case, and find that there are then in fact only three different representable clustering schemes:
+    One might ask oneself why we have chosen to require all morphisms to be injective throughout. This is because in the non-overlapping case, one can relatively straightforwardly carry out the same arguments in the non-injective case~\cite{carlsson_mémoli_2013}, and find that there are then in fact only three different representable clustering schemes:
     \begin{enumerate}
         \item The scheme that always sends every vertex to its own part, represented by the empty set or by $K_1$,
         \item the connected components functor, represented by any set of connected graphs containing at least one graph on at least two vertices,
