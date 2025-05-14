@@ -101,7 +101,6 @@ Finally, we also give a structural result for when two representable clustering 
 
 The reader who is less familiar with category theory is invited to review the very few concepts from it that we use in Appendix~\ref{cat_theory_appendix}.
 
-
 \paragraph*{List of notation}
 \begin{enumerate}
     \item We use capital Roman letters for graphs, e.g. $G$ or $H$, and their vertex and edge sets are also capital Roman letters, e.g. $V, W$ and $E, F$. Likewise, when considering a partitioned set, both its underlying set and its set of parts are capital Roman letters, e.g. $V$ and $P$. 
@@ -145,12 +144,6 @@ It is worth remarking here that this is a very permissive definition of a partit
     
     In particular, partitioned sets of the form $(V, \{V,W\})$ arise as the image of graphs under this connected components functor, and morphisms between graphs turn into morphisms from $(V, \{V,W\})$ to $(V, \{V,W'\})$ for arbitrary choices of $W$ and $W'$. So the fact that the spurious part $W$ was allowed to move around arbitrarily is in fact a feature, not a bug, of our definition.
 \end{remark}
-
-\begin{definition}
-    For a partitioned set $\mathcal{A} = (V,P)$ and a subset $p$ of its underlying set, we define the restriction of $\mathcal{A}$ to $p$, $\mathcal{A}|_p$, by that its underlying set is $p$, and its set of parts is given by
-    that is, we take the intersection of each part of $\mathcal{A}$ with $p$. It is easy to see that the set inclusion function $i: p \hookrightarrow V$ is a morphism from $\mathcal{A}|_p$ to $\mathcal{A}$.
-    $$\left\{q \cap p \given q \in P\right\},$$
-\end{definition}
 
 \begin{definition}
     The category $\Psetno$ of sets with non-overlapping partitions is the full subcategory of $\Pset$ whose objects have disjoint set covers. We may equivalently think of it as the category of sets equipped with partial equivalence relations, where the equivalence classes are the parts of the partitioned set.
