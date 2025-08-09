@@ -58,7 +58,7 @@
 \begin{abstract}
     Community detection in graphs is a problem that is likely to be relevant whenever network data appears, and consequently the problem has received much attention with many different methods and algorithms applied. However, many of these methods are hard to study theoretically, and they optimise for somewhat different goals. A general and rigorous account of the problem and possible methods remains elusive.
 
-    We study the problem of finding overlapping clusterings of hypergraphs, continuing the line of research started by Carlsson and Mémoli~\cite{carlsson_mémoli_2013} of classifying clustering schemes as functors. We extend their notion of representability to the overlapping case, showing that any representable overlapping clustering scheme is excisive and functorial, and any excisive and functorial clustering scheme is isomorphic to a representable clustering scheme.
+    We study the problem of determining overlapping clusterings of hypergraphs, continuing the line of research which was started by Carlsson and Mémoli~\cite{carlsson_memoli_2013} on classifying clustering schemes as functors. We extend their notion of representability to the overlapping case, showing that any representable overlapping clustering scheme is excisive and functorial, and any excisive and functorial clustering scheme is isomorphic to a representable clustering scheme.
 
     We also note that, for simple graphs, any representable clustering scheme is computable in polynomial time on graphs of bounded expansion, with an exponent determined by the maximum independence number of a graph in the representing set. This result also applies to non-overlapping representable clustering schemes, and so may be of independent interest.
 \end{abstract}
@@ -92,7 +92,7 @@ For example, modularity suffers from a resolution limit, wherein it cannot ``see
 
 In the literature on clustering based on dissimilarity measures, there has been much more attention to simpler methods, developing from the earliest studies of single-linkage clustering to more sophisticated versions of the same idea. In single-linkage clustering, we simply declare two objects to belong to the same part if they are sufficiently close, which leads to a very tractable and easily-analyzed method. However, it struggles with ``chaining'' effects, where two objects that are far apart are joined together by a chain of objects that are all close to each other.
 
-This class of methods has received sophisticated theoretical analysis beginning with the work of Carlsson and Mémoli~\cite{carlsson_mémoli_2013}, casting the problem of determining possible clustering methods in category-theoretical language as understanding properties of functors from the category of finite metric spaces to the category of sets with partitions. This line of research has also been extended into settings that cannot be represented as finite metric spaces, such as directed graphs~\cite{Carlsson_Memoli_Segarra_2021}, and the original work of Carlsson and Mémoli straightforwardly extends into the hypergraph setting without any major modifications.
+This class of methods has received sophisticated theoretical analysis beginning with the work of Carlsson and Mémoli~\cite{carlsson_memoli_2013}, casting the problem of determining possible clustering methods in category-theoretical language as understanding properties of functors from the category of finite metric spaces to the category of sets with partitions. This line of research has also been extended into settings that cannot be represented as finite metric spaces, such as directed graphs~\cite{Carlsson_Memoli_Segarra_2021}, and the original work of Carlsson and Mémoli straightforwardly extends into the hypergraph setting without any major modifications.
 
 In this line of research, we end up with three related concepts to describe our clustering methods:
 \begin{enumerate}
@@ -344,7 +344,7 @@ That this one is a functor also requires a proof, since it is defined as a compo
 
     The addition of the red edge to $H$ corresponds, in the line graph, to adding a new vertex with an edge to every vertex in the two cliques, so they merge into a new connected component, whose image under $\upsilon$ will be the entire vertex set. The orange edge, however, will not be connected to any of the vertices in the two cliques, and so will form a new connected component, whose image under $\upsilon$ will be $\{v_5, v_6, v_7, v_8\}$.
 
-    So we have seen that there must be a morphism from $(V, \{V, \{v_3, v_4, v_5, v_6, v_7\}\})$ to $(V, \{V, \{v_5, v_6, v_7, v_8\}\})$ in $\Pset$, which may at first have seemed like a bug in our definition, but is in fact a necessary feature.
+    So we have seen that there must be a morphism from the graph $(V, \{V, \{v_3,\allowbreak v_4,\allowbreak v_5, v_6, v_7\}\})$ to the graph $(V, \{V, \{v_5, v_6, v_7, v_8\}\})$ in $\Pset$. This may at first have seemed like a bug in our definition, but is in fact a necessary feature.
 \end{example}
 
 \begin{definition}\label{definition_representable_clustscheme}
@@ -410,7 +410,7 @@ In fact, which graphs are sent to spanned graphs by $\Phi_\Rset$ essentially det
 
     So let $H$ be some arbitrary graph, for which we wish to show that $\Pi_{\Rset,1}(H) = \Pi_{\Rset\cup\{G\},1}(H)$. It is easily seen that $\Phi_\Rset(H)$ is a subgraph of $\Phi_{\Rset\cup\{G\}}(H)$, so it will suffice to show that whenever there is a path in the line graph of $\Phi_{\Rset\cup\{G\}}(H)$ between two edges $e, e'$, there is a path between them also in $\Phi_{\Rset}(H)$.
 
-    So suppose we have such edges $e, e'$ and a path between them in $\LOne(\Phi_{\Rset\cup\{G\}}(H))$. If this path does not contain any edge induced by a copy of $G$ in $H$, then the same path exists also in $\LOne(\Phi_\Rset(H))$, and so we are done.
+    So suppose we have such edges $e, e'$ and a path from $e$ to $e'$ in $\LOne(\Phi_{\Rset\cup\{G\}}(H))$. If this path does not contain any edge induced by a copy of $G$ in $H$, then the same path exists also in $\LOne(\Phi_\Rset(H))$, and so we are done.
 
     So, assume $f$ is such an edge on this path, and say $\omega: G \to H$ is the morphism creating this edge. Let $e_p$ be the edge previous to $f$ on this path, and $e_s$ be the edge subsequent to $f$. Since these edges are adjacent, there has to exist $v_p \in \ea(e_p)\cap\ea(f)$ and $v_s \in \ea(f)\cap\ea(e_s)$.
 
@@ -648,7 +648,7 @@ Finally, in order to show that there is no other implication that holds between 
 \end{proof}
 
 \begin{remark}
-    One might ask oneself why we have chosen to require all morphisms to be injective throughout. This is because in the non-overlapping case, one can relatively straightforwardly carry out the same arguments in the non-injective case~\cite{carlsson_mémoli_2013}, and find that there are then in fact only three different representable clustering schemes:
+    One might ask oneself why we have chosen to require all morphisms to be injective throughout. This is because in the non-overlapping case, one can relatively straightforwardly carry out the same arguments in the non-injective case~\cite{carlsson_memoli_2013}, and find that there are then in fact only three different representable clustering schemes:
     \begin{enumerate}
         \item The scheme that always sends every vertex to its own part, represented by the empty set or by $K_1$,
         \item the connected components functor, represented by any set of connected graphs containing at least one graph on at least two vertices,
