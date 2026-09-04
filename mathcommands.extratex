@@ -10,13 +10,13 @@
 \usepackage[english]{babel}
 \usepackage{csquotes}
 \usepackage{url}
-\usepackage{color}
 \usepackage{varioref}
 \usepackage{tcolorbox}
 
 \usepackage{multirow}
 
 \usepackage{subfig}
+\usepackage[export]{adjustbox}
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -48,12 +48,11 @@
 
 \usepackage{color,soul}
 
-\usepackage[a4paper, total={5.5in, 8in}]{geometry}
-
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{prop}[theorem]{Proposition}
 \newtheorem{cor}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
 \newtheorem{conjecture}[theorem]{Conjecture}
 
 \theoremstyle{definition}
@@ -90,6 +89,11 @@
 \newcommand{\Lgr}{\mathcal{L}} % Lagrangian
 \newcommand{\Clust}{\mathfrak{C}}
 \newcommand{\Pset}{\mathcal{P}}
+\newcommand{\Psetno}{\mathcal{P}_{\mathrm{no}}}
+\newcommand{\Rset}{\mathfrak{R}}
+\newcommand{\Gset}{\mathfrak{G}}
+\newcommand{\Lk}{\Lambda_k}
+\newcommand{\LOne}{\Lambda_1}
 
 %Fouriertransform:
 \newcommand{\Fou}{\mathscr{F}}
@@ -169,7 +173,7 @@
 
 % Automorfigrupp, identitet, spår av en matris, signum, bild, och spann
 \DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\im}{im}
@@ -212,3 +216,6 @@
 
 \newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 
     \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+% Evil stuff:
+\newcommand{\ea}{\includegraphics[height=0.5\baselineskip]{graphics/edgeassign.pdf}}

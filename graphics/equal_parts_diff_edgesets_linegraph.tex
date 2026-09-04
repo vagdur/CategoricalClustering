@@ -1,0 +1,51 @@
+% Standalone LaTeX file for the 2-line graph of the hypergraph
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{xcolor}
+% Define ACM colors
+\definecolor{ACMYellow}{RGB}{255, 214, 0}
+\definecolor{ACMOrange}{RGB}{252, 146, 0}
+\definecolor{ACMRed}{RGB}{253, 27, 20}
+\definecolor{ACMLightBlue}{RGB}{131, 206, 226}
+\definecolor{ACMGreen}{RGB}{166, 188, 9}
+\definecolor{ACMPurple}{RGB}{101, 1, 107}
+\definecolor{ACMDarkBlue}{RGB}{9, 53, 122}
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={circle,draw, inner sep=2pt, align=center, text opacity=1}]
+% Upper component: ACMDarkBlue fill
+    \node[fill=ACMDarkBlue, fill opacity=0.3] (e3) at (-3,1.5)    {$\{v1,v2,v7\}$};
+    \node[fill=ACMDarkBlue, fill opacity=0.3] (e4) at (-3,-1.5)   {$\{v1,v2,v8\}$};
+    \node[fill=ACMDarkBlue, fill opacity=0.3] (e1) at (-1.5,0)    {$\{v1,v2,v3\}$};
+    \draw (e3) -- (e4);
+    \draw (e1) -- (e3);
+    \draw (e1) -- (e4);
+
+    \node[fill=ACMDarkBlue, fill opacity=0.3] (e2) at (1.5,0)     {$\{v2,v3,v4\}$};
+    \node[fill=ACMDarkBlue, fill opacity=0.3] (e5) at (3,1.5)     {$\{v3,v4,v5\}$};
+    \node[fill=ACMDarkBlue, fill opacity=0.3] (e6) at (3,-1.5)    {$\{v3,v4,v6\}$};
+    \draw (e2) -- (e5);
+    \draw (e2) -- (e6);
+    \draw (e5) -- (e6);
+
+    \draw (e1) -- (e2);
+
+% Lower component: ACMGreen fill
+    \node[fill=ACMGreen, fill opacity=0.3]  (e7)  at (-3,-4.5)   {$\{v5,v1,v6\}$};%{$\{v5,v6,v7\}$};
+    \node[fill=ACMGreen, fill opacity=0.3]  (e9)  at (-1.5,-6)   {$\{v5,v6,v7\}$};%{$\{v5,v1,v6\}$};
+    \node[fill=ACMGreen, fill opacity=0.3]  (e10) at (-3,-7.5)   {$\{v5,v2,v6\}$};
+    \draw (e7) -- (e9);
+    \draw (e7) -- (e10);
+    \draw (e9) -- (e10);
+
+    \node[fill=ACMGreen, fill opacity=0.3]  (e8)  at (1.5,-6)    {$\{v6,v7,v8\}$};
+    \node[fill=ACMGreen, fill opacity=0.3]  (e11) at (3,-4.5)    {$\{v7,v3,v8\}$};
+    \node[fill=ACMGreen, fill opacity=0.3]  (e12) at (3,-7.5)    {$\{v7,v4,v8\}$};
+    \draw (e8) -- (e11);
+    \draw (e8) -- (e12);
+    \draw (e11) -- (e12);
+
+    \draw (e9) -- (e8);
+
+\end{tikzpicture}
+\end{document}

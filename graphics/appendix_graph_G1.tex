@@ -1,0 +1,77 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{tikz-network}
+
+\usetikzlibrary{calc, backgrounds, positioning}
+\input{tikz-hypergraph}
+
+\usepackage{xcolor}
+
+\definecolor{ACMYellow}{RGB}{255, 214, 0}
+\definecolor{ACMOrange}{RGB}{252, 146, 0}
+\definecolor{ACMRed}{RGB}{253, 27, 20}
+\definecolor{ACMLightBlue}{RGB}{131, 206, 226}
+\definecolor{ACMGreen}{RGB}{166, 188, 9}
+\definecolor{ACMPurple}{RGB}{101, 1, 107}
+\definecolor{ACMDarkBlue}{RGB}{9, 53, 122}
+
+
+\begin{document}
+	
+\begin{tikzpicture}
+
+\tikzstyle{important}=[draw, circle, minimum size=8mm, fill=white];
+\tikzstyle{unimportant}=[draw, circle, minimum size=4mm, fill=white];
+
+\node (v1) at (2, 0) {};
+\node (v2) at (4, 0) {};
+\node (v3) at (6, 0) {};
+
+\node (v4) at (-1, 2) {};
+\node (v5) at (1, 2) {};
+\node (v6) at (3, 2) {};
+\node (v7) at (5, 2) {};
+\node (v8) at (7, 2) {};
+\node (v9) at (9, 2) {};
+
+\node (v10) at (2, 4) {};
+\node (v11) at (4, 4) {};
+\node (v12) at (6, 4) {};
+
+
+
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v4}{v10}{v11}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v11}{v12}{v9}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v5}{v10}{v6}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v6}{v11}{v7}{6mm};
+\draw[draw, fill=ACMDarkBlue, fill opacity=0.3] \hedgem{v7}{v12}{v8}{6mm};
+
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v4}{v2}{v1}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v2}{v9}{v3}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v1}{v5}{v6}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v2}{v6}{v7}{6mm};
+\draw[draw, fill=ACMGreen, fill opacity=0.3] \hedgem{v3}{v7}{v8}{6mm};
+
+
+
+
+\node[unimportant] at (v1) {$v_1$};
+\node[unimportant] at (v2) {$v_2$};
+\node[unimportant] at (v3) {$v_3$};
+\node[unimportant] at (v4) {$v_4$};
+\node[unimportant] at (v5) {$v_5$};
+\node[unimportant] at (v6) {$v_6$};
+\node[unimportant] at (v7) {$v_7$};
+\node[unimportant] at (v8) {$v_8$};
+\node[unimportant] at (v9) {$v_9$};
+\node[unimportant] at (v10) {$v_{10}$};
+\node[unimportant] at (v11) {$v_{11}$};
+\node[unimportant] at (v12) {$v_{12}$};
+
+
+
+
+\end{tikzpicture}
+
+\end{document}

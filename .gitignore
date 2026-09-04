@@ -10,3 +10,4 @@
 *.xml
 *.bcf
 *.run.xml
+.vscode/settings.json
